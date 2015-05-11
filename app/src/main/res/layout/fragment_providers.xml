@@ -20,5 +20,5 @@
         android:layout_width="match_parent"
 
         android:textColor="@color/white"
-        android:layout_height="wrap_content" android:background="@color/red" android:text="@string/add_provider"/>
+        android:layout_height="wrap_content" android:background="@drawable/add_button" android:text="@string/add_provider"/>
 </RelativeLayout>

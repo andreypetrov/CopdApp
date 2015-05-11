@@ -39,3 +39,15 @@ Thumbs.db
 #.idea/workspace.xml - remove # and delete .idea if it better suit your needs.
 .gradle
 build/
+
+*.iml
+*.iws
+*.ipr
+.idea/
+.gradle/
+local.properties
+
+*/build/
+
+*~
+*.swp
