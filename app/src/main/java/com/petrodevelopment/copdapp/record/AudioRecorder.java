@@ -29,8 +29,8 @@ import android.widget.LinearLayout;
 import java.io.IOException;
 
 
-public class AudioRecord extends Activity {
-    private static final String LOG_TAG = "AudioRecord";
+public class AudioRecorder extends Activity {
+    private static final String LOG_TAG = "AudioRecorder";
 
     private String mFileName = null;
     private MediaRecorder mRecorder = null;
@@ -39,7 +39,7 @@ public class AudioRecord extends Activity {
 
 
 
-    public AudioRecord(String fileName) {
+    public AudioRecorder(String fileName) {
         mFileName = Environment.getExternalStorageDirectory().getAbsolutePath();
         mFileName += "/";
         mFileName += "audiorecordtest.3gp";
@@ -70,7 +70,7 @@ public class AudioRecord extends Activity {
         mPlayer = null;
     }
 
-    private void startRecording() {
+    public void startRecording() {
         mRecorder = new MediaRecorder();
         mRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
         mRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
@@ -87,7 +87,7 @@ public class AudioRecord extends Activity {
     }
 
 
-    private void stopRecording() {
+    public void stopRecording() {
         mRecorder.stop();
         mRecorder.release();
         mRecorder = null;
