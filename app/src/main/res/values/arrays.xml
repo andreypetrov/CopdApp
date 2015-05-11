@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="main_menu">
+        <item>Guess</item>
+        <item>Marathon</item>
+        <item>Competition</item>
+    </string-array>
+
+</resources>

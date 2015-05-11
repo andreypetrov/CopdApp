@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">CopdApp</string>
+    <string name="title_appointments_fragment">Appointments</string>
+    <string name="title_providers_fragment">Providers</string>
+    <string name="title_medications_fragment">Medications</string>
+    <string name="title_caregivers_fragment">Caregivers</string>
+
+    <string name="title_record_activity">Record Activity</string>
+
+    <string name="action_note">Note</string>
+    <string name="action_voice">Voice</string>
+    <string name="action_camera">Camera</string>
+    <string name="action_reminder">Reminder</string>
+    <string name="action_delete">Delete</string>
+
+    <string name="dummy_text">dummy text</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="action_example">Example action</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="add_appointment">+ Add Appointment</string>
+    <string name="add_provider">+ Add Provider</string>
+    <string name="add_medication">+ Add Medication</string>
+    <string name="add_caregiver">+ Add Caregiver</string>
+</resources>
