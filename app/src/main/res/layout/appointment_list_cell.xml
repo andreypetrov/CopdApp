@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="@dimen/appointment_image_height"
+              android:orientation="horizontal">
+
+    <ImageView
+        android:id="@+id/doctor_image"
+        android:layout_width="@dimen/appointment_image_width"
+        android:layout_height="match_parent"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:layout_gravity="center_vertical"
+        android:paddingBottom="@dimen/box_top_and_bottom_padding"
+        android:paddingTop="@dimen/box_top_and_bottom_padding">
+
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/material_deep_teal_200"
+            android:textSize="@dimen/abc_text_size_body_1_material"
+            android:text="@string/dummy_text"/>
+
+        <TextView
+            android:id="@+id/doctor_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textSize="@dimen/abc_text_size_medium_material"
+            android:text="@string/dummy_text"/>
+
+        <TextView
+            android:id="@+id/doctor_title"
+            android:layout_width="match_parent"
+            android:textSize="@dimen/abc_text_size_body_1_material"
+            android:layout_height="wrap_content"
+            android:text="@string/dummy_text"/>
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:src="@drawable/abc_btn_check_to_on_mtrl_015"/>
+</LinearLayout>

@@ -9,8 +9,8 @@ import android.widget.BaseAdapter;
 import java.util.List;
 
 public abstract class GenericAdapter<Data> extends BaseAdapter {
-    List<Data> data;
-    Context context;
+    protected List<Data> data;
+    protected Context context;
 
     public GenericAdapter(List<Data> data, Context context) {
         this.data = data;
