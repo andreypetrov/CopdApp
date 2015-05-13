@@ -10,6 +10,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -29,6 +30,7 @@ import com.petrodevelopment.copdapp.fragments.MedicationsFragment;
 import com.petrodevelopment.copdapp.fragments.ProviderFragment;
 import com.petrodevelopment.copdapp.fragments.SectionFragment;
 import com.petrodevelopment.copdapp.network.Retrofit;
+import com.petrodevelopment.copdapp.util.U;
 
 
 public class HomeActivity extends ActionBarActivity
@@ -57,6 +59,11 @@ public class HomeActivity extends ActionBarActivity
 //        Retrofit.initialize();
 //        startRecordActivity();
     }
+
+
+
+
+
 
     private void startRecordActivity (){
         Intent intent = new Intent(this, RecordActivity.class);
@@ -123,11 +130,37 @@ public class HomeActivity extends ActionBarActivity
             // if the drawer is not showing. Otherwise, let the drawer
             // decide what to show in the action bar.
             getMenuInflater().inflate(R.menu.home, menu);
+            setupSearch(menu);
             restoreActionBar();
             return true;
         }
         return super.onCreateOptionsMenu(menu);
     }
+
+    private void setupSearch(Menu menu) {
+        MenuItem searchItem = menu.findItem(R.id.action_search);
+        SearchView searchView = (SearchView) searchItem.getActionView();
+        searchView.setIconifiedByDefault(true);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                U.log(this, "query text submit: " + s);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                U.log(this, "query text change: " + s);
+                return false;
+            }
+        });
+        searchView.setSubmitButtonEnabled(false);
+
+    }
+
+
+
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
