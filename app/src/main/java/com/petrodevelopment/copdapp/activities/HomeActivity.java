@@ -54,8 +54,8 @@ public class HomeActivity extends ActionBarActivity
 
         mTitle = getTitle();
 
-        Retrofit.initialize();
-        startRecordActivity();
+//        Retrofit.initialize();
+//        startRecordActivity();
     }
 
     private void startRecordActivity (){
