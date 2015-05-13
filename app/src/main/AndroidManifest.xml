@@ -2,6 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.petrodevelopment.copdapp" >
 
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -9,8 +14,6 @@
         android:theme="@style/AppTheme"
         android:name="com.petrodevelopment.copdapp.MainApplication">
 
-        <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-        <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
         <meta-data android:name="DATABASE" android:value="sugar_copd.db" />
         <meta-data android:name="VERSION" android:value="1" />

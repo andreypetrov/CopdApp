@@ -28,6 +28,7 @@ import com.petrodevelopment.copdapp.fragments.CaregiversFragment;
 import com.petrodevelopment.copdapp.fragments.MedicationsFragment;
 import com.petrodevelopment.copdapp.fragments.ProviderFragment;
 import com.petrodevelopment.copdapp.fragments.SectionFragment;
+import com.petrodevelopment.copdapp.network.Retrofit;
 
 
 public class HomeActivity extends ActionBarActivity
@@ -53,6 +54,7 @@ public class HomeActivity extends ActionBarActivity
 
         mTitle = getTitle();
 
+        Retrofit.initialize();
         startRecordActivity();
     }
 
