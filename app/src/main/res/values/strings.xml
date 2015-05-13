@@ -31,4 +31,6 @@
     <string name="add_provider">+ Add Provider</string>
     <string name="add_medication">+ Add Medication</string>
     <string name="add_caregiver">+ Add Caregiver</string>
+
+    <string name="sort_by">Sort By:</string>
 </resources>

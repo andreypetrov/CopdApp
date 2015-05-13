@@ -1,29 +1,19 @@
 package com.petrodevelopment.copdapp.activities;
 
-import android.app.Activity;
-
 import android.app.Fragment;
 import android.app.FragmentManager;
-import android.app.SearchManager;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
-import android.widget.TextView;
+import android.widget.Spinner;
 
 import com.petrodevelopment.copdapp.NavigationDrawerFragment;
 import com.petrodevelopment.copdapp.R;
@@ -32,7 +22,6 @@ import com.petrodevelopment.copdapp.fragments.CaregiversFragment;
 import com.petrodevelopment.copdapp.fragments.MedicationsFragment;
 import com.petrodevelopment.copdapp.fragments.ProviderFragment;
 import com.petrodevelopment.copdapp.fragments.SectionFragment;
-import com.petrodevelopment.copdapp.network.Retrofit;
 import com.petrodevelopment.copdapp.util.U;
 
 
@@ -57,16 +46,24 @@ public class HomeActivity extends ActionBarActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         initDrawer();
-
+        initSpinner();
         mTitle = getTitle();
 
 //        Retrofit.initialize();
 //        startRecordActivity();
     }
 
+    private void initSpinner() {
+        Spinner spinner = (Spinner) findViewById(R.id.sort_by_spinner);
+// Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.planets_array, R.layout.dropdown_textview);
+// Specify the layout to use when the list of choices appears
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+// Apply the adapter to the spinner
 
-
-
+        spinner.setAdapter(adapter);
+    }
 
 
     private void startRecordActivity (){
