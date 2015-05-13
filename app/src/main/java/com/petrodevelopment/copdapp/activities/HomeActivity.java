@@ -48,6 +48,7 @@ public class HomeActivity extends ActionBarActivity
      * Used to store the last screen title. For use in {@link #restoreActionBar()}.
      */
     private CharSequence mTitle;
+    private SearchView mSearchView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -142,11 +143,11 @@ public class HomeActivity extends ActionBarActivity
 
     private void setupSearch(Menu menu) {
         MenuItem searchItem = menu.findItem(R.id.action_search);
-        SearchView searchView = (SearchView) searchItem.getActionView();
-        searchView.setQueryHint(getString(R.string.search_appointments));
-        searchView.findViewById(R.id.search_plate).setBackgroundColor(Color.TRANSPARENT);
-//        ((EditText) searchView.findViewById(R.id.search_src_text)).setcust
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+        mSearchView = (SearchView) searchItem.getActionView();
+        //TODO make this dependent on the current fragment and delegate search to fragments in the text change callback
+        mSearchView.setQueryHint(getString(R.string.search_appointments));
+        mSearchView.findViewById(R.id.search_plate).setBackgroundColor(Color.TRANSPARENT);
+        mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
                 U.log(this, "query text submit: " + s);
@@ -159,7 +160,7 @@ public class HomeActivity extends ActionBarActivity
                 return false;
             }
         });
-        searchView.setSubmitButtonEnabled(false);
+        mSearchView.setSubmitButtonEnabled(false);
 
     }
 
