@@ -4,8 +4,10 @@ import android.app.Activity;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
@@ -20,6 +22,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.petrodevelopment.copdapp.NavigationDrawerFragment;
@@ -140,7 +143,9 @@ public class HomeActivity extends ActionBarActivity
     private void setupSearch(Menu menu) {
         MenuItem searchItem = menu.findItem(R.id.action_search);
         SearchView searchView = (SearchView) searchItem.getActionView();
-        searchView.setIconifiedByDefault(true);
+        searchView.setQueryHint(getString(R.string.search_appointments));
+        searchView.findViewById(R.id.search_plate).setBackgroundColor(Color.TRANSPARENT);
+//        ((EditText) searchView.findViewById(R.id.search_src_text)).setcust
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {

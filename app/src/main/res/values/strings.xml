@@ -7,6 +7,11 @@
     <string name="title_medications_fragment">Medications</string>
     <string name="title_caregivers_fragment">Caregivers</string>
 
+    <string name="search_appointments">Search appointments</string>
+    <string name="search_providers">Search providers</string>
+    <string name="search_medications">Search medications</string>
+    <string name="search_caregivers">Search caregivers</string>
+
     <string name="title_record_activity">Record Activity</string>
 
     <string name="action_note">Note</string>
