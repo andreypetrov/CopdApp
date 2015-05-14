@@ -20,7 +20,7 @@
         <meta-data android:name="QUERY_LOG" android:value="true" />
         <meta-data android:name="DOMAIN_PACKAGE_NAME" android:value="com.petrovdevelopment" />
 
-        <activity android:name=".activities.RecordActivity" android:label="@string/app_name"  >
+        <activity android:name=".record.RecordActivity" android:label="@string/app_name"  >
         </activity>
         <activity
             android:name=".activities.HomeActivity"

@@ -22,6 +22,7 @@ import com.petrodevelopment.copdapp.fragments.CaregiversFragment;
 import com.petrodevelopment.copdapp.fragments.MedicationsFragment;
 import com.petrodevelopment.copdapp.fragments.ProviderFragment;
 import com.petrodevelopment.copdapp.fragments.SectionFragment;
+import com.petrodevelopment.copdapp.record.RecordActivity;
 import com.petrodevelopment.copdapp.util.U;
 
 
@@ -50,7 +51,7 @@ public class HomeActivity extends ActionBarActivity
         mTitle = getTitle();
 
 //        Retrofit.initialize();
-//        startRecordActivity();
+        startRecordActivity();
     }
 
     private void initSpinner() {
@@ -130,7 +131,7 @@ public class HomeActivity extends ActionBarActivity
             // Only show items in the action bar relevant to this screen
             // if the drawer is not showing. Otherwise, let the drawer
             // decide what to show in the action bar.
-            getMenuInflater().inflate(R.menu.home, menu);
+            getMenuInflater().inflate(R.menu.home_menu, menu);
             setupSearch(menu);
             restoreActionBar();
             return true;

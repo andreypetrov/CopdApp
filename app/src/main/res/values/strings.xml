@@ -16,7 +16,7 @@
 
     <string name="action_note">Note</string>
     <string name="action_voice">Voice</string>
-    <string name="action_camera">Camera</string>
+    <string name="action_photo">Photo</string>
     <string name="action_reminder">Reminder</string>
     <string name="action_delete">Delete</string>
 
