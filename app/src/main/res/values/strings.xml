@@ -33,4 +33,5 @@
     <string name="add_caregiver">+ Add Caregiver</string>
 
     <string name="sort_by">Sort by:</string>
+    <string name="logout">Logout</string>
 </resources>
