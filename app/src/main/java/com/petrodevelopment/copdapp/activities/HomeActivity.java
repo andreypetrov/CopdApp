@@ -51,7 +51,7 @@ public class HomeActivity extends ActionBarActivity
         mTitle = getTitle();
 
 //        Retrofit.initialize();
-        startRecordActivity();
+//        startRecordActivity();
     }
 
     private void initSpinner() {

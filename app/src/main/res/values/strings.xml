@@ -34,4 +34,8 @@
 
     <string name="sort_by">Sort by:</string>
     <string name="logout">Logout</string>
+
+
+    <!-- Dummy time -->
+    <string name="dummy_time">00.35</string>
 </resources>
