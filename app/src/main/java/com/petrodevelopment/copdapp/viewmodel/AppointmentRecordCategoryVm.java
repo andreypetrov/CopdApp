@@ -10,8 +10,8 @@ import java.util.List;
  * Created by andrey on 13/05/2015.
  */
 public class AppointmentRecordCategoryVm {
-    public int id;
+    public String id;
+    public String type;
     public String name;
     public String image;
-    public List<AppointmentRecordCategoryVm> subcategories;
 }

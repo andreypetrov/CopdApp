@@ -1,10 +1,15 @@
 package com.petrodevelopment.copdapp.adapters;
 
 import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.petrodevelopment.copdapp.R;
+import com.petrodevelopment.copdapp.viewmodel.AppointmentListVm;
 import com.petrodevelopment.copdapp.viewmodel.AppointmentRecordCategoryVm;
 
 import java.util.List;
@@ -13,40 +18,34 @@ import java.util.List;
  * Every category has subcategories
  * Created by andrey on 15/05/2015.
  */
-public class AppointmentRecordCategoriesAdapter extends BaseAdapter {
-    private List<AppointmentRecordCategoryVm> mCategories;
-    private Context mContext;
+public class AppointmentRecordCategoriesAdapter extends GenericAdapter<AppointmentRecordCategoryVm> {
+    public static final String TYPE_CATEGORY = "category";
+    public static final String TYPE_SUBCATEGORY = "subcategory";
 
-    public AppointmentRecordCategoriesAdapter (Context context, List<AppointmentRecordCategoryVm> categories) {
-        mCategories = categories;
-        mContext = context;
+    private int categoryLayoutId;
+    private int subcategoryLayoutId;
+
+    public AppointmentRecordCategoriesAdapter(List<AppointmentRecordCategoryVm> data, Context context, int categoryLayoutId, int subcategoryLayoutId) {
+        super(data, context);
+        this.categoryLayoutId = categoryLayoutId;
+        this.subcategoryLayoutId = subcategoryLayoutId;
     }
 
     @Override
-    public int getCount() {
-        int count = 0;
-        for (AppointmentRecordCategoryVm category : mCategories) {
-            count++;
-            for (AppointmentRecordCategoryVm subcategory : category.subcategories) {
-                count++;
-            }
-        }
-        return count;
+    public void update(View view, int position) {
+        AppointmentRecordCategoryVm category = getItem(position);
+
+        TextView nameView = (TextView) view.findViewById(R.id.name);
+        nameView.setText(category.name);
+
+        ImageView imageView = (ImageView) view.findViewById(R.id.image);
+        imageView.setImageResource(R.drawable.ic_alarm_add_grey600_48dp);
     }
 
     @Override
-    public Object getItem(int position) {
-        return null;
-    }
-
-    @Override
-    public long getItemId(int position) {
-        return 0;
-    }
-
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        return null;
+    public int getCellResourceId(int position) {
+        if (getItemViewType(position) == 0) return categoryLayoutId;
+        else return subcategoryLayoutId;
     }
 
     @Override
@@ -56,7 +55,7 @@ public class AppointmentRecordCategoriesAdapter extends BaseAdapter {
 
     @Override
     public int getItemViewType(int position) {
-
-        return super.getItemViewType(position);
+        if (getItem(position).type.equals(TYPE_CATEGORY)) return 0;
+        else return 1; //subcategory
     }
 }

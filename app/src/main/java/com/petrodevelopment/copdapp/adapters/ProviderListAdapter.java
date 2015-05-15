@@ -25,7 +25,7 @@ public class ProviderListAdapter extends GenericAdapter<Provider> {
     }
 
     @Override
-    public int getCellResourceId() {
+    public int getCellResourceId(int position) {
         return cellMainMenuLayoutId;
     }
 

@@ -2,48 +2,52 @@
   "appointmentRecordCategories": [
     {
       "id": "1",
+      "type": "category",
       "name": "Diagnosis",
-      "image": "entry",
-      "type": "1", //category
-      "subcategories": [
-        {
-          "id": "1",
-          "name": "Severity",
-          "image": "car"
-        },
-        {
-          "id": "2",
-          "name": "Assessment",
-          "image": "car"
-        }
-      ]
+      "image": "entry"
+
+    },
+    {
+      "id": "1",
+      "type": "subcategory",
+      "name": "Severity",
+      "image": "car"
     },
     {
       "id": "2",
+      "type": "subcategory",
+      "name": "Assessment",
+      "image": "car"
+    },
+    {
+      "id": "2",
+      "type": "category",
       "name": "Plan",
-      "image": "entry",
-      "subcategories": [
-        {
-          "id": "1",
-          "name": "Medications",
-          "image": "car"
-        },
-        {
-          "id": "2",
-          "name": "Tests",
-          "image": "car"
-        },
-        {
-          "id": "3",
-          "name": "Life style changes",
-          "image": "car"
-        },
-        {
-          "id": "4",
-          "name": "Future referrals",
-          "image": "car"
-        }
-      ]
+      "image": "entry"
+    },
+    {
+      "id": "1",
+      "type": "subcategory",
+      "name": "Medications",
+      "image": "car"
+    },
+    {
+      "id": "2",
+      "type": "subcategory",
+      "name": "Tests",
+      "image": "car"
+    },
+    {
+      "id": "3",
+      "type": "subcategory",
+      "name": "Life style changes",
+      "image": "car"
+    },
+    {
+      "id": "4",
+      "type": "subcategory",
+      "name": "Future referrals",
+      "image": "car"
     }
   ]
 }
