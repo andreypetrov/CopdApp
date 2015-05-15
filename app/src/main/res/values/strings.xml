@@ -24,8 +24,11 @@
     <string name="dummy_text">dummy text</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="action_example">Example action</string>
-    <string name="action_settings">Settings</string>
+
+    <!-- Appointments -->
+    <string name="all">All</string>
+    <string name="upcoming">Upcoming</string>
+    <string name="clinician">Clinician</string>
 
     <string name="add_appointment">+ Add Appointment</string>
     <string name="add_provider">+ Add Provider</string>
@@ -40,7 +43,9 @@
     <string name="dummy_time">00.35</string>
 
 
-    <string name="all">All</string>
-    <string name="upcoming">Upcoming</string>
-    <string name="clinician">Clinician</string>
+
+
+    <!-- Record appointment -->
+    <string name="record_appointment">Record appointment</string>
+    <string name="record_results">Record results</string>
 </resources>
