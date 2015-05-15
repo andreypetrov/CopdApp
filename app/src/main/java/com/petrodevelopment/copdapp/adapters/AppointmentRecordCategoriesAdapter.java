@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.petrodevelopment.copdapp.R;
+import com.petrodevelopment.copdapp.util.U;
 import com.petrodevelopment.copdapp.viewmodel.AppointmentListVm;
 import com.petrodevelopment.copdapp.viewmodel.AppointmentRecordCategoryVm;
 
@@ -33,6 +34,7 @@ public class AppointmentRecordCategoriesAdapter extends GenericAdapter<Appointme
 
     @Override
     public void update(View view, int position) {
+        updateListener(view, position);
         AppointmentRecordCategoryVm category = getItem(position);
 
         TextView nameView = (TextView) view.findViewById(R.id.name);
@@ -40,6 +42,15 @@ public class AppointmentRecordCategoriesAdapter extends GenericAdapter<Appointme
 
         ImageView imageView = (ImageView) view.findViewById(R.id.image);
         imageView.setImageResource(R.drawable.ic_alarm_add_grey600_48dp);
+    }
+
+    private void updateListener(View view, int position) {
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                U.log(this, "view clicked!");
+            }
+        });
     }
 
     @Override

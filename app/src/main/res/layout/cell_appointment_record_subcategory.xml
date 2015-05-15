@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="@dimen/subcategory_row"
+    android:background="@drawable/white_button"
     android:orientation="horizontal">
 
     <include layout="@layout/line_vertical"/>
@@ -38,6 +39,12 @@
                 android:textSize="@dimen/abc_text_size_medium_material"
                 />
 
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:src="@drawable/abc_btn_check_to_on_mtrl_015"/>
         </LinearLayout>
 
         <include layout="@layout/line_horizontal"/>
