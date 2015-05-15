@@ -1,0 +1,75 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    tools:context=".ProvidersFragment">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="190dp"
+        android:contentDescription="@string/dummy_text"
+        android:src="@drawable/placeholder" />
+
+    <Spinner android:id="@+id/select_provider"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <Spinner android:id="@+id/select_date"
+            android:layout_width="205dp"
+            android:layout_height="wrap_content" />
+
+        <Spinner android:id="@+id/select_time"
+            android:layout_width="135dp"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+
+    <EditText android:id="@+id/appointment_reason"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textMultiLine"
+        android:lines="5"
+        android:minLines="2"
+        android:hint="@string/appointment_reason" />
+
+    <TextView android:id="@+id/questions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/appointment_questions" />
+
+    <TextView android:id="@+id/questions_per_specialist"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:width="300dp"
+        android:minLines="2"
+        android:text="@string/questions_per_specialist" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <Button  android:id="@+id/saveAsUpcoming"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:width="185dp"
+            android:text="@string/save_appointment"
+            android:onClick="" />
+
+        <Button  android:id="@+id/recordAppointment"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:width="185dp"
+            android:text="@string/record_appointment"
+            android:onClick="" />
+
+     </LinearLayout>
+
+</LinearLayout>
