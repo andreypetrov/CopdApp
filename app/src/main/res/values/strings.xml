@@ -38,4 +38,9 @@
 
     <!-- Dummy time -->
     <string name="dummy_time">00.35</string>
+
+
+    <string name="all">All</string>
+    <string name="upcoming">Upcoming</string>
+    <string name="clinician">Clinician</string>
 </resources>

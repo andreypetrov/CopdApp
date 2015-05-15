@@ -23,25 +23,25 @@
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:background="@drawable/tab"
-            android:text="@string/add_provider"
-            android:textColor="@color/white"/>
+            android:background="@drawable/tab_bg"
+            android:text="@string/all"
+            android:textColor="@drawable/tab_font_color"/>
         <Button
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:background="@drawable/tab"
-            android:text="@string/add_provider"
-            android:textColor="@color/white"/>
+            android:background="@drawable/tab_bg"
+            android:text="@string/upcoming"
+            android:textColor="@drawable/tab_font_color"/>
         <Button
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:background="@drawable/tab"
-            android:text="@string/add_provider"
-            android:textColor="@color/white"/>
+            android:background="@drawable/tab_bg"
+            android:text="@string/clinician"
+            android:textColor="@drawable/tab_font_color"/>
     </com.petrodevelopment.copdapp.views.TabsView>
 
     <ListView
