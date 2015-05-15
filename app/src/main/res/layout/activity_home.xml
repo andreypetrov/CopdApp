@@ -17,36 +17,36 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#2196F3"
+            android:background="@color/blue"
             android:minHeight="?android:attr/actionBarSize"
             app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"></android.support.v7.widget.Toolbar>
 
 
         <!-- As the main content view, the view below consumes the entire
              space available using match_parent in both dimensions. -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="@dimen/activity_horizontal_margin">
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:orientation="horizontal"-->
+            <!--android:padding="@dimen/activity_horizontal_margin">-->
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginRight="@dimen/activity_vertical_margin"
-                android:text="@string/sort_by"
-                android:textSize="@dimen/abc_text_size_large_material"/>
+            <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_gravity="center"-->
+                <!--android:layout_marginRight="@dimen/activity_vertical_margin"-->
+                <!--android:text="@string/sort_by"-->
+                <!--android:textSize="@dimen/abc_text_size_large_material"/>-->
 
-            <Spinner
-                android:id="@+id/sort_by_spinner"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/spinner_background"
-                android:dropDownSelector="@drawable/ic_alarm_add_grey600_48dp"
-                android:textSize="@dimen/abc_text_size_large_material"></Spinner>
+            <!--<Spinner-->
+                <!--android:id="@+id/sort_by_spinner"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:background="@drawable/spinner_background"-->
+                <!--android:dropDownSelector="@drawable/ic_alarm_add_grey600_48dp"-->
+                <!--android:textSize="@dimen/abc_text_size_large_material"></Spinner>-->
 
-        </LinearLayout>
+        <!--</LinearLayout>-->
 
         <!-- Swap different list fragments in the frame layout -->
         <FrameLayout

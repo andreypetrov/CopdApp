@@ -47,24 +47,24 @@ public class HomeActivity extends ActionBarActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         initDrawer();
-        initSpinner();
+//        initSpinner();
         mTitle = getTitle();
 
 //        Retrofit.initialize();
 //        startRecordActivity();
     }
 
-    private void initSpinner() {
-        Spinner spinner = (Spinner) findViewById(R.id.sort_by_spinner);
-// Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.planets_array, R.layout.dropdown_textview);
-// Specify the layout to use when the list of choices appears
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-// Apply the adapter to the spinner
-
-        spinner.setAdapter(adapter);
-    }
+//    private void initSpinner() {
+//        Spinner spinner = (Spinner) findViewById(R.id.sort_by_spinner);
+//// Create an ArrayAdapter using the string array and a default spinner layout
+//        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+//                R.array.planets_array, R.layout.dropdown_textview);
+//// Specify the layout to use when the list of choices appears
+//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//// Apply the adapter to the spinner
+//
+//        spinner.setAdapter(adapter);
+//    }
 
 
     private void startRecordActivity (){
