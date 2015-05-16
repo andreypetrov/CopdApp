@@ -9,7 +9,6 @@
     tools:context=".AddEditAppointmentActivity">
 
 
-
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
@@ -37,10 +36,11 @@
                 style="@android:style/Widget.Holo.Spinner"
                 android:hint="Date"/>
 
-
-            <Spinner android:id="@+id/select_time"
+            <TextView android:id="@+id/select_time"
                 android:layout_width="135dp"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                style="@android:style/Widget.Holo.Spinner"
+                android:text="@string/Time"/>
 
         </LinearLayout>
 
