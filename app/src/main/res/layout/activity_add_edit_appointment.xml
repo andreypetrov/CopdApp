@@ -29,7 +29,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content">
 
-            <com.petrodevelopment.copdapp.util.DateDisplayPicker
+            <TextView
                 android:id="@+id/select_date"
                 android:layout_width="205dp"
                 android:layout_height="wrap_content"
