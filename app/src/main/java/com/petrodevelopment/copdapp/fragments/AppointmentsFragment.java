@@ -18,7 +18,7 @@ import com.petrodevelopment.copdapp.viewmodel.AppointmentListVm;
 import java.util.List;
 
 /**
- * Created by Tom on 14/05/2015.
+ * Created by Andrey on 14/05/2015.
  */
 public class AppointmentsFragment extends SectionFragment {
     /**
