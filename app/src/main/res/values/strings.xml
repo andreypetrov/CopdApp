@@ -45,6 +45,9 @@
     <string name="Time">Time</string>
     <string name="appointment_reason">...enter reason for appointment</string>
     <string name="title_activity_add_edit_appointment">AddEditAppointmentActivity</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
     <!-- End Add for 14/05/2015-->
 
 

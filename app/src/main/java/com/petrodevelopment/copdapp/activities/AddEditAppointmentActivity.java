@@ -4,8 +4,13 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
+
 
 import com.petrodevelopment.copdapp.R;
+
 
 public class AddEditAppointmentActivity extends ActionBarActivity {
 
@@ -13,7 +18,15 @@ public class AddEditAppointmentActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_edit_appointment);
+
+        //Populate Provider Spinner
+        Spinner providerSpinner = (Spinner) findViewById(R.id.select_provider);
+        ArrayAdapter providerAdapter = ArrayAdapter.createFromResource(this, R.array.planets_array, android.R.layout.simple_spinner_item);
+        providerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        providerSpinner.setAdapter(providerAdapter);
+
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -36,4 +49,6 @@ public class AddEditAppointmentActivity extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+
 }
