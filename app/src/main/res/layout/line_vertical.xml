@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.petrodevelopment.copdapp.views.Line
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    android:layout_width="1dp"
+    android:layout_height="match_parent"
+    custom:line_orientation="vertical"
+    custom:line_stroke="1"
+    custom:line_color="@color/secondary_text_disabled_material_light" />

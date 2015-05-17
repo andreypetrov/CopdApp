@@ -12,8 +12,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.support.v4.widget.DrawerLayout;
-import android.widget.ArrayAdapter;
-import android.widget.Spinner;
 
 import com.petrodevelopment.copdapp.NavigationDrawerFragment;
 import com.petrodevelopment.copdapp.R;
@@ -22,6 +20,8 @@ import com.petrodevelopment.copdapp.fragments.CaregiversFragment;
 import com.petrodevelopment.copdapp.fragments.MedicationsFragment;
 import com.petrodevelopment.copdapp.fragments.ProviderFragment;
 import com.petrodevelopment.copdapp.fragments.SectionFragment;
+import com.petrodevelopment.copdapp.record.RecordActivity;
+import com.petrodevelopment.copdapp.record.RecordAppointmentActivity;
 import com.petrodevelopment.copdapp.util.U;
 
 
@@ -46,25 +46,30 @@ public class HomeActivity extends ActionBarActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         initDrawer();
-        initSpinner();
+//        initSpinner();
         mTitle = getTitle();
+        startRecordAppointmentActivity();
 
 //        Retrofit.initialize();
 //        startRecordActivity();
     }
 
-    private void initSpinner() {
-        Spinner spinner = (Spinner) findViewById(R.id.sort_by_spinner);
-// Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.planets_array, R.layout.dropdown_textview);
-// Specify the layout to use when the list of choices appears
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-// Apply the adapter to the spinner
+//    private void initSpinner() {
+//        Spinner spinner = (Spinner) findViewById(R.id.sort_by_spinner);
+//// Create an ArrayAdapter using the string array and a default spinner layout
+//        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+//                R.array.planets_array, R.layout.dropdown_textview);
+//// Specify the layout to use when the list of choices appears
+//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//// Apply the adapter to the spinner
+//
+//        spinner.setAdapter(adapter);
+//    }
 
-        spinner.setAdapter(adapter);
+    private void startRecordAppointmentActivity() {
+        Intent intent = new Intent(this, RecordAppointmentActivity.class);
+        startActivity(intent);
     }
-
 
     private void startRecordActivity (){
         Intent intent = new Intent(this, RecordActivity.class);
@@ -89,7 +94,7 @@ public class HomeActivity extends ActionBarActivity
      */
     @Override
     public void onNavigationDrawerItemSelected(int position) {
-        if (position == 4) startRecordActivity();
+        if (position == 4) startRecordAppointmentActivity();
         else {
             FragmentManager fragmentManager = getFragmentManager();
             fragmentManager.beginTransaction()
@@ -130,7 +135,7 @@ public class HomeActivity extends ActionBarActivity
             // Only show items in the action bar relevant to this screen
             // if the drawer is not showing. Otherwise, let the drawer
             // decide what to show in the action bar.
-            getMenuInflater().inflate(R.menu.home, menu);
+            getMenuInflater().inflate(R.menu.home_menu, menu);
             setupSearch(menu);
             restoreActionBar();
             return true;
@@ -160,26 +165,4 @@ public class HomeActivity extends ActionBarActivity
         mSearchView.setSubmitButtonEnabled(false);
 
     }
-
-
-
-
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-
-
 }

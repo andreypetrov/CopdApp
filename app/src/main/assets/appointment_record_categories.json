@@ -1,0 +1,53 @@
+{
+  "appointmentRecordCategories": [
+    {
+      "id": "1",
+      "type": "category",
+      "name": "Diagnosis",
+      "image": "entry"
+
+    },
+    {
+      "id": "1",
+      "type": "subcategory",
+      "name": "Severity",
+      "image": "car"
+    },
+    {
+      "id": "2",
+      "type": "subcategory",
+      "name": "Assessment",
+      "image": "car"
+    },
+    {
+      "id": "2",
+      "type": "category",
+      "name": "Plan",
+      "image": "entry"
+    },
+    {
+      "id": "1",
+      "type": "subcategory",
+      "name": "Medications",
+      "image": "car"
+    },
+    {
+      "id": "2",
+      "type": "subcategory",
+      "name": "Tests",
+      "image": "car"
+    },
+    {
+      "id": "3",
+      "type": "subcategory",
+      "name": "Life style changes",
+      "image": "car"
+    },
+    {
+      "id": "4",
+      "type": "subcategory",
+      "name": "Future referrals",
+      "image": "car"
+    }
+  ]
+}

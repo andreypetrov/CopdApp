@@ -36,7 +36,7 @@ public class AppointmentListAdapter extends GenericAdapter<AppointmentListVm> {
     }
 
     @Override
-    public int getCellResourceId() {
+    public int getCellResourceId(int position) {
         return cellMainMenuLayoutId;
     }
 

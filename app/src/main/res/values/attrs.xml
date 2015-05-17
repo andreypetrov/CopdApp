@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="TabsView">
+        <attr name="selected" format="integer" />
+    </declare-styleable>
+
+    <declare-styleable name="Line">
+        <attr name="line_color" format="color" />
+        <attr name="line_stroke" format="float" />
+        <attr name="line_orientation" format="string"/>
+    </declare-styleable>
+</resources>

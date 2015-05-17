@@ -1,7 +1,5 @@
 package com.petrodevelopment.copdapp.fragments;
 
-import android.app.Activity;
-import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,9 +8,7 @@ import android.widget.ListView;
 
 import com.petrodevelopment.copdapp.R;
 import com.petrodevelopment.copdapp.adapters.AppointmentListAdapter;
-import com.petrodevelopment.copdapp.adapters.ProviderListAdapter;
 import com.petrodevelopment.copdapp.model.Appointment;
-import com.petrodevelopment.copdapp.model.Provider;
 import com.petrodevelopment.copdapp.viewmodel.AppointmentListVm;
 
 import java.util.List;
@@ -42,7 +38,7 @@ public class AppointmentsFragment extends SectionFragment {
     private void populateList(View rootView) {
         ListView listView = (ListView) rootView.findViewById(R.id.list_view);
         List<AppointmentListVm> viewModels = AppointmentListVm.createFromModel(getModel());
-        listView.setAdapter(new AppointmentListAdapter(viewModels, getActivity(), R.layout.appointment_list_cell));
+        listView.setAdapter(new AppointmentListAdapter(viewModels, getActivity(), R.layout.cell_appointment_list));
     }
 
 

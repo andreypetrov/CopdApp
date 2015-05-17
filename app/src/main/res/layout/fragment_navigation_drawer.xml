@@ -21,9 +21,16 @@
     <ListView
         android:id="@+id/navigation_list_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:choiceMode="singleChoice"
         android:divider="@android:color/transparent"
         android:dividerHeight="0dp"/>
 
+    <Button
+        android:layout_gravity="center_horizontal"
+        android:textColor="@color/white"
+        android:background="@drawable/add_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" android:text="@string/logout"/>
 </LinearLayout>

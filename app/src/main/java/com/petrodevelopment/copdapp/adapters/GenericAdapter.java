@@ -35,7 +35,7 @@ public abstract class GenericAdapter<Data> extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
-            convertView = LayoutInflater.from(context).inflate(getCellResourceId(), parent, false);
+            convertView = LayoutInflater.from(context).inflate(getCellResourceId(position), parent, false);
             convertView.setTag(createHolder(convertView));
         }
         update(convertView, position);
@@ -44,7 +44,7 @@ public abstract class GenericAdapter<Data> extends BaseAdapter {
 
     public abstract void update(View view, int position);
 
-    public abstract int getCellResourceId();
+    public abstract int getCellResourceId(int positon);
 
     /**
      * To be overridden only in views with more than ten cells, to improve performance.

@@ -7,4 +7,6 @@ import com.orm.SugarApp;
  * Created by andrey on 10/05/2015.
  */
 public class MainApplication extends SugarApp {
+
+
 }

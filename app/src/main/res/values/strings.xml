@@ -16,7 +16,7 @@
 
     <string name="action_note">Note</string>
     <string name="action_voice">Voice</string>
-    <string name="action_camera">Camera</string>
+    <string name="action_photo">Photo</string>
     <string name="action_reminder">Reminder</string>
     <string name="action_delete">Delete</string>
 
@@ -24,8 +24,11 @@
     <string name="dummy_text">dummy text</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="action_example">Example action</string>
-    <string name="action_settings">Settings</string>
+
+    <!-- Appointments -->
+    <string name="all">All</string>
+    <string name="upcoming">Upcoming</string>
+    <string name="clinician">Clinician</string>
 
     <string name="add_appointment">+ Add Appointment</string>
     <string name="add_provider">+ Add Provider</string>
@@ -33,7 +36,6 @@
     <string name="add_caregiver">+ Add Caregiver</string>
 
     <string name="sort_by">Sort by:</string>
-
     <!--Added by Tom 14/05/2015 -->
     <string name="appointment_questions">Questions to Ask</string>
     <string name="save_appointment">Save as Upcoming</string>
@@ -50,5 +52,15 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <!-- End Add for 14/05/2015-->
 
+    <string name="logout">Logout</string>
 
+
+    <!-- Dummy time -->
+    <string name="dummy_time">00.35</string>
+
+
+
+
+    <!-- Record appointment -->
+    <string name="record_results">Record results</string>
 </resources>

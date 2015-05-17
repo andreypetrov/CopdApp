@@ -6,7 +6,7 @@ package com.petrodevelopment.copdapp.record;
 /*
  * The application needs to have the permission to write to external storage
  * if the output file is written to the external storage, and also the
- * permission to record audio. These permissions must be set in the
+ * permission to record_menu audio. These permissions must be set in the
  * application's AndroidManifest.xml file, with something like:
  *
  * <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
