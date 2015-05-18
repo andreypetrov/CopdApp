@@ -59,7 +59,7 @@
     <string name="dummy_time">00.35</string>
 
 
-
+    <string name="appointment_note_hint">Enter your notes here...</string>
 
     <!-- Record appointment -->
     <string name="record_results">Record results</string>

@@ -43,7 +43,7 @@ public class AppointmentRecordCategoriesAdapter extends GenericAdapter<Appointme
         nameView.setText(category.name);
 
         ImageView imageView = (ImageView) view.findViewById(R.id.image);
-        imageView.setImageResource(R.drawable.ic_alarm_add_grey600_48dp);
+        imageView.setImageResource(context.getResources().getIdentifier(category.image , "drawable", context.getPackageName()));
     }
 
     private void updateListener(View view, int position) {

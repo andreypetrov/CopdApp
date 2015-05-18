@@ -26,7 +26,7 @@
 
             <ImageView
                 android:id="@+id/image"
-                android:layout_width="@dimen/subcategory_icon"
+                android:layout_width="@dimen/category_icon"
                 android:layout_height="@dimen/subcategory_icon"
                 android:layout_gravity="center_vertical"
                 android:layout_marginRight="@dimen/activity_horizontal_margin"/>
@@ -51,27 +51,55 @@
 
         <LinearLayout
             android:id="@+id/cell_body"
-            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
             android:layout_marginRight="@dimen/activity_horizontal_margin"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:visibility="visible">
 
             <include layout="@layout/line_horizontal"/>
 
             <EditText
                 android:id="@+id/note"
-                android:layout_marginTop="@dimen/box_top_and_bottom_padding"
-                android:layout_marginBottom="@dimen/box_top_and_bottom_padding"
-                android:minLines="3"
-                android:gravity="top|left"
-                android:inputType="textMultiLine"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/box_top_and_bottom_padding"
+                android:layout_marginTop="@dimen/box_top_and_bottom_padding"
                 android:background="@color/transparent"
-                android:text="@string/dummy_text"/>
+                android:gravity="top|left"
+                android:hint="@string/appointment_note_hint"
+                android:inputType="textMultiLine"
+                android:minLines="3"
+                />
 
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" android:layout_gravity="center_horizontal">
+
+                <ImageButton
+                    android:id="@+id/mic_btn"
+                    android:background="@drawable/white_button"
+                    android:src="@drawable/ic_mic"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <ImageButton
+                    android:id="@+id/camera_btn"
+                    android:background="@drawable/white_button"
+                    android:src="@drawable/ic_camera"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <ImageButton
+                    android:id="@+id/reminder_btn"
+                    android:background="@drawable/white_button"
+                    android:src="@drawable/ic_reminder"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
         </LinearLayout>
 
         <include layout="@layout/line_horizontal"/>

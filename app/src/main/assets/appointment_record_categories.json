@@ -4,50 +4,50 @@
       "id": "1",
       "type": "category",
       "name": "Diagnosis",
-      "image": "entry"
+      "image": "ic_diagnosis"
 
     },
     {
       "id": "1",
       "type": "subcategory",
       "name": "Severity",
-      "image": "car"
+      "image": "ic_severity_blue"
     },
     {
       "id": "2",
       "type": "subcategory",
       "name": "Assessment",
-      "image": "car"
+      "image": "ic_assessment_blue"
     },
     {
       "id": "2",
       "type": "category",
       "name": "Plan",
-      "image": "entry"
+      "image": "ic_plan_color"
     },
     {
       "id": "1",
       "type": "subcategory",
       "name": "Medications",
-      "image": "car"
+      "image": "ic_medicationa_blue"
     },
     {
       "id": "2",
       "type": "subcategory",
       "name": "Tests",
-      "image": "car"
+      "image": "ic_tests_bue"
     },
     {
       "id": "3",
       "type": "subcategory",
       "name": "Life style changes",
-      "image": "car"
+      "image": "ic_lifestyle_blue"
     },
     {
       "id": "4",
       "type": "subcategory",
       "name": "Future referrals",
-      "image": "car"
+      "image": "ic_referrals_blue"
     }
   ]
 }
