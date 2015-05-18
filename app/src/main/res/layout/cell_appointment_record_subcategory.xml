@@ -2,23 +2,25 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/subcategory_row"
-    android:background="@drawable/white_button"
+    android:layout_height="wrap_content"
+    android:background="@color/transparent"
+    android:descendantFocusability="afterDescendants"
     android:orientation="horizontal">
 
     <include layout="@layout/line_vertical"/>
 
     <LinearLayout
         android:layout_width="0dp"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_weight="1"
         android:orientation="vertical"
         >
 
         <LinearLayout
+            android:id="@+id/cell_header"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_height="@dimen/subcategory_row"
+            android:background="@drawable/white_button"
             android:orientation="horizontal"
             >
 
@@ -45,6 +47,31 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="@dimen/activity_horizontal_margin"
                 android:src="@drawable/abc_btn_check_to_on_mtrl_015"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/cell_body"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:orientation="vertical">
+
+            <include layout="@layout/line_horizontal"/>
+
+            <EditText
+                android:id="@+id/note"
+                android:layout_marginTop="@dimen/box_top_and_bottom_padding"
+                android:layout_marginBottom="@dimen/box_top_and_bottom_padding"
+                android:minLines="3"
+                android:gravity="top|left"
+                android:inputType="textMultiLine"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/transparent"
+                android:text="@string/dummy_text"/>
+
         </LinearLayout>
 
         <include layout="@layout/line_horizontal"/>

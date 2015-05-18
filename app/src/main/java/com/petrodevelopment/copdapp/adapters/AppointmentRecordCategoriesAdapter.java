@@ -4,7 +4,9 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.BaseAdapter;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -34,7 +36,7 @@ public class AppointmentRecordCategoriesAdapter extends GenericAdapter<Appointme
 
     @Override
     public void update(View view, int position) {
-        updateListener(view, position);
+        if (getItemViewType(position) == 1) updateListener(view, position);
         AppointmentRecordCategoryVm category = getItem(position);
 
         TextView nameView = (TextView) view.findViewById(R.id.name);
@@ -45,9 +47,26 @@ public class AppointmentRecordCategoriesAdapter extends GenericAdapter<Appointme
     }
 
     private void updateListener(View view, int position) {
-        view.setOnClickListener(new View.OnClickListener() {
+
+        View headerView = view.findViewById(R.id.cell_header);
+        final View bodyView = view.findViewById(R.id.cell_body);
+        final EditText noteView=  (EditText) bodyView.findViewById(R.id.note);
+
+        headerView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                InputMethodManager inputMethodManager = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+                if (bodyView.getVisibility() == View.GONE) {
+                    bodyView.setVisibility(View.VISIBLE);
+                    noteView.requestFocus();
+                    noteView.setSelection(noteView.getText().length());
+                    inputMethodManager.showSoftInput(noteView, InputMethodManager.SHOW_IMPLICIT);
+                }
+                else {
+                    bodyView.setVisibility(View.GONE);
+                    inputMethodManager.hideSoftInputFromWindow(noteView.getWindowToken(), 0);
+                }
+
                 U.log(this, "view clicked!");
             }
         });
