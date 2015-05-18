@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.Spinner;
@@ -16,6 +17,9 @@ import android.widget.TimePicker;
 
 
 import com.petrodevelopment.copdapp.R;
+import com.petrodevelopment.copdapp.adapters.EditAddAppointmentProviderListAdapter;
+import com.petrodevelopment.copdapp.adapters.ProviderListAdapter;
+import com.petrodevelopment.copdapp.model.Provider;
 
 import java.util.Calendar;
 
@@ -26,16 +30,32 @@ public class AddEditAppointmentActivity extends ActionBarActivity implements OnC
     TextView selectTime,selectDate;
     private int hour, minute, day, month, year;
 
+    private Provider provider = new Provider();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_edit_appointment);
 
         //Populate Provider Spinner
-        Spinner providerSpinner = (Spinner) findViewById(R.id.select_provider);
-        ArrayAdapter providerAdapter = ArrayAdapter.createFromResource(this, R.array.planets_array, android.R.layout.simple_spinner_item);
-        providerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        final EditAddAppointmentProviderListAdapter providerAdapter = new EditAddAppointmentProviderListAdapter(Provider.getDummy(), this, R.layout.provider_list_cell);
+
+        final Spinner providerSpinner = (Spinner) findViewById(R.id.select_provider);
+        /*ArrayAdapter providerAdapter = ArrayAdapter.createFromResource(this, R.array.planets_array, android.R.layout.simple_spinner_item);
+        providerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);*/
         providerSpinner.setAdapter(providerAdapter);
+        providerSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String address = Provider.getDummy().get(position).address;
+                //Update mapview -> setCoords
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                return;
+            }
+        });
 
         //For picking time
         selectTime = (TextView) findViewById(R.id.select_time);

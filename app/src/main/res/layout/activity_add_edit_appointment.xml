@@ -83,7 +83,7 @@
                 android:width="180dp"
                 android:text="@string/save_appointment"
                 android:onClick=""
-                android:layout_alignParentBottom="true"/>
+                android:layout_alignParentBottom="true" />
 
             <Button  android:id="@+id/recordAppointment"
                 android:layout_height="wrap_content"
