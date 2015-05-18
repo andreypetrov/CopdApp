@@ -58,15 +58,15 @@ public class AppointmentRecordCategoriesAdapter extends GenericAdapter<Appointme
                 InputMethodManager inputMethodManager = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
                 if (bodyView.getVisibility() == View.GONE) {
                     bodyView.setVisibility(View.VISIBLE);
-                    noteView.requestFocus();
-                    noteView.setSelection(noteView.getText().length());
-                    inputMethodManager.showSoftInput(noteView, InputMethodManager.SHOW_IMPLICIT);
+//                    noteView.requestFocus();
+//                    noteView.setSelection(noteView.getText().length());
+//                    inputMethodManager.showSoftInput(noteView, InputMethodManager.SHOW_IMPLICIT);
                 }
                 else {
                     bodyView.setVisibility(View.GONE);
                     inputMethodManager.hideSoftInputFromWindow(noteView.getWindowToken(), 0);
                 }
-
+                
                 U.log(this, "view clicked!");
             }
         });
