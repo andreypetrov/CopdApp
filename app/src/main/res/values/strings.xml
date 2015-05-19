@@ -63,4 +63,9 @@
 
     <!-- Record appointment -->
     <string name="record_results">Record results</string>
+    <string name="title_activity_map_test">mapTest</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_maps_activity_test">Map</string>
 </resources>
