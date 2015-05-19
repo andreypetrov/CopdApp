@@ -2,6 +2,7 @@ package com.petrodevelopment.copdapp.activities;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -16,6 +17,12 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 
 
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
+import com.petrodevelopment.copdapp.MapsForAppointments;
 import com.petrodevelopment.copdapp.R;
 import com.petrodevelopment.copdapp.adapters.EditAddAppointmentProviderListAdapter;
 import com.petrodevelopment.copdapp.adapters.ProviderListAdapter;
@@ -24,11 +31,13 @@ import com.petrodevelopment.copdapp.model.Provider;
 import java.util.Calendar;
 
 
-public class AddEditAppointmentActivity extends ActionBarActivity implements OnClickListener {
+public class AddEditAppointmentActivity extends FragmentActivity implements OnClickListener, OnMapReadyCallback {
 
     //Variables
     TextView selectTime,selectDate;
     private int hour, minute, day, month, year;
+    private String address;
+    private String coords;
 
     private Provider provider = new Provider();
 
@@ -36,6 +45,12 @@ public class AddEditAppointmentActivity extends ActionBarActivity implements OnC
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_edit_appointment);
+
+        //Google Maps Added 19-05-2015 by Tom
+        MapFragment mapFragment = (MapFragment) getFragmentManager()
+                .findFragmentById(R.id.map);
+        mapFragment.getMapAsync(this);
+
 
         //Populate Provider Spinner
         final EditAddAppointmentProviderListAdapter providerAdapter = new EditAddAppointmentProviderListAdapter(Provider.getDummy(), this, R.layout.provider_list_cell);
@@ -47,7 +62,8 @@ public class AddEditAppointmentActivity extends ActionBarActivity implements OnC
         providerSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String address = Provider.getDummy().get(position).address;
+                address = Provider.getDummy().get(position).address;
+                coords = Provider.getDummy().get(position).coordinates;
                 //Update mapview -> setCoords
             }
 
@@ -134,5 +150,14 @@ public class AddEditAppointmentActivity extends ActionBarActivity implements OnC
                     }, hour, minute, false);
             tpd.show();
         }
+    }
+
+
+    //Added for Google Maps 19-05-2015 by Tom
+    @Override
+    public void onMapReady(GoogleMap map) {
+        map.addMarker(new MarkerOptions()
+                .position(new LatLng(0, 0))
+                .title("Marker"));
     }
 }

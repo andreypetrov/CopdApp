@@ -7,18 +7,26 @@
     android:layout_height="match_parent"
 
     tools:context=".AddEditAppointmentActivity">
-
-
+    
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:orientation="vertical">
 
+        <!-- Google Maps fragment added 19-05-2015-->
+        <fragment
+            android:id="@+id/map"
+            android:name="com.google.android.gms.maps.MapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="190dp"
+            tools:layout="@layout/fragment_maps_for_appointments"/>
+
+        <!-- Default map image, using map fragments now
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="190dp"
             android:contentDescription="@string/dummy_text"
-            android:src="@drawable/placeholder" />
+            android:src="@drawable/placeholder" /> -->
 
         <Spinner android:id="@+id/select_provider"
             android:layout_width="wrap_content"
