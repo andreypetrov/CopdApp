@@ -10,18 +10,22 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.petrodevelopment.copdapp.R;
 import com.petrodevelopment.copdapp.fragments.AppointmentsFragment;
 import com.petrodevelopment.copdapp.fragments.SectionFragment;
+import com.petrodevelopment.copdapp.util.TimeAndDate;
 import com.petrodevelopment.copdapp.util.U;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * Fragment for voice recording and play
- * TODO figure out whether we need to allow creation of more than one record
+ * TODO add total time and current time and a bar to navigate to any time within the file?
  * Created by user on 15-05-14.
  */
 public class VoiceRecordFragment extends SectionFragment {
@@ -30,11 +34,16 @@ public class VoiceRecordFragment extends SectionFragment {
     private Button mPlayButton;
     private Button mDeleteButton;
 
+
+    private TextView mTimeTextView;
+
     private boolean isRecording = false;
     private boolean isPlaying = false;
 
     private MediaRecorder mRecorder;
     private MediaPlayer mPlayer;
+    private Timer mTimer;
+    private TimerTask mTimerTask;
 
 
     /**
@@ -53,6 +62,7 @@ public class VoiceRecordFragment extends SectionFragment {
         View rootView = inflater.inflate(R.layout.fragment_record_voice, container, false);
 
         mFileName = Environment.getExternalStorageDirectory().getAbsolutePath() + "/audiorecordtest.3gp";
+        mTimer = new Timer();
 
         initView(rootView);
         initMediaPlayerAndButtons();
@@ -62,6 +72,8 @@ public class VoiceRecordFragment extends SectionFragment {
 
 
     private void initView(View rootView) {
+        mTimeTextView = (TextView) rootView.findViewById(R.id.time);
+
         initRecordButton(rootView);
         initPlayButton(rootView);
         initDeleteButton(rootView);
@@ -74,14 +86,18 @@ public class VoiceRecordFragment extends SectionFragment {
             public void onClick(View v) {
                 if (isRecording) {
                     stopRecording();
+                    stopTimer();
                     mRecordButton.setText(R.string.record);
                     mPlayButton.setEnabled(true);
                     mDeleteButton.setEnabled(true);
+                    initMediaPlayerAndButtons();
                 } else {
                     startRecording();
+                    startTimer();
                     mRecordButton.setText(R.string.stop);
                     mPlayButton.setEnabled(false);
                     mDeleteButton.setEnabled(false);
+
                 }
 
                 isRecording = !isRecording;
@@ -89,10 +105,37 @@ public class VoiceRecordFragment extends SectionFragment {
         });
     }
 
+    /**
+     * After one second of delay start updating the seconds
+     */
+    private void startTimer() {
+        mTimeTextView.setText(R.string.time_zero);
+
+        mTimerTask = new TimerTask() {
+            long timeInMilliseconds = 0;
+            @Override
+            public void run() {
+                timeInMilliseconds+=1000;
+                //refresh your textview
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        mTimeTextView.setText(TimeAndDate.formatMinutesAndSeconds(timeInMilliseconds));
+                    }
+                });
+            }
+        };
+        mTimer.schedule(mTimerTask, 1000, 1000);
+    }
+
+    private void stopTimer() {
+        mTimerTask.cancel();
+    }
+
+
 
     private void initPlayButton(View rootView) {
         mPlayButton = (Button) rootView.findViewById(R.id.play_btn);
-        mPlayButton.setEnabled(false); //TODO replace is with a check whether we have already a file or not
         mPlayButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -120,8 +163,9 @@ public class VoiceRecordFragment extends SectionFragment {
             @Override
             public void onClick(View v) {
                 File file = new File(mFileName);
-                if(file.exists()) {
+                if (file.exists()) {
                     file.delete();
+                    mTimeTextView.setText(R.string.time_zero);
                     mDeleteButton.setEnabled(false);
                     mPlayButton.setEnabled(false);
                     mRecordButton.setEnabled(true);
@@ -170,22 +214,33 @@ public class VoiceRecordFragment extends SectionFragment {
 
 
 
+    private void preparePlayer() {
+        try {
+            mPlayer.prepare();
+        } catch (IOException e) {
+            mPlayButton.setEnabled(false);
+        }
+        mPlayButton.setEnabled(true);
+    }
+
     private void initMediaPlayerAndButtons() {
         mPlayer = new MediaPlayer();
+
         File file = new File(mFileName);
-        if(file.exists()) {
+        if (file.exists()) {
             try {
                 mPlayer.setDataSource(mFileName);
                 mPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
                     @Override
                     public void onPrepared(MediaPlayer mp) {
-                        mPlayer.getDuration();
-                        U.log(this, "duration: " + mPlayer.getDuration() / 1000);
-                        //tODO update initial time
+                        mTimeTextView.setText(TimeAndDate.formatMinutesAndSeconds(mPlayer.getDuration()));
                     }
                 });
-                mPlayer.prepare();
+                preparePlayer();
+//                mPlayer.prepare();
+//                mPlayButton.setEnabled(true);
             } catch (IOException e) {
+                mPlayButton.setEnabled(false);
                 U.log(this, "prepare() failed");
             }
         } else {
@@ -196,35 +251,23 @@ public class VoiceRecordFragment extends SectionFragment {
 
 
     private void startPlaying() {
-        mPlayer = new MediaPlayer();
-        try {
-            mPlayer.setDataSource(mFileName);
-            mPlayer.prepare();
-            mPlayer.start();
-            mPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-                @Override
-                public void onPrepared(MediaPlayer mp) {
-                    mPlayer.getDuration();
-                    U.log(this, "duration: " + mPlayer.getDuration() / 1000);
-                }
-            });
-            mPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                @Override
-                public void onCompletion(MediaPlayer mp) {
-                    isPlaying = false;
-                    mPlayButton.setText(R.string.play);
-                    mRecordButton.setEnabled(true);
-                    mDeleteButton.setEnabled(true);
-                }
-            });
-        } catch (IOException e) {
-            U.log(this, "prepare() failed");
-        }
+        initMediaPlayerAndButtons();
+        mPlayer.start();
+        mPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                isPlaying = false;
+                mPlayButton.setText(R.string.play);
+                mRecordButton.setEnabled(true);
+                mDeleteButton.setEnabled(true);
+                stopPlaying();
+            }
+        });
     }
 
     private void stopPlaying() {
-        mPlayer.release();
-        mPlayer = null;
+        mPlayer.stop();
+        preparePlayer();
     }
 
 
