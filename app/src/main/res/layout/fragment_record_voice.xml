@@ -40,4 +40,14 @@
         android:background="@drawable/white_button"
         android:text="@string/play" />
 
+
+    <Button
+        android:id="@+id/delete_btn"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/white_button"
+        android:text="@string/action_delete" />
+
 </LinearLayout>

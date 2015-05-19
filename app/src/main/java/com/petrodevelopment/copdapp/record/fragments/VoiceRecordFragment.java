@@ -16,6 +16,7 @@ import com.petrodevelopment.copdapp.fragments.AppointmentsFragment;
 import com.petrodevelopment.copdapp.fragments.SectionFragment;
 import com.petrodevelopment.copdapp.util.U;
 
+import java.io.File;
 import java.io.IOException;
 
 /**
@@ -27,6 +28,7 @@ public class VoiceRecordFragment extends SectionFragment {
     private static String mFileName;
     private Button mRecordButton;
     private Button mPlayButton;
+    private Button mDeleteButton;
 
     private boolean isRecording = false;
     private boolean isPlaying = false;
@@ -50,16 +52,19 @@ public class VoiceRecordFragment extends SectionFragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_record_voice, container, false);
 
-        initView(rootView);
         mFileName = Environment.getExternalStorageDirectory().getAbsolutePath() + "/audiorecordtest.3gp";
 
+        initView(rootView);
+        initMediaPlayerAndButtons();
 
         return rootView;
     }
 
+
     private void initView(View rootView) {
         initRecordButton(rootView);
         initPlayButton(rootView);
+        initDeleteButton(rootView);
     }
 
     private void initRecordButton(View rootView) {
@@ -71,11 +76,12 @@ public class VoiceRecordFragment extends SectionFragment {
                     stopRecording();
                     mRecordButton.setText(R.string.record);
                     mPlayButton.setEnabled(true);
-                }
-                else {
+                    mDeleteButton.setEnabled(true);
+                } else {
                     startRecording();
                     mRecordButton.setText(R.string.stop);
                     mPlayButton.setEnabled(false);
+                    mDeleteButton.setEnabled(false);
                 }
 
                 isRecording = !isRecording;
@@ -94,10 +100,12 @@ public class VoiceRecordFragment extends SectionFragment {
                     stopPlaying();
                     mPlayButton.setText(R.string.play);
                     mRecordButton.setEnabled(true);
+                    mDeleteButton.setEnabled(true);
                 } else {
                     startPlaying();
                     mPlayButton.setText(R.string.stop);
                     mRecordButton.setEnabled(false);
+                    mDeleteButton.setEnabled(false);
                 }
 
                 isPlaying = !isPlaying;
@@ -105,6 +113,22 @@ public class VoiceRecordFragment extends SectionFragment {
         });
     }
 
+
+    private void initDeleteButton(View rootView) {
+        mDeleteButton = (Button) rootView.findViewById(R.id.delete_btn);
+        mDeleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                File file = new File(mFileName);
+                if(file.exists()) {
+                    file.delete();
+                    mDeleteButton.setEnabled(false);
+                    mPlayButton.setEnabled(false);
+                    mRecordButton.setEnabled(true);
+                }
+            }
+        });
+    }
 
     @Override
     public void onPause() {
@@ -144,17 +168,53 @@ public class VoiceRecordFragment extends SectionFragment {
         mRecorder = null;
     }
 
+
+
+    private void initMediaPlayerAndButtons() {
+        mPlayer = new MediaPlayer();
+        File file = new File(mFileName);
+        if(file.exists()) {
+            try {
+                mPlayer.setDataSource(mFileName);
+                mPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                    @Override
+                    public void onPrepared(MediaPlayer mp) {
+                        mPlayer.getDuration();
+                        U.log(this, "duration: " + mPlayer.getDuration() / 1000);
+                        //tODO update initial time
+                    }
+                });
+                mPlayer.prepare();
+            } catch (IOException e) {
+                U.log(this, "prepare() failed");
+            }
+        } else {
+            mDeleteButton.setEnabled(false);
+            mPlayButton.setEnabled(false);
+        }
+    }
+
+
     private void startPlaying() {
         mPlayer = new MediaPlayer();
         try {
             mPlayer.setDataSource(mFileName);
             mPlayer.prepare();
             mPlayer.start();
+            mPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                @Override
+                public void onPrepared(MediaPlayer mp) {
+                    mPlayer.getDuration();
+                    U.log(this, "duration: " + mPlayer.getDuration() / 1000);
+                }
+            });
             mPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                 @Override
                 public void onCompletion(MediaPlayer mp) {
                     isPlaying = false;
                     mPlayButton.setText(R.string.play);
+                    mRecordButton.setEnabled(true);
+                    mDeleteButton.setEnabled(true);
                 }
             });
         } catch (IOException e) {
@@ -165,6 +225,11 @@ public class VoiceRecordFragment extends SectionFragment {
     private void stopPlaying() {
         mPlayer.release();
         mPlayer = null;
+    }
+
+
+    private void deleteFile() {
+
     }
 
 }
