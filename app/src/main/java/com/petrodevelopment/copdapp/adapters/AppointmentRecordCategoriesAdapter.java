@@ -7,10 +7,13 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.petrodevelopment.copdapp.R;
+import com.petrodevelopment.copdapp.model.Appointment;
+import com.petrodevelopment.copdapp.model.AppointmentRecord;
 import com.petrodevelopment.copdapp.util.U;
 import com.petrodevelopment.copdapp.viewmodel.AppointmentListVm;
 import com.petrodevelopment.copdapp.viewmodel.AppointmentRecordCategoryVm;
@@ -27,16 +30,21 @@ public class AppointmentRecordCategoriesAdapter extends GenericAdapter<Appointme
 
     private int categoryLayoutId;
     private int subcategoryLayoutId;
+    private Appointment appointment;
 
-    public AppointmentRecordCategoriesAdapter(List<AppointmentRecordCategoryVm> data, Context context, int categoryLayoutId, int subcategoryLayoutId) {
+    public AppointmentRecordCategoriesAdapter(List<AppointmentRecordCategoryVm> data, Appointment appointment, Context context, int categoryLayoutId, int subcategoryLayoutId) {
         super(data, context);
+        this.appointment = appointment;
         this.categoryLayoutId = categoryLayoutId;
         this.subcategoryLayoutId = subcategoryLayoutId;
     }
 
     @Override
     public void update(View view, int position) {
-        if (getItemViewType(position) == 1) updateListener(view, position);
+        if (getItemViewType(position) == 1) {
+            updateListener(view, position);
+            updateAppointmentData(view, position);
+        }
         AppointmentRecordCategoryVm category = getItem(position);
 
         TextView nameView = (TextView) view.findViewById(R.id.name);
@@ -44,6 +52,58 @@ public class AppointmentRecordCategoriesAdapter extends GenericAdapter<Appointme
 
         ImageView imageView = (ImageView) view.findViewById(R.id.image);
         imageView.setImageResource(context.getResources().getIdentifier(category.image , "drawable", context.getPackageName()));
+    }
+
+
+    /**
+     * Depending on the position of the current item in the list, get the corresponding view to show
+     * @param position
+     * @return
+     */
+    private AppointmentRecord getFromIndex(int position) {
+        switch (position) {
+            case 1:
+                return appointment.severity;
+            case 2:
+                return appointment.assessment;
+            case 4:
+                return appointment.medications;
+            case 5:
+                return appointment.tests;
+            case 6:
+                return appointment.lifeStyleChanges;
+            case 7:
+                return appointment.futureReferrals;
+            default:
+                return null;
+        }
+    }
+
+    private void updateAppointmentData(View view, int position) {
+        AppointmentRecord record = getFromIndex(position);
+        final View bodyView = view.findViewById(R.id.cell_body);
+        updateText(bodyView, record);
+        updateImages(bodyView, record);
+    }
+
+    private void updateText(View view, AppointmentRecord record) {
+        if (record!= null && record.note != null) {
+            TextView textView = (TextView) view.findViewById(R.id.note);
+            textView.setText(record.note);
+        };
+    }
+
+    /**
+     * For every appointment record update the images gallery
+     * @param view
+     * @param record
+     */
+    private void updateImages(View view, AppointmentRecord record) {
+        if (record != null && record.imageUrls != null) {
+            GridView gridView = (GridView) view.findViewById(R.id.gallery);
+            ImageAdapter imageAdapter = new ImageAdapter(record.imageUrls, context, R.layout.cell_grid_gallery);
+            gridView.setAdapter(imageAdapter);
+        }
     }
 
     private void updateListener(View view, int position) {
@@ -58,9 +118,6 @@ public class AppointmentRecordCategoriesAdapter extends GenericAdapter<Appointme
                 InputMethodManager inputMethodManager = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
                 if (bodyView.getVisibility() == View.GONE) {
                     bodyView.setVisibility(View.VISIBLE);
-//                    noteView.requestFocus();
-//                    noteView.setSelection(noteView.getText().length());
-//                    inputMethodManager.showSoftInput(noteView, InputMethodManager.SHOW_IMPLICIT);
                 }
                 else {
                     bodyView.setVisibility(View.GONE);

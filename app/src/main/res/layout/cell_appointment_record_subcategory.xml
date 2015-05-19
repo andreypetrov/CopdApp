@@ -71,8 +71,19 @@
                 android:hint="@string/appointment_note_hint"
                 android:inputType="textMultiLine"
                 android:minLines="3"
-                />
+                    />
 
+            <com.petrodevelopment.copdapp.views.NonScrollableGridView xmlns:android="http://schemas.android.com/apk/res/android"
+                      android:id="@+id/gallery"
+                      android:layout_width="match_parent"
+                      android:layout_height="match_parent"
+                      android:columnWidth="90dp"
+                      android:numColumns="auto_fit"
+                      android:verticalSpacing="@dimen/box_top_and_bottom_padding"
+                      android:horizontalSpacing="@dimen/box_top_and_bottom_padding"
+                      android:stretchMode="columnWidth"
+                      android:gravity="center"
+                />
 
             <LinearLayout
                 android:layout_width="wrap_content"

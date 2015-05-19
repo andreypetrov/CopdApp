@@ -7,6 +7,7 @@ import android.widget.ListView;
 
 import com.petrodevelopment.copdapp.R;
 import com.petrodevelopment.copdapp.adapters.AppointmentRecordCategoriesAdapter;
+import com.petrodevelopment.copdapp.model.Appointment;
 import com.petrodevelopment.copdapp.util.JsonLoader;
 import com.petrodevelopment.copdapp.util.U;
 import com.petrodevelopment.copdapp.viewmodel.AppointmentRecordCategoriesVm;
@@ -15,13 +16,22 @@ import com.petrodevelopment.copdapp.viewmodel.AppointmentRecordCategoriesVm;
  * Created by andrey on 15/05/2015.
  */
 public class RecordAppointmentActivity extends ActionBarActivity {
+    Appointment appointment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_record_appointment);
+        initModel();
         initToolbar();
         initListView();
+    }
+
+    /**
+     * The appointment is passed in from the previous activity via the intent
+     */
+    private void initModel() {
+        appointment = Appointment.getDummy(this).get(0);
     }
 
     private void initToolbar() {
@@ -38,6 +48,7 @@ public class RecordAppointmentActivity extends ActionBarActivity {
 
         listView.setAdapter(new AppointmentRecordCategoriesAdapter(
                 categoriesObject.appointmentRecordCategories,
+                appointment,
                 this,
                 R.layout.cell_appointment_record_category,
                 R.layout.cell_appointment_record_subcategory));

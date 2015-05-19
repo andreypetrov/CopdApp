@@ -1,14 +1,12 @@
 package com.petrodevelopment.copdapp.model;
 
-import com.orm.SugarRecord;
-
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by andrey on 10/05/2015.
  */
-public class Provider extends SugarRecord<Provider> {
+public class Provider extends Model {
 
     public static List<Provider> getDummy() {
         List<Provider> providers = new ArrayList<>();

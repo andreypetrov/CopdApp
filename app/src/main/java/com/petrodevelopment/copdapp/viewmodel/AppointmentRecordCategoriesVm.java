@@ -1,5 +1,7 @@
 package com.petrodevelopment.copdapp.viewmodel;
 
+import com.petrodevelopment.copdapp.model.Appointment;
+
 import java.util.List;
 
 /**
@@ -8,4 +10,5 @@ import java.util.List;
  */
 public class AppointmentRecordCategoriesVm {
     public List<AppointmentRecordCategoryVm> appointmentRecordCategories;
+
 }
