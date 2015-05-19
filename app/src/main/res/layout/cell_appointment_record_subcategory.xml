@@ -27,7 +27,7 @@
             <ImageView
                 android:id="@+id/image"
                 android:layout_width="@dimen/category_icon"
-                android:layout_height="@dimen/subcategory_icon"
+                android:layout_height="@dimen/category_icon"
                 android:layout_gravity="center_vertical"
                 android:layout_marginRight="@dimen/activity_horizontal_margin"/>
 

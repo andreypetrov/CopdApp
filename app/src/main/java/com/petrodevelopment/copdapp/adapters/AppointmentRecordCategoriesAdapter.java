@@ -5,11 +5,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.petrodevelopment.copdapp.R;
 import com.petrodevelopment.copdapp.model.Appointment;
@@ -98,11 +100,18 @@ public class AppointmentRecordCategoriesAdapter extends GenericAdapter<Appointme
      * @param view
      * @param record
      */
-    private void updateImages(View view, AppointmentRecord record) {
+    private void updateImages(View view, final AppointmentRecord record) {
         if (record != null && record.imageUrls != null) {
             GridView gridView = (GridView) view.findViewById(R.id.gallery);
             ImageAdapter imageAdapter = new ImageAdapter(record.imageUrls, context, R.layout.cell_grid_gallery);
             gridView.setAdapter(imageAdapter);
+            gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                public void onItemClick(AdapterView<?> parent, View v,
+                                        int position, long id) {
+                    Toast.makeText(context, "" + position + ", record note: " + record.note,
+                            Toast.LENGTH_SHORT).show();
+                }
+            });
         }
     }
 
