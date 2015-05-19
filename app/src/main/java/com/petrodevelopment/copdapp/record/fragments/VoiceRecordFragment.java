@@ -18,6 +18,8 @@ import com.petrodevelopment.copdapp.fragments.SectionFragment;
 import java.io.IOException;
 
 /**
+ * Fragment for voice recording and play
+ * TODO figure out whether we need to allow creation of more than one record
  * Created by user on 15-05-14.
  */
 public class VoiceRecordFragment extends SectionFragment {
@@ -69,9 +71,16 @@ public class VoiceRecordFragment extends SectionFragment {
         mRecordButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (isPlaying) {
-
+                if (isRecording) {
+                    stopRecording();
+                    mPlayButton.setEnabled(true);
                 }
+                else {
+                    startRecording();
+                    mPlayButton.setEnabled(false);
+                }
+
+                isRecording = !isRecording;
             }
         });
     }
@@ -79,7 +88,21 @@ public class VoiceRecordFragment extends SectionFragment {
 
     private void initPlayButton(View rootView) {
         mPlayButton = (Button) rootView.findViewById(R.id.play_btn);
+        mPlayButton.setEnabled(false); //TODO replace is with a check whether we have already a file or not
+        mPlayButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (isPlaying) {
+                    stopPlaying();
+                    mRecordButton.setEnabled(true);
+                } else {
+                    startPlaying();
+                    mRecordButton.setEnabled(false);
+                }
 
+                isPlaying = !isPlaying;
+            }
+        });
     }
 
 
@@ -97,17 +120,6 @@ public class VoiceRecordFragment extends SectionFragment {
             mPlayer = null;
         }
     }
-
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-
-    }
-
-
-
-
-
 
 
     private void startRecording() {
