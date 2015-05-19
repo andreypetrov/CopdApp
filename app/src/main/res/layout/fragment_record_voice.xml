@@ -2,47 +2,42 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:orientation="horizontal"
     tools:context=".ProvidersFragment">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/action_voice" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/dummy_time"
-            android:textColor="@color/primary_text_default_material_light"
-            android:textSize="@dimen/abc_text_size_subtitle_material_toolbar" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/dummy_time"
-            android:textColor="@color/primary_text_default_material_light"
-            android:textSize="@dimen/abc_text_size_subtitle_material_toolbar" />
-
-
-    </LinearLayout>
-
-    <ListView
-        android:id="@+id/list_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"></ListView>
 
     <Button
-        android:layout_width="match_parent"
+        android:id="@+id/record_btn"
+        android:layout_width="0dp"
+        android:layout_weight="1"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="@drawable/add_button"
-        android:text="@string/add_provider"
-        android:textColor="@color/white" />
+        android:background="@drawable/white_button"
+        android:text="@string/record" />
+
+
+    <TextView
+        android:layout_marginLeft="@dimen/box_top_and_bottom_padding"
+        android:layout_marginRight="@dimen/box_top_and_bottom_padding"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" android:text="@string/time" />
+
+    <TextView
+        android:id="@+id/time"
+        android:layout_marginLeft="@dimen/box_top_and_bottom_padding"
+        android:layout_marginRight="@dimen/box_top_and_bottom_padding"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" android:text="@string/time_zero" />
+
+
+    <Button
+        android:id="@+id/play_btn"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/white_button"
+        android:text="@string/play" />
+
 </LinearLayout>

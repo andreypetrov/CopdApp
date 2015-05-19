@@ -63,4 +63,13 @@
 
     <!-- Record appointment -->
     <string name="record_results">Record results</string>
+
+    <!--Voice recording -->
+    <string name="time">Time:</string>
+    <string name="record">Record</string>
+    <string name="start">Start</string>
+    <string name="stop">Stop</string>
+    <string name="play">Play</string>
+    <string name="time_zero">00:00</string>
+
 </resources>
