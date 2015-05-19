@@ -14,6 +14,7 @@ import android.widget.Button;
 import com.petrodevelopment.copdapp.R;
 import com.petrodevelopment.copdapp.fragments.AppointmentsFragment;
 import com.petrodevelopment.copdapp.fragments.SectionFragment;
+import com.petrodevelopment.copdapp.util.U;
 
 import java.io.IOException;
 
@@ -23,7 +24,6 @@ import java.io.IOException;
  * Created by user on 15-05-14.
  */
 public class VoiceRecordFragment extends SectionFragment {
-    private static final String LOG_TAG = "AudioRecordTest";
     private static String mFileName;
     private Button mRecordButton;
     private Button mPlayButton;
@@ -60,10 +60,6 @@ public class VoiceRecordFragment extends SectionFragment {
     private void initView(View rootView) {
         initRecordButton(rootView);
         initPlayButton(rootView);
-
-
-
-
     }
 
     private void initRecordButton(View rootView) {
@@ -73,10 +69,12 @@ public class VoiceRecordFragment extends SectionFragment {
             public void onClick(View v) {
                 if (isRecording) {
                     stopRecording();
+                    mRecordButton.setText(R.string.record);
                     mPlayButton.setEnabled(true);
                 }
                 else {
                     startRecording();
+                    mRecordButton.setText(R.string.stop);
                     mPlayButton.setEnabled(false);
                 }
 
@@ -94,9 +92,11 @@ public class VoiceRecordFragment extends SectionFragment {
             public void onClick(View v) {
                 if (isPlaying) {
                     stopPlaying();
+                    mPlayButton.setText(R.string.play);
                     mRecordButton.setEnabled(true);
                 } else {
                     startPlaying();
+                    mPlayButton.setText(R.string.stop);
                     mRecordButton.setEnabled(false);
                 }
 
@@ -132,7 +132,7 @@ public class VoiceRecordFragment extends SectionFragment {
         try {
             mRecorder.prepare();
         } catch (IOException e) {
-            Log.e(LOG_TAG, "prepare() failed");
+            U.log(this, "prepare() failed");
         }
 
         mRecorder.start();
@@ -150,8 +150,15 @@ public class VoiceRecordFragment extends SectionFragment {
             mPlayer.setDataSource(mFileName);
             mPlayer.prepare();
             mPlayer.start();
+            mPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                @Override
+                public void onCompletion(MediaPlayer mp) {
+                    isPlaying = false;
+                    mPlayButton.setText(R.string.play);
+                }
+            });
         } catch (IOException e) {
-            Log.e(LOG_TAG, "prepare() failed");
+            U.log(this, "prepare() failed");
         }
     }
 
