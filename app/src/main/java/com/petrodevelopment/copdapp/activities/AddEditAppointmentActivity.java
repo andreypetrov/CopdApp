@@ -17,6 +17,8 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 
 
+import com.google.android.gms.maps.CameraUpdate;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -33,11 +35,16 @@ import java.util.Calendar;
 
 public class AddEditAppointmentActivity extends FragmentActivity implements OnClickListener, OnMapReadyCallback {
 
-    //Variables
+    //Variables for date and time
     TextView selectTime,selectDate;
     private int hour, minute, day, month, year;
-    private String address;
-    private String coords;
+
+    //Variables for google maps
+    private String address = "";
+    private String coords = "";
+    private String name = "";
+    private double lat = 43.6430879;
+    private double lng = -79.4186298;
 
     private Provider provider = new Provider();
 
@@ -64,6 +71,7 @@ public class AddEditAppointmentActivity extends FragmentActivity implements OnCl
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 address = Provider.getDummy().get(position).address;
                 coords = Provider.getDummy().get(position).coordinates;
+                name ="Dr. " + Provider.getDummy().get(position).firstName + " " + Provider.getDummy().get(position).lastName;
                 //Update mapview -> setCoords
             }
 
@@ -156,8 +164,23 @@ public class AddEditAppointmentActivity extends FragmentActivity implements OnCl
     //Added for Google Maps 19-05-2015 by Tom
     @Override
     public void onMapReady(GoogleMap map) {
+        //Use this to split the Coords variable into lat and long
+        String[] latLng;
+        latLng = coords.split(",");
+        lat = Double.parseDouble(latLng[0]) ;
+        lng = Double.parseDouble(latLng[1]);
+
+        //Adding the marker information
         map.addMarker(new MarkerOptions()
-                .position(new LatLng(0, 0))
-                .title("Marker"));
+                .position(new LatLng(43.6430879, -79.4186298))
+                .title(name)
+                .snippet(address));
+
+        //map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(lat, lng), 15));
+        //map.animateCamera(zoom);
+
+        //Setting camera view
+        //CameraUpdate center= CameraUpdateFactory.newLatLng(new LatLng(lat, lng));
+        //CameraUpdate zoom=CameraUpdateFactory.zoomTo(15);
     }
 }
