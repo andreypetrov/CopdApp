@@ -6,6 +6,8 @@
     <string name="title_providers_fragment">Providers</string>
     <string name="title_medications_fragment">Medications</string>
     <string name="title_caregivers_fragment">Caregivers</string>
+    <string name="title_activity_maps_activity_test">Maps</string>
+    <string name="title_activity_home_register">Register</string>
 
     <string name="search_appointments">Search appointments</string>
     <string name="search_providers">Search providers</string>
@@ -48,8 +50,6 @@
     <string name="appointment_reason">...enter reason for appointment</string>
     <string name="title_activity_add_edit_appointment">AddEditAppointmentActivity</string>
 
-<!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <!-- End Add for 14/05/2015-->
 
     <string name="logout">Logout</string>
@@ -60,12 +60,20 @@
 
 
 
-
     <!-- Record appointment -->
     <string name="record_results">Record results</string>
     <string name="title_activity_map_test">mapTest</string>
 
-    <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
-    <string name="title_activity_maps_activity_test">Map</string>
+
+    <!-- Register Screen-->
+    <string name="new_account">New Account</string>
+    <string name="login">Login</string>
+    <string name="signup">Signup</string>
+    <string name="enter_email">Enter your email</string>
+    <string name="choose_password">Choose password</string>
+    <string name="confirm_password">Retype password</string>
+    <string name="passcode_desc">Passcode allows you to stay logged in and protect your information from viewing by others</string>
+    <string name="choose_passcode">Choose 4-digit passcode</string>
+
 </resources>
