@@ -14,12 +14,20 @@
         android:layout_height="fill_parent"
         android:orientation="vertical">
 
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/blue"
+            android:minHeight="?android:attr/actionBarSize"
+            app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"></android.support.v7.widget.Toolbar>
+
         <!-- Google Maps fragment added 19-05-2015-->
         <fragment
             android:id="@+id/map"
             android:name="com.google.android.gms.maps.MapFragment"
             android:layout_width="match_parent"
-            android:layout_height="190dp"
+            android:layout_height="150dp"
             tools:layout="@layout/fragment_maps_for_appointments"/>
 
         <!-- Default map image, using map fragments now
@@ -31,7 +39,8 @@
 
         <Spinner android:id="@+id/select_provider"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp"/>
 
         <LinearLayout
             android:orientation="horizontal"
@@ -60,12 +69,12 @@
 
             <EditText android:id="@+id/appointment_reason"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="90dp"
                 android:background="@drawable/cell_bg"
-                android:padding="5dp"
+                android:gravity="top|left"
+                android:padding="10dp"
                 android:inputType="textMultiLine"
-                android:lines="5"
-                android:minLines="2"
+                android:minLines="1"
                 android:hint="@string/appointment_reason"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true" />
@@ -73,7 +82,8 @@
             <TextView android:id="@+id/questions"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="5dp"
+                android:textSize="18dp"
+                android:padding="5dp"
                 android:text="@string/appointment_questions"
                 android:layout_below="@+id/appointment_reason"
                 android:layout_alignParentLeft="true"
@@ -83,6 +93,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:width="300dp"
+                android:paddingTop="35dp"
                 android:minLines="2"
                 android:text="@string/questions_per_specialist"
                 android:layout_centerVertical="true"
