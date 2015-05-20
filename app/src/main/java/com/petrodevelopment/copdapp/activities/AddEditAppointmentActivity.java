@@ -40,9 +40,9 @@ public class AddEditAppointmentActivity extends FragmentActivity implements OnCl
     private int hour, minute, day, month, year;
 
     //Variables for google maps
-    private String address = "";
+    private String address = "Test";
     private String coords = "";
-    private String name = "";
+    private String name = "Dr";
     private double lat = 43.6430879;
     private double lng = -79.4186298;
 
@@ -73,6 +73,12 @@ public class AddEditAppointmentActivity extends FragmentActivity implements OnCl
                 coords = Provider.getDummy().get(position).coordinates;
                 name ="Dr. " + Provider.getDummy().get(position).firstName + " " + Provider.getDummy().get(position).lastName;
                 //Update mapview -> setCoords
+
+                /* Need to sort out the errors
+                String[] latLng;
+                latLng = coords.split(",");
+                lat = Double.parseDouble(latLng[0]) ;
+                lng = Double.parseDouble(latLng[1]);*/
             }
 
             @Override
@@ -165,18 +171,14 @@ public class AddEditAppointmentActivity extends FragmentActivity implements OnCl
     @Override
     public void onMapReady(GoogleMap map) {
         //Use this to split the Coords variable into lat and long
-        String[] latLng;
-        latLng = coords.split(",");
-        lat = Double.parseDouble(latLng[0]) ;
-        lng = Double.parseDouble(latLng[1]);
 
         //Adding the marker information
         map.addMarker(new MarkerOptions()
-                .position(new LatLng(43.6430879, -79.4186298))
+                .position(new LatLng(lat, lng))
                 .title(name)
                 .snippet(address));
 
-        //map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(lat, lng), 15));
+        map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(lat, lng), 11));
         //map.animateCamera(zoom);
 
         //Setting camera view
