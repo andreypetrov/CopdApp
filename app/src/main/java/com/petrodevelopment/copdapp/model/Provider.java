@@ -69,7 +69,7 @@ public class Provider extends SugarRecord<Provider> {
         this.phoneNumber = phoneNumber;
         this.email = email;
         this.address = address;
-        this.coordinates = coordinates;
+        this.Coordinates = Coordinates;
         this.clinicianType = clinicianType;
     }
 
@@ -78,7 +78,7 @@ public class Provider extends SugarRecord<Provider> {
     public String photoUrl;
     public String phoneNumber;
     public String email;
-    public String coordinates;
+    public String Coordinates;
     public String address;
 
     //a relationship to the type of provider

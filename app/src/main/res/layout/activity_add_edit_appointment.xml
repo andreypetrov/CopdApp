@@ -38,14 +38,18 @@
             android:src="@drawable/placeholder" /> -->
 
         <Spinner android:id="@+id/select_provider"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="10dp"/>
+            android:paddingTop="10dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"/>
 
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp">
 
             <TextView
                 android:id="@+id/select_date"
@@ -65,7 +69,10 @@
         <RelativeLayout
             android:orientation="horizontal"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp">
 
             <EditText android:id="@+id/appointment_reason"
                 android:layout_width="match_parent"
@@ -102,22 +109,22 @@
 
             <Button  android:id="@+id/saveAsUpcoming"
                 android:layout_height="wrap_content"
-                android:layout_width="175dp"
+                android:layout_width="165dp"
                 android:text="@string/save_appointment"
                 android:background="@color/blue"
                 android:textColor="@color/white"
                 android:onClick=""
-                android:layout_alignParentBottom="true" />
+                android:layout_alignParentBottom="true"/>
 
             <Button  android:id="@+id/recordAppointment"
                 android:layout_height="wrap_content"
-                android:layout_width="175dp"
+                android:layout_width="165dp"
                 android:text="@string/record_appointment"
                 android:background="@color/green"
                 android:textColor="@color/white"
                 android:onClick=""
                 android:layout_alignParentBottom="true"
-                android:layout_alignParentRight="true"/>
+                android:layout_alignParentRight="true" />
 
         </RelativeLayout>
     </LinearLayout>
