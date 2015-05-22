@@ -3,14 +3,12 @@ package com.petrodevelopment.copdapp.activities;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.support.v4.app.FragmentActivity;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -22,9 +20,12 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.petrodevelopment.copdapp.MapsForAppointments;
+import com.petrodevelopment.copdapp.NavigationDrawerFragment;
 import com.petrodevelopment.copdapp.R;
 import com.petrodevelopment.copdapp.adapters.EditAddAppointmentProviderListAdapter;
 import com.petrodevelopment.copdapp.adapters.ProviderListAdapter;
@@ -45,6 +46,8 @@ public class AddEditAppointmentActivity extends FragmentActivity implements OnCl
     private String name = "Dr";
     private double lat = 43.6430879;
     private double lng = -79.4186298;
+    private GoogleMap map;
+
 
     private Provider provider = new Provider();
 
@@ -70,15 +73,15 @@ public class AddEditAppointmentActivity extends FragmentActivity implements OnCl
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 address = Provider.getDummy().get(position).address;
-                coords = Provider.getDummy().get(position).coordinates;
+                coords = Provider.getDummy().get(position).Coordinates;
                 name ="Dr. " + Provider.getDummy().get(position).firstName + " " + Provider.getDummy().get(position).lastName;
-                //Update mapview -> setCoords
 
-                /* Need to sort out the errors
+                //Update coords for mapview
                 String[] latLng;
                 latLng = coords.split(",");
                 lat = Double.parseDouble(latLng[0]) ;
-                lng = Double.parseDouble(latLng[1]);*/
+                lng = Double.parseDouble(latLng[1]);
+                
             }
 
             @Override
@@ -94,7 +97,6 @@ public class AddEditAppointmentActivity extends FragmentActivity implements OnCl
         //For picking Date
         selectDate = (TextView) findViewById(R.id.select_date);
         selectDate.setOnClickListener(this);
-
     }
 
 
@@ -117,6 +119,7 @@ public class AddEditAppointmentActivity extends FragmentActivity implements OnCl
 
 
     //Added 16/05/2015 by Tom
+    //For the two pickers, time and date
     @Override
     public void onClick(View view) {
         //If date selected
@@ -142,7 +145,6 @@ public class AddEditAppointmentActivity extends FragmentActivity implements OnCl
                     }, year, month, day);
             dpd.show();
         }
-
         //If Time selected
         if (view == selectTime) {
 
@@ -170,11 +172,14 @@ public class AddEditAppointmentActivity extends FragmentActivity implements OnCl
     //Added for Google Maps 19-05-2015 by Tom
     @Override
     public void onMapReady(GoogleMap map) {
-        //Use this to split the Coords variable into lat and long
+        this.map = map;
+
+        BitmapDescriptor bitmapAZURE = BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE); //for map marker colour
 
         //Adding the marker information
         map.addMarker(new MarkerOptions()
                 .position(new LatLng(lat, lng))
+                .icon(bitmapAZURE)
                 .title(name)
                 .snippet(address));
 
