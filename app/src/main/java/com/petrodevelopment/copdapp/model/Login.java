@@ -24,7 +24,7 @@ public class Login extends ArrayList {
     public Login() {
     }
 
-    public static List<Login> getLogin() {
+    public static List<Login> addLogin() {
         List<Login> logins = new ArrayList<>();
         logins.add(new Login("tomwhite1209@gmail.com", "password", 1234));
         return logins;
@@ -32,6 +32,9 @@ public class Login extends ArrayList {
 
     public void addLogin(List<Login> logins)
     {
+        //Populate info already in list first
+        addLogin();
+        //Add new login
         logins.add(new Login(email, password, passNumber));
     }
 }
