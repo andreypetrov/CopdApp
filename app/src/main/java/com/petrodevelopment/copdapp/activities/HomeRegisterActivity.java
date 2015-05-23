@@ -1,18 +1,42 @@
 package com.petrodevelopment.copdapp.activities;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.petrodevelopment.copdapp.R;
+import com.petrodevelopment.copdapp.model.Login;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class HomeRegisterActivity extends ActionBarActivity {
+
+    private int parsedPasscode = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_register);
+
+        //For Sign up button
+        Button signup = (Button)findViewById(R.id.signup);
+        signup.setOnClickListener(new View.OnClickListener()
+        {
+            public void onClick(View v)
+            {
+                signUp();;
+            }
+        });
     }
 
     @Override
@@ -36,4 +60,73 @@ public class HomeRegisterActivity extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    //Added by Tom 23-05-2015
+    //Signing the user up, currently just goes into an arraylist, but will have to be changed when database implemented
+    public void signUp()
+    {
+        //Getting values from edit text fields
+        EditText emailText = (EditText)findViewById(R.id.enterEmail);
+        EditText passFirst = (EditText)findViewById(R.id.enterPassword);
+        EditText passSecond = (EditText)findViewById(R.id.confirmPassword);
+        EditText numbPass = (EditText)findViewById(R.id.enterPasscode);
+
+        //Validation NOTE: need to add int validation for passcode
+        if(emailText.getText().toString().matches(""))
+        {
+            showMsg("Email Cannot be blank!");
+        }
+        else if (passFirst.getText().toString().matches(""))
+        {
+            showMsg("Password Cannot be blank!");
+        }
+        else if (passSecond.getText().toString().matches(""))
+        {
+            showMsg("Password Cannot be blank!");
+        }
+        else if (numbPass.getText().toString().matches(""))
+        {
+            showMsg("4-digit passcode cannot be blank!");
+        }
+        else
+        {
+            if (passFirst.getText().toString().matches(passSecond.getText().toString()))
+            {
+                String email = emailText.getText().toString();
+                String password = passFirst.getText().toString();
+                String passcode = numbPass.getText().toString();
+                try{
+                    parsedPasscode = Integer.parseInt(passcode);
+                }
+                catch (NumberFormatException e)
+                {
+                    showMsg("Error");
+                }
+
+                //Add to ArrayList if good
+                List<Login> login = new ArrayList<>();
+                Login patientInfo = new Login(email, password, parsedPasscode);
+                patientInfo.addLogin(login);
+
+                showMsg("Success!");
+            }
+            else
+            {
+                showMsg("Your passwords do not match!");
+            }
+        }
+    }
+
+
+    //To show validation error --Added by Tom 23/05/2015
+    public void showMsg(String Error)
+    {
+        Context context = getApplicationContext();
+        CharSequence text = Error;
+        int duration = Toast.LENGTH_LONG;
+
+        Toast toast = Toast.makeText(context, text, duration);
+        toast.show();
+    }
+
 }
