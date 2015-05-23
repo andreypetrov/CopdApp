@@ -10,12 +10,14 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.DatePicker;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
 
-import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
@@ -24,14 +26,13 @@ import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.petrodevelopment.copdapp.MapsForAppointments;
-import com.petrodevelopment.copdapp.NavigationDrawerFragment;
 import com.petrodevelopment.copdapp.R;
 import com.petrodevelopment.copdapp.adapters.EditAddAppointmentProviderListAdapter;
-import com.petrodevelopment.copdapp.adapters.ProviderListAdapter;
 import com.petrodevelopment.copdapp.model.Provider;
+import com.petrodevelopment.copdapp.model.Questions;
 
 import java.util.Calendar;
+import java.util.List;
 
 
 public class AddEditAppointmentActivity extends FragmentActivity implements OnClickListener, OnMapReadyCallback {
@@ -57,35 +58,35 @@ public class AddEditAppointmentActivity extends FragmentActivity implements OnCl
         setContentView(R.layout.activity_add_edit_appointment);
 
         //Google Maps Added 19-05-2015 by Tom
-        MapFragment mapFragment = (MapFragment) getFragmentManager()
-                .findFragmentById(R.id.map);
+        MapFragment mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
 
         //Populate Provider Spinner
         final EditAddAppointmentProviderListAdapter providerAdapter = new EditAddAppointmentProviderListAdapter(Provider.getDummy(), this, R.layout.provider_list_cell);
-
         final Spinner providerSpinner = (Spinner) findViewById(R.id.select_provider);
-        /*ArrayAdapter providerAdapter = ArrayAdapter.createFromResource(this, R.array.planets_array, android.R.layout.simple_spinner_item);
-        providerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);*/
         providerSpinner.setAdapter(providerAdapter);
+
         providerSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 address = Provider.getDummy().get(position).address;
                 coords = Provider.getDummy().get(position).Coordinates;
-                name ="Dr. " + Provider.getDummy().get(position).firstName + " " + Provider.getDummy().get(position).lastName;
+                name = "Dr. " + Provider.getDummy().get(position).firstName + " " + Provider.getDummy().get(position).lastName;
 
                 //Update coords for mapview
                 String[] latLng;
                 latLng = coords.split(",");
-                lat = Double.parseDouble(latLng[0]) ;
+                lat = Double.parseDouble(latLng[0]);
                 lng = Double.parseDouble(latLng[1]);
-                
+
+                //Calling method to populate questions
+               // populateQuestions();
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
+                providerSpinner.setPrompt("Select Provider");
                 return;
             }
         });
@@ -184,10 +185,30 @@ public class AddEditAppointmentActivity extends FragmentActivity implements OnCl
                 .snippet(address));
 
         map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(lat, lng), 11));
-        //map.animateCamera(zoom);
+    }
 
-        //Setting camera view
-        //CameraUpdate center= CameraUpdateFactory.newLatLng(new LatLng(lat, lng));
-        //CameraUpdate zoom=CameraUpdateFactory.zoomTo(15);
+    //Added by Tom 22-05-2015, for Questions once Provider has been selected
+    public void populateQuestions() {
+
+        //First hide the textview questions_per_specialist"
+        TextView tv = (TextView) findViewById(R.id.questions_per_specialist);
+        tv.setVisibility(View.GONE);
+
+        //Display Questions//
+        //Questions
+        Questions questions = new Questions();
+        questions.getQuestions();
+
+        LinearLayout layout = new LinearLayout(this);
+        setContentView(layout);
+        layout.setOrientation(LinearLayout.VERTICAL);
+
+        for (int i =0; i < questions.size(); i++)
+        {
+            TextView textView=new TextView(getApplicationContext());
+            tv.setText(questions.get(i).toString());
+            layout.addView(tv);
+        }
     }
 }
+

@@ -14,13 +14,40 @@
         android:layout_height="fill_parent"
         android:orientation="vertical">
 
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"></TableLayout>
+
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="45dp"
             android:background="@color/blue"
             android:minHeight="?android:attr/actionBarSize"
-            app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"></android.support.v7.widget.Toolbar>
+            app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+            <ImageButton android:id="@+id/back_arrow"
+                android:layout_width="30dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_action_previous_item"
+                android:backgroundTint="@color/white" />
+
+            <TextView
+                android:layout_width="100sp"
+                android:layout_height="35dp"
+                android:layout_marginLeft="120dp"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:text="@string/add_appointment"
+                android:backgroundTint="@color/white" />
+
+            <ImageButton android:id="@+id/trash"
+                android:layout_width="30dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="80dp"
+                android:background="@drawable/ic_launcher_trashcan_normal_holo"/>
+        </android.support.v7.widget.Toolbar>
 
         <!-- Google Maps fragment added 19-05-2015-->
         <fragment
@@ -42,7 +69,7 @@
             android:layout_height="wrap_content"
             android:paddingTop="10dp"
             android:layout_marginRight="20dp"
-            android:layout_marginLeft="20dp"/>
+            android:layout_marginLeft="20dp" />
 
         <LinearLayout
             android:orientation="horizontal"
@@ -95,6 +122,7 @@
                 android:layout_below="@+id/appointment_reason"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true" />
+
 
             <TextView android:id="@+id/questions_per_specialist"
                 android:layout_width="wrap_content"

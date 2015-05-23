@@ -76,6 +76,14 @@ public class HomeActivity extends ActionBarActivity
         startActivity(intent);
     }
 
+    /*
+     *  Added by Tom 22/05/2015, to access AddEditAppointmentActivity
+     */
+    private void startAddAppointmentActivity() {
+        Intent intent = new Intent(this, AddEditAppointmentActivity.class);
+        startActivity(intent);
+    }
+
     /**
      * Setup drawer
      */
