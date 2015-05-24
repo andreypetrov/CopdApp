@@ -26,6 +26,7 @@ public class Login extends ArrayList {
 
     public static List<Login> addLogin() {
         List<Login> logins = new ArrayList<>();
+        logins.add(new Login("user@hackinghealth.ca", "password", 1111));
         logins.add(new Login("tomwhite1209@gmail.com", "password", 1234));
         return logins;
     }
