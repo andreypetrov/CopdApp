@@ -64,6 +64,7 @@
 
     <!-- Record appointment -->
     <string name="record_results">Record results</string>
+
     <string name="title_activity_map_test">mapTest</string>
 
     <string name="action_settings">Settings</string>
@@ -77,5 +78,15 @@
     <string name="confirm_password">Retype password</string>
     <string name="passcode_desc">Passcode allows you to stay logged in and protect your information from viewing by others</string>
     <string name="choose_passcode">Choose 4-digit passcode</string>
+
+
+    <!--Voice recording -->
+    <string name="time">Time:</string>
+    <string name="record">Record</string>
+    <string name="start">Start</string>
+    <string name="stop">Stop</string>
+    <string name="play">Play</string>
+    <string name="time_zero">00:00</string>
+
 
 </resources>
