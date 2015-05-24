@@ -9,6 +9,7 @@ import android.widget.ListView;
 import com.petrodevelopment.copdapp.R;
 import com.petrodevelopment.copdapp.adapters.ProviderListAdapter;
 import com.petrodevelopment.copdapp.model.Provider;
+import com.petrodevelopment.copdapp.model.ProviderList;
 
 import java.util.List;
 
@@ -41,6 +42,6 @@ public class ProviderFragment extends SectionFragment {
 
 
     private List<Provider> getModel() {
-        return Provider.getDummy();
+        return ProviderList.fromAsset(getActivity()).providers;
     }
 }

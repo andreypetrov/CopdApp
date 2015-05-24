@@ -1,5 +1,6 @@
 package com.petrodevelopment.copdapp.record;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
@@ -8,6 +9,7 @@ import android.widget.ListView;
 import com.petrodevelopment.copdapp.R;
 import com.petrodevelopment.copdapp.adapters.AppointmentRecordCategoriesAdapter;
 import com.petrodevelopment.copdapp.model.Appointment;
+import com.petrodevelopment.copdapp.model.AppointmentList;
 import com.petrodevelopment.copdapp.util.JsonLoader;
 import com.petrodevelopment.copdapp.util.U;
 import com.petrodevelopment.copdapp.viewmodel.AppointmentRecordCategoriesVm;
@@ -22,7 +24,7 @@ public class RecordAppointmentActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_record_appointment);
-        initModel();
+        initModel(this);
         initToolbar();
         initListView();
     }
@@ -30,8 +32,8 @@ public class RecordAppointmentActivity extends ActionBarActivity {
     /**
      * The appointment is passed in from the previous activity via the intent
      */
-    private void initModel() {
-        appointment = Appointment.getDummy(this).get(0);
+    private void initModel(Context context) {
+        appointment = AppointmentList.fromAsset(context).appointments.get(0);
     }
 
     private void initToolbar() {

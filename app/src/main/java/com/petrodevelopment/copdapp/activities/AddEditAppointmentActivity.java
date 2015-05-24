@@ -27,9 +27,12 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.petrodevelopment.copdapp.R;
 import com.petrodevelopment.copdapp.adapters.EditAddAppointmentProviderListAdapter;
 import com.petrodevelopment.copdapp.model.Provider;
-import com.petrodevelopment.copdapp.model.Questions;
+import com.petrodevelopment.copdapp.model.ProviderList;
+import com.petrodevelopment.copdapp.model.Question;
+import com.petrodevelopment.copdapp.model.QuestionList;
 
 import java.util.Calendar;
+import java.util.List;
 
 
 public class AddEditAppointmentActivity extends FragmentActivity implements OnClickListener, OnMapReadyCallback {
@@ -40,13 +43,12 @@ public class AddEditAppointmentActivity extends FragmentActivity implements OnCl
 
     //Variables for google maps
     private String address = "Test";
-    private String coords = "";
     private String name = "Dr";
     private double lat = 43.6430879;
     private double lng = -79.4186298;
     private GoogleMap map;
 
-
+    private List<Provider> providers;
     private Provider provider = new Provider();
 
     @Override
@@ -57,36 +59,9 @@ public class AddEditAppointmentActivity extends FragmentActivity implements OnCl
         //Google Maps Added 19-05-2015 by Tom
         MapFragment mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+        initProviders();
+        initSpinner();
 
-
-        //Populate Provider Spinner
-        final EditAddAppointmentProviderListAdapter providerAdapter = new EditAddAppointmentProviderListAdapter(Provider.getDummy(), this, R.layout.cell_provider_list);
-        final Spinner providerSpinner = (Spinner) findViewById(R.id.select_provider);
-        providerSpinner.setAdapter(providerAdapter);
-
-        providerSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                address = Provider.getDummy().get(position).address;
-                coords = Provider.getDummy().get(position).Coordinates;
-                name = "Dr. " + Provider.getDummy().get(position).firstName + " " + Provider.getDummy().get(position).lastName;
-
-                //Update coords for mapview
-                String[] latLng;
-                latLng = coords.split(",");
-                lat = Double.parseDouble(latLng[0]);
-                lng = Double.parseDouble(latLng[1]);
-
-                //Calling method to populate questions
-               // populateQuestions();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                providerSpinner.setPrompt("Select Provider");
-                return;
-            }
-        });
 
         //For picking time
         selectTime = (TextView) findViewById(R.id.select_time);
@@ -97,6 +72,38 @@ public class AddEditAppointmentActivity extends FragmentActivity implements OnCl
         selectDate.setOnClickListener(this);
     }
 
+    private void initSpinner() {
+        //Populate Provider Spinner
+        final EditAddAppointmentProviderListAdapter providerAdapter = new EditAddAppointmentProviderListAdapter(providers, this, R.layout.cell_provider_list);
+        final Spinner providerSpinner = (Spinner) findViewById(R.id.select_provider);
+        providerSpinner.setAdapter(providerAdapter);
+
+        providerSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Provider provider  = providers.get(position);
+                address = provider.address.street;
+                name = "Dr. " + provider.firstName + " " + provider.lastName;
+
+                //Update coords for mapview
+                lat = Double.parseDouble(provider.address.latitude);
+                lng = Double.parseDouble(provider.address.longitude);
+
+                //Calling method to populate questions
+                // populateQuestions();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                providerSpinner.setPrompt("Select Provider");
+                return;
+            }
+        });
+    }
+
+    private void initProviders() {
+        providers = ProviderList.fromAsset(this).providers;
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -184,17 +191,16 @@ public class AddEditAppointmentActivity extends FragmentActivity implements OnCl
         map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(lat, lng), 11));
     }
 
-    //Added by Tom 22-05-2015, for Questions once Provider has been selected
+    //Added by Tom 22-05-2015, for Question once Provider has been selected
     public void populateQuestions() {
 
         //First hide the textview questions_per_specialist"
         TextView tv = (TextView) findViewById(R.id.questions_per_specialist);
         tv.setVisibility(View.GONE);
 
-        //Display Questions//
-        //Questions
-        Questions questions = new Questions();
-        questions.getQuestions();
+        //Display Question//
+        //Question
+        List<Question> questions = QuestionList.fromAsset(this).questions;
 
         LinearLayout layout = new LinearLayout(this);
         setContentView(layout);

@@ -8,6 +8,7 @@
         android:id="@+id/doctor_image"
         android:layout_width="@dimen/appointment_image_width"
         android:layout_height="match_parent"
+        android:src="@drawable/default_user"
         android:layout_marginRight="@dimen/activity_horizontal_margin"/>
 
     <LinearLayout

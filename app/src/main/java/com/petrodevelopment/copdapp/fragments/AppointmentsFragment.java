@@ -9,6 +9,7 @@ import android.widget.ListView;
 import com.petrodevelopment.copdapp.R;
 import com.petrodevelopment.copdapp.adapters.AppointmentListAdapter;
 import com.petrodevelopment.copdapp.model.Appointment;
+import com.petrodevelopment.copdapp.model.AppointmentList;
 import com.petrodevelopment.copdapp.viewmodel.AppointmentListVm;
 
 import java.util.List;
@@ -43,7 +44,7 @@ public class AppointmentsFragment extends SectionFragment {
 
 
     private List<Appointment> getModel() {
-        return Appointment.getDummy();
+        return AppointmentList.fromAsset(getActivity()).appointments;
     }
 
 

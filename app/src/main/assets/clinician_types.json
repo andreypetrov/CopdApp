@@ -1,0 +1,21 @@
+{
+  "clinicianTypes": [
+    {
+      "id": "0",
+      "name": "Proctologist"
+    },
+    {
+      "id": "1",
+      "name": "Orthopedist"
+    },
+    {
+      "id": "2",
+      "name": "Pediatrician"
+    },
+    {
+      "id": "3",
+      "name": "General Practitioner"
+    }
+  ]
+}
+

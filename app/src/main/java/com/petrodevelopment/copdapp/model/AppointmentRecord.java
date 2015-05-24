@@ -25,11 +25,11 @@ public class AppointmentRecord extends Model {
     }
 
 
-    public static AppointmentRecord fromJson(String json) {
-       return JsonLoader.GSON.fromJson(json, AppointmentRecord.class);
+    private static AppointmentRecord fromJson(String json) {
+        return JsonLoader.GSON.fromJson(json, AppointmentRecord.class);
     }
 
-    public static AppointmentRecord createDummy(Context context) {
+    public static AppointmentRecord fromAsset(Context context) {
         String json = JsonLoader.loadJsonFromAssets(context, "appointment_record");
         return fromJson(json);
     }

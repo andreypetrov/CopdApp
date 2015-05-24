@@ -1,0 +1,28 @@
+{
+  "questions": [
+    {
+      "id":"0",
+      "name":"What is the severity of my condition?"
+    },
+    {
+      "id":"1",
+      "name":"What is the doctor's assessment of me?"
+    },
+    {
+      "id":"2",
+      "name":"What are the recommended medications? (name, dosage, frequency, and route, beginning date and end date if applicable)""
+    },
+    {
+      "id":"3",
+      "name":"What tests will be done"
+    },
+    {
+      "id":"4",
+      "name":"What lifestyle changes do I have to make?"
+    },
+    {
+      "id":"5",
+      "name":"What clinicians have I been referred to?"
+    }
+  ]
+}
