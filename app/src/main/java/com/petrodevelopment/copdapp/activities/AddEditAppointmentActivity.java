@@ -12,8 +12,6 @@ import android.widget.AdapterView;
 import android.widget.DatePicker;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
-import android.widget.TableLayout;
-import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
@@ -32,7 +30,6 @@ import com.petrodevelopment.copdapp.model.Provider;
 import com.petrodevelopment.copdapp.model.Questions;
 
 import java.util.Calendar;
-import java.util.List;
 
 
 public class AddEditAppointmentActivity extends FragmentActivity implements OnClickListener, OnMapReadyCallback {
@@ -63,7 +60,7 @@ public class AddEditAppointmentActivity extends FragmentActivity implements OnCl
 
 
         //Populate Provider Spinner
-        final EditAddAppointmentProviderListAdapter providerAdapter = new EditAddAppointmentProviderListAdapter(Provider.getDummy(), this, R.layout.provider_list_cell);
+        final EditAddAppointmentProviderListAdapter providerAdapter = new EditAddAppointmentProviderListAdapter(Provider.getDummy(), this, R.layout.cell_provider_list);
         final Spinner providerSpinner = (Spinner) findViewById(R.id.select_provider);
         providerSpinner.setAdapter(providerAdapter);
 

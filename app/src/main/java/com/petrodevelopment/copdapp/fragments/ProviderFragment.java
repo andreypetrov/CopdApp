@@ -1,6 +1,5 @@
 package com.petrodevelopment.copdapp.fragments;
 
-import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -37,7 +36,7 @@ public class ProviderFragment extends SectionFragment {
 
     private void populateList(View rootView) {
         ListView listView = (ListView) rootView.findViewById(R.id.list_view);
-        listView.setAdapter(new ProviderListAdapter(getModel(), getActivity(), R.layout.provider_list_cell));
+        listView.setAdapter(new ProviderListAdapter(getModel(), getActivity(), R.layout.cell_provider_list));
     }
 
 

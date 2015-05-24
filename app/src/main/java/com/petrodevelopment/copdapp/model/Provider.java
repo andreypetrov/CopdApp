@@ -9,6 +9,30 @@ import java.util.List;
  */
 public class Provider extends Model {
 
+    public String firstName;
+    public String lastName;
+    public String photoUrl;
+    public String phoneNumber;
+    public String email;
+    public String Coordinates;
+    public String address;
+
+    //a relationship to the type of provider
+    public ClinicianType clinicianType;
+
+    public Provider(String firstName, String lastName, String photoUrl, String phoneNumber, String email, String address, String Coordinates, ClinicianType clinicianType) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.photoUrl = photoUrl;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+        this.address = address;
+        this.Coordinates = Coordinates;
+        this.clinicianType = clinicianType;
+    }
+
+
+
     public static List<Provider> getDummy() {
         List<Provider> providers = new ArrayList<>();
         providers.add(new Provider(
@@ -20,7 +44,7 @@ public class Provider extends Model {
                 "12 Okanagan Drive, North York, ON, M1M 1M1",
                 "43.6430879,-79.4186298",
                 new ClinicianType("Surgeon")
-                ));
+        ));
 
         providers.add(new Provider(
                 "Ivan",
@@ -59,26 +83,4 @@ public class Provider extends Model {
 
     public Provider() {
     }
-
-    public Provider(String firstName, String lastName, String photoUrl, String phoneNumber, String email, String address, String Coordinates, ClinicianType clinicianType) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.photoUrl = photoUrl;
-        this.phoneNumber = phoneNumber;
-        this.email = email;
-        this.address = address;
-        this.Coordinates = Coordinates;
-        this.clinicianType = clinicianType;
-    }
-
-    public String firstName;
-    public String lastName;
-    public String photoUrl;
-    public String phoneNumber;
-    public String email;
-    public String Coordinates;
-    public String address;
-
-    //a relationship to the type of provider
-    ClinicianType clinicianType;
 }
