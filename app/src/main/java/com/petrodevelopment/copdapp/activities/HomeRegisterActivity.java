@@ -1,18 +1,15 @@
 package com.petrodevelopment.copdapp.activities;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,11 +28,7 @@ public class HomeRegisterActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_register);
 
-        //Underline New Account
-        TextView textView = (TextView) findViewById(R.id.newAccount);
-        SpannableString content = new SpannableString("New Account");
-        content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
-        textView.setText(content);
+        underline();
 
         //For Sign up button
         Button signup = (Button)findViewById(R.id.signup);
@@ -109,21 +102,29 @@ public class HomeRegisterActivity extends ActionBarActivity {
                 }
                 catch (NumberFormatException e)
                 {
-                    showMsg("Error");
+                    showMsg("Passcode must be anumber");
                 }
 
-                //Add to ArrayList if good
-                List<Login> login = new ArrayList<>();
-                Login patientInfo = new Login(email, password, parsedPasscode);
-                patientInfo.addLogin(login);
+                addToLoginList(email, password,parsedPasscode);
 
-                showMsg("Success!");
+                showMsg("Account Successfully Created!");
             }
             else
             {
                 showMsg("Your passwords do not match!");
             }
         }
+    }
+
+
+    /*
+     *  Adding patient registration to login
+     */
+    public void addToLoginList(String email, String password, int parsedPasscode)
+    {
+        List<Login> login = new ArrayList<>();
+        Login patientInfo = new Login(email, password, parsedPasscode);
+        patientInfo.addLogin(login);
     }
 
 
@@ -136,6 +137,16 @@ public class HomeRegisterActivity extends ActionBarActivity {
 
         Toast toast = Toast.makeText(context, text, duration);
         toast.show();
+    }
+
+
+    //Show underline under New Account
+    private void underline()
+    {
+        TextView textView = (TextView) findViewById(R.id.newAccount);
+        SpannableString content = new SpannableString("New Account");
+        content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
+        textView.setText(content);
     }
 
 }

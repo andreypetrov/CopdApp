@@ -75,10 +75,12 @@
     <string name="signup">Signup</string>
     <string name="enter_email">Enter your email</string>
     <string name="choose_password">Choose password</string>
+    <string name="enter_password">Enter your password</string>
     <string name="confirm_password">Retype password</string>
     <string name="passcode_desc">Passcode allows you to stay logged in and protect your information from viewing by others</string>
     <string name="choose_passcode">Choose 4-digit passcode</string>
-
+    <string name="enter_passcode">Enter your passcode</string>
+    <string name="forgot_password">Forgot Password?</string>
 
     <!--Voice recording -->
     <string name="time">Time:</string>
