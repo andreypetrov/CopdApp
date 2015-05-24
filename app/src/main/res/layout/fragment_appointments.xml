@@ -58,5 +58,5 @@
         android:layout_alignParentBottom="true"
         android:background="@drawable/add_button"
         android:text="@string/add_provider"
-        android:textColor="@color/white"/>
+        android:textColor="@color/white" />
 </LinearLayout>

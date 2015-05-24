@@ -49,7 +49,7 @@ public class HomeActivity extends ActionBarActivity
 //        initSpinner();
         mTitle = getTitle();
         startRecordAppointmentActivity();
-//        startAddEditAppointmentActivity();
+//        startAddAppointmentActivity();
 //        Retrofit.initialize();
 //        startRecordActivity();
     }
@@ -76,7 +76,10 @@ public class HomeActivity extends ActionBarActivity
         startActivity(intent);
     }
 
-    private void startAddEditAppointmentActivity() {
+    /*
+     *  Added by Tom 22/05/2015, to access AddEditAppointmentActivity
+     */
+    private void startAddAppointmentActivity() {
         Intent intent = new Intent(this, AddEditAppointmentActivity.class);
         startActivity(intent);
     }

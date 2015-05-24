@@ -45,8 +45,8 @@ public class Provider extends Model {
         ));
 
         providers.add(new Provider(
-                "Aleksandar",
-                "Petrov",
+                "Tom",
+                "White",
                 "https://fbcdn-profile-a.akamaihd.net/hprofile-ak-xpt1/v/t1.0-1/c11.0.50.50/p50x50/10364063_10152202370808445_8669827953058751583_n.jpg?oh=d33beced428f52734e819c32a7ca3e90&oe=55CD22D0&__gda__=1439647123_9c3b43b6842836cf8530294101f1a748",
                 "+1 2222222",
                 "aleksandar@email.com",
@@ -67,7 +67,7 @@ public class Provider extends Model {
         this.phoneNumber = phoneNumber;
         this.email = email;
         this.address = address;
-        this.coordinates = coordinates;
+        this.Coordinates = Coordinates;
         this.clinicianType = clinicianType;
     }
 
@@ -76,7 +76,7 @@ public class Provider extends Model {
     public String photoUrl;
     public String phoneNumber;
     public String email;
-    public String coordinates;
+    public String Coordinates;
     public String address;
 
     //a relationship to the type of provider

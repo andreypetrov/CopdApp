@@ -1,0 +1,108 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/blue"
+    tools:context="com.petrodevelopment.copdapp.activities.HomeRegisterActivity">
+
+    <ImageView android:id="@+id/lungs_icon"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="@drawable/white_lungs"
+        android:layout_gravity="center"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="30dp"
+        android:paddingBottom="30dp">
+
+        <TextView android:id="@+id/newAccount"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="@string/new_account"
+            android:textSize="23dp"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="40dp"
+            android:layout_marginStart="40dp" />
+
+        <TextView android:id="@+id/signin"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="@string/login"
+            android:textSize="23dp"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="40dp"
+            android:layout_marginEnd="40dp" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginLeft="40dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginEnd="40dp" >
+
+        <EditText android:id="@+id/enterEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:hint="@string/enter_email"
+            android:padding="15dp"
+            android:layout_marginTop="5dp"/>
+
+        <EditText android:id="@+id/enterPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:hint="@string/choose_password"
+            android:padding="15dp"
+            android:layout_marginTop="5dp"/>
+
+        <EditText android:id="@+id/confirmPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:hint="@string/confirm_password"
+            android:padding="15dp"
+            android:layout_marginTop="5dp"/>
+
+        <TextView android:id="@+id/passcode_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textSize="14dp"
+            android:text="@string/passcode_desc"
+            android:layout_marginTop="30dp"/>
+
+        <EditText android:id="@+id/enterPasscode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:hint="@string/choose_passcode"
+            android:padding="15dp"
+            android:layout_marginTop="5dp"/>
+
+        <Button android:id="@+id/signup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/signup"
+            android:textColor="@color/white"
+            android:background="@color/navy"
+            android:layout_marginTop="5dp" />
+
+    </LinearLayout>
+
+</LinearLayout>
