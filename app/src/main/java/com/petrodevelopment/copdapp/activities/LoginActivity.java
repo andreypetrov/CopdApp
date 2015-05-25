@@ -2,9 +2,11 @@ package com.petrodevelopment.copdapp.activities;
 
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
+import android.view.View;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -24,6 +26,15 @@ public class LoginActivity extends Activity  {
         setContentView(R.layout.activity_login);
 
         underline();
+
+        TextView tv =  (TextView) findViewById(R.id.newAccount);
+        tv.setOnClickListener(new View.OnClickListener()
+        {
+            public void onClick(View v)
+            {
+                goToNewUser(v);
+            }
+        });
     }
 
 
@@ -34,6 +45,15 @@ public class LoginActivity extends Activity  {
         SpannableString content = new SpannableString("Login");
         content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
         textView.setText(content);
+    }
+
+
+    //Go back to registration screen
+    private void goToNewUser(View v)
+    {
+        Intent intent = new Intent(this, HomeRegisterActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        startActivity(intent);
     }
 }
 

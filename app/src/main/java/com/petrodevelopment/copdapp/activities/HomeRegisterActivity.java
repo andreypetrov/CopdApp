@@ -1,6 +1,7 @@
 package com.petrodevelopment.copdapp.activities;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.text.SpannableString;
@@ -22,6 +23,12 @@ import java.util.List;
 public class HomeRegisterActivity extends ActionBarActivity {
 
     private int parsedPasscode = 0;
+    //Getting values from edit text fields
+    private EditText emailText;
+    private EditText passFirst;
+    private EditText passSecond;
+    private EditText numbPass;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +43,7 @@ public class HomeRegisterActivity extends ActionBarActivity {
         {
             public void onClick(View v)
             {
-                signUp();;
+                signUp(v);
             }
         });
     }
@@ -63,15 +70,23 @@ public class HomeRegisterActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
+
+    //Change from new user to login screen 24-05-2015
+    public void goToLoginScreen(View v)
+    {
+        Intent intent = new Intent(this, LoginActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        startActivity(intent);
+    }
+
     //Added by Tom 23-05-2015
     //Signing the user up, currently just goes into an arraylist, but will have to be changed when database implemented
-    public void signUp()
+    public void signUp(View v)
     {
-        //Getting values from edit text fields
-        EditText emailText = (EditText)findViewById(R.id.enterEmail);
-        EditText passFirst = (EditText)findViewById(R.id.enterPassword);
-        EditText passSecond = (EditText)findViewById(R.id.confirmPassword);
-        EditText numbPass = (EditText)findViewById(R.id.enterPasscode);
+        emailText = (EditText)findViewById(R.id.enterEmail);
+        passFirst = (EditText)findViewById(R.id.enterPassword);
+        passSecond = (EditText)findViewById(R.id.confirmPassword);
+        numbPass = (EditText)findViewById(R.id.enterPasscode);
 
         //Validation NOTE: need to add int validation for passcode
         if(emailText.getText().toString().matches(""))
@@ -92,27 +107,33 @@ public class HomeRegisterActivity extends ActionBarActivity {
         }
         else
         {
-            if (passFirst.getText().toString().matches(passSecond.getText().toString()))
-            {
-                String email = emailText.getText().toString();
-                String password = passFirst.getText().toString();
-                String passcode = numbPass.getText().toString();
-                try{
-                    parsedPasscode = Integer.parseInt(passcode);
-                }
-                catch (NumberFormatException e)
-                {
-                    showMsg("Passcode must be anumber");
-                }
+            secondValidation(v);
+        }
+    }
 
-                addToLoginList(email, password,parsedPasscode);
 
-                showMsg("Account Successfully Created!");
+    //Check if passwords match, validation good then go to Home
+    public void secondValidation(View v)
+    {
+        if (passFirst.getText().toString().matches(passSecond.getText().toString()))
+        {
+            String email = emailText.getText().toString();
+            String password = passFirst.getText().toString();
+            String passcode = numbPass.getText().toString();
+            try{
+                parsedPasscode = Integer.parseInt(passcode);
             }
-            else
+            catch (NumberFormatException e)
             {
-                showMsg("Your passwords do not match!");
+                showMsg("Passcode must be anumber");
             }
+
+            addToLoginList(email, password, parsedPasscode);
+            goToHome(v);
+        }
+        else
+        {
+            showMsg("Your passwords do not match!");
         }
     }
 
@@ -149,4 +170,12 @@ public class HomeRegisterActivity extends ActionBarActivity {
         textView.setText(content);
     }
 
+
+    //Going to home screen after login
+    public void goToHome(View v)
+    {
+        Intent intent = new Intent(this, HomeActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        startActivity(intent);
+    }
 }
