@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
+import com.petrodevelopment.copdapp.MainApplication;
 import com.petrodevelopment.copdapp.R;
 import com.petrodevelopment.copdapp.adapters.AppointmentListAdapter;
 import com.petrodevelopment.copdapp.model.Appointment;
@@ -38,13 +39,13 @@ public class AppointmentsFragment extends SectionFragment {
 
     private void populateList(View rootView) {
         ListView listView = (ListView) rootView.findViewById(R.id.list_view);
-        List<AppointmentListVm> viewModels = AppointmentListVm.createFromModel(getModel());
+        List<AppointmentListVm> viewModels = AppointmentListVm.createFromModel(getModel(), getActivity());
         listView.setAdapter(new AppointmentListAdapter(viewModels, getActivity(), R.layout.cell_appointment_list));
     }
 
 
     private List<Appointment> getModel() {
-        return AppointmentList.fromAsset(getActivity()).appointments;
+        return  ((MainApplication) getActivity().getApplication()).appointmentList.appointments;
     }
 
 

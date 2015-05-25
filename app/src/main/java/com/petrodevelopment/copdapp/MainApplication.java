@@ -2,8 +2,14 @@ package com.petrodevelopment.copdapp;
 
 import android.app.Application;
 
+import com.petrodevelopment.copdapp.model.Appointment;
+import com.petrodevelopment.copdapp.model.AppointmentList;
 import com.petrodevelopment.copdapp.model.ClinicianType;
 import com.petrodevelopment.copdapp.model.ClinicianTypeList;
+import com.petrodevelopment.copdapp.model.Provider;
+import com.petrodevelopment.copdapp.model.ProviderList;
+import com.petrodevelopment.copdapp.model.Question;
+import com.petrodevelopment.copdapp.model.QuestionList;
 
 import java.util.HashMap;
 import java.util.List;
@@ -15,22 +21,28 @@ import java.util.Map;
  */
 public class MainApplication extends Application {
 
-    private Map<String, String> clinicianIdToName;
+
+    //All model data is stored here
+    public ClinicianTypeList clinicianTypeList;
+    private Map<String, ClinicianType> clinicianTypeMap;
+
+    public ProviderList providerList;
+    private Map<String, Provider> providerMap;
+
+    public AppointmentList appointmentList;
+    private Map<String, Appointment> appointmentMap;
+
+    public QuestionList questionList;
+    private Map<String, Question> questionMap;
+
 
     @Override
     public void onCreate() {
         super.onCreate();
-    }
-
-
-    /**
-     * Get a clinician's name from it's id. On first access lazy init of clinician types
-     * @param clinicianTypeId
-     * @return
-     */
-    public String getClinicianName(String clinicianTypeId) {
-        if (clinicianIdToName == null) initClinicianTypes();
-        return clinicianIdToName.get(clinicianTypeId);
+        initClinicianTypes();
+        initProviders();
+        initAppointments();
+        initQuestions();
     }
 
 
@@ -38,10 +50,54 @@ public class MainApplication extends Application {
      * Initialize clinician types
      */
     private void initClinicianTypes() {
-        ClinicianTypeList clinicianTypeList = ClinicianTypeList.fromAsset(this);
-        clinicianIdToName = new HashMap<>();
-        for (ClinicianType clinicianType: clinicianTypeList.clinicianTypes) {
-            clinicianIdToName.put(clinicianType.id, clinicianType.name);
+        clinicianTypeList = ClinicianTypeList.fromAsset(this);
+        clinicianTypeMap = new HashMap<>();
+        for (ClinicianType clinicianType : clinicianTypeList.clinicianTypes) {
+            clinicianTypeMap.put(clinicianType.id, clinicianType);
         }
     }
+
+
+    private void initAppointments() {
+        appointmentList = AppointmentList.fromAsset(this);
+        appointmentMap = new HashMap<>();
+        for (Appointment appointment : appointmentList.appointments) {
+            appointmentMap.put(appointment.id, appointment);
+        }
+    }
+
+    private void initProviders() {
+        providerList = ProviderList.fromAsset(this);
+        providerMap = new HashMap<>();
+        for (Provider provider : providerList.providers) {
+            providerMap.put(provider.id, provider);
+        }
+    }
+
+
+    private void initQuestions() {
+        questionList = QuestionList.fromAsset(this);
+        questionMap = new HashMap<>();
+        for (Question question : questionList.questions) {
+            questionMap.put(question.id, question);
+        }
+    }
+
+
+    public ClinicianType getClinitianType(String id) {
+        return clinicianTypeMap.get(id);
+    }
+
+    public Provider getProvider(String id) {
+        return providerMap.get(id);
+    }
+
+    public Appointment getAppointment(String id) {
+        return appointmentMap.get(id);
+    }
+
+    public Question getQuestion(String id) {
+        return questionMap.get(id);
+    }
+
 }

@@ -2,6 +2,7 @@ package com.petrodevelopment.copdapp.model;
 
 import android.content.Context;
 
+import com.petrodevelopment.copdapp.MainApplication;
 import com.petrodevelopment.copdapp.util.JsonLoader;
 
 import java.util.ArrayList;
@@ -16,7 +17,7 @@ public class Appointment extends Model {
 
     public String id;
     public String date;
-    public String doctorName;
+    public String providerId;
 
     //Edited via the Record Appointment screen
     public AppointmentRecord severity;
@@ -30,4 +31,7 @@ public class Appointment extends Model {
 
     }
 
+    public Provider getProvider(Context context) {
+        return ((MainApplication)context.getApplicationContext()).getProvider(providerId);
+    }
 }

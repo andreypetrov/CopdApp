@@ -1,12 +1,14 @@
 {
   "providers": [
     {
-      "firstName": "James",
-      "lastName": "Ye",
+      "id": "0",
+      "title": "Dr. ",
+      "firstName": "One",
+      "lastName": "Man",
       "photoUrl": "https://lh4.googleusercontent.com/-4OBPaUrA_5g/AAAAAAAAAAI/AAAAAAAAABY/DQUmqzsH4qY/photo.jpg",
       "phoneNumber": "+1 647 777 777",
       "email": "james.ye@hospital.com",
-      "clinicianType": "1",
+      "clinicianTypeId": "1",
       "address": {
         "street": "1 Market Square West Avenue",
         "city": "Toronto",
@@ -17,12 +19,14 @@
       }
     },
     {
-      "firstName": "James",
+      "id": "1",
+      "title": "Mr. ",
+      "firstName": "Just Call Me James",
       "lastName": "Ye",
       "photoUrl": "https://lh4.googleusercontent.com/-4OBPaUrA_5g/AAAAAAAAAAI/AAAAAAAAABY/DQUmqzsH4qY/photo.jpg",
       "phoneNumber": "+1 647 777 777",
       "email": "james.ye@hospital.com",
-      "clinicianType": "2",
+      "clinicianTypeId": "2",
       "address": {
         "street": "1 Market Square West Avenue",
         "city": "Toronto",
@@ -33,12 +37,14 @@
       }
     },
     {
-      "firstName": "James",
-      "lastName": "Ye",
+      "id": "2",
+      "title": "Dr. ",
+      "firstName": "Man Man",
+      "lastName": "Tetris",
       "photoUrl": "https://lh4.googleusercontent.com/-4OBPaUrA_5g/AAAAAAAAAAI/AAAAAAAAABY/DQUmqzsH4qY/photo.jpg",
       "phoneNumber": "+1 647 777 777",
       "email": "james.ye@hospital.com",
-      "clinicianType": "2",
+      "clinicianTypeId": "2",
       "address": {
         "street": "1 Market Square West Avenue",
         "city": "Toronto",
@@ -49,12 +55,14 @@
       }
     },
     {
-      "firstName": "James",
-      "lastName": "Ye",
+      "id": "3",
+      "title": "Dr. ",
+      "firstName": "Will",
+      "lastName": "Smith",
       "photoUrl": "https://lh4.googleusercontent.com/-4OBPaUrA_5g/AAAAAAAAAAI/AAAAAAAAABY/DQUmqzsH4qY/photo.jpg",
       "phoneNumber": "+1 647 777 777",
       "email": "james.ye@hospital.com",
-      "clinicianType": "1",
+      "clinicianTypeId": "1",
       "address": {
         "street": "1 Market Square West Avenue",
         "city": "Toronto",

@@ -6,4 +6,5 @@ package com.petrodevelopment.copdapp.model;
 public class ClinicianType extends Model {
     public String id;
     public String name;
+    public String imageResourceName;
 }

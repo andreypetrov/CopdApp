@@ -1,5 +1,7 @@
 package com.petrodevelopment.copdapp.viewmodel;
 
+import android.content.Context;
+
 import com.petrodevelopment.copdapp.model.Appointment;
 
 import java.util.ArrayList;
@@ -16,12 +18,12 @@ public class AppointmentListVm {
     public String doctorTitle;
 
 
-    public static AppointmentListVm createFromModel(Appointment appointment) {
+    public static AppointmentListVm createFromModel(Appointment appointment, Context context) {
         AppointmentListVm viewModel = new AppointmentListVm(
-                "https://lh4.googleusercontent.com/-4OBPaUrA_5g/AAAAAAAAAAI/AAAAAAAAABY/DQUmqzsH4qY/photo.jpg",
-                "09 June, 2015",
-                "Dr. Thomas White",
-                "Respirologist"
+                appointment.getProvider(context).getClinitianType(context).imageResourceName,
+                appointment.date,
+                appointment.getProvider(context).title + " " + appointment.getProvider(context).firstName + " " + appointment.getProvider(context).lastName,
+                appointment.getProvider(context).getClinitianType(context).name
         );
         return viewModel;
     }
@@ -32,10 +34,10 @@ public class AppointmentListVm {
      * @param appointments
      * @return
      */
-    public static  List<AppointmentListVm> createFromModel(List<Appointment> appointments) {
+    public static  List<AppointmentListVm> createFromModel(List<Appointment> appointments, Context context) {
         List<AppointmentListVm> viewModels = new ArrayList<>();
         for (Appointment appointment : appointments) {
-            viewModels.add(createFromModel(appointment));
+            viewModels.add(createFromModel(appointment, context));
         }
         return viewModels;
     }

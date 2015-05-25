@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 import com.petrodevelopment.copdapp.R;
 import com.petrodevelopment.copdapp.model.Provider;
+import com.petrodevelopment.copdapp.util.U;
 import com.petrodevelopment.copdapp.viewmodel.AppointmentListVm;
 import com.squareup.picasso.Picasso;
 
@@ -32,7 +33,10 @@ public class AppointmentListAdapter extends GenericAdapter<AppointmentListVm> {
         dateView.setText(appointmentListVm.date);
 
         ImageView doctorImage = (ImageView) view.findViewById(R.id.doctor_image);
-        Picasso.with(context).load(appointmentListVm.doctorImageUrl).into(doctorImage);
+        doctorImage.setImageDrawable(U.getDrawableFromImageName(appointmentListVm.doctorImageUrl, context));
+
+        //Picasso.with(context).load(appointmentListVm.doctorImageUrl).into(doctorImage);
+
     }
 
     @Override

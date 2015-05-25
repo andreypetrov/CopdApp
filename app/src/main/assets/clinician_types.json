@@ -2,19 +2,23 @@
   "clinicianTypes": [
     {
       "id": "0",
-      "name": "Proctologist"
+      "name": "Cardiologist",
+      "imageResourceName": "ic_cardio_color"
     },
     {
       "id": "1",
-      "name": "Orthopedist"
+      "name": "Orthopedist",
+      "imageResourceName": "ic_cardio_color"
     },
     {
       "id": "2",
-      "name": "Pediatrician"
+      "name": "Respirotologist",
+      "imageResourceName": "ic_cardio_color"
     },
     {
       "id": "3",
-      "name": "General Practitioner"
+      "name": "General Practitioner",
+      "imageResourceName": "ic_cardio_color"
     }
   ]
 }

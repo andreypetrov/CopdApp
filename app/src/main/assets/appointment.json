@@ -1,5 +1,6 @@
 {
-  "doctorName": "Doctor Jones",
+  "id": "0",
+  "providerId": "1",
   "severity": {
     "note": "severity for my amazing appointment. I am sick but i will get better",
     "voiceRecordUrl": "http://www.com.com/whatever.mp3",

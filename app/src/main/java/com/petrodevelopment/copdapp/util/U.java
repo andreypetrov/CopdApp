@@ -12,6 +12,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Point;
+import android.graphics.drawable.Drawable;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
@@ -382,5 +383,14 @@ public class U {
         for (Object o : array) {
             list.add(o);
         }
+    }
+
+
+    public static int getDrawableResourceIdFromName(String resourceName, Context context) {
+        return context.getResources().getIdentifier(resourceName, "drawable", context.getPackageName());
+    }
+
+    public static Drawable getDrawableFromImageName(String resourceName, Context context) {
+        return context.getResources().getDrawable(getDrawableResourceIdFromName(resourceName, context));
     }
 }

@@ -27,7 +27,7 @@ public class ProviderListAdapter extends GenericAdapter<Provider> {
         TextView doctorNameView = (TextView) view.findViewById(R.id.doctor_name);
         doctorNameView.setText(provider.firstName + " " + provider.lastName);
         TextView doctorTitleView = (TextView) view.findViewById(R.id.doctor_title);
-        doctorTitleView.setText(provider.getClinicianName(context));
+        doctorTitleView.setText(provider.getClinitianType(context).name);
         TextView dateView = (TextView) view.findViewById(R.id.email);
         dateView.setText(provider.email);
 

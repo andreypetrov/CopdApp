@@ -12,7 +12,7 @@ import java.util.List;
  * TODO Fix this model to differentiate questions per providers
  * Created on 22/05/2015.
  */
-public class QuestionList extends ArrayList {
+public class QuestionList extends Model {
     public List<Question> questions;
 
     public QuestionList() {

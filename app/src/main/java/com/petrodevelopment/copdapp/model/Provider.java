@@ -13,6 +13,8 @@ import java.util.List;
  */
 public class Provider extends Model {
 
+    public String id;
+    public String title;
     public String firstName;
     public String lastName;
     public String photoUrl;
@@ -21,9 +23,10 @@ public class Provider extends Model {
     public String clinicianTypeId;
     public Address address;
 
-    public String getClinicianName(Context context) {
-        return ((MainApplication)context.getApplicationContext()).getClinicianName(clinicianTypeId);
+    public ClinicianType getClinitianType(Context context) {
+        return ((MainApplication)context.getApplicationContext()).getClinitianType(clinicianTypeId);
     }
+
     public Provider() {
     }
 }
