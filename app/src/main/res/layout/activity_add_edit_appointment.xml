@@ -30,22 +30,38 @@
             android:id="@+id/map"
             android:name="com.google.android.gms.maps.MapFragment"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="140dp"
             tools:layout="@layout/fragment_maps_for_appointments"/>
 
-        <!-- Default map image, using map fragments now
+        <!-- Backup Map Image
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="190dp"
             android:contentDescription="@string/dummy_text"
             android:src="@drawable/placeholder" /> -->
 
-        <Spinner android:id="@+id/select_provider"
-            android:layout_width="match_parent"
+        <RelativeLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingTop="10dp"
             android:layout_marginRight="20dp"
-            android:layout_marginLeft="20dp" />
+            android:layout_marginLeft="20dp">
+
+            <ImageView android:id="@+id/clinician_blue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_clinician_blue" />
+
+            <Spinner android:id="@+id/select_provider"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/clinician_blue"
+                android:layout_toEndOf="@+id/clinician_blue" />
+
+        </RelativeLayout>
+
+
 
         <LinearLayout
             android:orientation="horizontal"
@@ -54,18 +70,46 @@
             android:layout_marginRight="20dp"
             android:layout_marginLeft="20dp">
 
-            <TextView
-                android:id="@+id/select_date"
+            <RelativeLayout
                 android:layout_width="205dp"
-                android:layout_height="wrap_content"
-                style="@android:style/Widget.Holo.Spinner"
-                android:hint="Date"/>
+                android:layout_height="wrap_content">
 
-            <TextView android:id="@+id/select_time"
+                <ImageView android:id="@+id/date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/ic_date" />
+
+                <TextView
+                    android:id="@+id/select_date"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    style="@android:style/Widget.Holo.Spinner"
+                    android:hint="Date"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/date"
+                    android:layout_toEndOf="@+id/date" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
                 android:layout_width="135dp"
-                android:layout_height="wrap_content"
-                style="@android:style/Widget.Holo.Spinner"
-                android:text="@string/Time"/>
+                android:layout_height="wrap_content">
+
+                <ImageView android:id="@+id/time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/ic_time" />
+
+                <TextView android:id="@+id/select_time"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    style="@android:style/Widget.Holo.Spinner"
+                    android:text="@string/Time"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/time"
+                    android:layout_toEndOf="@+id/time" />
+
+            </RelativeLayout>
 
         </LinearLayout>
 

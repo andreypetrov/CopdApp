@@ -90,7 +90,7 @@ public class AddEditAppointmentActivity extends ActionBarActivity implements OnC
 
     private void initSpinner() {
         //Populate Provider Spinner
-        final EditAddAppointmentProviderListAdapter providerAdapter = new EditAddAppointmentProviderListAdapter(providers, this, R.layout.cell_provider_list);
+        final EditAddAppointmentProviderListAdapter providerAdapter = new EditAddAppointmentProviderListAdapter(providers, this, R.layout.cell_provider_add_appointment_list);
         final Spinner providerSpinner = (Spinner) findViewById(R.id.select_provider);
         providerSpinner.setAdapter(providerAdapter);
 
