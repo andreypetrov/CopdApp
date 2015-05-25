@@ -2,7 +2,7 @@
   "appointments":[
     {
       "id": "0",
-      "date":"1 January 2015",
+      "date":"1 January, 2015",
       "providerId": "2",
       "severity": {
         "note": "severity for my amazing appointment. I am sick but i will get better",
@@ -56,7 +56,7 @@
     },
     {
       "id": "1",
-      "date":"1 January 2016",
+      "date":"5 August, 2016",
       "providerId": "2",
       "severity": {
         "note": "severity for my amazing appointment. I am sick but i will get better",
@@ -110,7 +110,7 @@
     },
     {
       "id": "2",
-      "date":"1 January 2017",
+      "date":"3 June 2017",
       "providerId": "1",
       "severity": {
         "note": "severity for my amazing appointment. I am sick but i will get better",
@@ -218,7 +218,7 @@
     },
     {
       "id": "4",
-      "date":"5 January 1222",
+      "date":"5 January, 1222",
       "providerId": "3",
       "severity": {
         "note": "severity for my amazing appointment. I am sick but i will get better",

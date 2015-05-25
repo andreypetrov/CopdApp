@@ -13,6 +13,7 @@ import java.util.List;
  */
 public class AppointmentListVm {
     public String doctorImageUrl;
+    public String time;
     public String date;
     public String doctorName;
     public String doctorTitle;
@@ -22,6 +23,7 @@ public class AppointmentListVm {
         AppointmentListVm viewModel = new AppointmentListVm(
                 appointment.getProvider(context).getClinitianType(context).imageResourceName,
                 appointment.date,
+                "4.30 pm",
                 appointment.getProvider(context).title + " " + appointment.getProvider(context).firstName + " " + appointment.getProvider(context).lastName,
                 appointment.getProvider(context).getClinitianType(context).name
         );
@@ -42,9 +44,10 @@ public class AppointmentListVm {
         return viewModels;
     }
 
-    public AppointmentListVm(String doctorImageUrl, String date, String doctorName, String doctorTitle) {
+    public AppointmentListVm(String doctorImageUrl, String date, String time, String doctorName, String doctorTitle) {
         this.doctorImageUrl = doctorImageUrl;
         this.date = date;
+        this.time = time;
         this.doctorName = doctorName;
         this.doctorTitle = doctorTitle;
     }

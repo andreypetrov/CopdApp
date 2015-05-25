@@ -1,70 +1,131 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/appointment_image_height"
+    android:layout_height="@dimen/appointment_row_height"
+    android:background="@color/yellow_light"
     android:orientation="horizontal">
 
     <LinearLayout
-        android:id="@+id/background_layout"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/appointment_cell_box"
         android:layout_height="match_parent"
-        android:background="@color/teal"
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/doctor_name"
+            android:id="@+id/date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:text="@string/dummy_doctor_name"
-            android:textColor="@color/white"
-            android:textSize="@dimen/abc_text_size_medium_material"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/doctor_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:text="@string/dummy_text"
-            android:textColor="@color/white"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:maxLines="1"
+            android:paddingBottom="@dimen/box_top_and_bottom_padding"
+            android:paddingTop="@dimen/box_top_and_bottom_padding"
+            android:text="@string/dummy_date"
             android:textSize="@dimen/abc_text_size_body_1_material" />
 
+        <LinearLayout
+            android:id="@+id/background_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/teal"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin">
 
-        <ImageView
-            android:id="@+id/doctor_image"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:src="@drawable/ic_cardio_color" />
+
+            <TextView
+                android:id="@+id/doctor_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/box_top_and_bottom_padding"
+                android:maxLines="1"
+                android:text="@string/dummy_doctor_name"
+                android:textColor="@color/white"
+                android:textSize="@dimen/abc_text_size_medium_material"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/doctor_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="@dimen/box_top_and_bottom_padding"
+                android:maxLines="1"
+                android:text="@string/dummy_text"
+                android:textColor="@color/white"
+                android:textSize="@dimen/abc_text_size_body_1_material" />
+
+
+            <ImageView
+                android:id="@+id/doctor_image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_cardio_color" />
+        </LinearLayout>
+
     </LinearLayout>
-
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
         android:layout_weight="1"
-        android:orientation="vertical"
-        android:paddingBottom="@dimen/box_top_and_bottom_padding"
-        android:paddingTop="@dimen/box_top_and_bottom_padding">
+        android:orientation="vertical">
 
         <TextView
-            android:id="@+id/date"
-            android:layout_width="match_parent"
+            android:id="@+id/time"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/dummy_text"
-            android:textColor="@color/material_deep_teal_200"
+            android:paddingBottom="@dimen/box_top_and_bottom_padding"
+            android:paddingTop="@dimen/box_top_and_bottom_padding"
+            android:text="@string/dummy_time_appointment"
             android:textSize="@dimen/abc_text_size_body_1_material" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/cell_bg"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/activity_horizontal_margin">
+
+            <ImageView
+                android:layout_width="@dimen/small_icon"
+                android:layout_height="@dimen/small_icon"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="@dimen/box_top_and_bottom_padding"
+                android:src="@drawable/ic_endocrinologist_color" />
+
+            <ImageView
+                android:layout_width="@dimen/small_icon"
+                android:layout_height="@dimen/small_icon"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="@dimen/box_top_and_bottom_padding"
+                android:src="@drawable/ic_endocrinologist_color" />
+
+            <ImageView
+                android:layout_width="@dimen/small_icon"
+                android:layout_height="@dimen/small_icon"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/ic_endocrinologist_color" />
+
+            <!-- Filling the rest of the space -->
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|right"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:src="@drawable/abc_btn_check_to_on_mtrl_015" />
+        </LinearLayout>
 
 
     </LinearLayout>
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-        android:layout_marginRight="@dimen/activity_horizontal_margin"
-        android:src="@drawable/abc_btn_check_to_on_mtrl_015" />
+
 </LinearLayout>
+
