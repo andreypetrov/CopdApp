@@ -16,11 +16,11 @@
         android:minHeight="?android:attr/actionBarSize"
         app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"></android.support.v7.widget.Toolbar>
 
-    <fragment android:name="com.petrodevelopment.copdapp.record.fragments.VoiceRecordFragment"
-        android:id="@+id/voice_record_fragment"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:layout="@layout/fragment_record_voice" />
+    <!--<fragment android:name="com.petrodevelopment.copdapp.record.fragments.VoiceRecordFragment"-->
+        <!--android:id="@+id/voice_record_fragment"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--tools:layout="@layout/fragment_record_voice" />-->
 
 
     <ListView
