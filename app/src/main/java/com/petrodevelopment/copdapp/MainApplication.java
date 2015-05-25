@@ -15,7 +15,6 @@ import java.util.Map;
  */
 public class MainApplication extends Application {
 
-    private ClinicianTypeList clinicianTypeList;
     private Map<String, String> clinicianIdToName;
 
     @Override
@@ -39,7 +38,7 @@ public class MainApplication extends Application {
      * Initialize clinician types
      */
     private void initClinicianTypes() {
-        clinicianTypeList = ClinicianTypeList.fromAsset(this);
+        ClinicianTypeList clinicianTypeList = ClinicianTypeList.fromAsset(this);
         clinicianIdToName = new HashMap<>();
         for (ClinicianType clinicianType: clinicianTypeList.clinicianTypes) {
             clinicianIdToName.put(clinicianType.id, clinicianType.name);
