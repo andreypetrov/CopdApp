@@ -6,6 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
+import com.petrodevelopment.copdapp.util.U;
+
 import java.util.List;
 
 public abstract class GenericAdapter<Data> extends BaseAdapter {
@@ -19,6 +21,7 @@ public abstract class GenericAdapter<Data> extends BaseAdapter {
 
     @Override
     public int getCount() {
+        U.log(this, "getCount: " + data.size());
         return data.size();
     }
 

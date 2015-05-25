@@ -13,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.support.v4.widget.DrawerLayout;
 
+import com.petrodevelopment.copdapp.MainApplication;
 import com.petrodevelopment.copdapp.NavigationDrawerFragment;
 import com.petrodevelopment.copdapp.R;
 import com.petrodevelopment.copdapp.fragments.AppointmentsFragment;
@@ -66,12 +67,12 @@ public class HomeActivity extends ActionBarActivity
 //        spinner.setAdapter(adapter);
 //    }
 
-    private void startRecordAppointmentActivity() {
+    public void startRecordAppointmentActivity(String appointmentId) {
         Intent intent = new Intent(this, RecordAppointmentActivity.class);
         startActivity(intent);
     }
 
-    private void startRecordActivity (){
+    public void startRecordActivity (String appointmentId){
         Intent intent = new Intent(this, RecordActivity.class);
         startActivity(intent);
     }
@@ -79,8 +80,10 @@ public class HomeActivity extends ActionBarActivity
     /*
      *  Added by Tom 22/05/2015, to access AddEditAppointmentActivity
      */
-    private void startAddAppointmentActivity() {
+    public void startAddAppointmentActivity(String appointmentId) {
+
         Intent intent = new Intent(this, AddEditAppointmentActivity.class);
+        intent.putExtra(MainApplication.APPOINTMENT_ID_EXTRA, appointmentId);
         startActivity(intent);
     }
 
@@ -102,7 +105,7 @@ public class HomeActivity extends ActionBarActivity
      */
     @Override
     public void onNavigationDrawerItemSelected(int position) {
-        if (position == 4) startRecordAppointmentActivity();
+        if (position == 4) startRecordAppointmentActivity("test");
         else {
             FragmentManager fragmentManager = getFragmentManager();
             fragmentManager.beginTransaction()

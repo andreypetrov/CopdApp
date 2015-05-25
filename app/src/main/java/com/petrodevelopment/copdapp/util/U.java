@@ -1,8 +1,12 @@
 package com.petrodevelopment.copdapp.util;
 
 import java.lang.reflect.Field;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -385,6 +389,13 @@ public class U {
         }
     }
 
+    public static List<Object> deepCopyList(List<Object> original) {
+        List<Object> copy = new ArrayList<Object>();
+        for (Object object : original) {
+            copy.add(object);
+        }
+        return copy;
+    }
 
     public static int getDrawableResourceIdFromName(String resourceName, Context context) {
         return context.getResources().getIdentifier(resourceName, "drawable", context.getPackageName());
@@ -392,5 +403,21 @@ public class U {
 
     public static Drawable getDrawableFromImageName(String resourceName, Context context) {
         return context.getResources().getDrawable(getDrawableResourceIdFromName(resourceName, context));
+    }
+
+
+
+    public static Date convertUnixStringToDate(long unixDate) {
+        return new Date(unixDate*1000L);
+    }
+
+    public static String convertToTimeString(Date date) {
+        DateFormat dateFormat = SimpleDateFormat.getTimeInstance(DateFormat.SHORT);
+        return dateFormat.format(date);
+    }
+
+    public static String convertToDateString (Date date) {
+        DateFormat dateFormat = SimpleDateFormat.getDateInstance();
+        return dateFormat.format(date);
     }
 }

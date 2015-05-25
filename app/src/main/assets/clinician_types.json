@@ -3,22 +3,38 @@
     {
       "id": "0",
       "name": "Cardiologist",
-      "imageResourceName": "ic_cardio_color"
+      "color": "#ff7043",
+      "imageResourceName": "ic_cardio_white"
     },
     {
       "id": "1",
-      "name": "Orthopedist",
-      "imageResourceName": "ic_cardio_color"
+      "name": "Endocrinologist",
+      "color": "#ffab00",
+      "imageResourceName": "ic_endocrin_white"
     },
     {
       "id": "2",
       "name": "Respirotologist",
-      "imageResourceName": "ic_cardio_color"
+      "color": "#689f38",
+      "imageResourceName": "ic_respirologist_white"
     },
     {
       "id": "3",
-      "name": "General Practitioner",
-      "imageResourceName": "ic_cardio_color"
+      "name": "Neurologist",
+      "color": "#00796b",
+      "imageResourceName": "ic_neurog_white"
+    },
+    {
+      "id": "4",
+      "name": "Family Physician",
+      "color": "#00bfa5",
+      "imageResourceName": "ic_familyphys_white"
+    },
+    {
+      "id": "5",
+      "name": "Physician",
+      "color": "#e57373",
+      "imageResourceName": "ic_physical_white"
     }
   ]
 }

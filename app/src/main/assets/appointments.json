@@ -2,8 +2,8 @@
   "appointments":[
     {
       "id": "0",
-      "date":"1 January, 2015",
-      "providerId": "2",
+      "date":1396931400,
+      "providerId": "0",
       "severity": {
         "note": "severity for my amazing appointment. I am sick but i will get better",
         "voiceRecordUrl": "http://www.com.com/whatever.mp3",
@@ -56,7 +56,7 @@
     },
     {
       "id": "1",
-      "date":"5 August, 2016",
+      "date":1451061000, //12/25/2015 4:30pm greenwich time = 11.30am torontonian time
       "providerId": "2",
       "severity": {
         "note": "severity for my amazing appointment. I am sick but i will get better",
@@ -110,7 +110,7 @@
     },
     {
       "id": "2",
-      "date":"3 June 2017",
+      "date":1417428000,
       "providerId": "1",
       "severity": {
         "note": "severity for my amazing appointment. I am sick but i will get better",
@@ -164,7 +164,7 @@
     },
     {
       "id": "3",
-      "date":"5 January 1222",
+      "date":1459744200,
       "providerId": "0",
       "severity": {
         "note": "severity for my amazing appointment. I am sick but i will get better",
@@ -218,7 +218,7 @@
     },
     {
       "id": "4",
-      "date":"5 January, 1222",
+      "date":1420194600, //in UNIX format http://www.onlineconversion.com/unix_time.htm
       "providerId": "3",
       "severity": {
         "note": "severity for my amazing appointment. I am sick but i will get better",

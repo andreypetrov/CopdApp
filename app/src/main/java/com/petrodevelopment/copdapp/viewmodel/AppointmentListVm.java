@@ -3,8 +3,11 @@ package com.petrodevelopment.copdapp.viewmodel;
 import android.content.Context;
 
 import com.petrodevelopment.copdapp.model.Appointment;
+import com.petrodevelopment.copdapp.util.U;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -12,18 +15,22 @@ import java.util.List;
  * Created by andrey on 13/05/2015.
  */
 public class AppointmentListVm {
+
+    public String backgroundColor;
     public String doctorImageUrl;
-    public String time;
     public String date;
+    public String time;
     public String doctorName;
     public String doctorTitle;
 
 
     public static AppointmentListVm createFromModel(Appointment appointment, Context context) {
+        Date date = U.convertUnixStringToDate(appointment.date);
         AppointmentListVm viewModel = new AppointmentListVm(
+                appointment.getProvider(context).getClinitianType(context).color,
                 appointment.getProvider(context).getClinitianType(context).imageResourceName,
-                appointment.date,
-                "4.30 pm",
+                U.convertToDateString(date),
+                U.convertToTimeString(date),
                 appointment.getProvider(context).title + " " + appointment.getProvider(context).firstName + " " + appointment.getProvider(context).lastName,
                 appointment.getProvider(context).getClinitianType(context).name
         );
@@ -44,7 +51,8 @@ public class AppointmentListVm {
         return viewModels;
     }
 
-    public AppointmentListVm(String doctorImageUrl, String date, String time, String doctorName, String doctorTitle) {
+    public AppointmentListVm(String backgroundColor, String doctorImageUrl, String date, String time, String doctorName, String doctorTitle) {
+        this.backgroundColor = backgroundColor;
         this.doctorImageUrl = doctorImageUrl;
         this.date = date;
         this.time = time;

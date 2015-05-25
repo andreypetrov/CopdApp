@@ -56,7 +56,6 @@ public class TabsView extends LinearLayout {
             getChildAt(i).setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    U.log(this, "item selected");
                     select(j);
                 }
             });

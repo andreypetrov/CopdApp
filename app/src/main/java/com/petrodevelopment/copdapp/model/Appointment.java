@@ -16,7 +16,7 @@ import java.util.List;
 public class Appointment extends Model {
 
     public String id;
-    public String date;
+    public long date;
     public String providerId;
 
     //Edited via the Record Appointment screen

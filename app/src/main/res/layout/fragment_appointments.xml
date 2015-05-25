@@ -9,6 +9,7 @@
 
 
     <com.petrodevelopment.copdapp.views.TabsView
+        android:id="@+id/tabs"
         android:layout_marginRight="@dimen/activity_horizontal_margin"
         android:layout_marginLeft="@dimen/activity_horizontal_margin"
         android:layout_marginBottom="@dimen/activity_vertical_margin"
@@ -26,7 +27,8 @@
             android:layout_alignParentBottom="true"
             android:background="@drawable/tab_bg"
             android:text="@string/all"
-            android:textColor="@drawable/tab_font_color"/>
+            android:textColor="@drawable/tab_font_color"
+            />
         <Button
             android:layout_width="0dp"
             android:layout_weight="1"
