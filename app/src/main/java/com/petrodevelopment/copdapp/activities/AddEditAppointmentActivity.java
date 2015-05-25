@@ -2,6 +2,7 @@ package com.petrodevelopment.copdapp.activities;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -11,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
@@ -32,6 +34,7 @@ import com.petrodevelopment.copdapp.model.Provider;
 import com.petrodevelopment.copdapp.model.ProviderList;
 import com.petrodevelopment.copdapp.model.Question;
 import com.petrodevelopment.copdapp.model.QuestionList;
+import com.petrodevelopment.copdapp.record.RecordActivity;
 
 import java.util.Calendar;
 import java.util.List;
@@ -52,6 +55,8 @@ public class AddEditAppointmentActivity extends ActionBarActivity implements OnC
 
     private List<Provider> providers;
     private Provider provider = new Provider();
+    private Button recordButton;
+    private Button saveAppointment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +70,57 @@ public class AddEditAppointmentActivity extends ActionBarActivity implements OnC
         initSpinner();
         selectDateOrTime();
         initToolbar();
+
+        setButtonListeners();
+    }
+
+
+    public void setButtonListeners()
+    {
+        recordButton = (Button) findViewById(R.id.recordAppointment);
+        setRecordButtonListener(recordButton);
+        saveAppointment = (Button) findViewById(R.id.saveAsUpcoming);
+        setSaveAppointmentButtonListener(saveAppointment);
+    }
+
+
+    //Button click listener for recording
+    public void setRecordButtonListener(Button b)
+    {
+        b.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                goToRecording(v);
+            }
+        });
+    }
+
+
+    //Button click listener for saving appointments button
+    public void setSaveAppointmentButtonListener(Button b)
+    {
+        b.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                saveAppointment(v);
+            }
+        });
+    }
+
+
+    //Go to recording activity when record results button is clicked
+    public void goToRecording(View v)
+    {
+        Intent intent = new Intent(this, RecordActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        startActivity(intent);
+    }
+
+
+    //Saving appointment
+    public void saveAppointment(View v)
+    {
+        Intent intent = new Intent(this, HomeActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        startActivity(intent);
     }
 
 
