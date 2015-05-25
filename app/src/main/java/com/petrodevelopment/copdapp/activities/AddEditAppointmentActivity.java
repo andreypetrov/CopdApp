@@ -4,6 +4,8 @@ import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -35,7 +37,7 @@ import java.util.Calendar;
 import java.util.List;
 
 
-public class AddEditAppointmentActivity extends FragmentActivity implements OnClickListener, OnMapReadyCallback {
+public class AddEditAppointmentActivity extends ActionBarActivity implements OnClickListener, OnMapReadyCallback {
 
     //Variables for date and time
     TextView selectTime,selectDate;
@@ -62,6 +64,14 @@ public class AddEditAppointmentActivity extends FragmentActivity implements OnCl
         initProviders();
         initSpinner();
         selectDateOrTime();
+        initToolbar();
+    }
+
+
+    private void initToolbar() {
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
 
