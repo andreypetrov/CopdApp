@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -19,6 +20,8 @@ import com.petrodevelopment.copdapp.R;
  */
 public class LoginActivity extends Activity  {
 
+    private TextView tv;
+    private Button signIn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,13 +29,33 @@ public class LoginActivity extends Activity  {
         setContentView(R.layout.activity_login);
 
         underline();
+        setRegitrationTextViewListener(tv);
+        setSignInButtonListener(signIn);
+    }
 
-        TextView tv =  (TextView) findViewById(R.id.newAccount);
+
+    //For New User tab at top
+    private void setRegitrationTextViewListener(TextView tv)
+    {
+        this.tv = tv;
+        tv =  (TextView) findViewById(R.id.newAccount);
         tv.setOnClickListener(new View.OnClickListener()
         {
             public void onClick(View v)
             {
                 goToNewUser(v);
+            }
+        });
+    }
+
+    //For login button
+    private void setSignInButtonListener(Button b)
+    {
+        this.signIn = signIn;
+        signIn =  (Button) findViewById(R.id.login);
+        signIn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                loggedIn(v);
             }
         });
     }
@@ -52,6 +75,15 @@ public class LoginActivity extends Activity  {
     private void goToNewUser(View v)
     {
         Intent intent = new Intent(this, HomeRegisterActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        startActivity(intent);
+    }
+
+
+    //For login button
+    private void loggedIn(View v)
+    {
+        Intent intent = new Intent(this, HomeActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
         startActivity(intent);
     }
