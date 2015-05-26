@@ -21,19 +21,19 @@
     {
       "id": "1",
       "title": "Mr.",
-      "firstName": "Just Call Me James",
-      "lastName": "Ye",
+      "firstName": "Tom",
+      "lastName": "White",
       "photoUrl": "https://lh4.googleusercontent.com/-4OBPaUrA_5g/AAAAAAAAAAI/AAAAAAAAABY/DQUmqzsH4qY/photo.jpg",
       "phoneNumber": "+1 647 777 777",
       "email": "james.ye@hospital.com",
       "clinicianTypeId": "1",
       "address": {
-        "street": "1 Market Square West Avenue",
-        "city": "Toronto",
+        "street": "224 James Street South",
+        "city": "Hamilton",
         "province": "ON",
-        "postalCode": "P2P 2P2",
-        "latitude": "43.6430879",
-        "longitude": "-79.4186298"
+        "postalCode": "L8P 3A9",
+        "latitude": "43.2577163",
+        "longitude": "-79.8478001"
       }
     },
     {

@@ -43,12 +43,13 @@
     <string name="save_appointment">Save as Upcoming</string>
     <string name="record_appointment">Record Results</string>
     <string name="questions_per_specialist">...Select provider to see questions you should ask your doctor</string>
+    <string name="appointment_add">Add Appointment</string>
 
     <string name="select_provider">Select Provider</string>
     <string name="Date">Date</string>
     <string name="Time">Time</string>
     <string name="appointment_reason">...enter reason for appointment</string>
-    <string name="title_activity_add_edit_appointment">AddEditAppointmentActivity</string>
+    <string name="title_activity_add_edit_appointment">Add Appointment</string>
 
     <!-- End Add for 14/05/2015-->
 
@@ -75,10 +76,12 @@
     <string name="signup">Signup</string>
     <string name="enter_email">Enter your email</string>
     <string name="choose_password">Choose password</string>
+    <string name="enter_password">Enter your password</string>
     <string name="confirm_password">Retype password</string>
     <string name="passcode_desc">Passcode allows you to stay logged in and protect your information from viewing by others</string>
     <string name="choose_passcode">Choose 4-digit passcode</string>
-
+    <string name="enter_passcode">Enter your passcode</string>
+    <string name="forgot_password">Forgot Password?</string>
 
     <!--Voice recording -->
     <string name="time">Time:</string>

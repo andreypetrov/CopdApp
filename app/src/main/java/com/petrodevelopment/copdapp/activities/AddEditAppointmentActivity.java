@@ -2,13 +2,17 @@ package com.petrodevelopment.copdapp.activities;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
@@ -30,12 +34,13 @@ import com.petrodevelopment.copdapp.model.Provider;
 import com.petrodevelopment.copdapp.model.ProviderList;
 import com.petrodevelopment.copdapp.model.Question;
 import com.petrodevelopment.copdapp.model.QuestionList;
+import com.petrodevelopment.copdapp.record.RecordActivity;
 
 import java.util.Calendar;
 import java.util.List;
 
 
-public class AddEditAppointmentActivity extends FragmentActivity implements OnClickListener, OnMapReadyCallback {
+public class AddEditAppointmentActivity extends ActionBarActivity implements OnClickListener, OnMapReadyCallback {
 
     //Variables for date and time
     TextView selectTime,selectDate;
@@ -50,6 +55,8 @@ public class AddEditAppointmentActivity extends FragmentActivity implements OnCl
 
     private List<Provider> providers;
     private Provider provider = new Provider();
+    private Button recordButton;
+    private Button saveAppointment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,27 +68,92 @@ public class AddEditAppointmentActivity extends FragmentActivity implements OnCl
         mapFragment.getMapAsync(this);
         initProviders();
         initSpinner();
+        selectDateOrTime();
+        initToolbar();
+
+        setButtonListeners();
+    }
 
 
-        //For picking time
+    public void setButtonListeners()
+    {
+        recordButton = (Button) findViewById(R.id.recordAppointment);
+        setRecordButtonListener(recordButton);
+        saveAppointment = (Button) findViewById(R.id.saveAsUpcoming);
+        setSaveAppointmentButtonListener(saveAppointment);
+    }
+
+
+    //Button click listener for recording
+    public void setRecordButtonListener(Button b)
+    {
+        b.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                goToRecording(v);
+            }
+        });
+    }
+
+
+    //Button click listener for saving appointments button
+    public void setSaveAppointmentButtonListener(Button b)
+    {
+        b.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                saveAppointment(v);
+            }
+        });
+    }
+
+
+    //Go to recording activity when record results button is clicked
+    public void goToRecording(View v)
+    {
+        Intent intent = new Intent(this, RecordActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        startActivity(intent);
+    }
+
+
+    //Saving appointment
+    public void saveAppointment(View v)
+    {
+        Intent intent = new Intent(this, HomeActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        startActivity(intent);
+    }
+
+
+    private void initToolbar() {
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+
+    /*
+     * Selecting date or time
+     */
+    private void selectDateOrTime()
+    {
         selectTime = (TextView) findViewById(R.id.select_time);
         selectTime.setOnClickListener(this);
 
-        //For picking Date
         selectDate = (TextView) findViewById(R.id.select_date);
         selectDate.setOnClickListener(this);
     }
 
+
     private void initSpinner() {
         //Populate Provider Spinner
-        final EditAddAppointmentProviderListAdapter providerAdapter = new EditAddAppointmentProviderListAdapter(providers, this, R.layout.cell_provider_list);
+        final EditAddAppointmentProviderListAdapter providerAdapter = new EditAddAppointmentProviderListAdapter(providers, this, R.layout.cell_provider_add_appointment_list);
         final Spinner providerSpinner = (Spinner) findViewById(R.id.select_provider);
         providerSpinner.setAdapter(providerAdapter);
 
         providerSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Provider provider  = providers.get(position);
+                Provider provider = providers.get(position);
                 address = provider.address.street;
                 name = "Dr. " + provider.firstName + " " + provider.lastName;
 
@@ -127,7 +199,6 @@ public class AddEditAppointmentActivity extends FragmentActivity implements OnCl
     //For the two pickers, time and date
     @Override
     public void onClick(View view) {
-        //If date selected
         if (view== selectDate) {
             //Current D/M/Y
             final Calendar c = Calendar.getInstance();
@@ -135,42 +206,54 @@ public class AddEditAppointmentActivity extends FragmentActivity implements OnCl
             month = c.get(Calendar.MONTH);
             year =  c.get(Calendar.YEAR);
 
-            //DatePicker
-            DatePickerDialog dpd = new DatePickerDialog(this,
-                    new DatePickerDialog.OnDateSetListener() {
-
-                        @Override
-                        public void onDateSet(DatePicker view, int year,
-                                              int monthOfYear, int dayOfMonth) {
-                            // Display Selected date in textbox
-                            selectDate.setText(dayOfMonth + "-"
-                                    + (monthOfYear + 1) + "-" + year);
-
-                        }
-                    }, year, month, day);
-            dpd.show();
+            datePicker();
         }
-        //If Time selected
         if (view == selectTime) {
-
-            // Process to get Current Time
             final Calendar c = Calendar.getInstance();
             hour = c.get(Calendar.HOUR_OF_DAY);
             minute = c.get(Calendar.MINUTE);
 
-            // Launch Time Picker Dialog
-            TimePickerDialog tpd = new TimePickerDialog(this,
-                    new TimePickerDialog.OnTimeSetListener() {
-
-                        @Override
-                        public void onTimeSet(TimePicker view, int hourOfDay,
-                                              int minute) {
-                            // Display Selected time in textbox
-                            selectTime.setText(hourOfDay + ":" + minute);
-                        }
-                    }, hour, minute, false);
-            tpd.show();
+            timePicker();
         }
+    }
+
+    /*
+     *  For date picker
+     */
+    public void datePicker()
+    {
+        DatePickerDialog dpd = new DatePickerDialog(this,
+                new DatePickerDialog.OnDateSetListener() {
+
+                    @Override
+                    public void onDateSet(DatePicker view, int year,
+                                          int monthOfYear, int dayOfMonth) {
+                        // Display Selected date in textbox
+                        selectDate.setText(dayOfMonth + "-"
+                                + (monthOfYear + 1) + "-" + year);
+
+                    }
+                }, year, month, day);
+        dpd.show();
+    }
+
+
+    /*
+     * For time picker
+     */
+    public void timePicker()
+    {
+        TimePickerDialog tpd = new TimePickerDialog(this,
+                new TimePickerDialog.OnTimeSetListener() {
+
+                    @Override
+                    public void onTimeSet(TimePicker view, int hourOfDay,
+                                          int minute) {
+                        // Display Selected time in textbox
+                        selectTime.setText(hourOfDay + ":" + minute);
+                    }
+                }, hour, minute, false);
+        tpd.show();
     }
 
 
@@ -191,8 +274,10 @@ public class AddEditAppointmentActivity extends FragmentActivity implements OnCl
         map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(lat, lng), 11));
     }
 
+
     //Added by Tom 22-05-2015, for Question once Provider has been selected
-    public void populateQuestions() {
+    public void populateQuestions()
+    {
 
         //First hide the textview questions_per_specialist"
         TextView tv = (TextView) findViewById(R.id.questions_per_specialist);

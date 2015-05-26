@@ -28,6 +28,8 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
+            android:clickable="true"
+            android:onClick="goToNewUser"
             android:layout_marginLeft="40dp"
             android:layout_marginStart="40dp" />
 
@@ -41,8 +43,6 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:clickable="true"
-            android:onClick="goToLoginScreen"
             android:layout_marginRight="40dp"
             android:layout_marginEnd="40dp" />
 
@@ -69,43 +69,37 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
-            android:hint="@string/choose_password"
+            android:hint="@string/enter_password"
             android:padding="15dp"
             android:inputType="textPassword"
             android:layout_marginTop="5dp"/>
-
-        <EditText android:id="@+id/confirmPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:hint="@string/confirm_password"
-            android:inputType="textPassword"
-            android:padding="15dp"
-            android:layout_marginTop="5dp"/>
-
-        <TextView android:id="@+id/passcode_description"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/white"
-            android:textSize="14dp"
-            android:text="@string/passcode_desc"
-            android:layout_marginTop="30dp"/>
 
         <EditText android:id="@+id/enterPasscode"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
-            android:hint="@string/choose_passcode"
+            android:hint="@string/enter_passcode"
+            android:inputType="textPassword"
             android:padding="15dp"
             android:layout_marginTop="5dp"/>
 
-        <Button android:id="@+id/signup"
+        <TextView android:id="@+id/forgotPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/signup"
+            android:text="@string/forgot_password"
+            android:padding="15dp"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:layout_marginTop="5dp" />
+
+        <Button android:id="@+id/login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/login"
             android:textColor="@color/white"
             android:background="@color/navy"
-            android:layout_marginTop="5dp" />
+            android:onClick="loggedIn"
+            android:layout_marginTop="65dp" />
 
     </LinearLayout>
 

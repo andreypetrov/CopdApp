@@ -1,13 +1,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.petrodevelopment.copdapp.activities.AddEditAppointmentActivity">
+    tools:context=".AddEditAppointmentActivity">
 
     <item
-        android:id="@+id/action_refresh"
-        android:orderInCategory="100"
-        app:showAsAction="always"
-        android:icon="@drawable/add_button"
-        android:title="@string/add_appointment" />
+        android:id="@+id/action_delete"
+        android:icon="@drawable/ic_launcher_trashcan_normal_holo"
+        android:title="@string/action_delete"
+        app:showAsAction="collapseActionView|always" />
 
 </menu>
