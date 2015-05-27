@@ -10,6 +10,8 @@ import java.util.List;
  * Created by andrey on 18/05/2015.
  */
 public class AppointmentRecord extends Model {
+
+    public String name;
     public String note;
     public String voiceRecordUrl;
     public List<String> imageUrls;

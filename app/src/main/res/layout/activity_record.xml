@@ -17,6 +17,15 @@
         android:minHeight="?android:attr/actionBarSize"
         app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"></android.support.v7.widget.Toolbar>
 
+
+    <fragment
+        android:id="@+id/voice_record_fragment"
+        android:name="com.petrodevelopment.copdapp.record.fragments.VoiceRecordFragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:layout="@layout/fragment_record_voice" />
+
+
     <!--<android.support.v7.widget.Toolbar-->
     <!--android:id="@+id/actions_record_toolbar"-->
     <!--android:layout_width="match_parent"-->
@@ -43,32 +52,32 @@
 
         <ImageButton
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:contentDescription="@string/action_note"
             android:onClick="onNoteClick"
             android:src="@drawable/ic_note_add_black_48dp" />
 
         <ImageButton
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:contentDescription="@string/action_voice"
             android:onClick="onVoiceClick"
             android:src="@drawable/ic_open_in_browser_black_48dp" />
 
         <ImageButton
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:contentDescription="@string/action_voice"
             android:onClick="onPhotoClick"
             android:src="@drawable/ic_perm_contact_cal_black_48dp" />
 
         <ImageButton
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:contentDescription="@string/action_voice"
             android:onClick="onReminderClick"
             android:src="@drawable/ic_schedule_black_48dp" />

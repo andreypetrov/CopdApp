@@ -49,7 +49,7 @@ public class HomeActivity extends ActionBarActivity
         initDrawer();
 //        initSpinner();
         mTitle = getTitle();
-//        startRecordAppointmentActivity();
+        startRecordAppointmentActivity("0");
 //        startAddAppointmentActivity();
 //        Retrofit.initialize();
 //        startRecordActivity();

@@ -1,15 +1,20 @@
 package com.petrodevelopment.copdapp.record;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.petrodevelopment.copdapp.MainApplication;
 import com.petrodevelopment.copdapp.R;
 import com.petrodevelopment.copdapp.adapters.AppointmentRecordCategoriesAdapter;
 import com.petrodevelopment.copdapp.model.Appointment;
 import com.petrodevelopment.copdapp.model.AppointmentList;
+import com.petrodevelopment.copdapp.model.AppointmentRecord;
 import com.petrodevelopment.copdapp.util.JsonLoader;
 import com.petrodevelopment.copdapp.util.U;
 import com.petrodevelopment.copdapp.viewmodel.AppointmentRecordCategoriesVm;
@@ -19,6 +24,7 @@ import com.petrodevelopment.copdapp.viewmodel.AppointmentRecordCategoriesVm;
  */
 public class RecordAppointmentActivity extends ActionBarActivity {
     Appointment appointment;
+    AppointmentRecordCategoriesAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,15 +54,33 @@ public class RecordAppointmentActivity extends ActionBarActivity {
         String json = JsonLoader.loadJsonFromAssets(this, "appointment_record_categories");
         AppointmentRecordCategoriesVm categoriesObject = JsonLoader.GSON.fromJson(json, AppointmentRecordCategoriesVm.class);
 
-        listView.setAdapter(new AppointmentRecordCategoriesAdapter(
+
+        adapter = new AppointmentRecordCategoriesAdapter(
                 categoriesObject.appointmentRecordCategories,
                 appointment,
                 this,
                 R.layout.cell_appointment_record_category,
-                R.layout.cell_appointment_record_subcategory));
+                R.layout.cell_appointment_record_subcategory);
+
+        listView.setAdapter(adapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if (adapter.getItemViewType(position) == 1 ) startRecordActivity(position); //if it is a subcategory then open it for editing
+            }
+        });
+
+
 
 
         U.log(this, json);
+    }
+
+    public void startRecordActivity(int position) {
+        Intent intent = new Intent(this, RecordActivity.class);
+        intent.putExtra(MainApplication.APPOINTMENT_ID_EXTRA, appointment.id);
+        intent.putExtra(MainApplication.RECORD_TYPE_ID_EXTRA, adapter.getItem(position).name);
+        startActivity(intent);
     }
 
 }

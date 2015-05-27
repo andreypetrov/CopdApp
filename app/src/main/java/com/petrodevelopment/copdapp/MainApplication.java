@@ -24,7 +24,7 @@ public class MainApplication extends Application {
     public static String PROVIDER_ID_EXTRA = "provider_id_extra";
     public static String CLINICIAN_TYPE_ID_EXTRA = "clinician_type_id_extra";
     public static String QUESTION_ID_EXTRA = "question_id_extra";
-
+    public static String RECORD_TYPE_ID_EXTRA = "record_type_id_extra";
 
     //All model data is stored here
     public ClinicianTypeList clinicianTypeList;

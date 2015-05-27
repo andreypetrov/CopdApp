@@ -420,4 +420,13 @@ public class U {
         DateFormat dateFormat = SimpleDateFormat.getDateInstance();
         return dateFormat.format(date);
     }
+
+    public static long roundToSeconds(long millis) {
+        return rountTo(millis, 1000);
+    }
+
+    public static long rountTo(long input, long precision) {
+        return (input / precision) * precision;
+    }
+
 }

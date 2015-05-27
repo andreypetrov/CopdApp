@@ -1,19 +1,17 @@
 package com.petrodevelopment.copdapp.record.fragments;
 
-import android.app.Activity;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.os.Bundle;
 import android.os.Environment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.petrodevelopment.copdapp.R;
-import com.petrodevelopment.copdapp.fragments.AppointmentsFragment;
 import com.petrodevelopment.copdapp.fragments.SectionFragment;
 import com.petrodevelopment.copdapp.util.TimeAndDate;
 import com.petrodevelopment.copdapp.util.U;
@@ -30,22 +28,34 @@ import java.util.TimerTask;
  */
 public class VoiceRecordFragment extends SectionFragment {
     private static String mFileName;
-    private Button mRecordButton;
-    private Button mPlayButton;
-    private Button mDeleteButton;
+    private ImageView mRecordButton;
+    private ImageView mPlayButton;
+    private ImageView mDeleteButton;
+    private SeekBar mSeekBar;
 
 
     private TextView mTimeTextView;
 
     private boolean isRecording = false;
-    private boolean isPlaying = false;
 
     private MediaRecorder mRecorder;
     private MediaPlayer mPlayer;
     private Timer mTimer;
     private TimerTask mTimerTask;
 
+    private long mTrackDuration = 0l;
 
+    private PlayerState mCurrentPlayerState = PlayerState.IDLE;
+
+    private enum PlayerState { //corresponds to the diagram at http://developer.android.com/reference/android/media/MediaPlayer.html
+        IDLE,
+        INITIALIZED,
+        PREPARED,
+        STARTED,
+        PAUSED,
+        STOPPED,
+        END
+    }
     /**
      * Returns a new instance of this fragment for the given section
      * number.
@@ -73,28 +83,71 @@ public class VoiceRecordFragment extends SectionFragment {
 
     private void initView(View rootView) {
         mTimeTextView = (TextView) rootView.findViewById(R.id.time);
-
+        initSeekBar(rootView);
         initRecordButton(rootView);
         initPlayButton(rootView);
         initDeleteButton(rootView);
     }
 
+    private void initSeekBar(View rootView) {
+        mSeekBar = (SeekBar) rootView.findViewById(R.id.seek_bar);
+        mSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                U.log(this, "From user: " + fromUser + ", progress: " + progress);
+                long progressInMillis = (mTrackDuration / 100) * progress;
+                U.log(this, "From user: " + fromUser + ", progressInMillis: " + progressInMillis);
+                long progressInMillisRounded = U.roundToSeconds(progressInMillis);
+                updateTimer(progressInMillisRounded);
+                updatePlayer((int) progressInMillisRounded);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+    }
+
+
+    private void updatePlayer(int progressInMillis) {
+        if (mCurrentPlayerState == PlayerState.STARTED) {
+            mPlayer.pause();
+            mPlayer.seekTo(progressInMillis);
+            mPlayer.start();
+        } else if (mCurrentPlayerState == PlayerState.INITIALIZED || mCurrentPlayerState == PlayerState.STOPPED){
+            try {
+                mPlayer.prepare();
+                mPlayer.seekTo(progressInMillis);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            mPlayer.seekTo(progressInMillis);
+        }
+    }
+
     private void initRecordButton(View rootView) {
-        mRecordButton = (Button) rootView.findViewById(R.id.record_btn);
+        mRecordButton = (ImageView) rootView.findViewById(R.id.record_btn);
         mRecordButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (isRecording) {
                     stopRecording();
                     stopTimer();
-                    mRecordButton.setText(R.string.record);
+                    //mRecordButton.setText(R.string.record);
                     mPlayButton.setEnabled(true);
                     mDeleteButton.setEnabled(true);
                     initMediaPlayerAndButtons();
                 } else {
                     startRecording();
                     startTimer();
-                    mRecordButton.setText(R.string.stop);
+                    //mRecordButton.setText(R.string.stop);
                     mPlayButton.setEnabled(false);
                     mDeleteButton.setEnabled(false);
 
@@ -105,60 +158,34 @@ public class VoiceRecordFragment extends SectionFragment {
         });
     }
 
-    /**
-     * After one second of delay start updating the seconds
-     */
-    private void startTimer() {
-        mTimeTextView.setText(R.string.time_zero);
-
-        mTimerTask = new TimerTask() {
-            long timeInMilliseconds = 0;
-            @Override
-            public void run() {
-                timeInMilliseconds+=1000;
-                //refresh your textview
-                getActivity().runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        mTimeTextView.setText(TimeAndDate.formatMinutesAndSeconds(timeInMilliseconds));
-                    }
-                });
-            }
-        };
-        mTimer.schedule(mTimerTask, 1000, 1000);
-    }
-
-    private void stopTimer() {
-        mTimerTask.cancel();
-    }
-
 
 
     private void initPlayButton(View rootView) {
-        mPlayButton = (Button) rootView.findViewById(R.id.play_btn);
+        mPlayButton = (ImageView) rootView.findViewById(R.id.play_btn);
         mPlayButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (isPlaying) {
+                U.log(this, "play button pressed");
+                U.log(this, "Player State: " + mCurrentPlayerState);
+
+                if (mCurrentPlayerState == PlayerState.STARTED) {
                     stopPlaying();
-                    mPlayButton.setText(R.string.play);
+                    //mPlayButton.setText(R.string.play);
                     mRecordButton.setEnabled(true);
                     mDeleteButton.setEnabled(true);
                 } else {
                     startPlaying();
-                    mPlayButton.setText(R.string.stop);
+                    //mPlayButton.setText(R.string.stop);
                     mRecordButton.setEnabled(false);
                     mDeleteButton.setEnabled(false);
                 }
-
-                isPlaying = !isPlaying;
             }
         });
     }
 
 
     private void initDeleteButton(View rootView) {
-        mDeleteButton = (Button) rootView.findViewById(R.id.delete_btn);
+        mDeleteButton = (ImageView) rootView.findViewById(R.id.delete_btn);
         mDeleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -174,6 +201,7 @@ public class VoiceRecordFragment extends SectionFragment {
         });
     }
 
+
     @Override
     public void onPause() {
         super.onPause();
@@ -185,6 +213,7 @@ public class VoiceRecordFragment extends SectionFragment {
 
         if (mPlayer != null) {
             mPlayer.release();
+            mCurrentPlayerState = PlayerState.END;
             mPlayer = null;
         }
     }
@@ -225,20 +254,24 @@ public class VoiceRecordFragment extends SectionFragment {
 
     private void initMediaPlayerAndButtons() {
         mPlayer = new MediaPlayer();
+        mCurrentPlayerState = PlayerState.IDLE;
 
         File file = new File(mFileName);
-        if (file.exists()) {
+        U.log(this, "player state: " + mCurrentPlayerState.name());
+
+        if (file.exists() && (mCurrentPlayerState == PlayerState.IDLE || mCurrentPlayerState == PlayerState.STOPPED)) {
             try {
                 mPlayer.setDataSource(mFileName);
+                mCurrentPlayerState = PlayerState.INITIALIZED;
                 mPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
                     @Override
                     public void onPrepared(MediaPlayer mp) {
-                        mTimeTextView.setText(TimeAndDate.formatMinutesAndSeconds(mPlayer.getDuration()));
+                        mTrackDuration = mPlayer.getDuration();
+                        mTimeTextView.setText(TimeAndDate.formatMinutesAndSeconds(mTrackDuration));
+                        mCurrentPlayerState = PlayerState.PREPARED;
                     }
                 });
                 preparePlayer();
-//                mPlayer.prepare();
-//                mPlayButton.setEnabled(true);
             } catch (IOException e) {
                 mPlayButton.setEnabled(false);
                 U.log(this, "prepare() failed");
@@ -256,8 +289,7 @@ public class VoiceRecordFragment extends SectionFragment {
         mPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
             @Override
             public void onCompletion(MediaPlayer mp) {
-                isPlaying = false;
-                mPlayButton.setText(R.string.play);
+                //mPlayButton.setText(R.string.play);
                 mRecordButton.setEnabled(true);
                 mDeleteButton.setEnabled(true);
                 stopPlaying();
@@ -267,12 +299,57 @@ public class VoiceRecordFragment extends SectionFragment {
 
     private void stopPlaying() {
         mPlayer.stop();
+        mCurrentPlayerState = PlayerState.STOPPED;
+
         preparePlayer();
     }
 
 
-    private void deleteFile() {
 
+
+
+    /// TIMER METHODS
+
+
+    /**
+     * After one second of delay start updating the seconds
+     */
+    private void startTimer() {
+        mTimeTextView.setText(R.string.time_zero);
+        initTimerTask(0);
     }
+
+
+    private void initTimerTask(final long initialTime) {
+        if (mTimerTask != null) mTimerTask.cancel();
+        mTimerTask = new TimerTask() {
+            long timeInMilliseconds = initialTime;
+            @Override
+            public void run() {
+                timeInMilliseconds+=1000;
+                //refresh your textview
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        mTimeTextView.setText(TimeAndDate.formatMinutesAndSeconds(timeInMilliseconds));
+                    }
+                });
+            }
+        };
+        mTimer.schedule(mTimerTask, 1000, 1000);
+    }
+
+
+    private void updateTimer(long timeInMilliseconds) {
+        mTimeTextView.setText(TimeAndDate.formatMinutesAndSeconds(timeInMilliseconds));
+        initTimerTask(timeInMilliseconds);
+    }
+
+
+    private void stopTimer() {
+        mTimerTask.cancel();
+    }
+
+
 
 }

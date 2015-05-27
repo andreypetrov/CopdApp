@@ -44,8 +44,8 @@ public class AppointmentRecordCategoriesAdapter extends GenericAdapter<Appointme
     @Override
     public void update(View view, int position) {
         if (getItemViewType(position) == 1) {
-            updateListener(view, position);
-            updateAppointmentData(view, position);
+//            updateListener(view, position);
+//            updateAppointmentData(view, position);
         }
         AppointmentRecordCategoryVm category = getItem(position);
 
@@ -62,7 +62,7 @@ public class AppointmentRecordCategoriesAdapter extends GenericAdapter<Appointme
      * @param position
      * @return
      */
-    private AppointmentRecord getFromIndex(int position) {
+    public AppointmentRecord getFromIndex(int position) {
         switch (position) {
             case 1:
                 return appointment.severity;
