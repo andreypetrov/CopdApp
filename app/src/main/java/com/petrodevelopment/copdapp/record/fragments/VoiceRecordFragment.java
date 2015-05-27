@@ -162,6 +162,16 @@ public class VoiceRecordFragment extends SectionFragment {
     }
 
 
+
+
+
+    private void updateUi(long currentMillis) {
+        
+
+    }
+
+
+
     private void initPlayButton(View rootView) {
         mPlayButton = (ImageView) rootView.findViewById(R.id.play_btn);
         mPlayButton.setEnabled(false);
