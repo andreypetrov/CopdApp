@@ -45,8 +45,10 @@ public class VoiceRecordFragment extends SectionFragment {
 
     private long mTrackDuration = 0l;
 
-    private PlayerState mCurrentPlayerState = PlayerState.IDLE;
 
+
+
+    private PlayerState mCurrentPlayerState = PlayerState.IDLE;
     private enum PlayerState { //corresponds to the diagram at http://developer.android.com/reference/android/media/MediaPlayer.html
         IDLE,
         INITIALIZED,
@@ -56,6 +58,7 @@ public class VoiceRecordFragment extends SectionFragment {
         STOPPED,
         END
     }
+
     /**
      * Returns a new instance of this fragment for the given section
      * number.
@@ -98,7 +101,7 @@ public class VoiceRecordFragment extends SectionFragment {
                 long progressInMillis = (mTrackDuration / 100) * progress;
                 U.log(this, "From user: " + fromUser + ", progressInMillis: " + progressInMillis);
                 long progressInMillisRounded = U.roundToSeconds(progressInMillis);
-                updateTimer(progressInMillisRounded);
+//                updateTimer(progressInMillisRounded);
                 updatePlayer((int) progressInMillisRounded);
             }
 
@@ -120,7 +123,7 @@ public class VoiceRecordFragment extends SectionFragment {
             mPlayer.pause();
             mPlayer.seekTo(progressInMillis);
             mPlayer.start();
-        } else if (mCurrentPlayerState == PlayerState.INITIALIZED || mCurrentPlayerState == PlayerState.STOPPED){
+        } else if (mCurrentPlayerState == PlayerState.INITIALIZED || mCurrentPlayerState == PlayerState.STOPPED) {
             try {
                 mPlayer.prepare();
                 mPlayer.seekTo(progressInMillis);
@@ -159,25 +162,18 @@ public class VoiceRecordFragment extends SectionFragment {
     }
 
 
-
     private void initPlayButton(View rootView) {
         mPlayButton = (ImageView) rootView.findViewById(R.id.play_btn);
+        mPlayButton.setEnabled(false);
         mPlayButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 U.log(this, "play button pressed");
                 U.log(this, "Player State: " + mCurrentPlayerState);
-
                 if (mCurrentPlayerState == PlayerState.STARTED) {
                     stopPlaying();
-                    //mPlayButton.setText(R.string.play);
-                    mRecordButton.setEnabled(true);
-                    mDeleteButton.setEnabled(true);
-                } else {
+                } else if (mCurrentPlayerState == PlayerState.PREPARED) {
                     startPlaying();
-                    //mPlayButton.setText(R.string.stop);
-                    mRecordButton.setEnabled(false);
-                    mDeleteButton.setEnabled(false);
                 }
             }
         });
@@ -213,6 +209,7 @@ public class VoiceRecordFragment extends SectionFragment {
 
         if (mPlayer != null) {
             mPlayer.release();
+            U.log(this, "set state to prepared: PlayerState.END");
             mCurrentPlayerState = PlayerState.END;
             mPlayer = null;
         }
@@ -242,7 +239,6 @@ public class VoiceRecordFragment extends SectionFragment {
     }
 
 
-
     private void preparePlayer() {
         try {
             mPlayer.prepare();
@@ -254,6 +250,7 @@ public class VoiceRecordFragment extends SectionFragment {
 
     private void initMediaPlayerAndButtons() {
         mPlayer = new MediaPlayer();
+        U.log(this, "set state to prepared: PlayerState.IDLE");
         mCurrentPlayerState = PlayerState.IDLE;
 
         File file = new File(mFileName);
@@ -262,13 +259,17 @@ public class VoiceRecordFragment extends SectionFragment {
         if (file.exists() && (mCurrentPlayerState == PlayerState.IDLE || mCurrentPlayerState == PlayerState.STOPPED)) {
             try {
                 mPlayer.setDataSource(mFileName);
+                U.log(this, "set state to prepared: PlayerState.INITIALIZED");
                 mCurrentPlayerState = PlayerState.INITIALIZED;
                 mPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
                     @Override
                     public void onPrepared(MediaPlayer mp) {
                         mTrackDuration = mPlayer.getDuration();
                         mTimeTextView.setText(TimeAndDate.formatMinutesAndSeconds(mTrackDuration));
-                        mCurrentPlayerState = PlayerState.PREPARED;
+                        if(mCurrentPlayerState != PlayerState.STARTED) {
+                            U.log(this, "set state to prepared: PlayerState.PREPARED");
+                            mCurrentPlayerState = PlayerState.PREPARED;
+                        }
                     }
                 });
                 preparePlayer();
@@ -283,15 +284,25 @@ public class VoiceRecordFragment extends SectionFragment {
     }
 
 
+//
+//    private void updateUI() {
+//
+//    }
+
     private void startPlaying() {
         initMediaPlayerAndButtons();
         mPlayer.start();
+        U.log(this, "set state to prepared: PlayerState.STARTED");
+        mCurrentPlayerState = PlayerState.STARTED;
+
+        //mPlayButton.setText(R.string.stop);
+        mRecordButton.setEnabled(false);
+        mDeleteButton.setEnabled(false);
+
         mPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
             @Override
             public void onCompletion(MediaPlayer mp) {
                 //mPlayButton.setText(R.string.play);
-                mRecordButton.setEnabled(true);
-                mDeleteButton.setEnabled(true);
                 stopPlaying();
             }
         });
@@ -299,13 +310,12 @@ public class VoiceRecordFragment extends SectionFragment {
 
     private void stopPlaying() {
         mPlayer.stop();
+        U.log(this, "set state to prepared: PlayerState.STOPPED");
         mCurrentPlayerState = PlayerState.STOPPED;
-
+        mRecordButton.setEnabled(true);
+        mDeleteButton.setEnabled(true);
         preparePlayer();
     }
-
-
-
 
 
     /// TIMER METHODS
@@ -324,9 +334,10 @@ public class VoiceRecordFragment extends SectionFragment {
         if (mTimerTask != null) mTimerTask.cancel();
         mTimerTask = new TimerTask() {
             long timeInMilliseconds = initialTime;
+
             @Override
             public void run() {
-                timeInMilliseconds+=1000;
+                timeInMilliseconds += 1000;
                 //refresh your textview
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
@@ -340,16 +351,15 @@ public class VoiceRecordFragment extends SectionFragment {
     }
 
 
-    private void updateTimer(long timeInMilliseconds) {
-        mTimeTextView.setText(TimeAndDate.formatMinutesAndSeconds(timeInMilliseconds));
-        initTimerTask(timeInMilliseconds);
-    }
+//    private void updateTimer(long timeInMilliseconds) {
+//        mTimeTextView.setText(TimeAndDate.formatMinutesAndSeconds(timeInMilliseconds));
+//        initTimerTask(timeInMilliseconds);
+//    }
 
 
     private void stopTimer() {
         mTimerTask.cancel();
     }
-
 
 
 }
