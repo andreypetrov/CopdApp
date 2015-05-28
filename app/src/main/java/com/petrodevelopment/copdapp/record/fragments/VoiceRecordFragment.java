@@ -106,7 +106,7 @@ public class VoiceRecordFragment extends SectionFragment {
         try {
             mRecorder.prepare();
             mRecorder.start();
-            mRecordButton.setImageResource(R.drawable.ic_assessment);
+            mRecordButton.setImageResource(R.drawable.ic_stop_active);
             mRecordButton.setContentDescription(getString(R.string.stop));
             startRecordTimerTask();
         } catch (IOException e) {
@@ -119,7 +119,7 @@ public class VoiceRecordFragment extends SectionFragment {
         mRecorder.stop();
         mRecorder.release();
         mRecorder = null;
-        mRecordButton.setImageResource(R.drawable.ic_alarm_add_grey600_48dp);
+        mRecordButton.setImageResource(R.drawable.ic_record);
         mRecordButton.setContentDescription(getString(R.string.record));
         if (mOnStopListener != null) mOnStopListener.onStop(mFileName);
         stopRecordTimer();

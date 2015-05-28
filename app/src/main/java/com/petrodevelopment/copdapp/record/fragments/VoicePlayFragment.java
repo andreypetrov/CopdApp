@@ -283,7 +283,7 @@ public class VoicePlayFragment extends SectionFragment {
         U.log(this, "set state to prepared: PlayerState.STARTED");
         mCurrentPlayerState = PlayerState.STARTED;
         startPlayerTimerTask(mCurrentPosition);
-        mPlayButton.setImageResource(R.drawable.ic_severity_blue); //TODO replace with pause
+        mPlayButton.setImageResource(R.drawable.btn_pause);
         mPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
             @Override
             public void onCompletion(MediaPlayer mp) {
@@ -300,10 +300,11 @@ public class VoicePlayFragment extends SectionFragment {
     }
 
     private void updatePauseUi() {
-        mPlayButton.setImageResource(R.drawable.ic_medicationa_blue); //TODO replace with play
+        mPlayButton.setImageResource(R.drawable.btn_play);
         U.log(this, "set state to prepared: PlayerState.PAUSED");
         mCurrentPlayerState = PlayerState.PAUSED;
         mDeleteButton.setEnabled(true);
+
         stopPlayerTimer();
     }
 

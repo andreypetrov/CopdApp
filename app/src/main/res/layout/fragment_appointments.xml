@@ -59,6 +59,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:background="@drawable/add_button"
-        android:text="@string/add_provider"
+        android:text="@string/add_appointment"
         android:textColor="@color/white" />
 </LinearLayout>
