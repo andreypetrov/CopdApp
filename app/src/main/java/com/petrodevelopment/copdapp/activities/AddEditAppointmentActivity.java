@@ -3,7 +3,6 @@ package com.petrodevelopment.copdapp.activities;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
-import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
@@ -28,8 +27,10 @@ import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.petrodevelopment.copdapp.adapters.NothingSelectedSpinnerAdapter;
 import com.petrodevelopment.copdapp.R;
 import com.petrodevelopment.copdapp.adapters.EditAddAppointmentProviderListAdapter;
+import com.petrodevelopment.copdapp.model.ClinicianType;
 import com.petrodevelopment.copdapp.model.Provider;
 import com.petrodevelopment.copdapp.model.ProviderList;
 import com.petrodevelopment.copdapp.model.Question;
@@ -54,6 +55,8 @@ public class AddEditAppointmentActivity extends ActionBarActivity implements OnC
     private GoogleMap map;
 
     private List<Provider> providers;
+    private List<ClinicianType> ct;
+    private ClinicianType clinicianType = new ClinicianType();
     private Provider provider = new Provider();
     private Button recordButton;
     private Button saveAppointment;
@@ -148,12 +151,19 @@ public class AddEditAppointmentActivity extends ActionBarActivity implements OnC
         //Populate Provider Spinner
         final EditAddAppointmentProviderListAdapter providerAdapter = new EditAddAppointmentProviderListAdapter(providers, this, R.layout.cell_provider_add_appointment_list);
         final Spinner providerSpinner = (Spinner) findViewById(R.id.select_provider);
-        providerSpinner.setAdapter(providerAdapter);
+        //providerSpinner.setAdapter(providerAdapter);
+        providerSpinner.setAdapter(
+                new NothingSelectedSpinnerAdapter(
+                        providerAdapter,
+                        R.layout.cell_spinner_nothing_selected,
+                        this));
+
 
         providerSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Provider provider = providers.get(position);
+                provider = providers.get(position);
+                clinicianType =  ct.get(position);
                 address = provider.address.street;
                 name = "Dr. " + provider.firstName + " " + provider.lastName;
 
@@ -167,7 +177,6 @@ public class AddEditAppointmentActivity extends ActionBarActivity implements OnC
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                providerSpinner.setPrompt("Select Provider");
                 return;
             }
         });

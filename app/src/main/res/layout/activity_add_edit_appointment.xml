@@ -124,7 +124,7 @@
 
             <EditText android:id="@+id/appointment_reason"
                 android:layout_width="match_parent"
-                android:layout_height="90dp"
+                android:layout_height="75dp"
                 android:background="@drawable/cell_bg"
                 android:gravity="top|left"
                 android:padding="10dp"

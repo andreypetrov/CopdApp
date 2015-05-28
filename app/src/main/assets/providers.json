@@ -12,7 +12,7 @@
         "city": "Toronto",
         "province": "ON",
         "postalCode": "P2P 2P2",
-        "latitude": "43.6430879",
+        "latitude": "42.6430879",
         "longitude": "-79.4186298"
       }
     },
@@ -33,7 +33,7 @@
       }
     },
     {
-      "firstName": "James",
+      "firstName": "Jane",
       "lastName": "Ye",
       "photoUrl": "https://lh4.googleusercontent.com/-4OBPaUrA_5g/AAAAAAAAAAI/AAAAAAAAABY/DQUmqzsH4qY/photo.jpg",
       "phoneNumber": "+1 647 777 777",
@@ -45,12 +45,12 @@
         "province": "ON",
         "postalCode": "P2P 2P2",
         "latitude": "43.6430879",
-        "longitude": "-79.4186298"
+        "longitude": "-80.4186298"
       }
     },
     {
-      "firstName": "James",
-      "lastName": "Ye",
+      "firstName": "Mickey",
+      "lastName": "Mouse",
       "photoUrl": "https://lh4.googleusercontent.com/-4OBPaUrA_5g/AAAAAAAAAAI/AAAAAAAAABY/DQUmqzsH4qY/photo.jpg",
       "phoneNumber": "+1 647 777 777",
       "email": "james.ye@hospital.com",
@@ -61,7 +61,7 @@
         "province": "ON",
         "postalCode": "P2P 2P2",
         "latitude": "43.6430879",
-        "longitude": "-79.4186298"
+        "longitude": "-79.888000"
       }
     }
   ]

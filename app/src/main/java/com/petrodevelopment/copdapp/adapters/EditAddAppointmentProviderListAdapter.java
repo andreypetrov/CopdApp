@@ -6,6 +6,7 @@ import android.widget.TextView;
 
 import com.petrodevelopment.copdapp.R;
 import com.petrodevelopment.copdapp.model.Provider;
+import com.petrodevelopment.copdapp.model.ProviderList;
 
 import java.util.List;
 
@@ -21,6 +22,7 @@ public class EditAddAppointmentProviderListAdapter extends GenericAdapter<Provid
     @Override
     public void update(View view, int position) {
         Provider provider = getItem(position);
+
         TextView textView = (TextView) view.findViewById(R.id.doctor_name);
         textView.setText(provider.firstName + " " + provider.lastName);
     }
