@@ -424,9 +424,21 @@ public class U {
     public static long roundToSeconds(long millis) {
         return rountTo(millis, 1000);
     }
-
+    public static int roundToSeconds(int millis) {
+        return rountTo(millis, 1000);
+    }
     public static long rountTo(long input, long precision) {
         return (input / precision) * precision;
     }
+    public static int rountTo(int input, int precision) {
+        return (input / precision) * precision;
+    }
 
+    public static long calculatePercentage(long initialTimeInMillis, long totalTimeInMillis) {
+        return (100*initialTimeInMillis)/totalTimeInMillis;
+    }
+
+    public static int calculatePercentage(int initialTimeInMillis, int totalTimeInMillis) {
+        return (100*initialTimeInMillis)/totalTimeInMillis;
+    }
 }

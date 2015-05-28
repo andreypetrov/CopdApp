@@ -46,6 +46,7 @@ public class VoicePlayFragment extends SectionFragment {
     private PlayerState mCurrentPlayerState = PlayerState.IDLE;
 
     private OnDeleteListener mOnDeleteListener;
+    private boolean mCanSeekBarBeUpdatedByTimer = true;
 
     public interface OnDeleteListener {
         void onDelete(String fileName);
@@ -145,25 +146,35 @@ public class VoicePlayFragment extends SectionFragment {
 
     private void initSeekBar(View rootView) {
         mSeekBar = (SeekBar) rootView.findViewById(R.id.seek_bar);
+        mSeekBar.setTag(mCanSeekBarBeUpdatedByTimer);
         mSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                U.log(this, "From user: " + fromUser + ", progress: " + progress);
-                long progressInMillis = (mTrackDuration / 100) * progress;
-                U.log(this, "From user: " + fromUser + ", progressInMillis: " + progressInMillis);
-                long progressInMillisRounded = U.roundToSeconds(progressInMillis);
-//                updateTimer(progressInMillisRounded);
-                updatePlayer((int) progressInMillisRounded);
             }
 
             @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
+            public void onStartTrackingTouch(SeekBar seekBar) { //disable updating of the seek bar by other sources, specifically the timer
+                mCanSeekBarBeUpdatedByTimer = false;
+                mSeekBar.setTag(mCanSeekBarBeUpdatedByTimer);
             }
 
             @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
+            public void onStopTrackingTouch(SeekBar seekBar) { // only adjust media once we have stopped dragging on the bar
+                mCanSeekBarBeUpdatedByTimer = true;
+                mSeekBar.setTag(mCanSeekBarBeUpdatedByTimer);
 
+                int progressInMillis = ((int) mTrackDuration / 100) * seekBar.getProgress();
+                mCurrentPosition = U.roundToSeconds(progressInMillis);
+                updateTimer(mCurrentPosition);
+
+
+                if (mCurrentPlayerState == PlayerState.STARTED) {  //if the record was playing then continue immediately playing
+                    mPlayer.pause();
+                    startPlaying();
+                }
+                //else adjust the head on the bar so that there won't be a flickering jump backwards
+                //caused by the fact we are updating the bar only on round seconds
+                else mSeekBar.setProgress(U.calculatePercentage(mCurrentPosition, (int) mTrackDuration));
             }
         });
     }
@@ -184,7 +195,7 @@ public class VoicePlayFragment extends SectionFragment {
                 mPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
                     @Override
                     public void onPrepared(MediaPlayer mp) {
-                        mTrackDuration = mPlayer.getDuration();
+                        mTrackDuration = (mPlayer.getDuration()/1000) * 1000; // get rounded down to a second duration
                         mTotalTimeView.setText(TimeAndDate.formatMinutesAndSeconds(mTrackDuration));
                         if (mCurrentPlayerState != PlayerState.STARTED) {
                             U.log(this, "set state to prepared: PlayerState.PREPARED");
@@ -220,6 +231,10 @@ public class VoicePlayFragment extends SectionFragment {
 
 
     private void updatePlayer(int progressInMillis) {
+
+
+        updatePauseUi();
+
         if (mCurrentPlayerState == PlayerState.STARTED) {
             mPlayer.pause();
             mPlayer.seekTo(progressInMillis);
@@ -267,7 +282,7 @@ public class VoicePlayFragment extends SectionFragment {
         mPlayer.start();
         U.log(this, "set state to prepared: PlayerState.STARTED");
         mCurrentPlayerState = PlayerState.STARTED;
-        startPlayerTimer();
+        startPlayerTimerTask(mCurrentPosition);
         mPlayButton.setImageResource(R.drawable.ic_severity_blue); //TODO replace with pause
         mPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
             @Override
@@ -308,23 +323,23 @@ public class VoicePlayFragment extends SectionFragment {
     /**
      * After one second of delay start updating the seconds
      */
-    private void startPlayerTimer() {
-        initPlayerTimerTask(mCurrentPosition);
-    }
+//    private void startPlayerTimer() {
+//        initPlayerTimerTask(mCurrentPosition);
+//    }
 
-    private void initPlayerTimerTask(final long initialTime) {
+    private void startPlayerTimerTask(final int initialTime) {
 
         if (mPlayerTimerTask != null) mPlayerTimerTask.cancel();
 
-        mPlayerTimerTask = new TextViewTimerTask(initialTime, getActivity(), mCurrentTimeView);
+        mPlayerTimerTask = new TextViewTimerTask(initialTime, (int) mTrackDuration, getActivity(), mCurrentTimeView, mSeekBar);
         if (mTimer == null) mTimer = new Timer();
         mTimer.schedule(mPlayerTimerTask, 1000, 1000);
     }
 
-//    private void updateTimer(long timeInMilliseconds) {
-//        mCurrentTimeView.setText(TimeAndDate.formatMinutesAndSeconds(timeInMilliseconds));
-//        initRecordTimerTask(timeInMilliseconds);
-//    }
+
+    private void updateTimer(int timeInMillis) {
+        mCurrentTimeView.setText(TimeAndDate.formatMinutesAndSeconds( U.roundToSeconds(timeInMillis)));
+    }
 
     private void stopPlayerTimer() {
         if (mPlayerTimerTask != null) mPlayerTimerTask.cancel();

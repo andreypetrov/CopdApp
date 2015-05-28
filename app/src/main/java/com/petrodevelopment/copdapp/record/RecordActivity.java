@@ -41,11 +41,8 @@ public class RecordActivity extends BaseActivity {
         setContentView(R.layout.activity_record);
         initToolbar();
         initVoice();
-        initVoiceRecordFragment();
-        initVoicePlayFragment();
         selectAction(0);
     }
-
 
     private void initVoice(){
         String fileName = Environment.getExternalStorageDirectory().getAbsolutePath() + "/audiorecordtest.3gp";
@@ -56,8 +53,6 @@ public class RecordActivity extends BaseActivity {
             initVoiceRecordFragment();
         }
     }
-
-
 
     private void initToolbar() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);

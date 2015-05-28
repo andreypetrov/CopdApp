@@ -106,10 +106,9 @@ public class VoiceRecordFragment extends SectionFragment {
         try {
             mRecorder.prepare();
             mRecorder.start();
-
             mRecordButton.setImageResource(R.drawable.ic_assessment);
             mRecordButton.setContentDescription(getString(R.string.stop));
-            startRecordTimer();
+            startRecordTimerTask();
         } catch (IOException e) {
             U.log(this, "prepare() failed");
         }
@@ -129,17 +128,9 @@ public class VoiceRecordFragment extends SectionFragment {
 
     /// TIMER METHODS
 
-    /**
-     * After one second of delay start updating the seconds
-     */
-    private void startRecordTimer() {
-        mTimeTextView.setText(R.string.time_zero);
-        initRecordTimerTask(0);
-    }
-
-    private void initRecordTimerTask(final long initialTime) {
+    private void startRecordTimerTask() {
         if (mRecordTimerTask != null) mRecordTimerTask.cancel();
-        mRecordTimerTask = new TextViewTimerTask(initialTime, getActivity(), mTimeTextView);
+        mRecordTimerTask = new TextViewTimerTask(0, 0, getActivity(), mTimeTextView, null);
         mTimer.schedule(mRecordTimerTask, 1000, 1000);
     }
 
