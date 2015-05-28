@@ -10,6 +10,7 @@ import com.petrodevelopment.copdapp.model.Provider;
 import com.petrodevelopment.copdapp.model.ProviderList;
 import com.petrodevelopment.copdapp.model.Question;
 import com.petrodevelopment.copdapp.model.QuestionList;
+import com.petrodevelopment.copdapp.util.Preferences;
 
 import java.util.HashMap;
 import java.util.List;
@@ -29,16 +30,14 @@ public class MainApplication extends Application {
     //All model data is stored here
     public ClinicianTypeList clinicianTypeList;
     private Map<String, ClinicianType> clinicianTypeMap;
-
     public ProviderList providerList;
     private Map<String, Provider> providerMap;
-
     public AppointmentList appointmentList;
     private Map<String, Appointment> appointmentMap;
-
     public QuestionList questionList;
     private Map<String, Question> questionMap;
 
+    private Preferences preferences;
 
     @Override
     public void onCreate() {
@@ -104,4 +103,9 @@ public class MainApplication extends Application {
         return questionMap.get(id);
     }
 
+
+    public Preferences getPreferences() {
+        if (preferences == null) preferences = new Preferences(this);
+        return preferences;
+    }
 }
