@@ -1,7 +1,12 @@
 package com.petrodevelopment.copdapp.record;
 
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -16,6 +21,7 @@ import com.petrodevelopment.copdapp.record.fragments.VoicePlayFragment;
 import com.petrodevelopment.copdapp.record.fragments.VoiceRecordFragment;
 import com.petrodevelopment.copdapp.util.U;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 
 /**
@@ -28,11 +34,14 @@ public class RecordActivity extends BaseActivity {
 //    boolean recording = false;
 //    boolean recorded = false;
 //    boolean playing = false;
+    static final int REQUEST_IMAGE_CAPTURE = 1;
+
     private  String appointmentId;
     private AppointmentRecord appointmentRecord;
 
-    VoiceRecordFragment voiceRecordFragment;
-    VoicePlayFragment voicePlayFragment;
+    private VoiceRecordFragment voiceRecordFragment;
+    private VoicePlayFragment voicePlayFragment;
+    private GalleryPreviewFragment galleryPreviewFragment;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -92,9 +101,9 @@ public class RecordActivity extends BaseActivity {
 
 
     private void initGallery(){
-        GalleryPreviewFragment fragment = (GalleryPreviewFragment) getFragmentManager().findFragmentById(R.id.gallery_preview_fragment);
-        fragment.updateImages(appointmentRecord);
-        fragment.setOnGalleryClickListener(new GalleryPreviewFragment.OnGalleryClickListener() {
+        galleryPreviewFragment = (GalleryPreviewFragment) getFragmentManager().findFragmentById(R.id.gallery_preview_fragment);
+        galleryPreviewFragment.initImages(appointmentRecord);
+        galleryPreviewFragment.setOnGalleryClickListener(new GalleryPreviewFragment.OnGalleryClickListener() {
             @Override
             public void onImageClick(int position) {
                 U.log(this, "image clicked at position: " + position);
@@ -102,11 +111,33 @@ public class RecordActivity extends BaseActivity {
         });
     }
 
-
     public void onCameraClick(View view) {
+        PackageManager packageManager = getPackageManager();
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if(packageManager.hasSystemFeature(PackageManager.FEATURE_CAMERA)){
+            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+
+        }
         U.log(this, "on camera click open new taking picture activity with special intent");
     }
 
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+            Bundle extras = data.getExtras();
+            Bitmap imageBitmap = (Bitmap) extras.get("data");
+
+            ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+            imageBitmap.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+            String path = MediaStore.Images.Media.insertImage(getContentResolver(), imageBitmap, "Title", null);
+            String url = Uri.parse(path).toString();
+            appointmentRecord.imageUrls.add(url);
+            galleryPreviewFragment.update();
+
+            //mImageView.setImageBitmap(imageBitmap);
+        }
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -144,26 +175,6 @@ public class RecordActivity extends BaseActivity {
     public void onBackPressed() {
         saveAndClose();
     }
-
-
-
-    public void onNoteClick(View v) {
-
-    }
-
-    public void onVoiceClick(View v) {
-
-    }
-
-    public void onPhotoClick(View v) {
-
-    }
-
-    public void onReminderClick(View v) {
-
-    }
-
-
 
 
 }

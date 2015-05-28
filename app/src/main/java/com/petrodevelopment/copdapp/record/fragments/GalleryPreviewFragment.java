@@ -12,7 +12,6 @@ import android.widget.Toast;
 import com.petrodevelopment.copdapp.R;
 import com.petrodevelopment.copdapp.adapters.ImageAdapter;
 import com.petrodevelopment.copdapp.fragments.BaseFragment;
-import com.petrodevelopment.copdapp.fragments.SectionFragment;
 import com.petrodevelopment.copdapp.model.AppointmentRecord;
 
 /**
@@ -21,7 +20,8 @@ import com.petrodevelopment.copdapp.model.AppointmentRecord;
 public class GalleryPreviewFragment extends BaseFragment {
 
     private OnGalleryClickListener onGalleryClickListener;
-
+    private GridView gridView;
+    private ImageAdapter imageAdapter;
 
     public interface OnGalleryClickListener {
         void onImageClick(int position);
@@ -39,8 +39,8 @@ public class GalleryPreviewFragment extends BaseFragment {
      * For every appointment record update the images gallery
      * @param record
      */
-    public void updateImages(AppointmentRecord record) {
-        updateImages(getView(), record, getActivity());
+    public void initImages(AppointmentRecord record) {
+        initImages(getView(), record, getActivity());
     }
 
     /**
@@ -49,10 +49,10 @@ public class GalleryPreviewFragment extends BaseFragment {
      * @param record
      * @param context
      */
-    private void updateImages(View view, final AppointmentRecord record, final Context context) {
+    private void initImages(View view, final AppointmentRecord record, final Context context) {
         if (record != null && record.imageUrls != null) {
-            GridView gridView = (GridView) view.findViewById(R.id.gallery);
-            ImageAdapter imageAdapter = new ImageAdapter(record.imageUrls, context, R.layout.cell_grid_gallery);
+            gridView = (GridView) view.findViewById(R.id.gallery);
+            imageAdapter = new ImageAdapter(record.imageUrls, context, R.layout.cell_grid_gallery);
             gridView.setAdapter(imageAdapter);
             gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 public void onItemClick(AdapterView<?> parent, View v,
@@ -65,6 +65,11 @@ public class GalleryPreviewFragment extends BaseFragment {
         }
     }
 
+
+
+    public void update() {
+        imageAdapter.notifyDataSetChanged();
+    }
 
 
 
