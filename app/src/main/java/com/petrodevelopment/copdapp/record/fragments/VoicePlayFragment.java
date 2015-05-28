@@ -23,7 +23,7 @@ import java.util.TimerTask;
 
 /**
  * Fragment for voice recording and play
- * TODO add total time and current time and a bar to navigate to any time within the file?
+ * TODO fix bug with sometimes showing in the end current time more than total (00.12/00:11)
  * Created by user on 15-05-14.
  */
 public class VoicePlayFragment extends SectionFragment {
