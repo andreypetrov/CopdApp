@@ -52,7 +52,7 @@ public class HomeActivity extends BaseActivity
 //        startRecordAppointmentActivity("0");
 //        startAddAppointmentActivity();
 //        Retrofit.initialize();
-        startRecordActivity(3);
+//        startRecordActivity(3);
     }
 
 //    private void initSpinner() {
