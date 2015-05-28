@@ -61,27 +61,27 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
+            android:drawableLeft="@drawable/ic_email"
             android:hint="@string/enter_email"
-            android:padding="15dp"
-            android:layout_marginTop="5dp"/>
+            android:layout_marginTop="8dp"/>
 
         <EditText android:id="@+id/enterPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
+            android:drawableLeft="@drawable/ic_password"
             android:hint="@string/choose_password"
-            android:padding="15dp"
             android:inputType="textPassword"
-            android:layout_marginTop="5dp"/>
+            android:layout_marginTop="8dp"/>
 
         <EditText android:id="@+id/confirmPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
+            android:drawableLeft="@drawable/ic_password"
             android:hint="@string/confirm_password"
             android:inputType="textPassword"
-            android:padding="15dp"
-            android:layout_marginTop="5dp"/>
+            android:layout_marginTop="8dp"/>
 
         <TextView android:id="@+id/passcode_description"
             android:layout_width="match_parent"
@@ -95,9 +95,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
+            android:drawableLeft="@drawable/ic_passcode"
             android:hint="@string/choose_passcode"
-            android:padding="15dp"
-            android:layout_marginTop="5dp"/>
+            android:layout_marginTop="10dp"/>
 
         <Button android:id="@+id/signup"
             android:layout_width="match_parent"
@@ -105,7 +105,7 @@
             android:text="@string/signup"
             android:textColor="@color/white"
             android:background="@color/navy"
-            android:layout_marginTop="5dp" />
+            android:layout_marginTop="8dp" />
 
     </LinearLayout>
 

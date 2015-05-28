@@ -61,27 +61,27 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
+            android:drawableLeft="@drawable/ic_email"
             android:hint="@string/enter_email"
-            android:padding="15dp"
-            android:layout_marginTop="5dp"/>
+            android:layout_marginTop="8dp"/>
 
         <EditText android:id="@+id/enterPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
+            android:drawableLeft="@drawable/ic_password"
             android:hint="@string/enter_password"
-            android:padding="15dp"
             android:inputType="textPassword"
-            android:layout_marginTop="5dp"/>
+            android:layout_marginTop="8dp"/>
 
         <EditText android:id="@+id/enterPasscode"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
+            android:drawableLeft="@drawable/ic_passcode"
             android:hint="@string/enter_passcode"
             android:inputType="textPassword"
-            android:padding="15dp"
-            android:layout_marginTop="5dp"/>
+            android:layout_marginTop="8dp"/>
 
         <TextView android:id="@+id/forgotPassword"
             android:layout_width="match_parent"
@@ -99,7 +99,7 @@
             android:textColor="@color/white"
             android:background="@color/navy"
             android:onClick="loggedIn"
-            android:layout_marginTop="65dp" />
+            android:layout_marginTop="70dp" />
 
     </LinearLayout>
 
