@@ -18,6 +18,8 @@ import com.petrodevelopment.copdapp.record.fragments.VoiceRecordFragment;
 import com.petrodevelopment.copdapp.util.U;
 
 /**
+ *
+ * Record a note, an audio and images
  * Created by andrey on 10/05/2015.
  */
 public class RecordActivity extends ActionBarActivity {

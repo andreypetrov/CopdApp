@@ -23,25 +23,14 @@
         android:name="com.petrodevelopment.copdapp.record.fragments.VoiceRecordFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:layout="@layout/fragment_record_voice" />
+        tools:layout="@layout/fragment_voice_record" />
 
-
-    <!--<android.support.v7.widget.Toolbar-->
-    <!--android:id="@+id/actions_record_toolbar"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:background="@color/teal"-->
-    <!--app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"-->
-    <!--android:minHeight="?android:attr/actionBarSize">-->
-    <!--<ImageButton-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:src="@drawable/ic_get_app_black_36dp"-->
-    <!--android:layout_height="wrap_content" android:contentDescription="test1"/>-->
-    <!--<ImageButton-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:src="@drawable/ic_get_app_black_36dp"-->
-    <!--android:layout_height="wrap_content" android:contentDescription="test2" />-->
-    <!--</android.support.v7.widget.Toolbar>-->
+    <fragment
+        android:id="@+id/voice_play_fragment"
+        android:name="com.petrodevelopment.copdapp.record.fragments.VoicePlayFragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:layout="@layout/fragment_voice_play" />
 
 
     <LinearLayout

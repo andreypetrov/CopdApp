@@ -97,6 +97,7 @@
     <string name="dummy_date">7 January, 2015</string>
     <string name="dummy_time_appointment">4.30 pm</string>
     <string name="begin_appointment">Begin Appointment</string>
+    <string name="time_slash">/</string>
 
 
 </resources>

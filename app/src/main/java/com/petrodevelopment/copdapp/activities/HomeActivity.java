@@ -49,10 +49,10 @@ public class HomeActivity extends ActionBarActivity
         initDrawer();
 //        initSpinner();
         mTitle = getTitle();
-        startRecordAppointmentActivity("0");
+//        startRecordAppointmentActivity("0");
 //        startAddAppointmentActivity();
 //        Retrofit.initialize();
-//        startRecordActivity();
+        startRecordActivity(3);
     }
 
 //    private void initSpinner() {
@@ -72,8 +72,10 @@ public class HomeActivity extends ActionBarActivity
         startActivity(intent);
     }
 
-    public void startRecordActivity (String appointmentId){
+    public void startRecordActivity(int position) {
         Intent intent = new Intent(this, RecordActivity.class);
+        intent.putExtra(MainApplication.APPOINTMENT_ID_EXTRA, "2");
+        intent.putExtra(MainApplication.RECORD_TYPE_ID_EXTRA, "Severity");
         startActivity(intent);
     }
 
