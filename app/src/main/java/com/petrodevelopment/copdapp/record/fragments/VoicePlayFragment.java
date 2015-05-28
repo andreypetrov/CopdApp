@@ -41,8 +41,16 @@ public class VoicePlayFragment extends SectionFragment {
     private TimerTask mPlayerTimerTask;
 
     private long mTrackDuration = 0l;
+    private int mCurrentPosition = 0;
 
     private PlayerState mCurrentPlayerState = PlayerState.IDLE;
+
+    private OnDeleteListener mOnDeleteListener;
+
+    public interface OnDeleteListener {
+        void onDelete(String fileName);
+    }
+
 
     private enum PlayerState { //corresponds to the diagram at http://developer.android.com/reference/android/media/MediaPlayer.html
         IDLE,
@@ -67,7 +75,7 @@ public class VoicePlayFragment extends SectionFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_voice_record, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_voice_play, container, false);
 
         setFileName(Environment.getExternalStorageDirectory().getAbsolutePath() + "/audiorecordtest.3gp");
         initView(rootView);
@@ -107,8 +115,8 @@ public class VoicePlayFragment extends SectionFragment {
                 U.log(this, "play button pressed");
                 U.log(this, "Player State: " + mCurrentPlayerState);
                 if (mCurrentPlayerState == PlayerState.STARTED) {
-                    stopPlaying();
-                } else if (mCurrentPlayerState == PlayerState.PREPARED) {
+                    pausePlaying();
+                } else if (mCurrentPlayerState == PlayerState.PREPARED || mCurrentPlayerState == PlayerState.PAUSED) {
                     startPlaying();
                 }
             }
@@ -124,6 +132,8 @@ public class VoicePlayFragment extends SectionFragment {
                 if (file.exists()) {
                     file.delete();
                     mCurrentTimeView.setText(R.string.time_zero);
+                    mTotalTimeView.setText(R.string.time_zero);
+                    if (mOnDeleteListener != null) mOnDeleteListener.onDelete(mFileName);
                     mDeleteButton.setEnabled(false);
                     mPlayButton.setEnabled(false);
                 }
@@ -253,35 +263,42 @@ public class VoicePlayFragment extends SectionFragment {
 
 
     private void startPlaying() {
+        mPlayer.seekTo(mCurrentPosition);
         mPlayer.start();
         U.log(this, "set state to prepared: PlayerState.STARTED");
         mCurrentPlayerState = PlayerState.STARTED;
-
-        //mPlayButton.setText(R.string.stop);
-        mDeleteButton.setEnabled(false);
-
+        startPlayerTimer();
+        mPlayButton.setImageResource(R.drawable.ic_severity_blue); //TODO replace with pause
         mPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
             @Override
             public void onCompletion(MediaPlayer mp) {
-                //mPlayButton.setText(R.string.play);
-                stopPlaying();
+                resetPlaying();
             }
         });
+        mDeleteButton.setEnabled(false);
     }
 
     private void pausePlaying() {
         mPlayer.pause();
+        mCurrentPosition = mPlayer.getCurrentPosition();
+        updatePauseUi();
+    }
+
+    private void updatePauseUi() {
+        mPlayButton.setImageResource(R.drawable.ic_medicationa_blue); //TODO replace with play
         U.log(this, "set state to prepared: PlayerState.PAUSED");
         mCurrentPlayerState = PlayerState.PAUSED;
         mDeleteButton.setEnabled(true);
+        stopPlayerTimer();
     }
 
-    private void stopPlaying() {
-        mPlayer.stop();
-        U.log(this, "set state to prepared: PlayerState.STOPPED");
-        mCurrentPlayerState = PlayerState.STOPPED;
-        mDeleteButton.setEnabled(true);
-        preparePlayer();
+    /**
+     * Same as pause playing except that the current position is changed to 0
+     */
+    private void resetPlaying() {
+        mPlayer.pause();
+        mCurrentPosition = 0;
+        updatePauseUi();
     }
 
 
@@ -292,11 +309,11 @@ public class VoicePlayFragment extends SectionFragment {
      * After one second of delay start updating the seconds
      */
     private void startPlayerTimer() {
-        mCurrentTimeView.setText((R.string.time_zero));
-        initPlayerTimerTask(0);
+        initPlayerTimerTask(mCurrentPosition);
     }
 
     private void initPlayerTimerTask(final long initialTime) {
+
         if (mPlayerTimerTask != null) mPlayerTimerTask.cancel();
 
         mPlayerTimerTask = new TextViewTimerTask(initialTime, getActivity(), mCurrentTimeView);
@@ -314,4 +331,8 @@ public class VoicePlayFragment extends SectionFragment {
     }
 
 
+    /// GETTERS AND SETTERS
+    public void setOnDeleteListener(OnDeleteListener onDeleteListener) {
+        this.mOnDeleteListener = onDeleteListener;
+    }
 }

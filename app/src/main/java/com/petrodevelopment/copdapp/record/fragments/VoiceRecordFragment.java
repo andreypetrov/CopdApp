@@ -33,6 +33,14 @@ public class VoiceRecordFragment extends SectionFragment {
     private TimerTask mRecordTimerTask;
 
 
+    private OnStopListener mOnStopListener;
+
+    public interface OnStopListener {
+        void onStop(String fileName);
+    }
+
+
+
     /**
      * Returns a new instance of this fragment for the given section
      * number.
@@ -69,16 +77,8 @@ public class VoiceRecordFragment extends SectionFragment {
             public void onClick(View v) {
                 if (isRecording) {
                     stopRecording();
-                    stopRecordTimer();
-                    mRecordButton.setImageResource(R.drawable.ic_alarm_add_grey600_48dp);
-                    mRecordButton.setContentDescription(getString(R.string.record));
-                    //mRecordButton.setText(R.string.record);
                 } else {
                     startRecording();
-                    startRecordTimer();
-                    mRecordButton.setImageResource(R.drawable.ic_assessment);
-                    mRecordButton.setContentDescription(getString(R.string.stop));
-                    //mRecordButton.setText(R.string.stop);
                 }
                 isRecording = !isRecording;
             }
@@ -106,17 +106,25 @@ public class VoiceRecordFragment extends SectionFragment {
 
         try {
             mRecorder.prepare();
+            mRecorder.start();
+
+            mRecordButton.setImageResource(R.drawable.ic_assessment);
+            mRecordButton.setContentDescription(getString(R.string.stop));
+            startRecordTimer();
         } catch (IOException e) {
             U.log(this, "prepare() failed");
         }
 
-        mRecorder.start();
     }
 
     private void stopRecording() {
         mRecorder.stop();
         mRecorder.release();
         mRecorder = null;
+        mRecordButton.setImageResource(R.drawable.ic_alarm_add_grey600_48dp);
+        mRecordButton.setContentDescription(getString(R.string.record));
+        if (mOnStopListener != null) mOnStopListener.onStop(mFileName);
+        stopRecordTimer();
     }
 
 
@@ -140,5 +148,9 @@ public class VoiceRecordFragment extends SectionFragment {
         if (mRecordTimerTask != null) mRecordTimerTask.cancel();
     }
 
+    //GETTERS AND SETTERS
 
+    public void setOnStopListener(OnStopListener onStopListener) {
+        mOnStopListener = onStopListener;
+    }
 }

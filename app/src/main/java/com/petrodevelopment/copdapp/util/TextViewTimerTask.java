@@ -21,6 +21,7 @@ public class TextViewTimerTask extends TimerTask {
         this.timeInMillis = this.initialTimeInMillis;
         this.activity = activity;
         this.targetView = targetView;
+        this.targetView.setText(TimeAndDate.formatMinutesAndSeconds(initialTimeInMillis));
     }
 
     @Override

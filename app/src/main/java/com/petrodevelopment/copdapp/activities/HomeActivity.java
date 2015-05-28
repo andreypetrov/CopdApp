@@ -26,7 +26,7 @@ import com.petrodevelopment.copdapp.record.RecordAppointmentActivity;
 import com.petrodevelopment.copdapp.util.U;
 
 
-public class HomeActivity extends ActionBarActivity
+public class HomeActivity extends BaseActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks, SectionFragment.SectionFragmentParent {
 
     /**
@@ -108,12 +108,7 @@ public class HomeActivity extends ActionBarActivity
     @Override
     public void onNavigationDrawerItemSelected(int position) {
         if (position == 4) startRecordAppointmentActivity("test");
-        else {
-            FragmentManager fragmentManager = getFragmentManager();
-            fragmentManager.beginTransaction()
-                    .replace(R.id.container, createSectionFragment(position))
-                    .commit();
-        }
+        else replaceFragment(R.id.container, createSectionFragment(position));
     }
 
     private Fragment createSectionFragment(int position) {

@@ -1,12 +1,12 @@
 <!-- A DrawerLayout is intended to be used as the top-level content view using match_parent for both width and height to consume the full space available. -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/yellow_light"
-    android:orientation="vertical"
-    tools:context=".RecordActivity">
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/yellow_light"
+              android:orientation="vertical"
+              tools:context=".RecordActivity">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
@@ -17,20 +17,25 @@
         android:minHeight="?android:attr/actionBarSize"
         app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"></android.support.v7.widget.Toolbar>
 
-
-    <fragment
-        android:id="@+id/voice_record_fragment"
-        android:name="com.petrodevelopment.copdapp.record.fragments.VoiceRecordFragment"
+    <FrameLayout
+        android:id="@+id/voice_container"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:layout="@layout/fragment_voice_record" />
+        android:layout_height="wrap_content">
+    </FrameLayout>
 
-    <fragment
-        android:id="@+id/voice_play_fragment"
-        android:name="com.petrodevelopment.copdapp.record.fragments.VoicePlayFragment"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:layout="@layout/fragment_voice_play" />
+    <!--<fragment-->
+    <!--android:id="@+id/voice_record_fragment"-->
+    <!--android:name="com.petrodevelopment.copdapp.record.fragments.VoiceRecordFragment"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--tools:layout="@layout/fragment_voice_record" />-->
+
+    <!--<fragment-->
+    <!--android:id="@+id/voice_play_fragment"-->
+    <!--android:name="com.petrodevelopment.copdapp.record.fragments.VoicePlayFragment"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--tools:layout="@layout/fragment_voice_play" />-->
 
 
     <LinearLayout
@@ -45,7 +50,7 @@
             android:layout_weight="1"
             android:contentDescription="@string/action_note"
             android:onClick="onNoteClick"
-            android:src="@drawable/ic_note_add_black_48dp" />
+            android:src="@drawable/ic_note_add_black_48dp"/>
 
         <ImageButton
             android:layout_width="0dp"
@@ -53,7 +58,7 @@
             android:layout_weight="1"
             android:contentDescription="@string/action_voice"
             android:onClick="onVoiceClick"
-            android:src="@drawable/ic_open_in_browser_black_48dp" />
+            android:src="@drawable/ic_open_in_browser_black_48dp"/>
 
         <ImageButton
             android:layout_width="0dp"
@@ -61,7 +66,7 @@
             android:layout_weight="1"
             android:contentDescription="@string/action_voice"
             android:onClick="onPhotoClick"
-            android:src="@drawable/ic_perm_contact_cal_black_48dp" />
+            android:src="@drawable/ic_perm_contact_cal_black_48dp"/>
 
         <ImageButton
             android:layout_width="0dp"
@@ -69,13 +74,13 @@
             android:layout_weight="1"
             android:contentDescription="@string/action_voice"
             android:onClick="onReminderClick"
-            android:src="@drawable/ic_schedule_black_48dp" />
+            android:src="@drawable/ic_schedule_black_48dp"/>
     </LinearLayout>
     <!-- As the main content view, the view below consumes the entire
          space available using match_parent in both dimensions. -->
     <FrameLayout
         android:id="@+id/container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"/>
 </LinearLayout>
 

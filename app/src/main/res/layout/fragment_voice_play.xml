@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/white_button"
             android:contentDescription="@string/play"
-            android:src="@drawable/ic_work_black_48dp"/>
+            android:src="@drawable/ic_medicationa_blue"/>
 
         <LinearLayout
             android:layout_width="0dp"
