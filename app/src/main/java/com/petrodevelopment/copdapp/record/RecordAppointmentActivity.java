@@ -33,15 +33,17 @@ public class RecordAppointmentActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_record_appointment);
-        initModel(this);
+        initModel();
         initToolbar();
         initListView();
     }
 
+
     /**
      * The appointment is passed in from the previous activity via the intent
      */
-    private void initModel(Context context) {
+    @Override
+    public void initModel() {
         appointmentId  = getIntent().getStringExtra(MainApplication.APPOINTMENT_ID_EXTRA);
         appointment = getApp().getAppointment(appointmentId);
     }

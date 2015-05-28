@@ -67,8 +67,15 @@ public class HomeActivity extends BaseActivity
 //        spinner.setAdapter(adapter);
 //    }
 
+
+    @Override
+    public void initModel() {
+        // do nothing, model initialization is happening in the section fragments
+    }
+
     public void startRecordAppointmentActivity(String appointmentId) {
         Intent intent = new Intent(this, RecordAppointmentActivity.class);
+        intent.putExtra(MainApplication.APPOINTMENT_ID_EXTRA, "0");
         startActivity(intent);
     }
 

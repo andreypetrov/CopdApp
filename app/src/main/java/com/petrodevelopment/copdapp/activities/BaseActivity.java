@@ -21,6 +21,10 @@ public abstract class BaseActivity extends ActionBarActivity {
                 .commit();
     }
 
+
+    abstract public void initModel();
+
+
     /**
      * Override to save model associated with current activity (e.g. appointment or record)
      */

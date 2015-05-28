@@ -20,27 +20,13 @@
         android:id="@+id/voice_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <fragment
-            android:id="@+id/voice_record_fragment"
-            android:name="com.petrodevelopment.copdapp.record.fragments.VoiceRecordFragment"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:layout="@layout/fragment_voice_record"/>
+        <!--<fragment-->
+        <!--android:id="@+id/voice_record_fragment"-->
+        <!--android:name="com.petrodevelopment.copdapp.record.fragments.VoiceRecordFragment"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--tools:layout="@layout/fragment_voice_record"/>-->
     </FrameLayout>
-
-    <!--<fragment-->
-    <!--android:id="@+id/voice_record_fragment"-->
-    <!--android:name="com.petrodevelopment.copdapp.record.fragments.VoiceRecordFragment"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--tools:layout="@layout/fragment_voice_record" />-->
-
-    <!--<fragment-->
-    <!--android:id="@+id/voice_play_fragment"-->
-    <!--android:name="com.petrodevelopment.copdapp.record.fragments.VoicePlayFragment"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--tools:layout="@layout/fragment_voice_play" />-->
 
     <LinearLayout
         android:id="@+id/cell_body"
@@ -66,16 +52,17 @@
             android:minLines="3"
             />
 
-        <com.petrodevelopment.copdapp.views.NonScrollableGridView android:id="@+id/gallery"
-                                                                  xmlns:android="http://schemas.android.com/apk/res/android"
-                                                                  android:layout_width="match_parent"
-                                                                  android:layout_height="match_parent"
-                                                                  android:columnWidth="90dp"
-                                                                  android:gravity="center"
-                                                                  android:horizontalSpacing="@dimen/box_top_and_bottom_padding"
-                                                                  android:numColumns="auto_fit"
-                                                                  android:stretchMode="columnWidth"
-                                                                  android:verticalSpacing="@dimen/box_top_and_bottom_padding"
+        <com.petrodevelopment.copdapp.views.NonScrollableGridView
+            android:id="@+id/gallery"
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:columnWidth="90dp"
+            android:gravity="center"
+            android:horizontalSpacing="@dimen/box_top_and_bottom_padding"
+            android:numColumns="auto_fit"
+            android:stretchMode="columnWidth"
+            android:verticalSpacing="@dimen/box_top_and_bottom_padding"
             />
 
         <LinearLayout
@@ -112,9 +99,11 @@
     <include layout="@layout/line_horizontal"/>
 
 
-    <FrameLayout
-        android:id="@+id/container"
+    <fragment
+        android:id="@+id/gallery_preview_fragment"
+        android:name="com.petrodevelopment.copdapp.record.fragments.GalleryPreviewFragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="wrap_content"
+        tools:layout="@layout/fragment_gallery_preview"/>
 </LinearLayout>
 

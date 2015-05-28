@@ -1,21 +1,17 @@
 package com.petrodevelopment.copdapp.record;
 
-import android.app.Fragment;
-import android.app.FragmentManager;
 import android.os.Bundle;
 import android.os.Environment;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.petrodevelopment.copdapp.MainApplication;
 import com.petrodevelopment.copdapp.R;
 import com.petrodevelopment.copdapp.activities.BaseActivity;
-import com.petrodevelopment.copdapp.record.AudioRecorder;
-import com.petrodevelopment.copdapp.record.fragments.NoteRecordFragment;
-import com.petrodevelopment.copdapp.record.fragments.PhotoRecordFragment;
-import com.petrodevelopment.copdapp.record.fragments.ReminderRecordFragment;
+import com.petrodevelopment.copdapp.model.AppointmentRecord;
+import com.petrodevelopment.copdapp.record.fragments.GalleryPreviewFragment;
 import com.petrodevelopment.copdapp.record.fragments.VoicePlayFragment;
 import com.petrodevelopment.copdapp.record.fragments.VoiceRecordFragment;
 import com.petrodevelopment.copdapp.util.U;
@@ -32,6 +28,9 @@ public class RecordActivity extends BaseActivity {
 //    boolean recording = false;
 //    boolean recorded = false;
 //    boolean playing = false;
+    private  String appointmentId;
+    private AppointmentRecord appointmentRecord;
+
     VoiceRecordFragment voiceRecordFragment;
     VoicePlayFragment voicePlayFragment;
 
@@ -39,8 +38,16 @@ public class RecordActivity extends BaseActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_record);
+        initModel();
         initToolbar();
         initVoice();
+        initGallery();
+    }
+
+    @Override
+    public void initModel() {
+        appointmentId = getIntent().getStringExtra(MainApplication.APPOINTMENT_ID_EXTRA);
+        appointmentRecord = getApp().getAppointment(appointmentId).severity; //TODO make this dynamic
     }
 
     private void initVoice(){
@@ -82,6 +89,24 @@ public class RecordActivity extends BaseActivity {
         });
         replaceFragment(R.id.voice_container, voicePlayFragment);
     }
+
+
+    private void initGallery(){
+        GalleryPreviewFragment fragment = (GalleryPreviewFragment) getFragmentManager().findFragmentById(R.id.gallery_preview_fragment);
+        fragment.updateImages(appointmentRecord);
+        fragment.setOnGalleryClickListener(new GalleryPreviewFragment.OnGalleryClickListener() {
+            @Override
+            public void onImageClick(int position) {
+                U.log(this, "image clicked at position: " + position);
+            }
+        });
+    }
+
+
+    public void onCameraClick(View view) {
+        U.log(this, "on camera click open new taking picture activity with special intent");
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
