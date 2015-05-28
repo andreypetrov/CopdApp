@@ -4,7 +4,6 @@
               xmlns:tools="http://schemas.android.com/tools"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:background="@color/yellow_light"
               android:orientation="vertical"
               tools:context=".RecordActivity">
 
@@ -21,6 +20,12 @@
         android:id="@+id/voice_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+        <fragment
+            android:id="@+id/voice_record_fragment"
+            android:name="com.petrodevelopment.copdapp.record.fragments.VoiceRecordFragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:layout="@layout/fragment_voice_record"/>
     </FrameLayout>
 
     <!--<fragment-->
@@ -37,47 +42,76 @@
     <!--android:layout_height="wrap_content"-->
     <!--tools:layout="@layout/fragment_voice_play" />-->
 
-
     <LinearLayout
+        android:id="@+id/cell_body"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#2196F3"
-        android:orientation="horizontal">
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:orientation="vertical"
+        android:visibility="visible">
 
-        <ImageButton
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:contentDescription="@string/action_note"
-            android:onClick="onNoteClick"
-            android:src="@drawable/ic_note_add_black_48dp"/>
+        <include layout="@layout/line_horizontal"/>
 
-        <ImageButton
-            android:layout_width="0dp"
+        <EditText
+            android:id="@+id/note"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:contentDescription="@string/action_voice"
-            android:onClick="onVoiceClick"
-            android:src="@drawable/ic_open_in_browser_black_48dp"/>
+            android:layout_marginBottom="@dimen/box_top_and_bottom_padding"
+            android:layout_marginTop="@dimen/box_top_and_bottom_padding"
+            android:background="@color/transparent"
+            android:gravity="top|left"
+            android:hint="@string/appointment_note_hint"
+            android:inputType="textMultiLine"
+            android:minLines="3"
+            />
 
-        <ImageButton
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:contentDescription="@string/action_voice"
-            android:onClick="onPhotoClick"
-            android:src="@drawable/ic_perm_contact_cal_black_48dp"/>
+        <com.petrodevelopment.copdapp.views.NonScrollableGridView android:id="@+id/gallery"
+                                                                  xmlns:android="http://schemas.android.com/apk/res/android"
+                                                                  android:layout_width="match_parent"
+                                                                  android:layout_height="match_parent"
+                                                                  android:columnWidth="90dp"
+                                                                  android:gravity="center"
+                                                                  android:horizontalSpacing="@dimen/box_top_and_bottom_padding"
+                                                                  android:numColumns="auto_fit"
+                                                                  android:stretchMode="columnWidth"
+                                                                  android:verticalSpacing="@dimen/box_top_and_bottom_padding"
+            />
 
-        <ImageButton
-            android:layout_width="0dp"
+        <LinearLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:contentDescription="@string/action_voice"
-            android:onClick="onReminderClick"
-            android:src="@drawable/ic_schedule_black_48dp"/>
+            android:layout_gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/mic_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/white_button"
+                android:src="@drawable/ic_mic"/>
+
+            <ImageButton
+                android:id="@+id/camera_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/white_button"
+                android:onClick="onCameraClick"
+                android:src="@drawable/ic_camera"/>
+
+            <ImageButton
+                android:id="@+id/reminder_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/white_button"
+                android:src="@drawable/ic_reminder"/>
+
+        </LinearLayout>
     </LinearLayout>
-    <!-- As the main content view, the view below consumes the entire
-         space available using match_parent in both dimensions. -->
+
+    <include layout="@layout/line_horizontal"/>
+
+
     <FrameLayout
         android:id="@+id/container"
         android:layout_width="match_parent"

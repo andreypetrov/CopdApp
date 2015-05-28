@@ -49,7 +49,7 @@ public class HomeActivity extends BaseActivity
         initDrawer();
 //        initSpinner();
         mTitle = getTitle();
-//        startRecordAppointmentActivity("0");
+        startRecordAppointmentActivity("0");
 //        startAddAppointmentActivity();
 //        Retrofit.initialize();
 //        startRecordActivity(3);

@@ -13,7 +13,7 @@ import com.petrodevelopment.copdapp.R;
  * Parent of all other main menu section fragments
  * Created by andrey on 10/05/2015.
  */
-public class SectionFragment extends Fragment {
+public class SectionFragment extends BaseFragment {
     /**
      * Interface which the parent activity should implement to receive callbacks when the section was successfully attached to the activity
      */

@@ -5,12 +5,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.petrodevelopment.copdapp.MainApplication;
 import com.petrodevelopment.copdapp.R;
+import com.petrodevelopment.copdapp.activities.BaseActivity;
 import com.petrodevelopment.copdapp.adapters.AppointmentRecordCategoriesAdapter;
 import com.petrodevelopment.copdapp.model.Appointment;
 import com.petrodevelopment.copdapp.model.AppointmentList;
@@ -22,9 +24,10 @@ import com.petrodevelopment.copdapp.viewmodel.AppointmentRecordCategoriesVm;
 /**
  * Created by andrey on 15/05/2015.
  */
-public class RecordAppointmentActivity extends ActionBarActivity {
+public class RecordAppointmentActivity extends BaseActivity {
     Appointment appointment;
     AppointmentRecordCategoriesAdapter adapter;
+    String appointmentId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +42,8 @@ public class RecordAppointmentActivity extends ActionBarActivity {
      * The appointment is passed in from the previous activity via the intent
      */
     private void initModel(Context context) {
-        appointment = AppointmentList.fromAsset(context).appointments.get(0);
+        appointmentId  = getIntent().getStringExtra(MainApplication.APPOINTMENT_ID_EXTRA);
+        appointment = getApp().getAppointment(appointmentId);
     }
 
     private void initToolbar() {
@@ -66,7 +70,8 @@ public class RecordAppointmentActivity extends ActionBarActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if (adapter.getItemViewType(position) == 1 ) startRecordActivity(position); //if it is a subcategory then open it for editing
+                if (adapter.getItemViewType(position) == 1)
+                    startRecordActivity(position); //if it is a subcategory then open it for editing
             }
         });
 
@@ -83,4 +88,15 @@ public class RecordAppointmentActivity extends ActionBarActivity {
         startActivity(intent);
     }
 
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                saveAndClose();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 }

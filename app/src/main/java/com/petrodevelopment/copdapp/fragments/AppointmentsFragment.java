@@ -115,7 +115,7 @@ public class AppointmentsFragment extends SectionFragment {
     }
 
     private List<Appointment> getModel() {
-        return ((MainApplication) getActivity().getApplication()).appointmentList.appointments;
+        return getApp().appointmentList.appointments;
     }
 
 

@@ -41,7 +41,6 @@ public class RecordActivity extends BaseActivity {
         setContentView(R.layout.activity_record);
         initToolbar();
         initVoice();
-        selectAction(0);
     }
 
     private void initVoice(){
@@ -105,97 +104,41 @@ public class RecordActivity extends BaseActivity {
     }
 
 
-    private void deleteAndClose() {
-        U.log(this, "delete record and close activity");
-        finish();
+    @Override
+    public void saveModel() {
+        U.log(this, "save appointment record");
     }
+
+    @Override
+    public void deleteModel() {
+        U.log(this, "delete appointment record");
+    }
+
 
     @Override
     public void onBackPressed() {
         saveAndClose();
     }
 
-    private void saveAndClose() {
-        U.log(this, "save record and close activity");
-        finish();
-    }
 
 
     public void onNoteClick(View v) {
-        selectAction(0);
+
     }
 
     public void onVoiceClick(View v) {
-        selectAction(1);
+
     }
 
     public void onPhotoClick(View v) {
-        selectAction(2);
+
     }
 
     public void onReminderClick(View v) {
-        selectAction(3);
-    }
-
-
-    public void selectAction(int position) {
-            FragmentManager fragmentManager = getFragmentManager();
-            fragmentManager.beginTransaction()
-                    .replace(R.id.container, createSectionFragment(position))
-                    .commit();
 
     }
 
-    private Fragment createSectionFragment(int position) {
-        switch (position) {
-            case 0:
-                return NoteRecordFragment.newInstance(position, getString(R.string.action_note));
-            case 1:
-                return VoiceRecordFragment.newInstance(position, getString(R.string.action_voice));
-            case 2:
-                return PhotoRecordFragment.newInstance(position, getString(R.string.action_photo));
-            default:
-                return ReminderRecordFragment.newInstance(position, getString(R.string.action_reminder));
-        }
-    }
 
-
-
-    //second action bar methods
-//    public void onNoteClick(View v) {
-//        if (audioRecorder == null) audioRecorder = new AudioRecorder("test.3gp");
-//
-//        if (!recording & !playing) {
-//            recording = true;
-//            recorded = false;
-//            audioRecorder.startRecording();
-//            U.log(this, "start recording");
-//        } else {
-//            recording = false;
-//            recorded = true;
-//            audioRecorder.stopRecording();
-//            U.log(this, "stop recording");
-//        }
-//    }
-//
-//    public void onVoiceClick(View v) {
-//        if (recorded) {
-//            playing = true;
-//            audioRecorder.startPlaying();
-//        } else {
-//            playing = false;
-//            audioRecorder.stopPlaying();
-//        }
-//    }
-
-
-
-    //TODO move to voice fragment
-//    @Override
-//    protected void onPause() {
-//        super.onPause();
-//        if (audioRecorder != null) audioRecorder.releaseRecorderAndPlayer();
-//    }
 
 
 }
