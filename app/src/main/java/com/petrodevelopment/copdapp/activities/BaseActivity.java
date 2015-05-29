@@ -2,6 +2,8 @@ package com.petrodevelopment.copdapp.activities;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
@@ -14,6 +16,11 @@ import com.petrodevelopment.copdapp.util.U;
  * Created by andrey on 27/05/2015.
  */
 public abstract class BaseActivity extends AppCompatActivity {
+
+    @Override
+    public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
+        super.onCreate(savedInstanceState, persistentState);
+    }
 
     public void replaceFragment(int containerId, Fragment fragment) {
         FragmentManager fragmentManager = getFragmentManager();

@@ -17,6 +17,7 @@ import android.view.Window;
 import com.petrodevelopment.copdapp.MainApplication;
 import com.petrodevelopment.copdapp.R;
 import com.petrodevelopment.copdapp.activities.BaseActivity;
+import com.petrodevelopment.copdapp.gallery.GalleryActivity;
 import com.petrodevelopment.copdapp.model.AppointmentRecord;
 import com.petrodevelopment.copdapp.record.fragments.GalleryPreviewFragment;
 import com.petrodevelopment.copdapp.record.fragments.VoicePlayFragment;
@@ -49,17 +50,16 @@ public class RecordActivity extends BaseActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_record);
-
         initModel();
         initToolbar();
         initVoice();
         initGallery();
     }
 
+    @Override
     public void initModel() {
         appointmentId = getIntent().getStringExtra(MainApplication.APPOINTMENT_ID_EXTRA);
-        //appointmentRecord = getApp().getAppointment(appointmentId).severity; //TODO make this dynamic
-        appointmentRecord = ((MainApplication)getApplication()).getAppointment(appointmentId).severity;
+        appointmentRecord = ((MainApplication)getApplication()).getAppointment(appointmentId).severity;//TODO make this dynamic
     }
 
     private void initVoice(){
@@ -109,7 +109,10 @@ public class RecordActivity extends BaseActivity {
         galleryPreviewFragment.setOnGalleryClickListener(new GalleryPreviewFragment.OnGalleryClickListener() {
             @Override
             public void onImageClick(int position) {
-                U.log(this, "image clicked at position: " + position);
+                Intent intent = new Intent(RecordActivity.this, GalleryActivity.class);
+                intent.putExtra(MainApplication.APPOINTMENT_ID_EXTRA, appointmentId);
+                intent.putExtra(MainApplication.RECORD_TYPE_ID_EXTRA, appointmentRecord.name);
+                intent.putExtra(MainApplication.IMAGE_INDEX_EXTRA, position);
             }
         });
     }
