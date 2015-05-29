@@ -3,6 +3,7 @@ package com.petrodevelopment.copdapp.activities;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
 import com.petrodevelopment.copdapp.MainApplication;
@@ -12,7 +13,7 @@ import com.petrodevelopment.copdapp.util.U;
 /**
  * Created by andrey on 27/05/2015.
  */
-public abstract class BaseActivity extends ActionBarActivity {
+public abstract class BaseActivity extends AppCompatActivity {
 
     public void replaceFragment(int containerId, Fragment fragment) {
         FragmentManager fragmentManager = getFragmentManager();

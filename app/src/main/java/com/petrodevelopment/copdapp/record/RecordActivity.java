@@ -1,5 +1,6 @@
 package com.petrodevelopment.copdapp.record;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -11,6 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 
 import com.petrodevelopment.copdapp.MainApplication;
 import com.petrodevelopment.copdapp.R;
@@ -47,16 +49,17 @@ public class RecordActivity extends BaseActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_record);
+
         initModel();
         initToolbar();
         initVoice();
         initGallery();
     }
 
-    @Override
     public void initModel() {
         appointmentId = getIntent().getStringExtra(MainApplication.APPOINTMENT_ID_EXTRA);
-        appointmentRecord = getApp().getAppointment(appointmentId).severity; //TODO make this dynamic
+        //appointmentRecord = getApp().getAppointment(appointmentId).severity; //TODO make this dynamic
+        appointmentRecord = ((MainApplication)getApplication()).getAppointment(appointmentId).severity;
     }
 
     private void initVoice(){
@@ -70,9 +73,9 @@ public class RecordActivity extends BaseActivity {
     }
 
     private void initToolbar() {
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+       // Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+       // setSupportActionBar(toolbar);
+       // getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     private void initVoiceRecordFragment() {
@@ -84,7 +87,7 @@ public class RecordActivity extends BaseActivity {
                 initVoicePlayFragment();
             }
         });
-        replaceFragment(R.id.voice_container, voiceRecordFragment);
+        //replaceFragment(R.id.voice_container, voiceRecordFragment);
     }
 
     private void initVoicePlayFragment() {
@@ -96,7 +99,7 @@ public class RecordActivity extends BaseActivity {
                 initVoiceRecordFragment();
             }
         });
-        replaceFragment(R.id.voice_container, voicePlayFragment);
+        //replaceFragment(R.id.voice_container, voicePlayFragment);
     }
 
 
@@ -150,30 +153,30 @@ public class RecordActivity extends BaseActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                saveAndClose();
+                //saveAndClose();
                 return true;
             case R.id.action_delete:
-                deleteAndClose();
+                //deleteAndClose();
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
 
 
-    @Override
+    //@Override
     public void saveModel() {
         U.log(this, "save appointment record");
     }
 
-    @Override
+    //@Override
     public void deleteModel() {
         U.log(this, "delete appointment record");
     }
 
 
     @Override
-    public void onBackPressed() {
-        saveAndClose();
+    public void onBackPressed() { finish();
+        //saveAndClose();
     }
 
 
