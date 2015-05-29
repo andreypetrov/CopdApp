@@ -11,4 +11,12 @@
         <item name="iconifiedByDefault">false</item>
     </style>
 
+    <style name="LargeDialog" parent="@style/Theme.AppCompat.Light.Dialog">
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowMinWidthMajor">98%</item>
+        <item name="android:windowMinWidthMinor">98%</item>
+        <!--<item name="android:listPreferredItemPaddingLeft">5dip</item>-->
+        <!--<item name="android:listPreferredItemPaddingRight">5dip</item>-->
+    </style>
 </resources>
