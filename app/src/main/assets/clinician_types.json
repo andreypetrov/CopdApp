@@ -15,6 +15,14 @@
     {
       "id": "3",
       "name": "General Practitioner"
+    },
+    {
+      "id": "4",
+      "name": "Respirologist"
+    },
+    {
+      "id": "5",
+      "name": "Physiotherapist"
     }
   ]
 }
