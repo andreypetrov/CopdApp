@@ -22,11 +22,7 @@ public class Appointment extends Model {
     //Edited via the Record Appointment screen
     public List<AppointmentRecord> appointmentRecords;
 
-    public Appointment(){
-
-    }
-
     public Provider getProvider(Context context) {
-        return ((MainApplication)context.getApplicationContext()).getProvider(providerId);
+        return ((MainApplication)context.getApplicationContext()).getModelFacade().getProvider(providerId);
     }
 }

@@ -24,10 +24,7 @@ public class Provider extends Model {
     public Address address;
 
     public ClinicianType getClinitianType(Context context) {
-        return ((MainApplication)context.getApplicationContext()).getClinitianType(clinicianTypeId);
-    }
-
-    public Provider() {
+        return ((MainApplication)context.getApplicationContext()).getModelFacade().getClinitianType(clinicianTypeId);
     }
 
     public String getNameAndTitle() {

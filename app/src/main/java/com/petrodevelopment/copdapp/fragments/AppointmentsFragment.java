@@ -119,7 +119,7 @@ public class AppointmentsFragment extends FilterableFragment {
     }
 
     private List<Appointment> getModel() {
-        return getApp().appointmentList.appointments;
+        return getModelFacade().appointmentList.appointments;
     }
 
 

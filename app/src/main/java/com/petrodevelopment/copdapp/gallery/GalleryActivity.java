@@ -48,7 +48,7 @@ public class GalleryActivity extends BaseActivity {
     public void initModel() {
         appointmentId = getIntent().getStringExtra(MainApplication.APPOINTMENT_ID_EXTRA);
         imageIndex = getIntent().getIntExtra(MainApplication.IMAGE_INDEX_EXTRA, 0);
-        appointmentRecord = ((MainApplication) getApplication()).getAppointment(appointmentId).appointmentRecords.get(0);//TODO make this dynamic
+        appointmentRecord = getModelFacade().getAppointment(appointmentId).appointmentRecords.get(0);//TODO make this dynamic
 
     }
 

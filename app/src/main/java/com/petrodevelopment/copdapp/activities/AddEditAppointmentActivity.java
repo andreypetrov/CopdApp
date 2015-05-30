@@ -3,9 +3,7 @@ package com.petrodevelopment.copdapp.activities;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
-import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -85,7 +83,7 @@ public class AddEditAppointmentActivity extends BaseActivity implements OnClickL
     public void initModel() {
         //TODO if there is no appointment id, then create a new appointment with a unique id
         String appointmentId = getIntent().getStringExtra(MainApplication.APPOINTMENT_ID_EXTRA);
-        appointment = getApp().getAppointment(appointmentId);
+        appointment = getModelFacade().getAppointment(appointmentId);
         U.log(this, "opened appointment with id: " + appointmentId);
     }
 
@@ -189,7 +187,7 @@ public class AddEditAppointmentActivity extends BaseActivity implements OnClickL
     }
 
     private void initProviders() {
-        providers = ProviderList.fromAsset(this).providers;
+        providers = getModelFacade().providerList.providers;
     }
 
     @Override
@@ -300,7 +298,7 @@ public class AddEditAppointmentActivity extends BaseActivity implements OnClickL
 
         //Display Question//
         //Question
-        List<Question> questions = QuestionList.fromAsset(this).questions;
+        List<Question> questions = getModelFacade().questionList.questions;
 
         LinearLayout layout = new LinearLayout(this);
         setContentView(layout);

@@ -43,7 +43,7 @@ public class RecordAppointmentActivity extends BaseActivity {
     @Override
     public void initModel() {
         appointmentId  = getIntent().getStringExtra(MainApplication.APPOINTMENT_ID_EXTRA);
-        appointment = getApp().getAppointment(appointmentId);
+        appointment = getModelFacade().getAppointment(appointmentId);
     }
 
     private void initToolbar() {
@@ -56,7 +56,7 @@ public class RecordAppointmentActivity extends BaseActivity {
     private void initListView() {
         ListView listView = (ListView) findViewById(R.id.list_view);
         adapter = new AppointmentRecordCategoriesAdapter(
-                getApp().appointmentRecordCategoryList.getAppointmentRecordCategoriesAndTypesFlattened(),
+                getModelFacade().appointmentRecordCategoryList.getAppointmentRecordCategoriesAndTypesFlattened(),
                 appointment,
                 this,
                 R.layout.cell_appointment_record_category,

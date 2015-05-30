@@ -42,7 +42,7 @@ public class ProviderFragment extends FilterableFragment {
 
 
     private List<Provider> getModel() {
-        return ProviderList.fromAsset(getActivity()).providers;
+        return getModelFacade().providerList.providers;
     }
 
     @Override
