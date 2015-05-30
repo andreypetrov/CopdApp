@@ -16,26 +16,55 @@
         android:minHeight="?android:attr/actionBarSize"
         app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"></android.support.v7.widget.Toolbar>
 
+
+    <LinearLayout
+        android:id="@+id/cell_header"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/subcategory_row"
+        android:background="@drawable/white_button"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        >
+
+        <ImageView
+            android:id="@+id/image"
+            android:layout_width="@dimen/category_icon"
+            android:layout_height="@dimen/category_icon"
+            android:layout_gravity="center_vertical"/>
+
+        <TextView
+            android:id="@+id/question"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:text="@string/dummy_question"
+            android:textSize="@dimen/abc_text_size_small_material"
+            />
+
+        <ImageView
+            android:layout_width="@dimen/category_icon"
+            android:layout_height="@dimen/category_icon"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/ic_arrow_right_360"/>
+    </LinearLayout>
+
+    <include layout="@layout/line_horizontal_with_margin"/>
+
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginTop="@dimen/activity_vertical_margin">
 
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-            <FrameLayout
-                android:id="@+id/voice_container"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <!--<fragment-->
-                <!--android:id="@+id/voice_record_fragment"-->
-                <!--android:name="com.petrodevelopment.copdapp.record.fragments.VoiceRecordFragment"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--tools:layout="@layout/fragment_voice_record"/>-->
-            </FrameLayout>
+
 
             <LinearLayout
                 android:id="@+id/cell_body"
@@ -45,8 +74,6 @@
                 android:layout_marginRight="@dimen/activity_horizontal_margin"
                 android:orientation="vertical"
                 android:visibility="visible">
-
-                <include layout="@layout/line_horizontal"/>
 
                 <EditText
                     android:id="@+id/note"
@@ -74,47 +101,56 @@
                     android:verticalSpacing="@dimen/box_top_and_bottom_padding"
                     />
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:orientation="horizontal">
-
-                    <ImageButton
-                        android:id="@+id/mic_btn"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/white_button"
-                        android:src="@drawable/ic_mic"/>
-
-                    <ImageButton
-                        android:id="@+id/camera_btn"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/white_button"
-                        android:onClick="onCameraClick"
-                        android:src="@drawable/ic_camera"/>
-
-                    <ImageButton
-                        android:id="@+id/reminder_btn"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/white_button"
-                        android:src="@drawable/ic_reminder"/>
-
-                </LinearLayout>
+                <FrameLayout
+                    android:id="@+id/voice_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <!--<fragment-->
+                    <!--android:id="@+id/voice_record_fragment"-->
+                    <!--android:name="com.petrodevelopment.copdapp.record.fragments.VoiceRecordFragment"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--tools:layout="@layout/fragment_voice_record"/>-->
+                </FrameLayout>
             </LinearLayout>
-
-            <include layout="@layout/line_horizontal"/>
 
 
             <fragment
                 android:id="@+id/gallery_preview_fragment"
                 android:name="com.petrodevelopment.copdapp.record.fragments.GalleryPreviewFragment"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 tools:layout="@layout/fragment_gallery_preview"/>
+
+
         </LinearLayout>
+
+
     </ScrollView>
+
+    <include layout="@layout/line_horizontal_with_margin"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|bottom"
+
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/mic_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/white_button"
+            android:src="@drawable/ic_mic"/>
+
+        <ImageButton
+            android:id="@+id/camera_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/white_button"
+            android:onClick="onCameraClick"
+            android:src="@drawable/ic_camera"/>
+    </LinearLayout>
 </LinearLayout>
 

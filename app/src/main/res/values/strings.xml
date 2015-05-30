@@ -98,6 +98,7 @@
     <string name="dummy_time_appointment">4.30 pm</string>
     <string name="begin_appointment">Begin Appointment</string>
     <string name="time_slash">/</string>
+    <string name="dummy_question">What is my current activity level?</string>
 
 
 </resources>

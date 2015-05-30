@@ -73,6 +73,7 @@ public class RecordActivity extends BaseActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle(appointmentRecord.getAppointmentRecordCategory(this).name);
     }
 
     private void initVoiceRecordFragment() {
