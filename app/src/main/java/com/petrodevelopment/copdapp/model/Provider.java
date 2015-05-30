@@ -13,7 +13,6 @@ import java.util.List;
  */
 public class Provider extends Model {
 
-    public String id;
     public String title;
     public String firstName;
     public String lastName;

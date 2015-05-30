@@ -8,6 +8,7 @@
       "email": "dummy@hospital.com",
       "clinicianType": "1",
       "address": {
+        "id":"0",
         "street": "1 Market Square West Avenue",
         "city": "Toronto",
         "province": "ON",
@@ -24,6 +25,7 @@
       "email": "james.ye@hospital.com",
       "clinicianType": "1",
       "address": {
+        "id":"1",
         "street": "1 Market Square West Avenue",
         "city": "Toronto",
         "province": "ON",
@@ -40,6 +42,7 @@
       "email": "james.ye@hospital.com",
       "clinicianType": "2",
       "address": {
+        "id":"2",
         "street": "224 James Street South",
         "city": "Hamilton",
         "province": "ON",
@@ -56,6 +59,7 @@
       "email": "james.ye@hospital.com",
       "clinicianType": "2",
       "address": {
+        "id":"3",
         "street": "1 Market Square West Avenue",
         "city": "Toronto",
         "province": "ON",
@@ -72,6 +76,7 @@
       "email": "james.ye@hospital.com",
       "clinicianType": "1",
       "address": {
+        "id":"4",
         "street": "1 Market Square West Avenue",
         "city": "Toronto",
         "province": "ON",

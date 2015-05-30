@@ -13,7 +13,6 @@ import java.util.List;
  */
 public class AppointmentRecord extends Model {
 
-    public String id;
     public String appointmentRecordTypeId;
     public String note;
     public String voiceRecordUrl;

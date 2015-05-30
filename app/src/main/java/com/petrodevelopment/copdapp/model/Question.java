@@ -13,6 +13,5 @@ import java.util.List;
  * Created on 22/05/2015.
  */
 public class Question extends Model {
-    public String id;
     public String name;
 }
