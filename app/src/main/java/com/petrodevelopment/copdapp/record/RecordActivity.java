@@ -33,10 +33,7 @@ import java.io.File;
  * Created by andrey on 10/05/2015.
  */
 public class RecordActivity extends BaseActivity {
-//    AudioRecorder audioRecorder;
-//    boolean recording = false;
-//    boolean recorded = false;
-//    boolean playing = false;
+
     static final int REQUEST_IMAGE_CAPTURE = 1;
 
     private  String appointmentId;
@@ -73,9 +70,9 @@ public class RecordActivity extends BaseActivity {
     }
 
     private void initToolbar() {
-       // Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-       // setSupportActionBar(toolbar);
-       // getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     private void initVoiceRecordFragment() {
@@ -87,7 +84,7 @@ public class RecordActivity extends BaseActivity {
                 initVoicePlayFragment();
             }
         });
-        //replaceFragment(R.id.voice_container, voiceRecordFragment);
+        replaceFragment(R.id.voice_container, voiceRecordFragment);
     }
 
     private void initVoicePlayFragment() {
@@ -99,7 +96,7 @@ public class RecordActivity extends BaseActivity {
                 initVoiceRecordFragment();
             }
         });
-        //replaceFragment(R.id.voice_container, voicePlayFragment);
+        replaceFragment(R.id.voice_container, voicePlayFragment);
     }
 
 
@@ -109,13 +106,21 @@ public class RecordActivity extends BaseActivity {
         galleryPreviewFragment.setOnGalleryClickListener(new GalleryPreviewFragment.OnGalleryClickListener() {
             @Override
             public void onImageClick(int position) {
-                Intent intent = new Intent(RecordActivity.this, GalleryActivity.class);
-                intent.putExtra(MainApplication.APPOINTMENT_ID_EXTRA, appointmentId);
-                intent.putExtra(MainApplication.RECORD_TYPE_ID_EXTRA, appointmentRecord.name);
-                intent.putExtra(MainApplication.IMAGE_INDEX_EXTRA, position);
+                startGalleryActivity(position);
             }
         });
     }
+
+
+    private void startGalleryActivity(int imagePosition) {
+        Intent intent = new Intent(RecordActivity.this, GalleryActivity.class);
+        intent.putExtra(MainApplication.APPOINTMENT_ID_EXTRA, appointmentId);
+        intent.putExtra(MainApplication.RECORD_TYPE_ID_EXTRA, appointmentRecord.name);
+        intent.putExtra(MainApplication.IMAGE_INDEX_EXTRA, imagePosition);
+        startActivity(intent);
+    }
+
+
 
     public void onCameraClick(View view) {
         PackageManager packageManager = getPackageManager();
@@ -140,8 +145,6 @@ public class RecordActivity extends BaseActivity {
             String url = Uri.parse(path).toString();
             appointmentRecord.imageUrls.add(url);
             galleryPreviewFragment.update();
-
-            //mImageView.setImageBitmap(imageBitmap);
         }
     }
 
@@ -150,21 +153,6 @@ public class RecordActivity extends BaseActivity {
         getMenuInflater().inflate(R.menu.record_menu, menu);
         return true;
     }
-
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                //saveAndClose();
-                return true;
-            case R.id.action_delete:
-                //deleteAndClose();
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
 
     //@Override
     public void saveModel() {
@@ -177,10 +165,7 @@ public class RecordActivity extends BaseActivity {
     }
 
 
-    @Override
-    public void onBackPressed() { finish();
-        //saveAndClose();
-    }
+
 
 
 }

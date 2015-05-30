@@ -40,6 +40,21 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     }
 
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                saveAndClose();
+                return true;
+            case R.id.action_delete:
+                deleteAndClose();
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
     /**
      *  Override to delete model associated with current activity (e.g. appointment or record)
      */
@@ -57,7 +72,10 @@ public abstract class BaseActivity extends AppCompatActivity {
         finish();
     }
 
-
+    @Override
+    public void onBackPressed() {
+        saveAndClose();
+    }
     public MainApplication getApp() {
         return (MainApplication) getApplication();
     }

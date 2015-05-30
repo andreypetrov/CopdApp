@@ -57,8 +57,7 @@ public class GalleryPreviewFragment extends BaseFragment {
             gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 public void onItemClick(AdapterView<?> parent, View v,
                                         int position, long id) {
-                    Toast.makeText(context, "" + position + ", record note: " + record.note,
-                            Toast.LENGTH_SHORT).show();
+                    //TODO add click ui effects here potentially
                     if (onGalleryClickListener != null) onGalleryClickListener.onImageClick(position);
                 }
             });

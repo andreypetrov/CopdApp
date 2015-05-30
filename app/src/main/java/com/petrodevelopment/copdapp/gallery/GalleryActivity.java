@@ -2,6 +2,8 @@ package com.petrodevelopment.copdapp.gallery;
 
 import android.os.Bundle;
 import android.os.PersistableBundle;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -21,38 +23,43 @@ public class GalleryActivity  extends BaseActivity {
     private String appointmentId;
     private AppointmentRecord appointmentRecord;
     private ImageView imageView;
+
     @Override
-    public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
-        super.onCreate(savedInstanceState, persistentState);
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gallery);
 
-
+        initViews();
         initModel();
+        initToolbar();
         updateUi();
     }
-
+    private void initToolbar() {
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        setTitle(appointmentRecord.name);
+    }
 
     public void initViews() {
         imageView = (ImageView) findViewById(R.id.image_view);
         imageView.setOnTouchListener(new OnSwipeTouchListener(GalleryActivity.this) {
             @Override
             public void onSwipeLeft() {
-                Toast.makeText(GalleryActivity.this, "left", Toast.LENGTH_SHORT).show();
+                onBackSlide();
             }
 
             @Override
             public void onSwipeRight() {
-                Toast.makeText(GalleryActivity.this, "right", Toast.LENGTH_SHORT).show();
+                onForwardSlide();
             }
 
             @Override
             public void onSwipeTop() {
-                Toast.makeText(GalleryActivity.this, "top", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onSwipeBottom() {
-                Toast.makeText(GalleryActivity.this, "bottom", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -62,6 +69,7 @@ public class GalleryActivity  extends BaseActivity {
         appointmentId = getIntent().getStringExtra(MainApplication.APPOINTMENT_ID_EXTRA);
         imageIndex = getIntent().getIntExtra(MainApplication.IMAGE_INDEX_EXTRA, 0);
         appointmentRecord = ((MainApplication)getApplication()).getAppointment(appointmentId).severity;//TODO make this dynamic
+
     }
 
 
@@ -73,17 +81,24 @@ public class GalleryActivity  extends BaseActivity {
     }
 
 
-    public void onBackSlide(View view) {
+    public void onBackSlide() {
         if (imageIndex > 0) {
             imageIndex--;
             updateUi();
         }
     }
 
-    public void onForwardSlide(View view) {
+    public void onForwardSlide() {
         if (imageIndex < appointmentRecord.imageUrls.size() - 1){
             imageIndex++;
             updateUi();
         }
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.gallery_menu, menu);
+        return true;
     }
 }

@@ -56,13 +56,16 @@
 
         <activity
             android:name=".record.RecordActivity"
-            android:theme="@style/LargeDialog"
             android:label="@string/app_name" >
         </activity>
         <activity
             android:name=".record.RecordAppointmentActivity"
             android:label="@string/record_appointment"
             android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <activity
+            android:name=".gallery.GalleryActivity"
+            android:label="@string/app_name" >
         </activity>
         <activity
             android:name=".activities.HomeActivity"
