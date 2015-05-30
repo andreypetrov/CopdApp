@@ -1,12 +1,10 @@
 package com.petrodevelopment.copdapp.activities;
 
 import android.app.Fragment;
-import android.app.FragmentManager;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -38,12 +36,16 @@ public class HomeActivity extends BaseActivity
      * Used to store the last screen title. For use in {@link #restoreActionBar()}.
      */
     private CharSequence mTitle;
+
     private SearchView mSearchView;
+    private String searchViewHint;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        initModel();
         initToolbar();
         initDrawer();
 //        initSpinner();
@@ -66,15 +68,16 @@ public class HomeActivity extends BaseActivity
 //        spinner.setAdapter(adapter);
 //    }
 
+    @Override
+    public void initModel() {
+        setSearchViewHint(getString(R.string.search_appointments));
+    }
+
     public void initToolbar() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
     }
 
-    @Override
-    public void initModel() {
-        // do nothing, model initialization is happening in the section fragments
-    }
 
     public void startRecordAppointmentActivity(String appointmentId) {
         Intent intent = new Intent(this, RecordAppointmentActivity.class);
@@ -118,7 +121,27 @@ public class HomeActivity extends BaseActivity
     @Override
     public void onNavigationDrawerItemSelected(int position) {
         if (position == 4) startRecordAppointmentActivity("test");
-        else replaceFragment(R.id.container, createSectionFragment(position));
+        else {
+            replaceFragment(R.id.container, createSectionFragment(position));
+            replaceSearchHint(position);
+        }
+    }
+
+    private void replaceSearchHint(int position) {
+        switch (position) {
+            case 0:
+                setSearchViewHint(getString(R.string.search_appointments));
+                break;
+            case 1:
+                setSearchViewHint(getString(R.string.search_providers));
+                break;
+            case 2:
+                setSearchViewHint(getString(R.string.search_medications));
+                break;
+            default:
+                setSearchViewHint(getString(R.string.search_caregivers));
+        }
+        invalidateOptionsMenu();
     }
 
     private Fragment createSectionFragment(int position) {
@@ -154,19 +177,24 @@ public class HomeActivity extends BaseActivity
             // if the drawer is not showing. Otherwise, let the drawer
             // decide what to show in the action bar.
             getMenuInflater().inflate(R.menu.home_menu, menu);
-            setupSearch(menu);
+            updateSearch(menu);
             restoreActionBar();
             return true;
         }
         return super.onCreateOptionsMenu(menu);
     }
 
-    private void setupSearch(Menu menu) {
+    //public void SetupSearch()
+
+    private void updateSearch(Menu menu) {
         MenuItem searchItem = menu.findItem(R.id.action_search);
         mSearchView = (SearchView) searchItem.getActionView();
-        //TODO make this dependent on the current fragment and delegate search to fragments in the text change callback
-        mSearchView.setQueryHint(getString(R.string.search_appointments));
-        mSearchView.findViewById(R.id.search_plate).setBackgroundColor(Color.TRANSPARENT);
+
+        mSearchView.setQueryHint(searchViewHint);
+        //mSearchView.setIconifiedByDefault(true);
+        mSearchView.setIconifiedByDefault(false);
+
+        //mSearchView.findViewById(R.id.search_plate).setBackgroundColor(Color.RED);
         mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
@@ -176,11 +204,15 @@ public class HomeActivity extends BaseActivity
 
             @Override
             public boolean onQueryTextChange(String s) {
+                //TODO delegate search to fragments in the text change callback
                 U.log(this, "query text change: " + s);
                 return false;
             }
         });
         mSearchView.setSubmitButtonEnabled(false);
+    }
 
+    public void setSearchViewHint(String searchViewHint) {
+        this.searchViewHint = searchViewHint;
     }
 }
