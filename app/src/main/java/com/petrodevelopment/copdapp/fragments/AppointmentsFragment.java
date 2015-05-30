@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.Locale;
 
 /**
+ * TODO in the distant future apply filtering both by tab and by search field to return the intersection of the two search criteria
  * Created by Andrey on 14/05/2015.
  */
 public class AppointmentsFragment extends FilterableFragment {
@@ -54,6 +55,7 @@ public class AppointmentsFragment extends FilterableFragment {
         tabsView.setOnTabSelectedListener(new TabsView.OnTabSelectedListener() {
             @Override
             public void onTabSelected(int position, View view) {
+                ((HomeActivity)getActivity()).closeSearchView();
                 switch (position) {
                     case 0:
                         filterReset();
@@ -125,10 +127,12 @@ public class AppointmentsFragment extends FilterableFragment {
             Provider provider = appointment.getProvider(getActivity());
             ClinicianType clinicianType = provider.getClinitianType(getActivity());
 
+            //in the date fields we will check for contaning
             Date date = U.convertUnixStringToDate(appointment.date);
             String dateString = U.convertToDateString(date);
             String timeString = U.convertToTimeString(date);
 
+            //we will check in those fields for starting with
             String[] fields = {
                     provider.firstName,
                     provider.lastName,

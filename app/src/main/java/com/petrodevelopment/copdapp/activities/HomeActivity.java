@@ -10,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.support.v4.widget.DrawerLayout;
+import android.view.View;
 
 import com.petrodevelopment.copdapp.MainApplication;
 import com.petrodevelopment.copdapp.NavigationDrawerFragment;
@@ -41,6 +42,7 @@ public class HomeActivity extends BaseActivity
     private SearchView mSearchView;
     private String searchViewHint;
     private FilterableFragment currentFragment;
+    private MenuItem mSearchItem;
 
 
     @Override
@@ -187,11 +189,16 @@ public class HomeActivity extends BaseActivity
         return super.onCreateOptionsMenu(menu);
     }
 
+
+    public void closeSearchView(){
+        mSearchItem.collapseActionView();
+    }
+
     //public void SetupSearch()
 
     private void updateSearch(Menu menu) {
-        MenuItem searchItem = menu.findItem(R.id.action_search);
-        mSearchView = (SearchView) searchItem.getActionView();
+        mSearchItem = menu.findItem(R.id.action_search);
+        mSearchView = (SearchView) mSearchItem.getActionView();
 
         mSearchView.setQueryHint(searchViewHint);
         //mSearchView.setIconifiedByDefault(true);
@@ -207,10 +214,11 @@ public class HomeActivity extends BaseActivity
 
             @Override
             public boolean onQueryTextChange(String s) {
-                if(currentFragment != null) currentFragment.filterList(s);
+                if (currentFragment != null) currentFragment.filterList(s);
                 return false;
             }
         });
+
         mSearchView.setSubmitButtonEnabled(false);
     }
 
