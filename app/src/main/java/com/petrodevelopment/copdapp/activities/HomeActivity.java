@@ -51,7 +51,7 @@ public class HomeActivity extends BaseActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         getApp().getPreferences().init();
-        verifyLogin();
+        //verifyLogin();
         initModel();
         initToolbar();
         initDrawer();
