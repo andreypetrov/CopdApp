@@ -44,12 +44,11 @@ public class HomeActivity extends BaseActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        initToolbar();
         initDrawer();
 //        initSpinner();
         mTitle = getTitle();
-        startRecordAppointmentActivity("0");
+//        startRecordAppointmentActivity("0");
 //        startAddAppointmentActivity();
 //        Retrofit.initialize();
 //        startRecordActivity(3);
@@ -67,6 +66,10 @@ public class HomeActivity extends BaseActivity
 //        spinner.setAdapter(adapter);
 //    }
 
+    public void initToolbar() {
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+    }
 
     @Override
     public void initModel() {

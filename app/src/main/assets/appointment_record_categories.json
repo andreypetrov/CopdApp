@@ -1,51 +1,53 @@
 {
-  "appointmentRecordCategories": [
+  "appointmentRecordCategoryTypes": [
     {
-      "id": "1",
-      "type": "category",
-      "name": "Diagnosis",
+      "id": "0",
+      "typeId": "none",
+      "name": "Assessment",
       "image": "ic_diagnosis"
-
     },
     {
       "id": "1",
-      "type": "subcategory",
+      "typeId": "none",
+      "name": "Plan",
+      "image": "ic_plan_color"
+    }
+  ],
+
+  "appointmentRecordCategories": [
+    {
+      "id": "0",
+      "typeId": "0",
       "name": "Severity",
       "image": "ic_severity_blue"
     },
     {
-      "id": "2",
-      "type": "subcategory",
+      "id": "1",
+      "typeId": "0",
       "name": "Assessment",
       "image": "ic_assessment_blue"
     },
     {
       "id": "2",
-      "type": "category",
-      "name": "Plan",
-      "image": "ic_plan_color"
-    },
-    {
-      "id": "1",
-      "type": "subcategory",
+      "typeId": "1",
       "name": "Medications",
       "image": "ic_medicationa_blue"
     },
     {
-      "id": "2",
-      "type": "subcategory",
+      "id": "3",
+      "typeId": "1",
       "name": "Tests",
       "image": "ic_tests_bue"
     },
     {
-      "id": "3",
-      "type": "subcategory",
+      "id": "4",
+      "typeId": "1",
       "name": "Life style changes",
       "image": "ic_lifestyle_blue"
     },
     {
-      "id": "4",
-      "type": "subcategory",
+      "id": "5",
+      "typeId": "1",
       "name": "Future referrals",
       "image": "ic_referrals_blue"
     }

@@ -1,9 +1,7 @@
 package com.petrodevelopment.copdapp.record;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,11 +13,6 @@ import com.petrodevelopment.copdapp.R;
 import com.petrodevelopment.copdapp.activities.BaseActivity;
 import com.petrodevelopment.copdapp.adapters.AppointmentRecordCategoriesAdapter;
 import com.petrodevelopment.copdapp.model.Appointment;
-import com.petrodevelopment.copdapp.model.AppointmentList;
-import com.petrodevelopment.copdapp.model.AppointmentRecord;
-import com.petrodevelopment.copdapp.util.JsonLoader;
-import com.petrodevelopment.copdapp.util.U;
-import com.petrodevelopment.copdapp.viewmodel.AppointmentRecordCategoriesVm;
 
 /**
  * Created by andrey on 15/05/2015.
@@ -62,12 +55,8 @@ public class RecordAppointmentActivity extends BaseActivity {
 
     private void initListView() {
         ListView listView = (ListView) findViewById(R.id.list_view);
-        String json = JsonLoader.loadJsonFromAssets(this, "appointment_record_categories");
-        AppointmentRecordCategoriesVm categoriesObject = JsonLoader.GSON.fromJson(json, AppointmentRecordCategoriesVm.class);
-
-
         adapter = new AppointmentRecordCategoriesAdapter(
-                categoriesObject.appointmentRecordCategories,
+                getApp().appointmentRecordCategoryList.getAppointmentRecordCategoriesAndTypesFlattened(),
                 appointment,
                 this,
                 R.layout.cell_appointment_record_category,
@@ -81,11 +70,6 @@ public class RecordAppointmentActivity extends BaseActivity {
                     startRecordActivity(position); //if it is a subcategory then open it for editing
             }
         });
-
-
-
-
-        U.log(this, json);
     }
 
     public void startRecordActivity(int position) {

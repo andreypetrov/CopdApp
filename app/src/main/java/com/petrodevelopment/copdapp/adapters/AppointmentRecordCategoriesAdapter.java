@@ -1,24 +1,21 @@
 package com.petrodevelopment.copdapp.adapters;
 
 import android.content.Context;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
-import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.petrodevelopment.copdapp.MainApplication;
 import com.petrodevelopment.copdapp.R;
 import com.petrodevelopment.copdapp.model.Appointment;
 import com.petrodevelopment.copdapp.model.AppointmentRecord;
+import com.petrodevelopment.copdapp.model.AppointmentRecordCategory;
 import com.petrodevelopment.copdapp.util.U;
-import com.petrodevelopment.copdapp.viewmodel.AppointmentListVm;
-import com.petrodevelopment.copdapp.viewmodel.AppointmentRecordCategoryVm;
 
 import java.util.List;
 
@@ -26,15 +23,14 @@ import java.util.List;
  * Every category has subcategories
  * Created by andrey on 15/05/2015.
  */
-public class AppointmentRecordCategoriesAdapter extends GenericAdapter<AppointmentRecordCategoryVm> {
-    public static final String TYPE_CATEGORY = "category";
-    public static final String TYPE_SUBCATEGORY = "subcategory";
+public class AppointmentRecordCategoriesAdapter extends GenericAdapter<AppointmentRecordCategory> {
+    public static final String TYPE_ID_CATEGORY = "none";
 
     private int categoryLayoutId;
     private int subcategoryLayoutId;
     private Appointment appointment;
 
-    public AppointmentRecordCategoriesAdapter(List<AppointmentRecordCategoryVm> data, Appointment appointment, Context context, int categoryLayoutId, int subcategoryLayoutId) {
+    public AppointmentRecordCategoriesAdapter(List<AppointmentRecordCategory> data, Appointment appointment, Context context, int categoryLayoutId, int subcategoryLayoutId) {
         super(data, context);
         this.appointment = appointment;
         this.categoryLayoutId = categoryLayoutId;
@@ -47,7 +43,7 @@ public class AppointmentRecordCategoriesAdapter extends GenericAdapter<Appointme
 //            updateListener(view, position);
 //            updateAppointmentData(view, position);
         }
-        AppointmentRecordCategoryVm category = getItem(position);
+        AppointmentRecordCategory category = getItem(position);
 
         TextView nameView = (TextView) view.findViewById(R.id.name);
         nameView.setText(category.name);
@@ -63,22 +59,8 @@ public class AppointmentRecordCategoriesAdapter extends GenericAdapter<Appointme
      * @return
      */
     public AppointmentRecord getFromIndex(int position) {
-        switch (position) {
-            case 1:
-                return appointment.severity;
-            case 2:
-                return appointment.assessment;
-            case 4:
-                return appointment.medications;
-            case 5:
-                return appointment.tests;
-            case 6:
-                return appointment.lifeStyleChanges;
-            case 7:
-                return appointment.futureReferrals;
-            default:
-                return null;
-        }
+        AppointmentRecordCategory appointmentRecordCategory = getItem(position);
+        return ((MainApplication) context.getApplicationContext()).getAppointmentRecord(appointmentRecordCategory.id, appointment);
     }
 
     private void updateAppointmentData(View view, int position) {
@@ -151,7 +133,7 @@ public class AppointmentRecordCategoriesAdapter extends GenericAdapter<Appointme
 
     @Override
     public int getItemViewType(int position) {
-        if (getItem(position).type.equals(TYPE_CATEGORY)) return 0;
+        if (getItem(position).typeId.equals(TYPE_ID_CATEGORY)) return 0;
         else return 1; //subcategory
     }
 }

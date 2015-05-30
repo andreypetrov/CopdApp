@@ -4,6 +4,9 @@ import android.app.Application;
 
 import com.petrodevelopment.copdapp.model.Appointment;
 import com.petrodevelopment.copdapp.model.AppointmentList;
+import com.petrodevelopment.copdapp.model.AppointmentRecord;
+import com.petrodevelopment.copdapp.model.AppointmentRecordCategory;
+import com.petrodevelopment.copdapp.model.AppointmentRecordCategoryList;
 import com.petrodevelopment.copdapp.model.ClinicianType;
 import com.petrodevelopment.copdapp.model.ClinicianTypeList;
 import com.petrodevelopment.copdapp.model.Provider;
@@ -11,6 +14,7 @@ import com.petrodevelopment.copdapp.model.ProviderList;
 import com.petrodevelopment.copdapp.model.Question;
 import com.petrodevelopment.copdapp.model.QuestionList;
 import com.petrodevelopment.copdapp.util.Preferences;
+import com.petrodevelopment.copdapp.util.U;
 
 import java.util.HashMap;
 import java.util.List;
@@ -37,6 +41,8 @@ public class MainApplication extends Application {
     private Map<String, Appointment> appointmentMap;
     public QuestionList questionList;
     private Map<String, Question> questionMap;
+    public AppointmentRecordCategoryList appointmentRecordCategoryList;
+    private Map<String, AppointmentRecordCategory> appointmentRecordCategoryMap;
 
     private Preferences preferences;
 
@@ -46,6 +52,7 @@ public class MainApplication extends Application {
         initClinicianTypes();
         initProviders();
         initAppointments();
+        initAppointmentRecordCategories();
         initQuestions();
     }
 
@@ -69,6 +76,16 @@ public class MainApplication extends Application {
             appointmentMap.put(appointment.id, appointment);
         }
     }
+
+    private void initAppointmentRecordCategories() {
+        appointmentRecordCategoryList = AppointmentRecordCategoryList.fromAsset(this);
+        appointmentRecordCategoryMap = new HashMap<>();
+        for (AppointmentRecordCategory appointmentRecordCategory : appointmentRecordCategoryList.appointmentRecordCategories) {
+            appointmentRecordCategoryMap.put(appointmentRecordCategory.id, appointmentRecordCategory);
+        }
+        U.log(this, appointmentRecordCategoryList.toString());
+    }
+
 
     private void initProviders() {
         providerList = ProviderList.fromAsset(this);
@@ -104,9 +121,22 @@ public class MainApplication extends Application {
         return questionMap.get(id);
     }
 
+    public AppointmentRecordCategory getAppointmentRecordCategory(String id) {
+        return appointmentRecordCategoryMap.get(id);
+    }
+
+    public AppointmentRecord getAppointmentRecord(String appointmentRecordCategoryId, Appointment appointment) {
+        for (AppointmentRecord appointmentRecord : appointment.appointmentRecords) {
+            if (appointmentRecord.getAppointmentRecordCategory(this).id.equals(appointmentRecordCategoryId)) {
+                return appointmentRecord;
+            }
+        }
+        return null;
+    }
 
     public Preferences getPreferences() {
         if (preferences == null) preferences = new Preferences(this);
         return preferences;
     }
+
 }

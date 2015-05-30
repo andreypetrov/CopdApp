@@ -11,7 +11,11 @@
     <style name="AppTheme.SearchView" parent="Widget.AppCompat.SearchView">
         <item name="searchIcon">@drawable/ic_search_white_48dp</item>
         <item name="iconifiedByDefault">true</item>
+        <item name="closeIcon">@drawable/ic_search_white_48dp</item>
+
     </style>
+
+
 
     <style name="LargeDialog" parent="@style/Theme.AppCompat.Light.Dialog">
         <item name="android:windowActionBar">false</item>

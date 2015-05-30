@@ -56,7 +56,7 @@ public class RecordActivity extends BaseActivity {
     @Override
     public void initModel() {
         appointmentId = getIntent().getStringExtra(MainApplication.APPOINTMENT_ID_EXTRA);
-        appointmentRecord = ((MainApplication)getApplication()).getAppointment(appointmentId).severity;//TODO make this dynamic
+        appointmentRecord = ((MainApplication)getApplication()).getAppointment(appointmentId).appointmentRecords.get(0);//TODO make this dynamic
     }
 
     private void initVoice(){
@@ -115,7 +115,7 @@ public class RecordActivity extends BaseActivity {
     private void startGalleryActivity(int imagePosition) {
         Intent intent = new Intent(RecordActivity.this, GalleryActivity.class);
         intent.putExtra(MainApplication.APPOINTMENT_ID_EXTRA, appointmentId);
-        intent.putExtra(MainApplication.RECORD_TYPE_ID_EXTRA, appointmentRecord.name);
+        intent.putExtra(MainApplication.RECORD_TYPE_ID_EXTRA, appointmentRecord.getAppointmentRecordCategory(this).name);
         intent.putExtra(MainApplication.IMAGE_INDEX_EXTRA, imagePosition);
         startActivity(intent);
     }

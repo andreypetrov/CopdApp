@@ -20,12 +20,7 @@ public class Appointment extends Model {
     public String providerId;
 
     //Edited via the Record Appointment screen
-    public AppointmentRecord severity;
-    public AppointmentRecord assessment;
-    public AppointmentRecord medications;
-    public AppointmentRecord tests;
-    public AppointmentRecord lifeStyleChanges;
-    public AppointmentRecord futureReferrals;
+    public List<AppointmentRecord> appointmentRecords;
 
     public Appointment(){
 

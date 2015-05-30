@@ -2,6 +2,7 @@ package com.petrodevelopment.copdapp.model;
 
 import android.content.Context;
 
+import com.petrodevelopment.copdapp.MainApplication;
 import com.petrodevelopment.copdapp.util.JsonLoader;
 
 import java.util.List;
@@ -11,7 +12,8 @@ import java.util.List;
  */
 public class AppointmentRecord extends Model {
 
-    public String name;
+    public String id;
+    public String appointmentRecordTypeId;
     public String note;
     public String voiceRecordUrl;
     public List<String> imageUrls;
@@ -26,6 +28,9 @@ public class AppointmentRecord extends Model {
         this.imageUrls = imageUrls;
     }
 
+    public AppointmentRecordCategory getAppointmentRecordCategory(Context context) {
+        return ((MainApplication)context.getApplicationContext()).getAppointmentRecordCategory(appointmentRecordTypeId);
+    }
 
     private static AppointmentRecord fromJson(String json) {
         return JsonLoader.GSON.fromJson(json, AppointmentRecord.class);
