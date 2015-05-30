@@ -36,7 +36,7 @@ public class ModelFacade {
 
     public ModelFacade(Context context) {
         this.context = context;
-        //resetModel(); //for testing only. Comment out this line if you want your models to persist.
+        resetModel(); //for testing only. Comment out this line if you want your models to persist.
         loadModel();
     }
 

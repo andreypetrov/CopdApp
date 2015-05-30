@@ -7,7 +7,7 @@
       "photoUrl": "https://lh4.googleusercontent.com/-4OBPaUrA_5g/AAAAAAAAAAI/AAAAAAAAABY/DQUmqzsH4qY/photo.jpg",
       "phoneNumber": "+1 647 777 777",
       "email": "dummy@hospital.com",
-      "clinicianType": "1",
+      "clinicianTypeId": "1",
       "address": {
         "id":"0",
         "street": "1 Market Square West Avenue",
@@ -25,7 +25,7 @@
       "photoUrl": "https://lh4.googleusercontent.com/-4OBPaUrA_5g/AAAAAAAAAAI/AAAAAAAAABY/DQUmqzsH4qY/photo.jpg",
       "phoneNumber": "+1 647 777 777",
       "email": "james.ye@hospital.com",
-      "clinicianType": "1",
+      "clinicianTypeId": "1",
       "address": {
         "id":"1",
         "street": "1 Market Square West Avenue",
@@ -43,7 +43,7 @@
       "photoUrl": "https://lh4.googleusercontent.com/-4OBPaUrA_5g/AAAAAAAAAAI/AAAAAAAAABY/DQUmqzsH4qY/photo.jpg",
       "phoneNumber": "+1 647 777 777",
       "email": "james.ye@hospital.com",
-      "clinicianType": "2",
+      "clinicianTypeId": "2",
       "address": {
         "id":"2",
         "street": "224 James Street South",
@@ -61,7 +61,7 @@
       "photoUrl": "https://lh4.googleusercontent.com/-4OBPaUrA_5g/AAAAAAAAAAI/AAAAAAAAABY/DQUmqzsH4qY/photo.jpg",
       "phoneNumber": "+1 647 777 777",
       "email": "james.ye@hospital.com",
-      "clinicianType": "2",
+      "clinicianTypeId": "2",
       "address": {
         "id":"3",
         "street": "1 Market Square West Avenue",
@@ -79,7 +79,7 @@
       "photoUrl": "https://lh4.googleusercontent.com/-4OBPaUrA_5g/AAAAAAAAAAI/AAAAAAAAABY/DQUmqzsH4qY/photo.jpg",
       "phoneNumber": "+1 647 777 777",
       "email": "james.ye@hospital.com",
-      "clinicianType": "1",
+      "clinicianTypeId": "1",
       "address": {
         "id":"4",
         "street": "1 Market Square West Avenue",
