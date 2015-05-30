@@ -1,13 +1,14 @@
 {
   "providers": [
     {
-      "id": 0,
-      "firstName": "Select",
-      "lastName": "Provider",
+      "id": "0",
+      "title": "Dr.",
+      "firstName": "One",
+      "lastName": "Man",
       "photoUrl": "https://lh4.googleusercontent.com/-4OBPaUrA_5g/AAAAAAAAAAI/AAAAAAAAABY/DQUmqzsH4qY/photo.jpg",
       "phoneNumber": "+1 647 777 777",
-      "email": "dummy@hospital.com",
-      "clinicianTypeId": "1",
+      "email": "james.ye@hospital.com",
+      "clinicianTypeId": "0",
       "address": {
         "id":"0",
         "street": "1 Market Square West Avenue",
@@ -19,33 +20,16 @@
       }
     },
     {
-      "id": 1,
-      "firstName": "James",
-      "lastName": "Ye",
+      "id": "1",
+      "title": "Mr.",
+      "firstName": "Tom",
+      "lastName": "White",
       "photoUrl": "https://lh4.googleusercontent.com/-4OBPaUrA_5g/AAAAAAAAAAI/AAAAAAAAABY/DQUmqzsH4qY/photo.jpg",
       "phoneNumber": "+1 647 777 777",
       "email": "james.ye@hospital.com",
       "clinicianTypeId": "1",
       "address": {
         "id":"1",
-        "street": "1 Market Square West Avenue",
-        "city": "Toronto",
-        "province": "ON",
-        "postalCode": "P2P 2P2",
-        "latitude": "43.6430879",
-        "longitude": "-79.4186298"
-      }
-    },
-    {
-      "id": 2,
-      "firstName": "Tom",
-      "lastName": "White",
-      "photoUrl": "https://lh4.googleusercontent.com/-4OBPaUrA_5g/AAAAAAAAAAI/AAAAAAAAABY/DQUmqzsH4qY/photo.jpg",
-      "phoneNumber": "+1 647 777 777",
-      "email": "james.ye@hospital.com",
-      "clinicianTypeId": "2",
-      "address": {
-        "id":"2",
         "street": "224 James Street South",
         "city": "Hamilton",
         "province": "ON",
@@ -55,13 +39,33 @@
       }
     },
     {
-      "id": 3,
-      "firstName": "Jane",
-      "lastName": "Ye",
+      "id": "2",
+      "title": "Dr.",
+      "firstName": "Man Man",
+      "lastName": "Tetris",
       "photoUrl": "https://lh4.googleusercontent.com/-4OBPaUrA_5g/AAAAAAAAAAI/AAAAAAAAABY/DQUmqzsH4qY/photo.jpg",
       "phoneNumber": "+1 647 777 777",
       "email": "james.ye@hospital.com",
       "clinicianTypeId": "2",
+      "address": {
+        "id":"2",
+        "street": "1 Market Square West Avenue",
+        "city": "Toronto",
+        "province": "ON",
+        "postalCode": "P2P 2P2",
+        "latitude": "43.6430879",
+        "longitude": "-79.4186298"
+      }
+    },
+    {
+      "id": "3",
+      "title": "Dr.",
+      "firstName": "Will",
+      "lastName": "Smith",
+      "photoUrl": "https://lh4.googleusercontent.com/-4OBPaUrA_5g/AAAAAAAAAAI/AAAAAAAAABY/DQUmqzsH4qY/photo.jpg",
+      "phoneNumber": "+1 647 777 777",
+      "email": "james.ye@hospital.com",
+      "clinicianTypeId": "3",
       "address": {
         "id":"3",
         "street": "1 Market Square West Avenue",
@@ -73,21 +77,60 @@
       }
     },
     {
-      "id": 4,
-      "firstName": "Mickey",
-      "lastName": "Mouse",
+      "id": "4",
+      "title": "Dr.",
+      "firstName": "Ben",
+      "lastName": "Afleck",
       "photoUrl": "https://lh4.googleusercontent.com/-4OBPaUrA_5g/AAAAAAAAAAI/AAAAAAAAABY/DQUmqzsH4qY/photo.jpg",
       "phoneNumber": "+1 647 777 777",
       "email": "james.ye@hospital.com",
-      "clinicianTypeId": "1",
+      "clinicianTypeId": "4",
       "address": {
         "id":"4",
         "street": "1 Market Square West Avenue",
         "city": "Toronto",
         "province": "ON",
         "postalCode": "P2P 2P2",
-        "latitude": "43.4554269",
-        "longitude": "-79.6864468"
+        "latitude": "43.6430879",
+        "longitude": "-79.4186298"
+      }
+    },
+    {
+      "id": "5",
+      "title": "Dr.",
+      "firstName": "Ben",
+      "lastName": "Afleck",
+      "photoUrl": "https://lh4.googleusercontent.com/-4OBPaUrA_5g/AAAAAAAAAAI/AAAAAAAAABY/DQUmqzsH4qY/photo.jpg",
+      "phoneNumber": "+1 647 777 777",
+      "email": "james.ye@hospital.com",
+      "clinicianTypeId": "5",
+      "address": {
+        "id":"5",
+        "street": "1 Market Square West Avenue",
+        "city": "Toronto",
+        "province": "ON",
+        "postalCode": "P2P 2P2",
+        "latitude": "43.6430879",
+        "longitude": "-79.4186298"
+      }
+    },
+    {
+      "id": "6",
+      "title": "Dr.",
+      "firstName": "Tres",
+      "lastName": "Bien",
+      "photoUrl": "https://lh4.googleusercontent.com/-4OBPaUrA_5g/AAAAAAAAAAI/AAAAAAAAABY/DQUmqzsH4qY/photo.jpg",
+      "phoneNumber": "+1 647 777 777",
+      "email": "james.ye@hospital.com",
+      "clinicianTypeId": "2",
+      "address": {
+        "id":"6",
+        "street": "1 Market Square West Avenue",
+        "city": "Toronto",
+        "province": "ON",
+        "postalCode": "P2P 2P2",
+        "latitude": "43.6430879",
+        "longitude": "-79.4186298"
       }
     }
   ]
