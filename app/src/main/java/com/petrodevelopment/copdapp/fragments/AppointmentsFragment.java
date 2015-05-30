@@ -50,12 +50,17 @@ public class AppointmentsFragment extends FilterableFragment {
     }
 
 
+    /**
+     * Attach tab listener
+     * TODO update the last tab to the doctor name by tabsView.updateText(position, "Dr. Jekyll");
+     * @param rootView
+     */
     private void initTabs(View rootView) {
         TabsView tabsView = (TabsView) rootView.findViewById(R.id.tabs);
         tabsView.setOnTabSelectedListener(new TabsView.OnTabSelectedListener() {
             @Override
             public void onTabSelected(int position, View view) {
-                ((HomeActivity)getActivity()).closeSearchView();
+                ((HomeActivity) getActivity()).closeSearchView();
                 switch (position) {
                     case 0:
                         filterReset();
@@ -70,6 +75,7 @@ public class AppointmentsFragment extends FilterableFragment {
                 }
             }
         });
+
     }
 
     private void initList(View rootView) {

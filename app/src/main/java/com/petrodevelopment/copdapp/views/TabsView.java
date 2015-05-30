@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.petrodevelopment.copdapp.R;
 import com.petrodevelopment.copdapp.util.U;
@@ -77,6 +78,19 @@ public class TabsView extends LinearLayout {
             }
             if (mOnTabSelectedListener != null)
                 mOnTabSelectedListener.onTabSelected(mCurrentPosition, getChildAt(mCurrentPosition));
+        }
+    }
+
+    /**
+     * Update the text of the given tab
+     *
+     * @param position
+     * @param text
+     */
+    public void updateText(int position, String text) {
+        View tabView = getChildAt(position);
+        if (tabView instanceof TextView) {
+            ((TextView) tabView).setText(text);
         }
     }
 }
