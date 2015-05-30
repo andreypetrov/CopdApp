@@ -3,6 +3,7 @@ package com.petrodevelopment.copdapp;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -24,12 +25,15 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.petrodevelopment.copdapp.activities.LoginActivity;
+import com.petrodevelopment.copdapp.fragments.BaseFragment;
+
 /**
  * Fragment used for managing interactions for and presentation of a navigation drawer.
  * See the <a href="https://developer.android.com/design/patterns/navigation-drawer.html#Interaction">
  * design guidelines</a> for a complete explanation of the behaviors implemented here.
  */
-public class NavigationDrawerFragment extends Fragment {
+public class NavigationDrawerFragment extends BaseFragment {
 
     /**
      * Remember the position of the selected item.
@@ -92,8 +96,26 @@ public class NavigationDrawerFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View v =  inflater.inflate(R.layout.fragment_navigation_drawer, container, false);
-        mDrawerListView = (ListView) v.findViewById(R.id.navigation_list_view);
+        View view =  inflater.inflate(R.layout.fragment_navigation_drawer, container, false);
+        initDrawerList(view);
+        initLogoutButton(view);
+        return view;
+    }
+
+    private void initLogoutButton(View view) {
+        View logoutButton = view.findViewById(R.id.logout_btn);
+        logoutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getApp().getPreferences().logOut();
+                Intent intent = new Intent(getActivity(), LoginActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+    private void initDrawerList(View view) {
+        mDrawerListView = (ListView) view.findViewById(R.id.navigation_list_view);
         mDrawerListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -106,8 +128,8 @@ public class NavigationDrawerFragment extends Fragment {
                 android.R.id.text1,
                 generateMenu()));
         mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
-        return v;
     }
+
 
     private String[] generateMenu() {
         String[] menuStringArray = new String[]{

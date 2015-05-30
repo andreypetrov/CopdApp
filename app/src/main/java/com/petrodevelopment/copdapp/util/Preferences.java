@@ -11,6 +11,7 @@ public class Preferences {
     public static final String PREFERENCES_FILE_NAME = "preferences";
 
     public static final String IS_USER_LOGGED_IN = "is_user_logged_in";
+    public static final String USER_NAME = "user_name";
 
     private SharedPreferences mSharedPreferences;
     private SharedPreferences.Editor mSharedPreferencesEditor;
@@ -40,6 +41,16 @@ public class Preferences {
 
     private void setIsUserLoggedIn (boolean isUserLoggedIn) {
         mSharedPreferencesEditor.putBoolean(IS_USER_LOGGED_IN, isUserLoggedIn);
+        mSharedPreferencesEditor.apply();
+    }
+
+
+    public String getUserName() {
+        return mSharedPreferences.getString(USER_NAME, "");
+    }
+
+    public void setUserName(String userName) {
+        mSharedPreferencesEditor.putString(IS_USER_LOGGED_IN, userName);
         mSharedPreferencesEditor.apply();
     }
 

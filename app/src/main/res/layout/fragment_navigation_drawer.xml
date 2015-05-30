@@ -28,6 +28,7 @@
         android:dividerHeight="0dp"/>
 
     <Button
+        android:id="@+id/logout_btn"
         android:layout_gravity="center_horizontal"
         android:textColor="@color/white"
         android:background="@drawable/add_button"

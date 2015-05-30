@@ -21,6 +21,7 @@ import com.petrodevelopment.copdapp.fragments.FilterableFragment;
 import com.petrodevelopment.copdapp.fragments.MedicationsFragment;
 import com.petrodevelopment.copdapp.fragments.ProviderFragment;
 import com.petrodevelopment.copdapp.fragments.SectionFragment;
+import com.petrodevelopment.copdapp.model.Login;
 import com.petrodevelopment.copdapp.record.RecordActivity;
 import com.petrodevelopment.copdapp.record.RecordAppointmentActivity;
 import com.petrodevelopment.copdapp.util.U;
@@ -49,6 +50,7 @@ public class HomeActivity extends BaseActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        verifyLogin();
         initModel();
         initToolbar();
         initDrawer();
@@ -59,6 +61,16 @@ public class HomeActivity extends BaseActivity
 //        Retrofit.initialize();
 //        startRecordActivity(3);
     }
+
+    private void verifyLogin() {
+        getApp().getPreferences().init();
+
+        if(!getApp().getPreferences().isUserLoggedIn()) {
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
+        }
+    }
+
 
 //    private void initSpinner() {
 //        Spinner spinner = (Spinner) findViewById(R.id.sort_by_spinner);
