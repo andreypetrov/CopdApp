@@ -3,6 +3,7 @@ package com.petrodevelopment.copdapp.activities;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -15,6 +16,8 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.Spinner;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
@@ -36,11 +39,11 @@ import com.petrodevelopment.copdapp.model.ClinicianType;
 import com.petrodevelopment.copdapp.model.Provider;
 import com.petrodevelopment.copdapp.model.ProviderList;
 import com.petrodevelopment.copdapp.model.Question;
-import com.petrodevelopment.copdapp.model.QuestionList;
 import com.petrodevelopment.copdapp.record.RecordActivity;
 
 import java.util.Calendar;
 import java.util.List;
+import android.widget.TableRow.LayoutParams;
 
 
 public class AddEditAppointmentActivity extends ActionBarActivity implements OnClickListener, OnMapReadyCallback {
@@ -57,15 +60,26 @@ public class AddEditAppointmentActivity extends ActionBarActivity implements OnC
     private GoogleMap map;
 
     private List<Provider> providers;
-    private List<ClinicianType> ct;
-    private ClinicianType clinicianType = new ClinicianType();
     private Provider provider = new Provider();
     private Button recordButton;
     private Button saveAppointment;
 
-    //For Testing Questions
-    private String[] questionList;
+    private List<Question> questions;
+    private Question question = new Question();
 
+    //This is used for creating table rows for questions
+    private final LayoutParams lp = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+    private TextView providerQuestion;
+
+    //Testing
+    private String[] questionArr =  new String[]{
+            "What is the severity of my condition?",
+            "What is the doctor's assessment of me?",
+            "What are the recommended medications? (name, dosage, frequency, and route, beginning date and end date if applicable)",
+            "What tests will be done?",
+            "What lifestyle changes do I have to make?",
+            "What clinicians have I been referred to?",
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,20 +89,18 @@ public class AddEditAppointmentActivity extends ActionBarActivity implements OnC
         //Google Maps Added 19-05-2015 by Tom
         MapFragment mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-        initProviders();
-        initSpinner();
-        initToolbar();
         setUp();
-
-        questionList = new String[]{"...Select Provider to see Quesitons, etc, etc.", "One", "Two", "Three", "Four"};
     }
 
 
     /*
-     * All listeners methods here
+     * Grouping methods for readability
      */
     public void setUp()
     {
+        initProviders();
+        initSpinner();
+        initToolbar();
         selectPickers();
         setButtonListeners();
     }
@@ -114,8 +126,7 @@ public class AddEditAppointmentActivity extends ActionBarActivity implements OnC
 
 
     //Button click listener for saving appointments button
-    public void setSaveAppointmentButtonListener(Button b)
-    {
+    public void setSaveAppointmentButtonListener(Button b) {
         b.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 saveAppointment(v);
@@ -142,6 +153,7 @@ public class AddEditAppointmentActivity extends ActionBarActivity implements OnC
     }
 
 
+
     private void initToolbar() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -159,7 +171,6 @@ public class AddEditAppointmentActivity extends ActionBarActivity implements OnC
         providerSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                //populateQuestions();
                 provider = providers.get(position);
                 address = provider.address.street;
                 name = "Dr. " + provider.firstName + " " + provider.lastName;
@@ -170,6 +181,7 @@ public class AddEditAppointmentActivity extends ActionBarActivity implements OnC
 
                 if (providerSpinner.getSelectedItemPosition() != 0) {
                     createMarker();
+                    populateQuestions();
                 }
             }
 
@@ -310,47 +322,50 @@ public class AddEditAppointmentActivity extends ActionBarActivity implements OnC
         Point screenPosition = projection.toScreenLocation(markerLocation);
 
         Point mappoint = map.getProjection().toScreenLocation(new LatLng(lat, lng));
-        mappoint.set(mappoint.x, mappoint.y+150);
+        mappoint.set(mappoint.x, mappoint.y + 150);
         map.animateCamera(CameraUpdateFactory.newLatLng(map.getProjection().fromScreenLocation(mappoint)));
     }
-    /*
-
-    Projection projection = map.getProjection();
-    LatLng markerLocation = marker.getPosition();
-     Point screenPosition = projection.toScreenLocation(markerLocation);
-
-    Point mappoint = googleMap.getProjection().toScreenLocation(new LatLng(latitude, longitude));
-        mappoint.set(mappoint.x, mappoint.y-30);
-        googleMap.animateCamera(CameraUpdateFactory.newLatLng(googleMap.getProjection().fromScreenLocation(mappoint)));
-
-     */
 
 
     //Added by Tom 22-05-2015, for Question once Provider has been selected
     public void populateQuestions()
     {
-
-
         //First hide the textview questions_per_specialist"
-        //TextView tv = (TextView) findViewById(R.id.questions_per_specialist);
-       // tv.setVisibility(View.GONE);
+        TextView tv = (TextView) findViewById(R.id.questions_per_specialist);
+        tv.setVisibility(View.GONE);
 
-        //Display Question//
-        //Question
-
-        //List<Question> questions = QuestionList.fromAsset(this).questions;
-        /*
-        LinearLayout layout = new LinearLayout(this);
-        setContentView(layout);
-        layout.setOrientation(LinearLayout.VERTICAL);
-
-        for (int i =0; i < questions.size(); i++)
+        for (int i = 0; i < questionArr.length; i++)
         {
-            TextView textView=new TextView(getApplicationContext());
-            tv.setText(questions.get(i).toString());
-            layout.addView(tv);
-        }*/
+            setTableRow(i);
+        }
+    }
 
+    /*
+     *Programmatically create table row for questions
+     */
+    public void setTableRow(int i)
+    {
+        TableLayout questionLayout = (TableLayout) findViewById(R.id.questions_table);
+        TableRow row = new TableRow(this);
+        row.setLayoutParams(lp);
+
+        setTableQuestion(i);
+        row.addView(providerQuestion);
+
+        questionLayout.addView(row, new TableLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
+    }
+
+
+    /*
+     * To set textview for question to go in the Question Table
+     */
+    public void setTableQuestion(int i)
+    {
+        providerQuestion = new TextView(this);
+        providerQuestion.setLayoutParams(lp);
+        providerQuestion.setBackgroundColor(Color.WHITE);
+        providerQuestion.setText(questionArr[i]);
+        providerQuestion.setBackgroundDrawable(getResources().getDrawable(R.drawable.greenline));
     }
 }
 
