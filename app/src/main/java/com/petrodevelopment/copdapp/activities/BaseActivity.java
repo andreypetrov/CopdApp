@@ -89,4 +89,11 @@ public abstract class BaseActivity extends AppCompatActivity {
     public ModelFacade getModelFacade() {
         return  getApp().getModelFacade();
     }
+
+
+    @Override
+    public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
+        super.onSaveInstanceState(outState, outPersistentState);
+        getModelFacade().saveModel();
+    }
 }

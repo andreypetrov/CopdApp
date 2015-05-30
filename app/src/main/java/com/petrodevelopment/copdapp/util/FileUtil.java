@@ -38,7 +38,7 @@ public class FileUtil {
     }
 
 
-    public static void saveModelToFile(String fileName, Context context, Object model) {
+    public static void saveModelToFile(String fileName, Object model, Context context) {
         String json = JsonLoader.GSON.toJson(model);
         saveStringToFile(fileName+ JSON_EXTENSION,json, context);
     }

@@ -48,6 +48,15 @@ public class ModelFacade {
         initQuestions();
     }
 
+    public void saveModel() {
+        FileUtil.saveModelToFile(APPOINTMENTS, appointmentList, context);
+        FileUtil.saveModelToFile(PROVIDERS, providerList, context);
+        FileUtil.saveModelToFile(QUESTIONS, questionList, context);
+        FileUtil.saveModelToFile(APPOINTMENT_RECORD_CATEGORIES, appointmentRecordCategoryList, context);
+        FileUtil.saveModelToFile(CLINICIAN_TYPES, clinicianTypeList, context);
+    }
+
+
     private void initClinicianTypes() {
         clinicianTypeList = (ClinicianTypeList) fromFile(CLINICIAN_TYPES, ClinicianTypeList.class, context);
         clinicianTypeMap = new HashMap<>();
