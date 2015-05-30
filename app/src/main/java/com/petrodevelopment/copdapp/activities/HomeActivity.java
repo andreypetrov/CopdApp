@@ -50,6 +50,7 @@ public class HomeActivity extends BaseActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        getApp().getPreferences().init();
         verifyLogin();
         initModel();
         initToolbar();
@@ -63,11 +64,10 @@ public class HomeActivity extends BaseActivity
     }
 
     private void verifyLogin() {
-        getApp().getPreferences().init();
-
         if(!getApp().getPreferences().isUserLoggedIn()) {
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
+            finish();
         }
     }
 
