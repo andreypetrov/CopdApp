@@ -11,7 +11,6 @@ import com.petrodevelopment.copdapp.model.Appointment;
 import com.petrodevelopment.copdapp.model.ClinicianType;
 import com.petrodevelopment.copdapp.model.Provider;
 import com.petrodevelopment.copdapp.util.U;
-import com.petrodevelopment.copdapp.viewmodel.AppointmentListVm;
 
 import java.util.Date;
 import java.util.List;

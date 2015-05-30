@@ -16,7 +16,7 @@ import java.util.List;
 /**
  * Created by andrey on 10/05/2015.
  */
-public class ProviderFragment extends SectionFragment {
+public class ProviderFragment extends FilterableFragment {
     /**
      * Returns a new instance of this fragment for the given section
      * number.
@@ -43,5 +43,10 @@ public class ProviderFragment extends SectionFragment {
 
     private List<Provider> getModel() {
         return ProviderList.fromAsset(getActivity()).providers;
+    }
+
+    @Override
+    public void filterList(String searchQuery) {
+
     }
 }

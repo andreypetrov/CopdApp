@@ -7,7 +7,6 @@ import android.widget.TextView;
 
 import com.petrodevelopment.copdapp.R;
 import com.petrodevelopment.copdapp.model.Provider;
-import com.petrodevelopment.copdapp.viewmodel.AppointmentListVm;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;

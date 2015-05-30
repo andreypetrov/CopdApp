@@ -11,18 +11,20 @@ import com.petrodevelopment.copdapp.R;
 import com.petrodevelopment.copdapp.activities.HomeActivity;
 import com.petrodevelopment.copdapp.adapters.AppointmentListAdapter;
 import com.petrodevelopment.copdapp.model.Appointment;
+import com.petrodevelopment.copdapp.model.ClinicianType;
+import com.petrodevelopment.copdapp.model.Provider;
 import com.petrodevelopment.copdapp.util.U;
-import com.petrodevelopment.copdapp.viewmodel.AppointmentListVm;
 import com.petrodevelopment.copdapp.views.TabsView;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by Andrey on 14/05/2015.
  */
-public class AppointmentsFragment extends SectionFragment {
+public class AppointmentsFragment extends FilterableFragment {
     private List<Appointment> filteredAppointments;
     private ListView listView;
     private AppointmentListAdapter adapter;
@@ -95,8 +97,6 @@ public class AppointmentsFragment extends SectionFragment {
             }
         }
         if(adapter !=null) adapter.notifyDataSetChanged();
-
-        U.log(this, "filterUpcoming() - filteredAppointments.size(): " + filteredAppointments.size());
     }
 
     private void filterReset() {
@@ -112,6 +112,46 @@ public class AppointmentsFragment extends SectionFragment {
 
     private List<Appointment> getModel() {
         return getApp().appointmentList.appointments;
+    }
+
+
+    @Override
+    public void filterList(String searchQuery) {
+        String searchQueryLowerCase = searchQuery.toLowerCase(Locale.getDefault());
+
+        U.log(this, "filtering: " + searchQuery);
+        filteredAppointments.clear();
+        for (Appointment appointment : getModel()) {
+            Provider provider = appointment.getProvider(getActivity());
+            ClinicianType clinicianType = provider.getClinitianType(getActivity());
+
+            Date date = U.convertUnixStringToDate(appointment.date);
+            String dateString = U.convertToDateString(date);
+            String timeString = U.convertToTimeString(date);
+
+            String[] fields = {
+                    provider.firstName,
+                    provider.lastName,
+                    provider.email,
+                    provider.title,
+                    provider.phoneNumber,
+                    clinicianType.name
+            };
+
+            for (String field : fields) {
+                if (field.toLowerCase(Locale.getDefault()).startsWith(searchQueryLowerCase)) {
+                    filteredAppointments.add(appointment);
+                    break;
+                }
+                if (dateString.toLowerCase(Locale.getDefault()).contains(searchQueryLowerCase) ||
+                    timeString.toLowerCase(Locale.getDefault()).contains(searchQueryLowerCase) ) {
+                    filteredAppointments.add(appointment);
+                    break;
+                }
+
+            }
+        }
+        if(adapter !=null) adapter.notifyDataSetChanged();
     }
 
 

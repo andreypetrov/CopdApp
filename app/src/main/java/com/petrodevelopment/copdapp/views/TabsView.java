@@ -67,13 +67,16 @@ public class TabsView extends LinearLayout {
      * @param newPosition
      */
     public void select(int newPosition) {
-        mCurrentPosition = newPosition;
-        U.log(this, "selecting position: " + mCurrentPosition);
-        int count = getChildCount();
-        for (int i = 0; i < count; i++) {
-            if (i == mCurrentPosition) getChildAt(i).setSelected(true);
-            else getChildAt(i).setSelected(false);
+        if (newPosition != mCurrentPosition) {
+            mCurrentPosition = newPosition;
+            U.log(this, "selecting position: " + mCurrentPosition);
+            int count = getChildCount();
+            for (int i = 0; i < count; i++) {
+                if (i == mCurrentPosition) getChildAt(i).setSelected(true);
+                else getChildAt(i).setSelected(false);
+            }
+            if (mOnTabSelectedListener != null)
+                mOnTabSelectedListener.onTabSelected(mCurrentPosition, getChildAt(mCurrentPosition));
         }
-        if (mOnTabSelectedListener != null) mOnTabSelectedListener.onTabSelected(mCurrentPosition, getChildAt(mCurrentPosition));
     }
 }

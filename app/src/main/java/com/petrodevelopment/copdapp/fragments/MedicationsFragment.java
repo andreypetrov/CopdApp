@@ -11,7 +11,7 @@ import com.petrodevelopment.copdapp.R;
 /**
  * Created by andrey on 10/05/2015.
  */
-public class MedicationsFragment extends SectionFragment {
+public class MedicationsFragment extends FilterableFragment {
     /**
      * Returns a new instance of this fragment for the given section
      * number.
@@ -40,4 +40,8 @@ public class MedicationsFragment extends SectionFragment {
 
     }
 
+    @Override
+    public void filterList(String searchQuery) {
+
+    }
 }

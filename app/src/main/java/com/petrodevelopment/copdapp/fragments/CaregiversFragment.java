@@ -11,7 +11,7 @@ import com.petrodevelopment.copdapp.R;
 /**
  * Created by andrey on 10/05/2015.
  */
-public class CaregiversFragment extends SectionFragment {
+public class CaregiversFragment extends FilterableFragment {
 
     /**
      * Returns a new instance of this fragment for the given section
@@ -41,4 +41,8 @@ public class CaregiversFragment extends SectionFragment {
 
     }
 
+    @Override
+    public void filterList(String searchQuery) {
+
+    }
 }

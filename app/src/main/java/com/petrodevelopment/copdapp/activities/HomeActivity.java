@@ -16,6 +16,7 @@ import com.petrodevelopment.copdapp.NavigationDrawerFragment;
 import com.petrodevelopment.copdapp.R;
 import com.petrodevelopment.copdapp.fragments.AppointmentsFragment;
 import com.petrodevelopment.copdapp.fragments.CaregiversFragment;
+import com.petrodevelopment.copdapp.fragments.FilterableFragment;
 import com.petrodevelopment.copdapp.fragments.MedicationsFragment;
 import com.petrodevelopment.copdapp.fragments.ProviderFragment;
 import com.petrodevelopment.copdapp.fragments.SectionFragment;
@@ -39,6 +40,7 @@ public class HomeActivity extends BaseActivity
 
     private SearchView mSearchView;
     private String searchViewHint;
+    private FilterableFragment currentFragment;
 
 
     @Override
@@ -122,7 +124,8 @@ public class HomeActivity extends BaseActivity
     public void onNavigationDrawerItemSelected(int position) {
         if (position == 4) startRecordAppointmentActivity("test");
         else {
-            replaceFragment(R.id.container, createSectionFragment(position));
+            currentFragment = createSectionFragment(position);
+            replaceFragment(R.id.container, currentFragment);
             replaceSearchHint(position);
         }
     }
@@ -144,7 +147,7 @@ public class HomeActivity extends BaseActivity
         invalidateOptionsMenu();
     }
 
-    private Fragment createSectionFragment(int position) {
+    private FilterableFragment createSectionFragment(int position) {
         switch (position) {
             case 0:
                 return AppointmentsFragment.newInstance(0, getString(R.string.title_appointments_fragment));
@@ -204,8 +207,7 @@ public class HomeActivity extends BaseActivity
 
             @Override
             public boolean onQueryTextChange(String s) {
-                //TODO delegate search to fragments in the text change callback
-                U.log(this, "query text change: " + s);
+                if(currentFragment != null) currentFragment.filterList(s);
                 return false;
             }
         });
