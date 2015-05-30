@@ -28,19 +28,22 @@ import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.petrodevelopment.copdapp.MainApplication;
 import com.petrodevelopment.copdapp.R;
 import com.petrodevelopment.copdapp.adapters.EditAddAppointmentProviderListAdapter;
+import com.petrodevelopment.copdapp.model.Appointment;
 import com.petrodevelopment.copdapp.model.Provider;
 import com.petrodevelopment.copdapp.model.ProviderList;
 import com.petrodevelopment.copdapp.model.Question;
 import com.petrodevelopment.copdapp.model.QuestionList;
 import com.petrodevelopment.copdapp.record.RecordActivity;
+import com.petrodevelopment.copdapp.util.U;
 
 import java.util.Calendar;
 import java.util.List;
 
 
-public class AddEditAppointmentActivity extends ActionBarActivity implements OnClickListener, OnMapReadyCallback {
+public class AddEditAppointmentActivity extends BaseActivity implements OnClickListener, OnMapReadyCallback {
 
     //Variables for date and time
     TextView selectTime,selectDate;
@@ -58,6 +61,9 @@ public class AddEditAppointmentActivity extends ActionBarActivity implements OnC
     private Button recordButton;
     private Button saveAppointment;
 
+    private Appointment appointment;
+    private String appointmentId;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,12 +72,21 @@ public class AddEditAppointmentActivity extends ActionBarActivity implements OnC
         //Google Maps Added 19-05-2015 by Tom
         MapFragment mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+        initModel();
         initProviders();
         initSpinner();
         selectDateOrTime();
         initToolbar();
 
         setButtonListeners();
+    }
+
+    @Override
+    public void initModel() {
+        //TODO if there is no appointment id, then create a new appointment with a unique id
+        String appointmentId = getIntent().getStringExtra(MainApplication.APPOINTMENT_ID_EXTRA);
+        appointment = getApp().getAppointment(appointmentId);
+        U.log(this, "opened appointment with id: " + appointmentId);
     }
 
 

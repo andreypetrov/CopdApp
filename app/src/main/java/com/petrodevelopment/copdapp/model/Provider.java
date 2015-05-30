@@ -29,4 +29,8 @@ public class Provider extends Model {
 
     public Provider() {
     }
+
+    public String getNameAndTitle() {
+        return title + " " + firstName + " " + lastName;
+    }
 }

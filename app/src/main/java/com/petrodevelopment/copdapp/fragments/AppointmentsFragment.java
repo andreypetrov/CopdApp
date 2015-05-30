@@ -4,13 +4,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Adapter;
 import android.widget.AdapterView;
-import android.widget.BaseAdapter;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 
-import com.petrodevelopment.copdapp.MainApplication;
 import com.petrodevelopment.copdapp.R;
 import com.petrodevelopment.copdapp.activities.HomeActivity;
 import com.petrodevelopment.copdapp.adapters.AppointmentListAdapter;
@@ -50,6 +46,7 @@ public class AppointmentsFragment extends SectionFragment {
         return rootView;
     }
 
+
     private void initTabs(View rootView) {
         TabsView tabsView = (TabsView) rootView.findViewById(R.id.tabs);
         tabsView.setOnTabSelectedListener(new TabsView.OnTabSelectedListener() {
@@ -75,8 +72,7 @@ public class AppointmentsFragment extends SectionFragment {
         U.log(this,"initList");
         listView = (ListView) rootView.findViewById(R.id.list_view);
         filterReset();
-        List<AppointmentListVm> viewModels = AppointmentListVm.createFromModel(filteredAppointments, getActivity());
-        adapter = new AppointmentListAdapter(viewModels, getActivity(), R.layout.cell_appointment_list);
+        adapter = new AppointmentListAdapter(filteredAppointments, getActivity(), R.layout.cell_appointment_list);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -100,7 +96,7 @@ public class AppointmentsFragment extends SectionFragment {
         }
         if(adapter !=null) adapter.notifyDataSetChanged();
 
-        U.log(this, filteredAppointments.size());
+        U.log(this, "filterUpcoming() - filteredAppointments.size(): " + filteredAppointments.size());
     }
 
     private void filterReset() {
@@ -110,7 +106,7 @@ public class AppointmentsFragment extends SectionFragment {
         for (Appointment appointment : getModel()) {
             filteredAppointments.add(appointment);
         }
-        U.log(this, filteredAppointments.size());
+        U.log(this, "filterReset():" + filteredAppointments.size());
         if(adapter !=null) adapter.notifyDataSetChanged();
     }
 
