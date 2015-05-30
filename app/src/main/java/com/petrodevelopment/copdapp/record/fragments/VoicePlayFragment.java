@@ -222,17 +222,7 @@ public class VoicePlayFragment extends SectionFragment {
         mSeekBar.setProgress(Math.round(progress));
     }
 
-
-
-
-
-
-
-
-
-    private void updatePlayer(int progressInMillis) {
-
-
+    /*private void updatePlayer(int progressInMillis) {
         updatePauseUi();
 
         if (mCurrentPlayerState == PlayerState.STARTED) {
@@ -249,7 +239,7 @@ public class VoicePlayFragment extends SectionFragment {
         } else {
             mPlayer.seekTo(progressInMillis);
         }
-    }
+    }*/
 
 
 

@@ -36,6 +36,7 @@ public class ModelFacade {
 
     public ModelFacade(Context context) {
         this.context = context;
+        //resetModel(); //for testing only. Comment out this line if you want your models to persist.
         loadModel();
     }
 
@@ -56,6 +57,13 @@ public class ModelFacade {
         FileUtil.saveModelToFile(CLINICIAN_TYPES, clinicianTypeList, context);
     }
 
+    public void resetModel() {
+        FileUtil.deleteModelFile(APPOINTMENTS, context);
+        FileUtil.deleteModelFile(PROVIDERS, context);
+        FileUtil.deleteModelFile(QUESTIONS, context);
+        FileUtil.deleteModelFile(APPOINTMENT_RECORD_CATEGORIES, context);
+        FileUtil.deleteModelFile(CLINICIAN_TYPES, context);
+    }
 
     private void initClinicianTypes() {
         clinicianTypeList = (ClinicianTypeList) fromFile(CLINICIAN_TYPES, ClinicianTypeList.class, context);
@@ -84,10 +92,13 @@ public class ModelFacade {
 
     private void initProviders() {
         providerList = (ProviderList) fromFile(PROVIDERS, ProviderList.class, context);
+        U.log(this, providerList.providers);
         providerMap = new HashMap<>();
         for (Provider provider : providerList.providers) {
             providerMap.put(provider.id, provider);
         }
+        U.log(this, "providerMap: ");
+        U.log(this, providerMap);
     }
 
     private void initQuestions() {

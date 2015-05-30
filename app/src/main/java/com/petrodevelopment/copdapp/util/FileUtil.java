@@ -17,7 +17,6 @@ public class FileUtil {
 
     public static final String JSON_EXTENSION = ".json";
 
-
     public static String loadModelFromFile(String fileName, Context context) {
         String fullFileName = fileName + JSON_EXTENSION;
 
@@ -31,6 +30,21 @@ public class FileUtil {
         }
     }
 
+    public static void deleteModelFile(String fileName, Context context) {
+        deleteFile(fileName + JSON_EXTENSION, context);
+    }
+
+    public static void saveModelToFile(String fileName, Object model, Context context) {
+        String json = JsonLoader.GSON.toJson(model);
+        saveStringToFile(fileName + JSON_EXTENSION, json, context);
+    }
+
+
+
+
+
+
+
     private static String initFileFromStringAsset (String fileName, Context context) {
         String stringFromAssets = loadStringFromAssets(fileName, context);
         saveStringToFile(fileName, stringFromAssets, context);
@@ -38,12 +52,13 @@ public class FileUtil {
     }
 
 
-    public static void saveModelToFile(String fileName, Object model, Context context) {
-        String json = JsonLoader.GSON.toJson(model);
-        saveStringToFile(fileName+ JSON_EXTENSION,json, context);
+    private static void deleteFile(String fileName, Context context) {
+        File file = new File(context.getFilesDir(), fileName);
+        if (file.exists()) file.delete();
     }
 
-    public static void saveStringToFile(String fileName, String content, Context context) {
+
+    private static void saveStringToFile(String fileName, String content, Context context) {
         FileOutputStream outputStream;
         try {
             outputStream = context.openFileOutput(fileName, Context.MODE_PRIVATE);
@@ -54,7 +69,7 @@ public class FileUtil {
         }
     }
 
-    public static String loadStringFromFile(String fileName, Context context) {
+    private static String loadStringFromFile(String fileName, Context context) {
         try {
             InputStream inputStream  = context.openFileInput(fileName);
             return loadStringFromInputStream(inputStream);
@@ -64,7 +79,7 @@ public class FileUtil {
         }
     }
 
-    public static String loadStringFromAssets(String fileName, Context context) {
+    private static String loadStringFromAssets(String fileName, Context context) {
         try {
             InputStream inputStream = context.getAssets().open(fileName);
             return loadStringFromInputStream(inputStream);
