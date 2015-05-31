@@ -73,7 +73,7 @@
     <!-- Register Screen-->
     <string name="new_account">New Account</string>
     <string name="login">Login</string>
-    <string name="signup">Signup</string>
+    <string name="signup">Sign Up</string>
     <string name="enter_email">Enter your email</string>
     <string name="choose_password">Choose password</string>
     <string name="enter_password">Enter your password</string>

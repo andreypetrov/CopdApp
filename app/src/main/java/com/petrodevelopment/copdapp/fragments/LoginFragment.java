@@ -5,6 +5,8 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.text.SpannableString;
+import android.text.style.UnderlineSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,8 +46,19 @@ public class LoginFragment extends BaseFragment {
         loginActivity = (LoginActivity) getActivity();
         goToRegister(inflatedView); //Register screen
         initLoginButton(inflatedView); //To login
+        underlineLogin(inflatedView);
         // Inflate the layout for this fragment
         return inflatedView;
+    }
+
+
+    //Show underline under Login
+    public void underlineLogin(View view)
+    {
+        TextView textView = (TextView) view.findViewById(R.id.signin);
+        SpannableString content = new SpannableString("Login");
+        content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
+        textView.setText(content);
     }
 
     /*

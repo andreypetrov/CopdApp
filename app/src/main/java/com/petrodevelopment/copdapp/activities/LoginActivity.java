@@ -2,14 +2,19 @@ package com.petrodevelopment.copdapp.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.style.UnderlineSpan;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 
 import com.petrodevelopment.copdapp.R;
 import com.petrodevelopment.copdapp.fragments.LoginFragment;
 import com.petrodevelopment.copdapp.fragments.RegisterFragment;
 import com.petrodevelopment.copdapp.fragments.WelcomeBackFragment;
+import com.petrodevelopment.copdapp.util.Preferences;
 
 
 public class LoginActivity extends BaseActivity {
@@ -23,7 +28,11 @@ public class LoginActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        initLoginFragment();
+        Preferences p = getPreferences();
+         if(p.isUserLoggedIn())
+            initWelcomeBackFragment();
+        else
+            initLoginFragment();
     }
 
 

@@ -21,6 +21,7 @@ public class Preferences {
         mContext = context;
     }
 
+
     /**
      * Initialize the preferences. It can be called only after activity's onCreate method
      */

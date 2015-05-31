@@ -61,9 +61,19 @@ public class RegisterFragment extends BaseFragment{
         loginActivity = (LoginActivity) getActivity();
         initLoginButton(inflatedView);
         initSignUpButton(inflatedView);
+        underlineNewAccount(inflatedView);
 
         // Inflate the layout for this fragment
         return inflatedView;
+    }
+
+    //Show underline under New Account
+    public void underlineNewAccount(View view)
+    {
+        TextView textView = (TextView) view.findViewById(R.id.newAccount);
+        SpannableString content = new SpannableString("New Account");
+        content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
+        textView.setText(content);
     }
 
     /*
@@ -88,7 +98,6 @@ public class RegisterFragment extends BaseFragment{
         signIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                
                 U.log(this, "signup.onClick");
                 loginActivity.goToHome();
             }
