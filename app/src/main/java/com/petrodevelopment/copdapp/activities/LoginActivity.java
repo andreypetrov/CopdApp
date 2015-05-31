@@ -1,10 +1,10 @@
 package com.petrodevelopment.copdapp.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.view.Menu;
 import android.view.MenuItem;
+
 
 import com.petrodevelopment.copdapp.R;
 import com.petrodevelopment.copdapp.fragments.LoginFragment;
@@ -16,26 +16,22 @@ public class LoginActivity extends BaseActivity {
 
     private LoginFragment loginFragment;
     private RegisterFragment registerFragment;
+    private WelcomeBackFragment welcomeBackFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        //Creating First fragment(Register?)
-        if (findViewById(R.id.user_interface) != null)
-        {
-            if (savedInstanceState != null)
-                return;
+        initLoginFragment();
+    }
 
-            RegisterFragment register = new RegisterFragment();
-            //LoginFragment login = new LoginFragment();
-            //WelcomeBackFragment wbf = new WelcomeBackFragment();
-            FragmentManager fm = getFragmentManager();
-            FragmentTransaction ft = fm.beginTransaction();
-            ft.add(R.id.user_interface, register);
-            ft.commit();
-        }
+
+    public void goToHome()
+    {
+        Intent intent = new Intent(this, HomeActivity.class);
+        //intent.putExtra();
+        startActivity(intent);
     }
 
 
@@ -54,6 +50,14 @@ public class LoginActivity extends BaseActivity {
     public void initRegisterFragment() {
         registerFragment =  new RegisterFragment();
         replaceFragment(R.id.user_interface, registerFragment);
+    }
+
+    /*
+     * Welcome back fragment
+     */
+    public void initWelcomeBackFragment() {
+        welcomeBackFragment = new WelcomeBackFragment();
+        replaceFragment(R.id.user_interface, welcomeBackFragment);
     }
 
 

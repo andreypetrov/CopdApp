@@ -12,6 +12,7 @@ import android.text.style.UnderlineSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,6 +20,7 @@ import android.widget.Toast;
 import com.petrodevelopment.copdapp.R;
 import com.petrodevelopment.copdapp.activities.LoginActivity;
 import com.petrodevelopment.copdapp.model.Login;
+import com.petrodevelopment.copdapp.util.U;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +30,7 @@ import java.util.List;
  * Added by tom 30/05/2015
  * For register screen on home page
  */
-public class RegisterFragment extends Fragment implements View.OnClickListener {
+public class RegisterFragment extends BaseFragment{
 
     private int parsedPasscode = 0;
     //Getting values from edit text fields
@@ -37,12 +39,8 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
     private EditText passSecond;
     private EditText numbPass;
 
-    private LoginFragment loginFragment;
-    public Context context;
     private LoginActivity loginActivity;
 
-    private OnItemSelectedListener listener;
-    private OnFragmentInteractionListener mListener;
 
     public RegisterFragment() {
         // Required empty public constructor
@@ -60,55 +58,41 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
 
         View inflatedView = inflater.inflate(R.layout.fragment_register, container, false);
-
-        TextView tv = (TextView) inflatedView.findViewById(R.id.login);
-       tv.setOnClickListener(this);
+        loginActivity = (LoginActivity) getActivity();
+        initLoginButton(inflatedView);
+        initSignUpButton(inflatedView);
 
         // Inflate the layout for this fragment
         return inflatedView;
     }
 
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.login:
+    /*
+     * For sign in button
+     */
+    private void initLoginButton(View view) {
+        TextView tv = (TextView) view.findViewById(R.id.login);
+        tv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 loginActivity.initLoginFragment();
-                break;
-        }
+            }
+        });
     }
 
 
-
-    public interface OnItemSelectedListener {
-        public void onRssItemSelected(String link);
+    /*
+     * For SignUp button
+     */
+    private void initSignUpButton(View view) {
+        Button signIn = (Button) view.findViewById(R.id.signup);
+        signIn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                U.log(this, "signup.onClick");
+                loginActivity.goToHome();
+            }
+        });
     }
-
-
-
-    public interface OnFragmentInteractionListener {
-        public void onFragmentInteraction(Uri uri);
-    }
-
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        try {
-            //mListener = (OnFragmentInteractionListener) activity;
-            context = getActivity();
-            loginActivity = (LoginActivity)context;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
-
 
 
     //Added by Tom 23-05-2015
@@ -161,7 +145,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
             }
 
             addToLoginList(email, password, parsedPasscode);
-            goToHome(v);
+            //goToHome(v); To start home screen after validation
         }
         else
         {
@@ -191,11 +175,4 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
         Toast toast = Toast.makeText(context, text, duration);
         toast.show();
     }
-
-    //Going to home screen after login
-    public void goToHome(View v)
-    {
-
-    }
-
 }

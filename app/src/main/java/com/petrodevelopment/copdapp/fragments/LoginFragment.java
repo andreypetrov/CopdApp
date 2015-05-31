@@ -8,6 +8,7 @@ import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.petrodevelopment.copdapp.R;
@@ -16,7 +17,7 @@ import com.petrodevelopment.copdapp.activities.LoginActivity;
 /**
  * Fragment for login
  */
-public class LoginFragment extends Fragment {
+public class LoginFragment extends BaseFragment {
 
     private RegisterFragment registerFragment;
     public Context context;
@@ -24,22 +25,6 @@ public class LoginFragment extends Fragment {
 
     private TextView newUser;
 
-    private OnFragmentInteractionListener mListener;
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment LoginFragment.
-     */
-    public static LoginFragment newInstance(String param1, String param2) {
-        LoginFragment fragment = new LoginFragment();
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
-        return fragment;
-    }
 
     public LoginFragment() {
         // Required empty public constructor
@@ -56,46 +41,38 @@ public class LoginFragment extends Fragment {
                              Bundle savedInstanceState) {
         View inflatedView = inflater.inflate(R.layout.fragment_login, container, false);
 
-        newUser = (TextView) inflatedView.findViewById(R.id.newAccount);
+        loginActivity = (LoginActivity) getActivity();
+        goToRegister(inflatedView); //Register screen
+        initLoginButton(inflatedView); //To login
+        // Inflate the layout for this fragment
+        return inflatedView;
+    }
+
+    /*
+     * Login after signup
+     */
+    private void initLoginButton(View view)
+    {
+        Button signin = (Button) view.findViewById(R.id.login);
+        signin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getApp().getPreferences().logIn();
+                loginActivity.goToHome();
+            }
+        });
+    }
+
+    private void goToRegister(View view)
+    {
+        newUser = (TextView) view.findViewById(R.id.newAccount);
         newUser.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 loginActivity.initRegisterFragment();
             }
         });
-
-        // Inflate the layout for this fragment
-        return inflatedView;
     }
 
 
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
-
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        try {
-            //mListener = (OnFragmentInteractionListener) activity;
-            context = getActivity();
-            loginActivity = (LoginActivity)context;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
-
-
-    public interface OnFragmentInteractionListener {
-        public void onFragmentInteraction(Uri uri);
-    }
 
 }

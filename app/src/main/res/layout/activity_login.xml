@@ -13,7 +13,7 @@
     <ImageView android:id="@+id/lungs_icon"
         android:layout_width="@dimen/lung_width"
         android:layout_height="@dimen/lung_height"
-        android:background="@drawable/white_lungs"
+        android:background="@drawable/logo"
         android:layout_gravity="center"/>
 
     <FrameLayout android:id="@+id/user_interface"
