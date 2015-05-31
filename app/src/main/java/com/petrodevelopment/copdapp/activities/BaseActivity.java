@@ -10,6 +10,8 @@ import android.view.MenuItem;
 
 import com.petrodevelopment.copdapp.MainApplication;
 import com.petrodevelopment.copdapp.R;
+import com.petrodevelopment.copdapp.model.ModelFacade;
+import com.petrodevelopment.copdapp.util.Preferences;
 import com.petrodevelopment.copdapp.util.U;
 
 /**
@@ -76,7 +78,22 @@ public abstract class BaseActivity extends AppCompatActivity {
     public void onBackPressed() {
         saveAndClose();
     }
+
     public MainApplication getApp() {
         return (MainApplication) getApplication();
+    }
+
+    public Preferences getPreferences (){
+        return getApp().getPreferences();
+    }
+    public ModelFacade getModelFacade() {
+        return  getApp().getModelFacade();
+    }
+
+
+    @Override
+    public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
+        super.onSaveInstanceState(outState, outPersistentState);
+        getModelFacade().saveModel();
     }
 }

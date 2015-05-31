@@ -3,6 +3,7 @@ package com.petrodevelopment.copdapp.model;
 
 import android.content.Context;
 
+import com.petrodevelopment.copdapp.util.FileUtil;
 import com.petrodevelopment.copdapp.util.JsonLoader;
 
 import java.util.ArrayList;
@@ -14,16 +15,4 @@ import java.util.List;
  */
 public class ClinicianTypeList extends Model {
     public List<ClinicianType> clinicianTypes;
-
-    public ClinicianTypeList() {
-    }
-
-    private static ClinicianTypeList fromJson(String json) {
-        return JsonLoader.GSON.fromJson(json, ClinicianTypeList.class);
-    }
-
-    public static ClinicianTypeList fromAsset(Context context) {
-        String json = JsonLoader.loadJsonFromAssets(context, "clinician_types");
-        return fromJson(json);
-    }
 }

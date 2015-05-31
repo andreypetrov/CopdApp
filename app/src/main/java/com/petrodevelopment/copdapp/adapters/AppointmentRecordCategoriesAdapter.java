@@ -60,7 +60,7 @@ public class AppointmentRecordCategoriesAdapter extends GenericAdapter<Appointme
      */
     public AppointmentRecord getFromIndex(int position) {
         AppointmentRecordCategory appointmentRecordCategory = getItem(position);
-        return ((MainApplication) context.getApplicationContext()).getAppointmentRecord(appointmentRecordCategory.id, appointment);
+        return ((MainApplication) context.getApplicationContext()).getModelFacade().getAppointmentRecord(appointmentRecordCategory.id, appointment);
     }
 
     private void updateAppointmentData(View view, int position) {

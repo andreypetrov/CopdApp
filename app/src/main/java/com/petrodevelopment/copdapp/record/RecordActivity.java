@@ -56,7 +56,7 @@ public class RecordActivity extends BaseActivity {
     @Override
     public void initModel() {
         appointmentId = getIntent().getStringExtra(MainApplication.APPOINTMENT_ID_EXTRA);
-        appointmentRecord = ((MainApplication)getApplication()).getAppointment(appointmentId).appointmentRecords.get(0);//TODO make this dynamic
+        appointmentRecord = getModelFacade().getAppointment(appointmentId).appointmentRecords.get(0);//TODO make this dynamic
     }
 
     private void initVoice(){
@@ -73,6 +73,7 @@ public class RecordActivity extends BaseActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle(appointmentRecord.getAppointmentRecordCategory(this).name);
     }
 
     private void initVoiceRecordFragment() {

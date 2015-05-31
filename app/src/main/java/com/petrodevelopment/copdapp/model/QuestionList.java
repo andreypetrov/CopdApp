@@ -14,16 +14,4 @@ import java.util.List;
  */
 public class QuestionList extends Model {
     public List<Question> questions;
-
-    public QuestionList() {
-    }
-
-    private static QuestionList fromJson(String json) {
-        return JsonLoader.GSON.fromJson(json, QuestionList.class);
-    }
-
-    public static QuestionList fromAsset(Context context) {
-        String json = JsonLoader.loadJsonFromAssets(context, "questions");
-        return fromJson(json);
-    }
 }

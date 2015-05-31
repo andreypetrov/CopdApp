@@ -15,18 +15,13 @@ import java.util.List;
  */
 public class Appointment extends Model {
 
-    public String id;
     public long date;
     public String providerId;
 
     //Edited via the Record Appointment screen
     public List<AppointmentRecord> appointmentRecords;
 
-    public Appointment(){
-
-    }
-
     public Provider getProvider(Context context) {
-        return ((MainApplication)context.getApplicationContext()).getProvider(providerId);
+        return ((MainApplication)context.getApplicationContext()).getModelFacade().getProvider(providerId);
     }
 }

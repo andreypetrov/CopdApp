@@ -50,7 +50,8 @@ public class HomeActivity extends BaseActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        verifyLogin();
+        getApp().getPreferences().init();
+        //verifyLogin();
         initModel();
         initToolbar();
         initDrawer();
@@ -59,15 +60,14 @@ public class HomeActivity extends BaseActivity
 //        startRecordAppointmentActivity("0");
 //        startAddAppointmentActivity();
 //        Retrofit.initialize();
-//        startRecordActivity(3);
+        startRecordActivity(3);
     }
 
     private void verifyLogin() {
-        getApp().getPreferences().init();
-
         if(!getApp().getPreferences().isUserLoggedIn()) {
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
+            finish();
         }
     }
 

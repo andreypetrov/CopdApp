@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -33,14 +32,18 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.petrodevelopment.copdapp.MainApplication;
 import com.petrodevelopment.copdapp.R;
 import com.petrodevelopment.copdapp.adapters.EditAddAppointmentProviderListAdapter;
+import com.petrodevelopment.copdapp.model.Appointment;
 import com.petrodevelopment.copdapp.model.ClinicianType;
+import com.petrodevelopment.copdapp.model.ModelFacade;
 import com.petrodevelopment.copdapp.model.Provider;
 import com.petrodevelopment.copdapp.model.ProviderList;
 import com.petrodevelopment.copdapp.model.Question;
 import com.petrodevelopment.copdapp.record.RecordActivity;
 import com.petrodevelopment.copdapp.record.RecordAppointmentActivity;
+import com.petrodevelopment.copdapp.util.U;
 
 import java.util.Calendar;
 import java.util.List;
@@ -60,32 +63,35 @@ public class AddEditAppointmentActivity extends BaseActivity implements OnClickL
     private double lng = -79.4186298;
     private GoogleMap map;
 
+    private Appointment appointment;
     private List<Provider> providers;
+
     private Provider provider = new Provider();
     private Button recordButton;
     private Button saveAppointment;
 
     private List<Question> questions;
-    private Question question = new Question();
+
 
     //This is used for creating table rows for questions
     private final LayoutParams lp = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
     private TextView providerQuestion;
 
     //Testing
-    private String[] questionArr =  new String[]{
-            "What is the severity of my condition?",
-            "What is the doctor's assessment of me?",
-            "What are the recommended medications? (name, dosage, frequency, and route, beginning date and end date if applicable)",
-            "What tests will be done?",
-            "What lifestyle changes do I have to make?",
-            "What clinicians have I been referred to?",
-    };
+//    private String[] questionArr =  new String[]{
+//            "What is the severity of my condition?",
+//            "What is the doctor's assessment of me?",
+//            "What are the recommended medications? (name, dosage, frequency, and route, beginning date and end date if applicable)",
+//            "What tests will be done?",
+//            "What lifestyle changes do I have to make?",
+//            "What clinicians have I been referred to?",
+//    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_edit_appointment);
+
 
         //Google Maps Added 19-05-2015 by Tom
         MapFragment mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.map);
@@ -99,12 +105,24 @@ public class AddEditAppointmentActivity extends BaseActivity implements OnClickL
      */
     public void setUp()
     {
-        initProviders();
+        initModel();
         initSpinner();
         initToolbar();
         selectPickers();
         setButtonListeners();
     }
+
+    @Override
+    public void initModel() {
+        //TODO if there is no appointment id, then create a new appointment with a unique id
+        String appointmentId = getIntent().getStringExtra(MainApplication.APPOINTMENT_ID_EXTRA);
+        appointment = getModelFacade().getAppointment(appointmentId);
+        questions = getModelFacade().questionList.questions;
+        providers = getModelFacade().providerList.providers;
+
+        U.log(this, "opened appointment with id: " + appointmentId);
+    }
+
 
     public void setButtonListeners()
     {
@@ -195,7 +213,7 @@ public class AddEditAppointmentActivity extends BaseActivity implements OnClickL
     }
 
     private void initProviders() {
-        providers = ProviderList.fromAsset(this).providers;
+
     }
 
     @Override
@@ -203,11 +221,6 @@ public class AddEditAppointmentActivity extends BaseActivity implements OnClickL
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_add_edit_appointment, menu);
         return true;
-    }
-
-    @Override
-    public void initModel() {
-
     }
 
     @Override
@@ -341,7 +354,8 @@ public class AddEditAppointmentActivity extends BaseActivity implements OnClickL
         TextView tv = (TextView) findViewById(R.id.questions_per_specialist);
         tv.setVisibility(View.GONE);
 
-        for (int i = 0; i < questionArr.length; i++)
+        for (int i = 0; i < questions.size(); i++)
+
         {
             setTableRow(i);
         }
@@ -371,7 +385,7 @@ public class AddEditAppointmentActivity extends BaseActivity implements OnClickL
         providerQuestion = new TextView(this);
         providerQuestion.setLayoutParams(lp);
         providerQuestion.setBackgroundColor(Color.WHITE);
-        providerQuestion.setText(questionArr[i]);
+        providerQuestion.setText(questions.get(i).name);
         //providerQuestion.setBackgroundDrawable(getResources().getDrawable(R.drawable.greenline));
     }
 }
