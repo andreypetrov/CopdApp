@@ -13,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
+import android.widget.ScrollView;
 
 import com.petrodevelopment.copdapp.MainApplication;
 import com.petrodevelopment.copdapp.R;
@@ -42,11 +43,14 @@ public class RecordActivity extends BaseActivity {
     private VoiceRecordFragment voiceRecordFragment;
     private VoicePlayFragment voicePlayFragment;
     private GalleryPreviewFragment galleryPreviewFragment;
+    private ScrollView scrollView;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_record);
+        scrollView = (ScrollView) findViewById(R.id.scrollView);
         initModel();
         initToolbar();
         initVoice();
@@ -67,12 +71,12 @@ public class RecordActivity extends BaseActivity {
         if (file.exists()) {
             initVoicePlayFragment();
         }
-//        else {
-//            initVoiceRecordFragment();
-//        }
-
-
     }
+
+    public void scrollViewToBottom() {
+        scrollView.fullScroll(View.FOCUS_DOWN);
+}
+
 
     private void initToolbar() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -90,7 +94,9 @@ public class RecordActivity extends BaseActivity {
                 initVoicePlayFragment();
             }
         });
-        replaceFragment(R.id.voice_container, voiceRecordFragment);
+        replaceFragment(R.id.voice_record_container, voiceRecordFragment);
+        removeFragment(voicePlayFragment);
+        isRecordingVisible = true;
     }
 
     private void initVoicePlayFragment() {
@@ -102,7 +108,9 @@ public class RecordActivity extends BaseActivity {
                 removeFragment(voicePlayFragment);
             }
         });
-        replaceFragment(R.id.voice_container, voicePlayFragment);
+        replaceFragment(R.id.voice_play_container, voicePlayFragment);
+        removeFragment(voiceRecordFragment);
+        isRecordingVisible = false;
     }
 
     /**
@@ -115,6 +123,7 @@ public class RecordActivity extends BaseActivity {
             initVoicePlayFragment();
         } else {
             removeFragment(voiceRecordFragment);
+            isRecordingVisible = false;
         }
     }
 
@@ -142,8 +151,6 @@ public class RecordActivity extends BaseActivity {
         //TODO figure out whether it is safe to remove fragment while the recording is still hapenning
         if (isRecordingVisible) removeRecordFragmentOrShowPlayFragmentIfNeeded();
         else initVoiceRecordFragment();
-
-        isRecordingVisible = !isRecordingVisible;
     }
 
     public void onCameraClick(View view) {
