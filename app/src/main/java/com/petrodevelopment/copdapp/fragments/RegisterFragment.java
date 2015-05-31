@@ -88,6 +88,7 @@ public class RegisterFragment extends BaseFragment{
         signIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                
                 U.log(this, "signup.onClick");
                 loginActivity.goToHome();
             }
