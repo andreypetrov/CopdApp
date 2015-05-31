@@ -96,12 +96,13 @@
                     xmlns:android="http://schemas.android.com/apk/res/android"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:columnWidth="90dp"
-                    android:gravity="center"
-                    android:horizontalSpacing="@dimen/box_top_and_bottom_padding"
-                    android:numColumns="auto_fit"
+                    android:columnWidth="@dimen/appointment_image_height"
+                    android:horizontalSpacing="@dimen/gallery_spacing"
+                    android:numColumns="4"
+                    android:layout_rowWeight="1"
                     android:stretchMode="columnWidth"
-                    android:verticalSpacing="@dimen/box_top_and_bottom_padding"
+                    android:verticalSpacing="@dimen/gallery_spacing"
+                    tools:listitem="@layout/cell_grid_gallery"
                     />
 
 
