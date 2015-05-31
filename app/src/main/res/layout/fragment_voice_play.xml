@@ -6,6 +6,7 @@
     android:clipToPadding="false"
     android:gravity="center_vertical"
     android:orientation="vertical"
+    android:background="@color/background_material_light"
     android:padding="@dimen/activity_horizontal_margin"
     tools:context=".VoicePlayFragment">
 
@@ -14,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal|right"
-        android:layout_marginRight="@dimen/profile_image_width"
+        android:layout_marginRight="@dimen/record_time_left_margin"
 
         android:orientation="horizontal">
 
@@ -23,7 +24,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/box_top_and_bottom_padding"
-            android:layout_marginRight="@dimen/box_top_and_bottom_padding"
             android:text="@string/time_zero" />
 
         <TextView
@@ -37,7 +37,6 @@
             android:id="@+id/total_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/box_top_and_bottom_padding"
             android:layout_marginRight="@dimen/box_top_and_bottom_padding"
             android:text="@string/time_zero" />
 

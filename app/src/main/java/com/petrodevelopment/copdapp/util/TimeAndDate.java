@@ -1,5 +1,6 @@
 package com.petrodevelopment.copdapp.util;
 
+import java.text.SimpleDateFormat;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -12,7 +13,7 @@ public class TimeAndDate {
      * @param millis
      * @return
      */
-    public static String formatMinutesAndSeconds(long millis) {
+    public static String formatMinutesAndSeconds(long millis) { //TODO change this method to have different formatting in the future
         return String.format("%02d:%02d",
                 TimeUnit.MILLISECONDS.toMinutes(millis),
                 TimeUnit.MILLISECONDS.toSeconds(millis) -
