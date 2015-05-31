@@ -90,11 +90,7 @@ public class VoiceRecordFragment extends SectionFragment {
     @Override
     public void onPause() {
         super.onPause();
-        if (mRecorder != null) {
-            mRecorder.release();
-            mRecorder = null;
-        }
-        stopRecordTimer();
+        stopRecording();
     }
 
     public void deleteTrack() {
@@ -124,13 +120,15 @@ public class VoiceRecordFragment extends SectionFragment {
     }
 
     private void stopRecording() {
-        mRecorder.stop();
-        mRecorder.release();
-        mRecorder = null;
-        mRecordButton.setImageResource(R.drawable.ic_record);
-        mRecordButton.setContentDescription(getString(R.string.record));
-        if (mOnStopListener != null) mOnStopListener.onStop(mFileName);
-        stopRecordTimer();
+        if (mRecorder != null) {
+            mRecorder.stop();
+            mRecorder.release();
+            mRecorder = null;
+            mRecordButton.setImageResource(R.drawable.ic_record);
+            mRecordButton.setContentDescription(getString(R.string.record));
+            if (mOnStopListener != null) mOnStopListener.onStop(mFileName);
+            stopRecordTimer();
+        }
     }
 
 
