@@ -112,18 +112,7 @@
                     android:layout_height="match_parent"
                     tools:layout="@layout/fragment_gallery_preview"/>
 
-                <FrameLayout
-                    android:id="@+id/voice_container"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    >
-                    <!--<fragment-->
-                    <!--android:id="@+id/voice_record_fragment"-->
-                    <!--android:name="com.petrodevelopment.copdapp.record.fragments.VoiceRecordFragment"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--tools:layout="@layout/fragment_voice_record"/>-->
-                </FrameLayout>
+
             </LinearLayout>
 
 
@@ -131,6 +120,20 @@
 
 
     </ScrollView>
+
+
+    <FrameLayout
+        android:id="@+id/voice_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+        <!--<fragment-->
+        <!--android:id="@+id/voice_record_fragment"-->
+        <!--android:name="com.petrodevelopment.copdapp.record.fragments.VoiceRecordFragment"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--tools:layout="@layout/fragment_voice_record"/>-->
+    </FrameLayout>
 
     <include layout="@layout/line_horizontal_with_margin"/>
 
