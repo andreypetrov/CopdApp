@@ -71,6 +71,7 @@ public class RecordActivity extends BaseActivity {
 //            initVoiceRecordFragment();
 //        }
 
+
     }
 
     private void initToolbar() {
