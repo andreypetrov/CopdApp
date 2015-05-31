@@ -58,6 +58,7 @@
         android:layout_weight="1">
 
         <ScrollView
+            android:id="@+id/scrollView"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -104,14 +105,21 @@
 
             </LinearLayout>
         </ScrollView>
-
         <FrameLayout
-            android:id="@+id/voice_container"
+            android:id="@+id/voice_record_container"
             android:layout_alignParentBottom="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
         </FrameLayout>
     </RelativeLayout>
+
+    <FrameLayout
+        android:id="@+id/voice_play_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </FrameLayout>
+
+
 
 
     <include layout="@layout/line_horizontal_with_margin" />

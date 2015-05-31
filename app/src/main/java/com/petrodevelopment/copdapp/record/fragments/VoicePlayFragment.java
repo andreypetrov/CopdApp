@@ -1,5 +1,6 @@
 package com.petrodevelopment.copdapp.record.fragments;
 
+import android.app.Activity;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Environment;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 
 import com.petrodevelopment.copdapp.R;
 import com.petrodevelopment.copdapp.fragments.SectionFragment;
+import com.petrodevelopment.copdapp.record.RecordActivity;
 import com.petrodevelopment.copdapp.util.TextViewTimerTask;
 import com.petrodevelopment.copdapp.util.TimeAndDate;
 import com.petrodevelopment.copdapp.util.U;
