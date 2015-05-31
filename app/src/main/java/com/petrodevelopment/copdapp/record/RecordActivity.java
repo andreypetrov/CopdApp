@@ -28,7 +28,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 
 /**
- *
  * Record a note, an audio and images
  * Created by andrey on 10/05/2015.
  */
@@ -36,8 +35,9 @@ public class RecordActivity extends BaseActivity {
 
     static final int REQUEST_IMAGE_CAPTURE = 1;
 
-    private  String appointmentId;
+    private String appointmentId;
     private AppointmentRecord appointmentRecord;
+    private boolean isRecordingVisible = false;
 
     private VoiceRecordFragment voiceRecordFragment;
     private VoicePlayFragment voicePlayFragment;
@@ -59,14 +59,18 @@ public class RecordActivity extends BaseActivity {
         appointmentRecord = getModelFacade().getAppointment(appointmentId).appointmentRecords.get(0);//TODO make this dynamic
     }
 
-    private void initVoice(){
+
+    private void initVoice() {
+
         String fileName = Environment.getExternalStorageDirectory().getAbsolutePath() + "/audiorecordtest.3gp";
         File file = new File(fileName);
         if (file.exists()) {
             initVoicePlayFragment();
-        } else {
-            initVoiceRecordFragment();
         }
+//        else {
+//            initVoiceRecordFragment();
+//        }
+
     }
 
     private void initToolbar() {
@@ -77,7 +81,7 @@ public class RecordActivity extends BaseActivity {
     }
 
     private void initVoiceRecordFragment() {
-        voiceRecordFragment =  new VoiceRecordFragment();
+        voiceRecordFragment = new VoiceRecordFragment();
         voiceRecordFragment.setOnStopListener(new VoiceRecordFragment.OnStopListener() {
             @Override
             public void onStop(String fileName) {
@@ -89,19 +93,31 @@ public class RecordActivity extends BaseActivity {
     }
 
     private void initVoicePlayFragment() {
-        voicePlayFragment =  new VoicePlayFragment();
+        voicePlayFragment = new VoicePlayFragment();
         voicePlayFragment.setOnDeleteListener(new VoicePlayFragment.OnDeleteListener() {
             @Override
             public void onDelete(String fileName) {
                 U.log(this, "FILE DELETED: " + fileName);
-                initVoiceRecordFragment();
+                removeFragment(voicePlayFragment);
             }
         });
         replaceFragment(R.id.voice_container, voicePlayFragment);
     }
 
+    /**
+     * If we stop recording, make sure you show the correct fragment if it is needed.
+     */
+    public void removeRecordFragmentOrShowPlayFragmentIfNeeded () {
+        String fileName = Environment.getExternalStorageDirectory().getAbsolutePath() + VoiceRecordFragment.FILE_NAME;
+        File file = new File(fileName);
+        if (file.exists()) {
+            initVoicePlayFragment();
+        } else {
+            removeFragment(voiceRecordFragment);
+        }
+    }
 
-    private void initGallery(){
+    private void initGallery() {
         galleryPreviewFragment = (GalleryPreviewFragment) getFragmentManager().findFragmentById(R.id.gallery_preview_fragment);
         galleryPreviewFragment.initImages(appointmentRecord);
         galleryPreviewFragment.setOnGalleryClickListener(new GalleryPreviewFragment.OnGalleryClickListener() {
@@ -121,12 +137,18 @@ public class RecordActivity extends BaseActivity {
         startActivity(intent);
     }
 
+    public void onMicrophoneClick(View view) {
+        //TODO figure out whether it is safe to remove fragment while the recording is still hapenning
+        if (isRecordingVisible) removeRecordFragmentOrShowPlayFragmentIfNeeded();
+        else initVoiceRecordFragment();
 
+        isRecordingVisible = !isRecordingVisible;
+    }
 
     public void onCameraClick(View view) {
         PackageManager packageManager = getPackageManager();
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        if(packageManager.hasSystemFeature(PackageManager.FEATURE_CAMERA)){
+        if (packageManager.hasSystemFeature(PackageManager.FEATURE_CAMERA)) {
             startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
 
         }
@@ -164,9 +186,6 @@ public class RecordActivity extends BaseActivity {
     public void deleteModel() {
         U.log(this, "delete appointment record");
     }
-
-
-
 
 
 }

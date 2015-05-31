@@ -31,6 +31,9 @@ public abstract class BaseActivity extends AppCompatActivity {
                 .commit();
     }
 
+    public void removeFragment(Fragment fragment) {
+        getFragmentManager().beginTransaction().remove(fragment).commit();
+    }
 
     abstract public void initModel();
 

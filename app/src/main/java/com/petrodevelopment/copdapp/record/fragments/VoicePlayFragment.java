@@ -124,6 +124,11 @@ public class VoicePlayFragment extends SectionFragment {
         });
     }
 
+    public void deleteTrack() {
+        File file = new File(mFileName);
+        if (file.exists()) file.delete();
+    }
+
     private void initDeleteButton(View rootView) {
         mDeleteButton = (ImageView) rootView.findViewById(R.id.delete_btn);
         mDeleteButton.setOnClickListener(new View.OnClickListener() {
