@@ -7,6 +7,10 @@
     <color name="green_light">#76ff03</color>
     <color name="green_light_pressed">#689f38</color>
 
+    <color name="main_text_color">#4a494b</color>
+    <color name="hint_text_color">#929496</color>
+
+
     <color name="yellow_dark">#ffe293</color>
     <color name="yellow_light">#f6f086</color>
     <color name="teal">#00b686</color>

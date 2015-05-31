@@ -14,6 +14,7 @@ import com.petrodevelopment.copdapp.fragments.SectionFragment;
 import com.petrodevelopment.copdapp.util.TextViewTimerTask;
 import com.petrodevelopment.copdapp.util.U;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -23,6 +24,7 @@ import java.util.TimerTask;
  * Created by user on 15-05-14.
  */
 public class VoiceRecordFragment extends SectionFragment {
+    public static final String FILE_NAME ="/audiorecordtest.3gp";
     private static String mFileName;
     private ImageButton mRecordButton;
     private TextView mTimeTextView;
@@ -55,7 +57,7 @@ public class VoiceRecordFragment extends SectionFragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_voice_record, container, false);
 
-        mFileName = Environment.getExternalStorageDirectory().getAbsolutePath() + "/audiorecordtest.3gp";
+        mFileName = Environment.getExternalStorageDirectory().getAbsolutePath() + FILE_NAME;
 
         mTimer = new Timer();
         initView(rootView);
@@ -88,12 +90,14 @@ public class VoiceRecordFragment extends SectionFragment {
     @Override
     public void onPause() {
         super.onPause();
-        if (mRecorder != null) {
-            mRecorder.release();
-            mRecorder = null;
-        }
-        stopRecordTimer();
+        stopRecording();
     }
+
+    public void deleteTrack() {
+        File file = new File(mFileName);
+        if (file.exists()) file.delete();
+    }
+
 
 
     private void startRecording() {
@@ -116,13 +120,15 @@ public class VoiceRecordFragment extends SectionFragment {
     }
 
     private void stopRecording() {
-        mRecorder.stop();
-        mRecorder.release();
-        mRecorder = null;
-        mRecordButton.setImageResource(R.drawable.ic_record);
-        mRecordButton.setContentDescription(getString(R.string.record));
-        if (mOnStopListener != null) mOnStopListener.onStop(mFileName);
-        stopRecordTimer();
+        if (mRecorder != null) {
+            mRecorder.stop();
+            mRecorder.release();
+            mRecorder = null;
+            mRecordButton.setImageResource(R.drawable.ic_record);
+            mRecordButton.setContentDescription(getString(R.string.record));
+            if (mOnStopListener != null) mOnStopListener.onStop(mFileName);
+            stopRecordTimer();
+        }
     }
 
 

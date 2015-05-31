@@ -11,10 +11,10 @@
     <dimen name="appointment_image_width">90dp</dimen>
     <dimen name="box_top_and_bottom_padding">5dp</dimen>
     <dimen name="appointment_cell_box">150dp</dimen>
-
+    <dimen name="elevation">2dp</dimen>
     <!--<dimen name="appointment_row_height">150dp</dimen>-->
     <dimen name="small_icon">36dp</dimen>
-
+    <dimen name="gallery_vertical_spacing">2dp</dimen>
     <dimen name="list_vertical_margin">12dp</dimen>
     <dimen name="list_horizontal_margin">16dp</dimen>
 

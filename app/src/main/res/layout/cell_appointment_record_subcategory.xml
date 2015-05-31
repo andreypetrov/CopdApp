@@ -46,7 +46,7 @@
                 android:layout_height="@dimen/category_icon"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                android:src="@drawable/ic_arrow_right_360"/>
+                android:src="@drawable/ic_chevron_right"/>
         </LinearLayout>
 
         <LinearLayout

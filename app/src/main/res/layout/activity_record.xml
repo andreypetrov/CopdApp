@@ -1,11 +1,11 @@
 <!-- A DrawerLayout is intended to be used as the top-level content view using match_parent for both width and height to consume the full space available. -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:app="http://schemas.android.com/apk/res-auto"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical"
-              tools:context=".RecordActivity">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".RecordActivity">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
@@ -21,18 +21,18 @@
         android:id="@+id/cell_header"
         android:layout_width="match_parent"
         android:layout_height="@dimen/subcategory_row"
-        android:background="@drawable/white_button"
-        android:orientation="horizontal"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
         android:layout_marginLeft="@dimen/activity_horizontal_margin"
         android:layout_marginRight="@dimen/activity_horizontal_margin"
-        >
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:background="@drawable/white_button"
+        android:orientation="horizontal">
 
         <ImageView
             android:id="@+id/image"
             android:layout_width="@dimen/category_icon"
             android:layout_height="@dimen/category_icon"
-            android:layout_gravity="center_vertical"/>
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/ic_assessment_blue" />
 
         <TextView
             android:id="@+id/question"
@@ -41,95 +41,80 @@
             android:layout_gravity="center_vertical"
             android:layout_weight="1"
             android:text="@string/dummy_question"
-            android:textSize="@dimen/abc_text_size_small_material"
-            />
+            android:textSize="@dimen/abc_text_size_subhead_material" />
 
         <ImageView
             android:layout_width="@dimen/category_icon"
             android:layout_height="@dimen/category_icon"
             android:layout_gravity="center_vertical"
-            android:src="@drawable/ic_arrow_right_360"/>
+            android:src="@drawable/ic_dropdown" />
     </LinearLayout>
 
-    <include layout="@layout/line_horizontal_with_margin"/>
+    <include layout="@layout/line_horizontal_with_margin" />
 
-    <ScrollView
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
 
-        <LinearLayout
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
-            android:layout_marginBottom="@dimen/activity_vertical_margin">
-
-
+            android:layout_height="match_parent">
 
             <LinearLayout
-                android:id="@+id/cell_body"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                android:layout_marginRight="@dimen/activity_horizontal_margin"
-                android:orientation="vertical"
-                android:visibility="visible">
-
-                <EditText
-                    android:id="@+id/note"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/box_top_and_bottom_padding"
-                    android:layout_marginTop="@dimen/box_top_and_bottom_padding"
-                    android:background="@color/transparent"
-                    android:gravity="top|left"
-                    android:hint="@string/appointment_note_hint"
-                    android:inputType="textMultiLine"
-                    android:minLines="3"
-                    />
-
-                <com.petrodevelopment.copdapp.views.NonScrollableGridView
-                    android:id="@+id/gallery"
-                    xmlns:android="http://schemas.android.com/apk/res/android"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:columnWidth="90dp"
-                    android:gravity="center"
-                    android:horizontalSpacing="@dimen/box_top_and_bottom_padding"
-                    android:numColumns="auto_fit"
-                    android:stretchMode="columnWidth"
-                    android:verticalSpacing="@dimen/box_top_and_bottom_padding"
-                    />
-
-                <FrameLayout
-                    android:id="@+id/voice_container"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <!--<fragment-->
-                    <!--android:id="@+id/voice_record_fragment"-->
-                    <!--android:name="com.petrodevelopment.copdapp.record.fragments.VoiceRecordFragment"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--tools:layout="@layout/fragment_voice_record"/>-->
-                </FrameLayout>
-            </LinearLayout>
-
-
-            <fragment
-                android:id="@+id/gallery_preview_fragment"
-                android:name="com.petrodevelopment.copdapp.record.fragments.GalleryPreviewFragment"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                tools:layout="@layout/fragment_gallery_preview"/>
+                android:layout_marginBottom="@dimen/activity_vertical_margin"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/activity_vertical_margin">
 
 
-        </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/cell_body"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                    android:layout_marginRight="@dimen/activity_horizontal_margin"
+                    android:orientation="vertical"
+                    android:visibility="visible">
+
+                    <EditText
+                        android:id="@+id/note"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/box_top_and_bottom_padding"
+                        android:layout_marginTop="@dimen/box_top_and_bottom_padding"
+                        android:background="@color/transparent"
+                        android:gravity="top|left"
+                        android:hint="@string/appointment_note_hint"
+                        android:inputType="textMultiLine"
+                        android:minLines="3" />
+
+                    <fragment
+                        android:id="@+id/gallery_preview_fragment"
+                        android:name="com.petrodevelopment.copdapp.record.fragments.GalleryPreviewFragment"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        tools:layout="@layout/fragment_gallery_preview" />
 
 
-    </ScrollView>
+                </LinearLayout>
 
-    <include layout="@layout/line_horizontal_with_margin"/>
+
+            </LinearLayout>
+        </ScrollView>
+
+        <FrameLayout
+            android:id="@+id/voice_container"
+            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </FrameLayout>
+    </RelativeLayout>
+
+
+    <include layout="@layout/line_horizontal_with_margin" />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -143,7 +128,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/white_button"
-            android:src="@drawable/ic_mic"/>
+            android:onClick="onMicrophoneClick"
+            android:src="@drawable/ic_mic" />
 
         <ImageButton
             android:id="@+id/camera_btn"
@@ -151,7 +137,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/white_button"
             android:onClick="onCameraClick"
-            android:src="@drawable/ic_camera"/>
+            android:src="@drawable/ic_camera" />
     </LinearLayout>
 </LinearLayout>
 

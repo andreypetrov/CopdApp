@@ -1,15 +1,22 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:tools="http://schemas.android.com/tools"
-              android:layout_width="match_parent"
+              android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              android:orientation="vertical"
-              tools:context=".VoiceRecordFragment">
+              android:layout_gravity="center_horizontal"
+              android:gravity="center_vertical"
+              android:orientation="horizontal"
+              tools:context=".VoiceRecordFragment"
+              android:padding="@dimen/activity_horizontal_margin"
+              android:clipToPadding="false"
+    >
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        tools:context=".VoiceRecordFragment">
+        android:gravity="center_vertical"
+        android:background="@drawable/white_button"
+        android:elevation="@dimen/elevation"
+        android:orientation="horizontal">
 
 
         <ImageButton
@@ -19,21 +26,15 @@
             android:layout_centerVertical="true"
             android:background="@drawable/white_button"
             android:src="@drawable/ic_record"
-          />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/box_top_and_bottom_padding"
-            android:layout_marginRight="@dimen/box_top_and_bottom_padding"
-            android:text="@string/time"/>
+            />
 
         <TextView
             android:id="@+id/time"
+            android:layout_centerVertical="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/box_top_and_bottom_padding"
-            android:layout_marginRight="@dimen/box_top_and_bottom_padding"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
             android:text="@string/time_zero"/>
     </LinearLayout>
 

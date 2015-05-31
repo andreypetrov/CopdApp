@@ -435,10 +435,12 @@ public class U {
     }
 
     public static long calculatePercentage(long initialTimeInMillis, long totalTimeInMillis) {
-        return (100*initialTimeInMillis)/totalTimeInMillis;
+        if (totalTimeInMillis == 0) return 0;
+        else return (100*initialTimeInMillis)/totalTimeInMillis;
     }
 
     public static int calculatePercentage(int initialTimeInMillis, int totalTimeInMillis) {
-        return (100*initialTimeInMillis)/totalTimeInMillis;
+        if (totalTimeInMillis == 0) return 0;
+        else return (100*initialTimeInMillis)/totalTimeInMillis;
     }
 }
