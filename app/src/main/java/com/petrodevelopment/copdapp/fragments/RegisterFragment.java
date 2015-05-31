@@ -1,26 +1,34 @@
-package com.petrodevelopment.copdapp.activities;
+package com.petrodevelopment.copdapp.fragments;
 
+import android.app.Activity;
+import android.app.FragmentManager;
 import android.content.Context;
-import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
+import android.content.DialogInterface;
+import android.net.Uri;
 import android.os.Bundle;
+import android.app.Fragment;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
+import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.petrodevelopment.copdapp.R;
+import com.petrodevelopment.copdapp.activities.LoginActivity;
 import com.petrodevelopment.copdapp.model.Login;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class HomeRegisterActivity extends ActionBarActivity {
+
+/**
+ * Added by tom 30/05/2015
+ * For register screen on home page
+ */
+public class RegisterFragment extends Fragment implements View.OnClickListener {
 
     private int parsedPasscode = 0;
     //Getting values from edit text fields
@@ -29,64 +37,88 @@ public class HomeRegisterActivity extends ActionBarActivity {
     private EditText passSecond;
     private EditText numbPass;
 
+    private LoginFragment loginFragment;
+    public Context context;
+    private LoginActivity loginActivity;
+
+    private OnItemSelectedListener listener;
+    private OnFragmentInteractionListener mListener;
+
+    public RegisterFragment() {
+        // Required empty public constructor
+    }
+
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home_register);
 
-        underline();
-
-        //For Sign up button
-        Button signup = (Button)findViewById(R.id.signup);
-        signup.setOnClickListener(new View.OnClickListener()
-        {
-            public void onClick(View v)
-            {
-                signUp(v);
-            }
-        });
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_home_register, menu);
-        return true;
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+
+        View inflatedView = inflater.inflate(R.layout.fragment_register, container, false);
+
+        TextView tv = (TextView) inflatedView.findViewById(R.id.login);
+       tv.setOnClickListener(this);
+
+        // Inflate the layout for this fragment
+        return inflatedView;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.login:
+                loginActivity.initLoginFragment();
+                break;
         }
-
-        return super.onOptionsItemSelected(item);
     }
 
 
-    //Change from new user to login screen 24-05-2015
-    public void goToLoginScreen(View v)
-    {
-        Intent intent = new Intent(this, LoginActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-        startActivity(intent);
+
+    public interface OnItemSelectedListener {
+        public void onRssItemSelected(String link);
     }
+
+
+
+    public interface OnFragmentInteractionListener {
+        public void onFragmentInteraction(Uri uri);
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        try {
+            //mListener = (OnFragmentInteractionListener) activity;
+            context = getActivity();
+            loginActivity = (LoginActivity)context;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString()
+                    + " must implement OnFragmentInteractionListener");
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mListener = null;
+    }
+
+
 
     //Added by Tom 23-05-2015
     //Signing the user up, currently just goes into an arraylist, but will have to be changed when database implemented
     public void signUp(View v)
     {
-        emailText = (EditText)findViewById(R.id.enterEmail);
-        passFirst = (EditText)findViewById(R.id.enterPassword);
-        passSecond = (EditText)findViewById(R.id.confirmPassword);
-        numbPass = (EditText)findViewById(R.id.enterPasscode);
+        emailText = (EditText) getView().findViewById(R.id.enterEmail);
+        passFirst = (EditText) getView().findViewById(R.id.enterPassword);
+        passSecond = (EditText) getView().findViewById(R.id.confirmPassword);
+        numbPass = (EditText) getView().findViewById(R.id.enterPasscode);
 
         //Validation NOTE: need to add int validation for passcode
         if(emailText.getText().toString().matches(""))
@@ -141,6 +173,7 @@ public class HomeRegisterActivity extends ActionBarActivity {
     /*
      *  Adding patient registration to login
      */
+
     public void addToLoginList(String email, String password, int parsedPasscode)
     {
         List<Login> login = new ArrayList<>();
@@ -148,11 +181,10 @@ public class HomeRegisterActivity extends ActionBarActivity {
         patientInfo.addLogin(login);
     }
 
-
     //To show validation error --Added by Tom 23/05/2015
     public void showMsg(String Error)
     {
-        Context context = getApplicationContext();
+        Context context = getActivity().getApplicationContext();
         CharSequence text = Error;
         int duration = Toast.LENGTH_LONG;
 
@@ -160,22 +192,10 @@ public class HomeRegisterActivity extends ActionBarActivity {
         toast.show();
     }
 
-
-    //Show underline under New Account
-    private void underline()
-    {
-        TextView textView = (TextView) findViewById(R.id.newAccount);
-        SpannableString content = new SpannableString("New Account");
-        content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
-        textView.setText(content);
-    }
-
-
     //Going to home screen after login
     public void goToHome(View v)
     {
-        Intent intent = new Intent(this, HomeActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-        startActivity(intent);
+
     }
+
 }

@@ -99,13 +99,8 @@
             android:label="@string/title_activity_maps_activity_test" >
         </activity>
         <activity
-            android:name=".activities.HomeRegisterActivity"
-            android:label="@string/title_activity_home_register" >
-        </activity>
-        <activity
             android:name=".activities.LoginActivity"
-            android:label="@string/title_activity_login"
-            android:windowSoftInputMode="adjustResize|stateVisible" >
+            android:label="@string/title_activity_home_register" >
         </activity>
     </application>
 

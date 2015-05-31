@@ -1,91 +1,86 @@
 package com.petrodevelopment.copdapp.activities;
 
-
-import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
-import android.text.SpannableString;
-import android.text.style.UnderlineSpan;
-import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
-
-import java.util.ArrayList;
-import java.util.List;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import com.petrodevelopment.copdapp.R;
+import com.petrodevelopment.copdapp.fragments.LoginFragment;
+import com.petrodevelopment.copdapp.fragments.RegisterFragment;
+import com.petrodevelopment.copdapp.fragments.WelcomeBackFragment;
 
-/**
- * A login screen that offers login via email/password.
- */
-public class LoginActivity extends Activity  {
 
-    private TextView tv;
-    private Button signIn;
+public class LoginActivity extends BaseActivity {
+
+    private LoginFragment loginFragment;
+    private RegisterFragment registerFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        underline();
-        setRegitrationTextViewListener(tv);
-        setSignInButtonListener(signIn);
-    }
-
-
-    //For New User tab at top
-    private void setRegitrationTextViewListener(TextView tv)
-    {
-        this.tv = tv;
-        tv =  (TextView) findViewById(R.id.newAccount);
-        tv.setOnClickListener(new View.OnClickListener()
+        //Creating First fragment(Register?)
+        if (findViewById(R.id.user_interface) != null)
         {
-            public void onClick(View v)
-            {
-                goToNewUser(v);
-            }
-        });
-    }
+            if (savedInstanceState != null)
+                return;
 
-    //For login button
-    private void setSignInButtonListener(Button b)
-    {
-        this.signIn = signIn;
-        signIn =  (Button) findViewById(R.id.login);
-        signIn.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                loggedIn(v);
-            }
-        });
+            RegisterFragment register = new RegisterFragment();
+            //LoginFragment login = new LoginFragment();
+            //WelcomeBackFragment wbf = new WelcomeBackFragment();
+            FragmentManager fm = getFragmentManager();
+            FragmentTransaction ft = fm.beginTransaction();
+            ft.add(R.id.user_interface, register);
+            ft.commit();
+        }
     }
 
 
-    //Show underline under Login
-    private void underline()
-    {
-        TextView textView = (TextView) findViewById(R.id.signin);
-        SpannableString content = new SpannableString("Login");
-        content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
-        textView.setText(content);
+    /*
+     * Login Fragment
+     */
+    public void initLoginFragment() {
+        loginFragment = new LoginFragment();
+        replaceFragment(R.id.user_interface, loginFragment);
     }
 
 
-    //Go back to registration screen
-    private void goToNewUser(View v)
-    {
-        Intent intent = new Intent(this, HomeRegisterActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-        startActivity(intent);
+    /*
+     * Register Fragment
+     */
+    public void initRegisterFragment() {
+        registerFragment =  new RegisterFragment();
+        replaceFragment(R.id.user_interface, registerFragment);
     }
 
 
-    //For login button
-    private void loggedIn(View v)
-    {
-        Intent intent = new Intent(this, HomeActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-        startActivity(intent);
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_home_register, menu);
+        return true;
+    }
+
+    @Override
+    public void initModel() {
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }
-

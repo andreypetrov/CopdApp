@@ -100,4 +100,9 @@
     <string name="time_slash">/</string>
 
 
+    <!-- Welcome Back -->
+    <string name="welcome_back">Welcome Back</string>
+
+
+
 </resources>

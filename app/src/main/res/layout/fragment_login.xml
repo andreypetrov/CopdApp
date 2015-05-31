@@ -1,0 +1,84 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.petrodevelopment.copdapp.fragments.LoginFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="30dp"
+        android:paddingBottom="30dp">
+
+        <TextView android:id="@+id/newAccount"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="@string/new_account"
+            android:textSize="23dp"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:layout_alignParentTop="true" />
+
+        <TextView android:id="@+id/signin"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="@string/login"
+            android:textSize="23dp"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_below="@+id/newAccount">
+
+            <EditText android:id="@+id/enterEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:drawableLeft="@drawable/ic_email"
+                android:hint="@string/enter_email"
+                android:layout_marginTop="8dp"/>
+
+            <EditText android:id="@+id/enterPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:drawableLeft="@drawable/ic_password"
+                android:hint="@string/enter_password"
+                android:inputType="textPassword"
+                android:layout_marginTop="8dp"/>
+
+            <EditText android:id="@+id/enterPasscode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:drawableLeft="@drawable/ic_passcode"
+                android:hint="@string/enter_passcode"
+                android:layout_marginTop="10dp"/>
+
+            <TextView android:id="@+id/passcode_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textSize="14dp"
+                android:text="@string/forgot_password"
+                android:layout_marginTop="30dp"/>
+
+            <Button android:id="@+id/login"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/login"
+                android:textColor="@color/white"
+                android:background="@color/navy"
+                android:layout_marginTop="8dp" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
+</FrameLayout>

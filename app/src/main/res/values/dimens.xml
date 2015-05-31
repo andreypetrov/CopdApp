@@ -3,6 +3,8 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
 
+    <dimen name="login_top_margin">25dp</dimen>
+
     <dimen name="profile_image_height">50dp</dimen>
     <dimen name="profile_image_width">50dp</dimen>
     <dimen name="appointment_image_height">90dp</dimen>
@@ -27,4 +29,7 @@
     <!-- Per the design guidelines, navigation drawers should be between 240dp and 320dp:
          https://developer.android.com/design/patterns/navigation-drawer.html -->
     <dimen name="navigation_drawer_width">240dp</dimen>
+
+    <dimen name="lung_height">100dp</dimen>
+    <dimen name="lung_width">100dp</dimen>
 </resources>
