@@ -100,7 +100,7 @@ public class HomeActivity extends BaseActivity
     public void startRecordActivity(int position) {
         Intent intent = new Intent(this, RecordActivity.class);
         intent.putExtra(MainApplication.APPOINTMENT_ID_EXTRA, "0");
-        intent.putExtra(MainApplication.APPOINTMENT_RECORD_CATEGORY_ID, "Severity");
+        intent.putExtra(MainApplication.APPOINTMENT_RECORD_CATEGORY_ID, "2");
         startActivity(intent);
     }
 

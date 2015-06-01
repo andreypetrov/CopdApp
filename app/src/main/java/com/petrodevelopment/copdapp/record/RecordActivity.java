@@ -56,12 +56,22 @@ public class RecordActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_record);
         scrollView = (ScrollView) findViewById(R.id.scrollView);
-        initNote();
         initModel();
+        initNote();
         initToolbar();
         initVoice();
         initGallery();
     }
+
+
+    @Override
+    public void initModel() {
+        appointmentId = getIntent().getStringExtra(MainApplication.APPOINTMENT_ID_EXTRA);
+        appointment = getModelFacade().getAppointment(appointmentId);
+        appointmentRecordCategoryId = getIntent().getStringExtra(MainApplication.APPOINTMENT_RECORD_CATEGORY_ID);
+        appointmentRecord = getModelFacade().getAppointmentRecord(appointmentRecordCategoryId, appointment);
+    }
+
 
     private void initNote() {
         EditText note = (EditText) findViewById(R.id.note);
@@ -81,16 +91,6 @@ public class RecordActivity extends BaseActivity {
             }
         });
     }
-
-    @Override
-    public void initModel() {
-        appointmentId = getIntent().getStringExtra(MainApplication.APPOINTMENT_ID_EXTRA);
-        appointment = getModelFacade().getAppointment(appointmentId);
-        appointmentRecordCategoryId = getIntent().getStringExtra(MainApplication.APPOINTMENT_RECORD_CATEGORY_ID);
-        appointmentRecord = getModelFacade().getAppointmentRecord(appointmentRecordCategoryId, appointment);
-    }
-
-
     private void initVoice() {
 
         String fileName = Environment.getExternalStorageDirectory().getAbsolutePath() + "/audiorecordtest.3gp";
