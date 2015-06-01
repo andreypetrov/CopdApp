@@ -1,8 +1,6 @@
 package com.petrodevelopment.copdapp.activities;
 
-import android.app.Fragment;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.SearchView;
@@ -10,7 +8,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.support.v4.widget.DrawerLayout;
-import android.view.View;
 
 import com.petrodevelopment.copdapp.MainApplication;
 import com.petrodevelopment.copdapp.NavigationDrawerFragment;
@@ -21,7 +18,6 @@ import com.petrodevelopment.copdapp.fragments.FilterableFragment;
 import com.petrodevelopment.copdapp.fragments.MedicationsFragment;
 import com.petrodevelopment.copdapp.fragments.ProviderFragment;
 import com.petrodevelopment.copdapp.fragments.SectionFragment;
-import com.petrodevelopment.copdapp.model.Login;
 import com.petrodevelopment.copdapp.record.RecordActivity;
 import com.petrodevelopment.copdapp.record.RecordAppointmentActivity;
 import com.petrodevelopment.copdapp.util.U;
@@ -104,7 +100,7 @@ public class HomeActivity extends BaseActivity
     public void startRecordActivity(int position) {
         Intent intent = new Intent(this, RecordActivity.class);
         intent.putExtra(MainApplication.APPOINTMENT_ID_EXTRA, "0");
-        intent.putExtra(MainApplication.RECORD_TYPE_ID_EXTRA, "Severity");
+        intent.putExtra(MainApplication.APPOINTMENT_RECORD_CATEGORY_ID, "Severity");
         startActivity(intent);
     }
 

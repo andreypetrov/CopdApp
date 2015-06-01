@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">CopdApp</string>
+    <string name="app_name">AppointMend</string>
     <string name="title_appointments_fragment">Appointments</string>
     <string name="title_providers_fragment">Providers</string>
     <string name="title_medications_fragment">Medications</string>

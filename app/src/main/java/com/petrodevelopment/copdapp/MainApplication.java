@@ -30,7 +30,7 @@ public class MainApplication extends Application {
     public static final String PROVIDER_ID_EXTRA = "provider_id_extra";
     public static final String CLINICIAN_TYPE_ID_EXTRA = "clinician_type_id_extra";
     public static final String QUESTION_ID_EXTRA = "question_id_extra";
-    public static final String RECORD_TYPE_ID_EXTRA = "record_type_id_extra";
+    public static final String APPOINTMENT_RECORD_CATEGORY_ID = "appointment_record_category_id";
     public static final String IMAGE_INDEX_EXTRA = "image_index_extra";
 
     private ModelFacade modelFacade;

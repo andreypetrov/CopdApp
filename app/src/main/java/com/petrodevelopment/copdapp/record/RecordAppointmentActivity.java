@@ -75,7 +75,7 @@ public class RecordAppointmentActivity extends BaseActivity {
     public void startRecordActivity(int position) {
         Intent intent = new Intent(this, RecordActivity.class);
         intent.putExtra(MainApplication.APPOINTMENT_ID_EXTRA, appointment.id);
-        intent.putExtra(MainApplication.RECORD_TYPE_ID_EXTRA, adapter.getItem(position).name);
+        intent.putExtra(MainApplication.APPOINTMENT_RECORD_CATEGORY_ID, adapter.getItem(position).id);
         startActivity(intent);
     }
 

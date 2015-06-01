@@ -1,6 +1,5 @@
 package com.petrodevelopment.copdapp.record;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -9,16 +8,18 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
+import android.widget.EditText;
 import android.widget.ScrollView;
 
 import com.petrodevelopment.copdapp.MainApplication;
 import com.petrodevelopment.copdapp.R;
 import com.petrodevelopment.copdapp.activities.BaseActivity;
 import com.petrodevelopment.copdapp.gallery.GalleryActivity;
+import com.petrodevelopment.copdapp.model.Appointment;
 import com.petrodevelopment.copdapp.model.AppointmentRecord;
 import com.petrodevelopment.copdapp.record.fragments.GalleryPreviewFragment;
 import com.petrodevelopment.copdapp.record.fragments.VoicePlayFragment;
@@ -36,8 +37,12 @@ public class RecordActivity extends BaseActivity {
 
     static final int REQUEST_IMAGE_CAPTURE = 1;
 
+    //Model
     private String appointmentId;
+    private Appointment appointment;
+    private String appointmentRecordCategoryId;
     private AppointmentRecord appointmentRecord;
+
     private boolean isRecordingVisible = false;
 
     private VoiceRecordFragment voiceRecordFragment;
@@ -51,16 +56,38 @@ public class RecordActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_record);
         scrollView = (ScrollView) findViewById(R.id.scrollView);
+        initNote();
         initModel();
         initToolbar();
         initVoice();
         initGallery();
     }
 
+    private void initNote() {
+        EditText note = (EditText) findViewById(R.id.note);
+        note.setText(appointmentRecord.note);
+        note.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                appointmentRecord.note = s.toString();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
+    }
+
     @Override
     public void initModel() {
         appointmentId = getIntent().getStringExtra(MainApplication.APPOINTMENT_ID_EXTRA);
-        appointmentRecord = getModelFacade().getAppointment(appointmentId).appointmentRecords.get(0);//TODO make this dynamic
+        appointment = getModelFacade().getAppointment(appointmentId);
+        appointmentRecordCategoryId = getIntent().getStringExtra(MainApplication.APPOINTMENT_RECORD_CATEGORY_ID);
+        appointmentRecord = getModelFacade().getAppointmentRecord(appointmentRecordCategoryId, appointment);
     }
 
 
@@ -72,12 +99,7 @@ public class RecordActivity extends BaseActivity {
             initVoicePlayFragment();
         }
     }
-
-    public void scrollViewToBottom() {
-        scrollView.fullScroll(View.FOCUS_DOWN);
-}
-
-
+    
     private void initToolbar() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -142,7 +164,7 @@ public class RecordActivity extends BaseActivity {
     private void startGalleryActivity(int imagePosition) {
         Intent intent = new Intent(RecordActivity.this, GalleryActivity.class);
         intent.putExtra(MainApplication.APPOINTMENT_ID_EXTRA, appointmentId);
-        intent.putExtra(MainApplication.RECORD_TYPE_ID_EXTRA, appointmentRecord.getAppointmentRecordCategory(this).name);
+        intent.putExtra(MainApplication.APPOINTMENT_RECORD_CATEGORY_ID, appointmentRecord.getAppointmentRecordCategory(this).name);
         intent.putExtra(MainApplication.IMAGE_INDEX_EXTRA, imagePosition);
         startActivity(intent);
     }
