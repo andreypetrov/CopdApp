@@ -57,6 +57,7 @@ import java.util.Locale;
      */
     private void initTabs(View rootView) {
         TabsView tabsView = (TabsView) rootView.findViewById(R.id.tabs);
+        tabsView.getChildAt(0).setSelected(true); //TODO create tabsview api method for initialization of selected item
         tabsView.setOnTabSelectedListener(new TabsView.OnTabSelectedListener() {
             @Override
             public void onTabSelected(int position, View view) {
