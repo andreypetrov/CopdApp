@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-
+    android:focusable="true"
+    android:focusableInTouchMode="true"
     tools:context=".AddEditAppointmentActivity">
 
     <LinearLayout
@@ -43,51 +44,53 @@
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingTop="10dp"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
             android:paddingRight="@dimen/activity_horizontal_margin"
-            android:paddingLeft="@dimen/activity_horizontal_margin">
+            android:paddingTop="10dp">
 
-            <ImageView android:id="@+id/clinician_blue"
+            <ImageView
+                android:id="@+id/clinician_blue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/ic_clinician_blue" />
+                android:background="@drawable/ic_clinician_blue"/>
 
-            <Spinner android:id="@+id/select_provider"
+            <Spinner
+                android:id="@+id/select_provider"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_toRightOf="@+id/clinician_blue"
-                android:layout_toEndOf="@+id/clinician_blue" />
+                android:layout_toEndOf="@+id/clinician_blue"
+                android:layout_toRightOf="@+id/clinician_blue"/>
 
         </RelativeLayout>
 
 
-
         <LinearLayout
-            android:orientation="horizontal"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:paddingRight="@dimen/activity_horizontal_margin"
-            android:paddingLeft="@dimen/activity_horizontal_margin">
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin">
 
             <RelativeLayout
                 android:layout_width="205dp"
                 android:layout_height="wrap_content">
 
-                <ImageView android:id="@+id/date"
+                <ImageView
+                    android:id="@+id/date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/ic_date" />
+                    android:background="@drawable/ic_date"/>
 
                 <TextView
                     android:id="@+id/select_date"
+                    style="@android:style/Widget.Holo.Spinner"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    style="@android:style/Widget.Holo.Spinner"
-                    android:hint="Date"
                     android:layout_centerVertical="true"
+                    android:layout_toEndOf="@+id/date"
                     android:layout_toRightOf="@+id/date"
-                    android:layout_toEndOf="@+id/date" />
+                    android:hint="Date"/>
 
             </RelativeLayout>
 
@@ -95,92 +98,100 @@
                 android:layout_width="135dp"
                 android:layout_height="wrap_content">
 
-                <ImageView android:id="@+id/time"
+                <ImageView
+                    android:id="@+id/time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/ic_time" />
+                    android:background="@drawable/ic_time"/>
 
-                <TextView android:id="@+id/select_time"
+                <TextView
+                    android:id="@+id/select_time"
+                    style="@android:style/Widget.Holo.Spinner"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    style="@android:style/Widget.Holo.Spinner"
-                    android:text="@string/Time"
                     android:layout_centerVertical="true"
+                    android:layout_toEndOf="@+id/time"
                     android:layout_toRightOf="@+id/time"
-                    android:layout_toEndOf="@+id/time" />
+                    android:text="@string/Time"/>
 
             </RelativeLayout>
 
         </LinearLayout>
 
         <RelativeLayout
-            android:orientation="horizontal"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:paddingRight="@dimen/activity_horizontal_margin"
-            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginBottom="10dp"
             android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp">
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin">
 
-            <EditText android:id="@+id/appointment_reason"
+            <EditText
+                android:id="@+id/appointment_reason"
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
                 android:background="@drawable/cell_bg"
                 android:gravity="top|left"
-                android:padding="10dp"
+                android:hint="@string/appointment_reason"
                 android:inputType="textMultiLine"
                 android:minLines="1"
-                android:hint="@string/appointment_reason"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true" />
+                android:padding="10dp"/>
 
-            <TextView android:id="@+id/questions"
+            <TextView
+                android:id="@+id/questions"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="18dp"
+                android:layout_below="@+id/appointment_reason"
                 android:padding="5dp"
                 android:text="@string/appointment_questions"
-                android:layout_below="@+id/appointment_reason" />
+                android:textSize="18dp"/>
 
             <ScrollView
                 android:layout_width="fill_parent"
                 android:layout_height="90dp"
+                android:layout_above="@+id/saveAsUpcoming"
                 android:layout_marginBottom="10dp"
-                android:layout_weight="1"
-                android:layout_above="@+id/saveAsUpcoming">
+                android:layout_weight="1">
 
-                <TableLayout android:id="@+id/questions_table"
+                <TableLayout
+                    android:id="@+id/questions_table"
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent">
 
-                    <TextView android:id="@+id/questions_per_specialist"
+                    <TextView
+                        android:id="@+id/questions_per_specialist"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:paddingTop="10dp"
                         android:minLines="2"
-                        android:text="@string/questions_per_specialist" />
+                        android:paddingTop="10dp"
+                        android:text="@string/questions_per_specialist"/>
 
                 </TableLayout>
             </ScrollView>
 
-            <Button  android:id="@+id/saveAsUpcoming"
-                android:layout_height="wrap_content"
+            <Button
+                android:id="@+id/saveAsUpcoming"
                 android:layout_width="160dp"
-                android:text="@string/save_appointment"
-                android:background="@color/blue"
-                android:textColor="@color/white"
-                android:onClick=""
-                android:layout_alignParentBottom="true"/>
-
-            <Button  android:id="@+id/recordAppointment"
                 android:layout_height="wrap_content"
-                android:layout_width="160dp"
-                android:text="@string/record_appointment"
-                android:background="@color/green"
-                android:textColor="@color/white"
-                android:onClick="goToRecording"
                 android:layout_alignParentBottom="true"
-                android:layout_alignParentRight="true" />
+                android:background="@color/blue"
+                android:onClick=""
+                android:text="@string/save_appointment"
+                android:textColor="@color/white"/>
+
+            <Button
+                android:id="@+id/recordAppointment"
+                android:layout_width="160dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:background="@color/green"
+                android:onClick="goToRecording"
+                android:text="@string/record_appointment"
+                android:textColor="@color/white"/>
 
         </RelativeLayout>
     </LinearLayout>

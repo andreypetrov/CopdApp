@@ -63,6 +63,7 @@ public class AddEditAppointmentActivity extends BaseActivity implements OnClickL
     private double lng = -79.4186298;
     private GoogleMap map;
 
+    private String appointmentId;
     private Appointment appointment;
     private List<Provider> providers;
 
@@ -76,16 +77,6 @@ public class AddEditAppointmentActivity extends BaseActivity implements OnClickL
     //This is used for creating table rows for questions
     private final LayoutParams lp = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
     private TextView providerQuestion;
-
-    //Testing
-//    private String[] questionArr =  new String[]{
-//            "What is the severity of my condition?",
-//            "What is the doctor's assessment of me?",
-//            "What are the recommended medications? (name, dosage, frequency, and route, beginning date and end date if applicable)",
-//            "What tests will be done?",
-//            "What lifestyle changes do I have to make?",
-//            "What clinicians have I been referred to?",
-//    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,7 +106,7 @@ public class AddEditAppointmentActivity extends BaseActivity implements OnClickL
     @Override
     public void initModel() {
         //TODO if there is no appointment id, then create a new appointment with a unique id
-        String appointmentId = getIntent().getStringExtra(MainApplication.APPOINTMENT_ID_EXTRA);
+        appointmentId = getIntent().getStringExtra(MainApplication.APPOINTMENT_ID_EXTRA);
         appointment = getModelFacade().getAppointment(appointmentId);
         questions = getModelFacade().questionList.questions;
         providers = getModelFacade().providerList.providers;
@@ -158,6 +149,7 @@ public class AddEditAppointmentActivity extends BaseActivity implements OnClickL
     public void goToRecording(View v)
     {
         Intent intent = new Intent(this, RecordAppointmentActivity.class);
+        intent.putExtra(MainApplication.APPOINTMENT_ID_EXTRA, appointmentId);
         startActivity(intent);
         finish();
     }
