@@ -131,7 +131,23 @@ public class AppointmentsFragment extends FilterableFragment {
         filteredAppointments.clear();
         for (Appointment appointment : getModel()) {
             Provider provider = appointment.getProvider(getActivity());
-            ClinicianType clinicianType = provider.getClinitianType(getActivity());
+            if (provider != null) { // match by doctor if there is one
+                ClinicianType clinicianType = provider.getClinitianType(getActivity());
+                String[] fields = {
+                        provider.firstName,
+                        provider.lastName,
+                        provider.email,
+                        provider.title,
+                        provider.phoneNumber,
+                        clinicianType.name
+                };
+                for (String field : fields) {
+                    if (field.toLowerCase(Locale.getDefault()).startsWith(searchQueryLowerCase)) {
+                        filteredAppointments.add(appointment);
+                        break;
+                    }
+                }
+            }
 
             //in the date fields we will check for contaning
             Date date = U.convertUnixStringToDate(appointment.date);
@@ -139,27 +155,13 @@ public class AppointmentsFragment extends FilterableFragment {
             String timeString = U.convertToTimeString(date);
 
             //we will check in those fields for starting with
-            String[] fields = {
-                    provider.firstName,
-                    provider.lastName,
-                    provider.email,
-                    provider.title,
-                    provider.phoneNumber,
-                    clinicianType.name
-            };
-
-            for (String field : fields) {
-                if (field.toLowerCase(Locale.getDefault()).startsWith(searchQueryLowerCase)) {
-                    filteredAppointments.add(appointment);
-                    break;
-                }
-                if (dateString.toLowerCase(Locale.getDefault()).contains(searchQueryLowerCase) ||
+            if (dateString.toLowerCase(Locale.getDefault()).contains(searchQueryLowerCase) ||
                     timeString.toLowerCase(Locale.getDefault()).contains(searchQueryLowerCase) ) {
-                    filteredAppointments.add(appointment);
-                    break;
-                }
-
+                filteredAppointments.add(appointment);
+                break;
             }
+
+
         }
         if(adapter !=null) adapter.notifyDataSetChanged();
     }

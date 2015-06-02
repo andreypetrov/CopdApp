@@ -21,7 +21,6 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 
 
-
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
@@ -47,13 +46,14 @@ import com.petrodevelopment.copdapp.util.U;
 
 import java.util.Calendar;
 import java.util.List;
+
 import android.widget.TableRow.LayoutParams;
 
 
 public class AddEditAppointmentActivity extends BaseActivity implements OnClickListener, OnMapReadyCallback {
 
     //Variables for date and time
-    TextView selectTime,selectDate,selectQuestions;
+    TextView selectTime, selectDate, selectQuestions;
     private int hour, minute, day, month, year;
 
     //Variables for google maps
@@ -67,7 +67,9 @@ public class AddEditAppointmentActivity extends BaseActivity implements OnClickL
     private Appointment appointment;
     private List<Provider> providers;
 
-    private Provider provider = new Provider();
+    private Provider provider;
+    private String providerId;
+
     private Button recordButton;
     private Button saveAppointment;
 
@@ -94,8 +96,7 @@ public class AddEditAppointmentActivity extends BaseActivity implements OnClickL
     /*
      * Grouping methods for readability
      */
-    public void setUp()
-    {
+    public void setUp() {
         initModel();
         initSpinner();
         initToolbar();
@@ -108,15 +109,15 @@ public class AddEditAppointmentActivity extends BaseActivity implements OnClickL
         //TODO if there is no appointment id, then create a new appointment with a unique id
         appointmentId = getIntent().getStringExtra(MainApplication.APPOINTMENT_ID_EXTRA);
         appointment = getModelFacade().getAppointment(appointmentId);
+        provider = appointment.getProvider(this);
+        providerId = provider.id;
+
         questions = getModelFacade().questionList.questions;
         providers = getModelFacade().providerList.providers;
-
-        U.log(this, "opened appointment with id: " + appointmentId);
     }
 
 
-    public void setButtonListeners()
-    {
+    public void setButtonListeners() {
         recordButton = (Button) findViewById(R.id.recordAppointment);
         setRecordButtonListener(recordButton);
         saveAppointment = (Button) findViewById(R.id.saveAsUpcoming);
@@ -125,8 +126,7 @@ public class AddEditAppointmentActivity extends BaseActivity implements OnClickL
 
 
     //Button click listener for recording
-    public void setRecordButtonListener(Button b)
-    {
+    public void setRecordButtonListener(Button b) {
         b.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 goToRecording(v);
@@ -146,8 +146,7 @@ public class AddEditAppointmentActivity extends BaseActivity implements OnClickL
 
 
     //Go to recording activity when record results button is clicked
-    public void goToRecording(View v)
-    {
+    public void goToRecording(View v) {
         Intent intent = new Intent(this, RecordAppointmentActivity.class);
         intent.putExtra(MainApplication.APPOINTMENT_ID_EXTRA, appointmentId);
         startActivity(intent);
@@ -156,14 +155,11 @@ public class AddEditAppointmentActivity extends BaseActivity implements OnClickL
 
 
     //Saving appointment
-    public void saveAppointment(View v)
-    {
+    public void saveAppointment(View v) {
         Intent intent = new Intent(this, HomeActivity.class);
         //Pass appointment id
         startActivity(intent);
-
     }
-
 
 
     private void initToolbar() {
@@ -173,27 +169,27 @@ public class AddEditAppointmentActivity extends BaseActivity implements OnClickL
     }
 
 
-
     private void initSpinner() {
         //Populate Provider Spinner
         final EditAddAppointmentProviderListAdapter providerAdapter = new EditAddAppointmentProviderListAdapter(providers, this, R.layout.cell_provider_add_appointment_list);
         final Spinner providerSpinner = (Spinner) findViewById(R.id.select_provider);
         providerSpinner.setAdapter(providerAdapter);
 
+
         providerSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                provider = providers.get(position);
-                address = provider.address.street;
-                name = "Dr. " + provider.firstName + " " + provider.lastName;
-
-                //Update coords for mapview
-                lat = Double.parseDouble(provider.address.latitude);
-                lng = Double.parseDouble(provider.address.longitude);
-
                 if (providerSpinner.getSelectedItemPosition() != 0) {
+                    provider = providers.get(position - 1); // offsetting because of the extra first item on the spinner
+                    providerId = provider.id;
+                    appointment.providerId = providerId;
+
                     createMarker();
                     populateQuestions();
+                } else { //reset provider to none
+                    provider = null;
+                    providerId = null;
+                    appointment.providerId = null;
                 }
             }
 
@@ -236,7 +232,7 @@ public class AddEditAppointmentActivity extends BaseActivity implements OnClickL
             final Calendar c = Calendar.getInstance();
             day = c.get(Calendar.DAY_OF_MONTH);
             month = c.get(Calendar.MONTH);
-            year =  c.get(Calendar.YEAR);
+            year = c.get(Calendar.YEAR);
 
             datePicker();
         }
@@ -252,8 +248,7 @@ public class AddEditAppointmentActivity extends BaseActivity implements OnClickL
     /*
      *  For date picker
      */
-    public void datePicker()
-    {
+    public void datePicker() {
         DatePickerDialog dpd = new DatePickerDialog(this,
                 new DatePickerDialog.OnDateSetListener() {
 
@@ -273,8 +268,7 @@ public class AddEditAppointmentActivity extends BaseActivity implements OnClickL
     /*
      * For time picker
      */
-    public void timePicker()
-    {
+    public void timePicker() {
         TimePickerDialog tpd = new TimePickerDialog(this,
                 new TimePickerDialog.OnTimeSetListener() {
 
@@ -292,8 +286,7 @@ public class AddEditAppointmentActivity extends BaseActivity implements OnClickL
     /*
      * Selecting date or time, or number picker for questions
      */
-    private void selectPickers()
-    {
+    private void selectPickers() {
         selectTime = (TextView) findViewById(R.id.select_time);
         selectTime.setOnClickListener(this);
 
@@ -311,8 +304,13 @@ public class AddEditAppointmentActivity extends BaseActivity implements OnClickL
     }
 
 
-    public void createMarker()
-    {
+    public void createMarker() {
+        address = provider.address.street;
+        name = provider.title + " " + provider.firstName + " " + provider.lastName;
+        //Update coords for mapview
+        lat = Double.parseDouble(provider.address.latitude);
+        lng = Double.parseDouble(provider.address.longitude);
+
         BitmapDescriptor bitmapAZURE = BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE); //for map marker colour
 
         Marker info = map.addMarker(new MarkerOptions()
@@ -327,8 +325,7 @@ public class AddEditAppointmentActivity extends BaseActivity implements OnClickL
     }
 
 
-    public void setMapScreen(Marker marker)
-    {
+    public void setMapScreen(Marker marker) {
         Projection projection = map.getProjection();
         LatLng markerLocation = marker.getPosition();
         Point screenPosition = projection.toScreenLocation(markerLocation);
@@ -340,8 +337,7 @@ public class AddEditAppointmentActivity extends BaseActivity implements OnClickL
 
 
     //Added by Tom 22-05-2015, for Question once Provider has been selected
-    public void populateQuestions()
-    {
+    public void populateQuestions() {
         //First hide the textview questions_per_specialist"
         TextView tv = (TextView) findViewById(R.id.questions_per_specialist);
         tv.setVisibility(View.GONE);
@@ -356,8 +352,7 @@ public class AddEditAppointmentActivity extends BaseActivity implements OnClickL
     /*
      *Programmatically create table row for questions
      */
-    public void setTableRow(int i)
-    {
+    public void setTableRow(int i) {
         TableLayout questionLayout = (TableLayout) findViewById(R.id.questions_table);
         TableRow row = new TableRow(this);
         row.setLayoutParams(lp);
@@ -372,8 +367,7 @@ public class AddEditAppointmentActivity extends BaseActivity implements OnClickL
     /*
      * To set textview for question to go in the Question Table
      */
-    public void setTableQuestion(int i)
-    {
+    public void setTableQuestion(int i) {
         providerQuestion = new TextView(this);
         providerQuestion.setLayoutParams(lp);
         providerQuestion.setBackgroundColor(Color.WHITE);

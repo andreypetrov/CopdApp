@@ -22,7 +22,7 @@ public class EditAddAppointmentProviderListAdapter extends GenericAdapter<Provid
     public void update(View view, int position) {
         Provider provider = getItem(position);
         TextView textView = (TextView) view.findViewById(R.id.doctor_name);
-        textView.setText(provider.firstName + " " + provider.lastName);
+        textView.setText(provider.title + " " + provider.firstName + " " + provider.lastName);
     }
 
     @Override

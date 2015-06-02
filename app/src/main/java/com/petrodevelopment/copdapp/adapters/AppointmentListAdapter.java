@@ -33,7 +33,8 @@ public class AppointmentListAdapter extends GenericAdapter<Appointment> {
         View backgroundView=  view.findViewById(R.id.background_layout);
         backgroundView.setBackgroundColor(Color.parseColor(clinicianType.color));
         TextView doctorNameView = (TextView) view.findViewById(R.id.doctor_name);
-        doctorNameView.setText(appointment.getProvider(context).getNameAndTitle());
+
+        if(provider != null) doctorNameView.setText(appointment.getProvider(context).getNameAndTitle());
         TextView doctorTitleView = (TextView) view.findViewById(R.id.clinician_type);
         doctorTitleView.setText(clinicianType.name);
         TextView dateView = (TextView) view.findViewById(R.id.date);
