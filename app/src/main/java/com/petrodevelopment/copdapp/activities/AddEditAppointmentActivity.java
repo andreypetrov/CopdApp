@@ -7,6 +7,8 @@ import android.graphics.Color;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,6 +16,7 @@ import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -35,14 +38,9 @@ import com.petrodevelopment.copdapp.MainApplication;
 import com.petrodevelopment.copdapp.R;
 import com.petrodevelopment.copdapp.adapters.EditAddAppointmentProviderListAdapter;
 import com.petrodevelopment.copdapp.model.Appointment;
-import com.petrodevelopment.copdapp.model.ClinicianType;
-import com.petrodevelopment.copdapp.model.ModelFacade;
 import com.petrodevelopment.copdapp.model.Provider;
-import com.petrodevelopment.copdapp.model.ProviderList;
 import com.petrodevelopment.copdapp.model.Question;
-import com.petrodevelopment.copdapp.record.RecordActivity;
 import com.petrodevelopment.copdapp.record.RecordAppointmentActivity;
-import com.petrodevelopment.copdapp.util.U;
 
 import java.util.Calendar;
 import java.util.List;
@@ -100,8 +98,30 @@ public class AddEditAppointmentActivity extends BaseActivity implements OnClickL
         initModel();
         initSpinner();
         initToolbar();
+        initNoteField();
         selectPickers();
         setButtonListeners();
+    }
+
+    private void initNoteField() {
+        EditText noteEditTextView = (EditText) findViewById(R.id.note);
+        noteEditTextView.setText(appointment.note);
+        noteEditTextView.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                appointment.note = s.toString();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
     }
 
     @Override
@@ -110,7 +130,7 @@ public class AddEditAppointmentActivity extends BaseActivity implements OnClickL
         appointmentId = getIntent().getStringExtra(MainApplication.APPOINTMENT_ID_EXTRA);
         appointment = getModelFacade().getAppointment(appointmentId);
         provider = appointment.getProvider(this);
-        providerId = provider.id;
+        if (provider != null) providerId = provider.id;
 
         questions = getModelFacade().questionList.questions;
         providers = getModelFacade().providerList.providers;
@@ -174,7 +194,7 @@ public class AddEditAppointmentActivity extends BaseActivity implements OnClickL
         final EditAddAppointmentProviderListAdapter providerAdapter = new EditAddAppointmentProviderListAdapter(providers, this, R.layout.cell_provider_add_appointment_list);
         final Spinner providerSpinner = (Spinner) findViewById(R.id.select_provider);
         providerSpinner.setAdapter(providerAdapter);
-
+        providerSpinner.setSelection(getCurrentProviderIndexInSpinner());
 
         providerSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -198,6 +218,11 @@ public class AddEditAppointmentActivity extends BaseActivity implements OnClickL
                 return;
             }
         });
+    }
+
+    private int getCurrentProviderIndexInSpinner() { //depends on equals implementation
+        if (provider != null && providers != null ) return providers.indexOf(provider) + 1;
+        else return 0;
     }
 
     private void initProviders() {

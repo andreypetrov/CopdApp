@@ -26,24 +26,43 @@ public class AppointmentListAdapter extends GenericAdapter<Appointment> {
     @Override
     public void update(View view, int position) {
         Appointment appointment = getItem(position);
+        updateProvider(view, appointment);
+        updateDate(view, appointment);
+    }
+
+    private void updateProvider(View view, Appointment appointment) {
         Provider provider = appointment.getProvider(context);
-        ClinicianType clinicianType = provider.getClinitianType(context);
-        Date date = U.convertUnixStringToDate(appointment.date);
 
-        View backgroundView=  view.findViewById(R.id.background_layout);
-        backgroundView.setBackgroundColor(Color.parseColor(clinicianType.color));
         TextView doctorNameView = (TextView) view.findViewById(R.id.doctor_name);
-
-        if(provider != null) doctorNameView.setText(appointment.getProvider(context).getNameAndTitle());
+        View backgroundView=  view.findViewById(R.id.background_layout);
         TextView doctorTitleView = (TextView) view.findViewById(R.id.clinician_type);
-        doctorTitleView.setText(clinicianType.name);
+        ImageView doctorImage = (ImageView) view.findViewById(R.id.doctor_image);
+
+        if (provider!=null) {
+            ClinicianType clinicianType = provider.getClinitianType(context);
+            doctorNameView.setText(appointment.getProvider(context).getNameAndTitle());
+            backgroundView.setBackgroundColor(Color.parseColor(clinicianType.color));
+            doctorTitleView.setText(clinicianType.name);
+            doctorImage.setImageDrawable(U.getDrawableFromImageName(clinicianType.imageResourceName, context));
+        } else {
+            doctorNameView.setText("N/A");
+            backgroundView.setBackgroundResource(R.color.dark_blue);
+            doctorTitleView.setText("");
+            doctorImage.setImageResource(R.drawable.default_user);
+        }
+    }
+
+
+
+
+    private void updateDate(View view, Appointment appointment) {
+        Date date = U.convertUnixStringToDate(appointment.date);
         TextView dateView = (TextView) view.findViewById(R.id.date);
         dateView.setText(U.convertToDateString(date));
         TextView timeView = (TextView) view.findViewById(R.id.time);
         timeView.setText(U.convertToTimeString(date));
-        ImageView doctorImage = (ImageView) view.findViewById(R.id.doctor_image);
-        doctorImage.setImageDrawable(U.getDrawableFromImageName(clinicianType.imageResourceName, context));
     }
+
 
     @Override
     public int getCellResourceId(int position) {

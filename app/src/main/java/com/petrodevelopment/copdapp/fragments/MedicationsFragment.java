@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.ListView;
 
 import com.petrodevelopment.copdapp.R;
@@ -12,6 +13,7 @@ import com.petrodevelopment.copdapp.R;
  * Created by andrey on 10/05/2015.
  */
 public class MedicationsFragment extends FilterableFragment {
+    BaseAdapter adapter;
     /**
      * Returns a new instance of this fragment for the given section
      * number.
@@ -34,6 +36,11 @@ public class MedicationsFragment extends FilterableFragment {
         return rootView;
     }
 
+
+    @Override
+    public void updateUi() {
+        if (adapter!=null) adapter.notifyDataSetChanged();
+    }
 
 
     private void populateList(ListView listView) {

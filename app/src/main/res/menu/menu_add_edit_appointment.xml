@@ -5,7 +5,7 @@
 
     <item
         android:id="@+id/action_delete"
-        android:icon="@drawable/ic_launcher_trashcan_normal_holo"
+        android:icon="@drawable/ic_delete"
         android:title="@string/action_delete"
         app:showAsAction="collapseActionView|always" />
 

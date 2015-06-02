@@ -5,5 +5,12 @@ package com.petrodevelopment.copdapp.fragments;
  */
 public abstract class FilterableFragment extends SectionFragment {
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        updateUi();
+    }
+
+    public abstract void updateUi();
     public abstract void filterList(String searchQuery);
 }

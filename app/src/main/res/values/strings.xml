@@ -100,7 +100,7 @@
     <string name="time_slash">/</string>
     <string name="dummy_question">What is my current activity level?</string>
 
-
+    <string name="not_available">N/A</string>
     <!-- Welcome Back -->
     <string name="welcome_back">Welcome Back</string>
 

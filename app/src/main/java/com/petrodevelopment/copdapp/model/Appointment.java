@@ -17,6 +17,7 @@ public class Appointment extends Model {
 
     public long date;
     public String providerId;
+    public String note;
 
     //Edited via the Record Appointment screen
     public List<AppointmentRecord> appointmentRecords;

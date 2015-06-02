@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
+import android.widget.BaseAdapter;
 import android.widget.ListView;
 
 import com.petrodevelopment.copdapp.R;
@@ -21,6 +23,8 @@ public class ProviderFragment extends FilterableFragment {
      * Returns a new instance of this fragment for the given section
      * number.
      */
+    BaseAdapter adapter;
+
     public static ProviderFragment newInstance(int sectionNumber, String sectionTitle) {
         ProviderFragment fragment = new ProviderFragment();
         SectionFragment.addSectionAndTitleToFragment(fragment, sectionNumber, sectionTitle);
@@ -37,9 +41,14 @@ public class ProviderFragment extends FilterableFragment {
 
     private void populateList(View rootView) {
         ListView listView = (ListView) rootView.findViewById(R.id.list_view);
-        listView.setAdapter(new ProviderListAdapter(getModel(), getActivity(), R.layout.cell_provider_list));
+        adapter = new ProviderListAdapter(getModel(), getActivity(), R.layout.cell_provider_list);
+        listView.setAdapter(adapter);
     }
 
+    @Override
+    public void updateUi() {
+        if (adapter!=null) adapter.notifyDataSetChanged();
+    }
 
     private List<Provider> getModel() {
         return getModelFacade().providerList.providers;

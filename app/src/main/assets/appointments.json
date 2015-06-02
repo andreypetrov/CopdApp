@@ -1,13 +1,14 @@
 {
-  "appointments":[
+  "appointments": [
     {
       "id": "0",
-      "date":1396931400,
+      "note": "appointment test note",
+      "date": 1396931400,
       "providerId": "0",
       "appointmentRecords": [
         {
           "id": "0",
-          "appointmentRecordTypeId":"0",
+          "appointmentRecordTypeId": "0",
           "note": "severity for my amazing appointment. I am sick but i will get better",
           "voiceRecordUrl": "http://www.com.com/whatever.mp3",
           "imageUrls": [
@@ -57,7 +58,7 @@
         },
         {
           "id": "1",
-          "appointmentRecordTypeId":"1",
+          "appointmentRecordTypeId": "1",
           "note": "assessment for my amazing appointment. I am sick but i will get better",
           "voiceRecordUrl": "http://www.com.com/whatever.mp3",
           "imageUrls": [
@@ -71,14 +72,14 @@
         },
         {
           "id": "2",
-          "appointmentRecordTypeId":"2",
+          "appointmentRecordTypeId": "2",
           "note": "medications for my amazing appointment. I am sick but i will get better",
           "voiceRecordUrl": "http://www.com.com/whatever.mp3",
           "imageUrls": []
         },
         {
           "id": "3",
-          "appointmentRecordTypeId":"3",
+          "appointmentRecordTypeId": "3",
           "note": "",
           "voiceRecordUrl": "http://www.com.com/whatever.mp3",
           "imageUrls": [
@@ -88,7 +89,7 @@
         },
         {
           "id": "4",
-          "appointmentRecordTypeId":"4",
+          "appointmentRecordTypeId": "4",
           "name": "Life Style Changes",
           "note": "life style for my amazing appointment. I am sick but i will get better",
           "voiceRecordUrl": "",
@@ -96,7 +97,7 @@
         },
         {
           "id": "5",
-          "appointmentRecordTypeId":"5",
+          "appointmentRecordTypeId": "5",
           "name": "Future Referrals",
           "note": "",
           "voiceRecordUrl": "",
@@ -106,12 +107,14 @@
     },
     {
       "id": "1",
-      "date":1451061000, //12/25/2015 4:30pm greenwich time = 11.30am torontonian time
+      "note": "appointment test note for my second appointment",
+      "date": 1451061000,
+      //12/25/2015 4:30pm greenwich time = 11.30am torontonian time
       "providerId": "2",
       "appointmentRecords": [
         {
           "id": "0",
-          "appointmentRecordTypeId":"0",
+          "appointmentRecordTypeId": "0",
           "note": "severity for my amazing appointment. I am sick but i will get better",
           "voiceRecordUrl": "http://www.com.com/whatever.mp3",
           "imageUrls": [
@@ -126,7 +129,7 @@
         },
         {
           "id": "1",
-          "appointmentRecordTypeId":"1",
+          "appointmentRecordTypeId": "1",
           "note": "assessment for my amazing appointment. I am sick but i will get better",
           "voiceRecordUrl": "http://www.com.com/whatever.mp3",
           "imageUrls": [
@@ -140,14 +143,14 @@
         },
         {
           "id": "2",
-          "appointmentRecordTypeId":"2",
+          "appointmentRecordTypeId": "2",
           "note": "medications for my amazing appointment. I am sick but i will get better",
           "voiceRecordUrl": "http://www.com.com/whatever.mp3",
           "imageUrls": []
         },
         {
           "id": "3",
-          "appointmentRecordTypeId":"3",
+          "appointmentRecordTypeId": "3",
           "note": "",
           "voiceRecordUrl": "http://www.com.com/whatever.mp3",
           "imageUrls": [
@@ -157,7 +160,7 @@
         },
         {
           "id": "4",
-          "appointmentRecordTypeId":"4",
+          "appointmentRecordTypeId": "4",
           "name": "Life Style Changes",
           "note": "life style for my amazing appointment. I am sick but i will get better",
           "voiceRecordUrl": "",
@@ -165,7 +168,7 @@
         },
         {
           "id": "5",
-          "appointmentRecordTypeId":"5",
+          "appointmentRecordTypeId": "5",
           "name": "Future Referrals",
           "note": "",
           "voiceRecordUrl": "",
@@ -175,12 +178,13 @@
     },
     {
       "id": "2",
-      "date":1417428000,
+      "note": "",
+      "date": 1417428000,
       "providerId": "1",
       "appointmentRecords": [
         {
           "id": "0",
-          "appointmentRecordTypeId":"0",
+          "appointmentRecordTypeId": "0",
           "note": "severity for my amazing appointment. I am sick but i will get better",
           "voiceRecordUrl": "http://www.com.com/whatever.mp3",
           "imageUrls": [
@@ -195,7 +199,7 @@
         },
         {
           "id": "1",
-          "appointmentRecordTypeId":"1",
+          "appointmentRecordTypeId": "1",
           "note": "assessment for my amazing appointment. I am sick but i will get better",
           "voiceRecordUrl": "http://www.com.com/whatever.mp3",
           "imageUrls": [
@@ -209,14 +213,14 @@
         },
         {
           "id": "2",
-          "appointmentRecordTypeId":"2",
+          "appointmentRecordTypeId": "2",
           "note": "medications for my amazing appointment. I am sick but i will get better",
           "voiceRecordUrl": "http://www.com.com/whatever.mp3",
           "imageUrls": []
         },
         {
           "id": "3",
-          "appointmentRecordTypeId":"3",
+          "appointmentRecordTypeId": "3",
           "note": "",
           "voiceRecordUrl": "http://www.com.com/whatever.mp3",
           "imageUrls": [
@@ -226,7 +230,7 @@
         },
         {
           "id": "4",
-          "appointmentRecordTypeId":"4",
+          "appointmentRecordTypeId": "4",
           "name": "Life Style Changes",
           "note": "life style for my amazing appointment. I am sick but i will get better",
           "voiceRecordUrl": "",
@@ -234,7 +238,7 @@
         },
         {
           "id": "5",
-          "appointmentRecordTypeId":"5",
+          "appointmentRecordTypeId": "5",
           "name": "Future Referrals",
           "note": "",
           "voiceRecordUrl": "",
@@ -244,12 +248,13 @@
     },
     {
       "id": "3",
-      "date":1459744200,
+      "note": "test",
+      "date": 1459744200,
       "providerId": "0",
       "appointmentRecords": [
         {
           "id": "0",
-          "appointmentRecordTypeId":"0",
+          "appointmentRecordTypeId": "0",
           "note": "severity for my amazing appointment. I am sick but i will get better",
           "voiceRecordUrl": "http://www.com.com/whatever.mp3",
           "imageUrls": [
@@ -264,7 +269,7 @@
         },
         {
           "id": "1",
-          "appointmentRecordTypeId":"1",
+          "appointmentRecordTypeId": "1",
           "note": "assessment for my amazing appointment. I am sick but i will get better",
           "voiceRecordUrl": "http://www.com.com/whatever.mp3",
           "imageUrls": [
@@ -278,14 +283,14 @@
         },
         {
           "id": "2",
-          "appointmentRecordTypeId":"2",
+          "appointmentRecordTypeId": "2",
           "note": "medications for my amazing appointment. I am sick but i will get better",
           "voiceRecordUrl": "http://www.com.com/whatever.mp3",
           "imageUrls": []
         },
         {
           "id": "3",
-          "appointmentRecordTypeId":"3",
+          "appointmentRecordTypeId": "3",
           "note": "",
           "voiceRecordUrl": "http://www.com.com/whatever.mp3",
           "imageUrls": [
@@ -295,7 +300,7 @@
         },
         {
           "id": "4",
-          "appointmentRecordTypeId":"4",
+          "appointmentRecordTypeId": "4",
           "name": "Life Style Changes",
           "note": "life style for my amazing appointment. I am sick but i will get better",
           "voiceRecordUrl": "",
@@ -303,7 +308,7 @@
         },
         {
           "id": "5",
-          "appointmentRecordTypeId":"5",
+          "appointmentRecordTypeId": "5",
           "name": "Future Referrals",
           "note": "",
           "voiceRecordUrl": "",
@@ -313,12 +318,14 @@
     },
     {
       "id": "4",
-      "date":1420194600, //in UNIX format http://www.onlineconversion.com/unix_time.htm
+      "note": "lol",
+      "date": 1420194600,
+      //in UNIX format http://www.onlineconversion.com/unix_time.htm
       "providerId": "3",
       "appointmentRecords": [
         {
           "id": "0",
-          "appointmentRecordTypeId":"0",
+          "appointmentRecordTypeId": "0",
           "note": "severity for my amazing appointment. I am sick but i will get better",
           "voiceRecordUrl": "http://www.com.com/whatever.mp3",
           "imageUrls": [
@@ -333,7 +340,7 @@
         },
         {
           "id": "1",
-          "appointmentRecordTypeId":"1",
+          "appointmentRecordTypeId": "1",
           "note": "assessment for my amazing appointment. I am sick but i will get better",
           "voiceRecordUrl": "http://www.com.com/whatever.mp3",
           "imageUrls": [
@@ -347,14 +354,14 @@
         },
         {
           "id": "2",
-          "appointmentRecordTypeId":"2",
+          "appointmentRecordTypeId": "2",
           "note": "medications for my amazing appointment. I am sick but i will get better",
           "voiceRecordUrl": "http://www.com.com/whatever.mp3",
           "imageUrls": []
         },
         {
           "id": "3",
-          "appointmentRecordTypeId":"3",
+          "appointmentRecordTypeId": "3",
           "note": "",
           "voiceRecordUrl": "http://www.com.com/whatever.mp3",
           "imageUrls": [
@@ -364,7 +371,7 @@
         },
         {
           "id": "4",
-          "appointmentRecordTypeId":"4",
+          "appointmentRecordTypeId": "4",
           "name": "Life Style Changes",
           "note": "life style for my amazing appointment. I am sick but i will get better",
           "voiceRecordUrl": "",
@@ -372,7 +379,7 @@
         },
         {
           "id": "5",
-          "appointmentRecordTypeId":"5",
+          "appointmentRecordTypeId": "5",
           "name": "Future Referrals",
           "note": "",
           "voiceRecordUrl": "",

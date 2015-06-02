@@ -25,7 +25,7 @@ import java.util.Locale;
  * TODO in the distant future apply filtering both by tab and by search field to return the intersection of the two search criteria
  * Created by Andrey on 14/05/2015.
  */
-public class AppointmentsFragment extends FilterableFragment {
+    public class AppointmentsFragment extends FilterableFragment {
     private List<Appointment> filteredAppointments;
     private ListView listView;
     private AppointmentListAdapter adapter;
@@ -121,6 +121,13 @@ public class AppointmentsFragment extends FilterableFragment {
     private List<Appointment> getModel() {
         return getModelFacade().appointmentList.appointments;
     }
+
+
+    @Override
+    public void updateUi() {
+        if (adapter!=null) adapter.notifyDataSetChanged();
+    }
+
 
 
     @Override
