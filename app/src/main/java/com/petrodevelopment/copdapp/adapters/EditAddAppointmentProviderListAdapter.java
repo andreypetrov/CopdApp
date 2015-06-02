@@ -20,9 +20,17 @@ public class EditAddAppointmentProviderListAdapter extends GenericAdapter<Provid
     //Only thing really changed so far is this - Tom - 18-05-2015
     @Override
     public void update(View view, int position) {
-        Provider provider = getItem(position);
+        if (position == 0) updateSelectProviderView(view);
+        else {
+            Provider provider = getItem(position-1);
+            TextView textView = (TextView) view.findViewById(R.id.doctor_name);
+            textView.setText(provider.title + " " + provider.firstName + " " + provider.lastName);
+        }
+    }
+
+    private void updateSelectProviderView(View view) {
         TextView textView = (TextView) view.findViewById(R.id.doctor_name);
-        textView.setText(provider.title + " " + provider.firstName + " " + provider.lastName);
+        textView.setText(context.getString(R.string.select_provider));
     }
 
     @Override

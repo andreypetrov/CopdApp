@@ -338,16 +338,24 @@ public class AddEditAppointmentActivity extends BaseActivity implements OnClickL
 
     //Added by Tom 22-05-2015, for Question once Provider has been selected
     public void populateQuestions() {
-        //First hide the textview questions_per_specialist"
-        TextView tv = (TextView) findViewById(R.id.questions_per_specialist);
-        tv.setVisibility(View.GONE);
+        if (provider != null) {
+            //First hide the textview questions_per_specialist"
+            TextView tv = (TextView) findViewById(R.id.questions_per_specialist);
+            tv.setVisibility(View.GONE);
 
-        for (int i = 0; i < questions.size(); i++)
+            for (int i = 0; i < questions.size(); i++)
 
-        {
-            setTableRow(i);
+            {
+                setTableRow(i);
+            }
+        } else {
+            //TODO hide questions
         }
     }
+
+
+
+
 
     /*
      *Programmatically create table row for questions
